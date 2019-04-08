@@ -1,13 +1,13 @@
 <template>
   <div>
     <h3>The board</h3>
-    <div class="container">
+    <div class="container" v-if="tileColors.length > 0">
       <div class="row no-gutters tile-rows text-center" v-for="i in 8" :key="'kamiRow_' + i">
         <div
           class="col tile"
-          :style="{backgroundColor: tileColors['r' + i]['c' + j]}"
           v-for="j in 8"
           :key="'tile_' + i + '_' + j"
+          :style="{backgroundColor: tileColors[i-1][j-1]}"
         ></div>
       </div>
     </div>
@@ -17,20 +17,16 @@
 <script>
 import Tile from "./Tile.vue";
 import axios from "axios";
+import TileColors from "../assets/TileColors.json";
 
 export default {
   data() {
     return {
-      tileColors: {}
+      tileColors: TileColors
     };
   },
-  components: {
-    AppTile: Tile
-  },
   created() {
-    axios.get("defaultBoard/tileColors.json").then(response => {
-      this.tileColors = response.data;
-    });
+    axios.get("defaultBoard/tileColors.json");
   }
 };
 </script>
