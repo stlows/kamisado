@@ -2,7 +2,7 @@
   <div>
     <div
       class="tower"
-      :class="{ towerAvailable: tower.playerId === turn, 'tower--shadow': selected === tower }"
+      :class="{ towerAvailable: tower.playerId === turn && isFirstTurn, 'tower--shadow': selected === tower }"
       :style="{ backgroundColor:getPlayerColor(tower.playerId) }"
       @click="towerClicked"
     >
@@ -20,7 +20,7 @@ import Colors from "../assets/Colors.json";
 import Symbols from "../assets/Symbols.json";
 
 export default {
-  props: ["tower", "turn", "selected"],
+  props: ["tower", "turn", "selected", "isFirstTurn"],
   data() {
     return {
       isSelected: true
@@ -37,12 +37,15 @@ export default {
       return Symbols[id];
     },
     towerClicked() {
-      if (this.selected === this.tower) {
-        this.$emit("towerSelected", null);
-        return;
-      }
-      if (this.turn === this.tower.playerId) {
-        this.$emit("towerSelected", this.tower);
+      if (this.isFirstTurn) {
+        if (this.selected === this.tower) {
+          this.$emit("towerSelected", null);
+          return;
+        }
+        if (this.turn === this.tower.playerId) {
+          this.$emit("towerSelected", this.tower);
+          return;
+        }
       }
     }
   }
@@ -67,10 +70,10 @@ export default {
   vertical-align: middle;
 }
 .tower--shadow {
-  box-shadow: 0 0 2vh 0px #222;
+  box-shadow: 0 0 4vh 0px #fff;
 }
 .tower__text--shadow {
-  text-shadow: 0 0 1vh #222;
+  text-shadow: 0 0 1vh #fff;
 }
 .towerAvailable:hover {
   cursor: pointer;

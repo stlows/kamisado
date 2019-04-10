@@ -15,6 +15,7 @@
             :tower="getTower(x,y)"
             :selected="selectedTower"
             :turn="turn"
+            :isFirstTurn="isFirstTurn"
           ></app-tower>
         </td>
       </tr>
@@ -34,8 +35,9 @@ export default {
       tileColors: TileColors,
       towers: [],
       turn: 1,
+      isFirstTurn: true,
       selectedTower: null,
-      possibleMovesArray: [{ x: 1, y: 1 }]
+      possibleMovesArray: []
     };
   },
   methods: {
@@ -48,12 +50,16 @@ export default {
       return Colors.tiles[id];
     },
     getTower(x, y) {
-      for (let i in this.towers) {
-        if (this.towers[i].x === x && this.towers[i].y === y) {
-          return this.towers[i];
-        }
-      }
-      return null;
+      let filter = this.towers.filter(t => t.x === x && t.y === y);
+      if (filter.length === 1) return filter[0];
+      else return null;
+    },
+    getTowerByPlayerIdAndColor(playerId, colorId) {
+      let filter = this.towers.filter(
+        t => t.playerId === playerId && t.colorId === colorId
+      );
+      if (filter.length === 1) return filter[0];
+      else return null;
     },
     isPossibleMove(x, y) {
       for (let i in this.possibleMovesArray) {
@@ -110,22 +116,21 @@ export default {
     nextY(y, playerId) {
       return playerId === 0 ? y + 1 : y - 1;
     },
-    nextXLeft(x, playerId) {
-      return x - 1;
-    },
-    nextXRight(x, playerId) {
-      return x + 1;
-    },
     tileClicked(x, y) {
       if (this.isPossibleMove(x, y)) {
         this.moveTower(this.selectedTower, x, y);
-        this.setSelectedTower(null);
         this.switchTurn();
+        let towerToPlay = this.getTowerByPlayerIdAndColor(
+          this.turn,
+          this.tileColors[y - 1][x - 1]
+        );
+        this.setSelectedTower(towerToPlay);
       }
     },
     moveTower(tower, newX, newY) {
       tower.x = newX;
       tower.y = newY;
+      this.isFirstTurn = false;
     },
     setSelectedTower(tower) {
       this.selectedTower = tower;
@@ -138,14 +143,14 @@ export default {
         { playerId: 0, colorId: 2, x: 3, y: 1, sumo: 0 },
         { playerId: 0, colorId: 3, x: 4, y: 1, sumo: 0 },
         { playerId: 0, colorId: 4, x: 5, y: 1, sumo: 0 },
-        { playerId: 0, colorId: 5, x: 2, y: 5, sumo: 0 },
-        { playerId: 0, colorId: 6, x: 3, y: 6, sumo: 0 },
+        { playerId: 0, colorId: 5, x: 6, y: 1, sumo: 0 },
+        { playerId: 0, colorId: 6, x: 7, y: 1, sumo: 0 },
         { playerId: 0, colorId: 7, x: 8, y: 1, sumo: 0 },
         { playerId: 1, colorId: 7, x: 1, y: 8, sumo: 0 },
         { playerId: 1, colorId: 6, x: 2, y: 8, sumo: 0 },
         { playerId: 1, colorId: 5, x: 3, y: 8, sumo: 0 },
         { playerId: 1, colorId: 4, x: 4, y: 8, sumo: 0 },
-        { playerId: 1, colorId: 3, x: 4, y: 4, sumo: 0 },
+        { playerId: 1, colorId: 3, x: 5, y: 8, sumo: 0 },
         { playerId: 1, colorId: 2, x: 6, y: 8, sumo: 0 },
         { playerId: 1, colorId: 1, x: 7, y: 8, sumo: 0 },
         { playerId: 1, colorId: 0, x: 8, y: 8, sumo: 0 }
@@ -180,10 +185,9 @@ table {
 td {
   width: 10vh;
   height: 10vh;
-  box-shadow: 0 0 1px 0 #fff inset;
 }
 td.possible {
-  box-shadow: 0 0 30px 0 #fff inset;
+  box-shadow: 0 0 30px 0 #000 inset;
 }
 td.possible:hover {
   cursor: pointer;
