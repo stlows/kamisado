@@ -48,7 +48,7 @@ export default {
         { playerId: 0, colorId: 3, x: 4, y: 1, sumo: 0 },
         { playerId: 0, colorId: 4, x: 5, y: 1, sumo: 0 },
         { playerId: 0, colorId: 5, x: 2, y: 5, sumo: 0 },
-        { playerId: 0, colorId: 6, x: 7, y: 1, sumo: 0 },
+        { playerId: 0, colorId: 6, x: 3, y: 6, sumo: 0 },
         { playerId: 0, colorId: 7, x: 8, y: 1, sumo: 0 },
         { playerId: 1, colorId: 7, x: 1, y: 8, sumo: 0 },
         { playerId: 1, colorId: 6, x: 2, y: 8, sumo: 0 },
