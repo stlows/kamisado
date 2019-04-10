@@ -1,4 +1,7 @@
-# kamisado
+# Kamisado
+
+Vue.js implementation of the game Kamisado
+
 
 ## Project setup
 ```
