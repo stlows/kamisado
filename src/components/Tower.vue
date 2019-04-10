@@ -2,34 +2,16 @@
   <div>
     <div
       class="tower"
-      :class="{towerAvailable: tower.playerId === turn}"
-      :style="{backgroundColor:getPlayerColor(tower.playerId)}"
+      :class="{ towerAvailable: tower.playerId === turn, 'tower--shadow': selected === tower }"
+      :style="{ backgroundColor:getPlayerColor(tower.playerId) }"
+      @click="towerClicked"
     >
-      <span :style="{color:getTowerColor(tower.colorId)}">{{ getSymbol(tower.colorId)}}</span>
+      <span
+        class="tower__text"
+        :class="{'tower__text--shadow': selected === tower}"
+        :style="{color:getTowerColor(tower.colorId) }"
+      >{{ getSymbol(tower.colorId)}}</span>
     </div>
-    <!-- <svg width="10vh" height="10vh">
-      <circle
-        cx="50%"
-        cy="50%"
-        r="35%"
-        class="tower"
-        :fill="getPlayerColor(tower.playerId)"
-        
-        @click="towerClicked"
-      ></circle>
-      <text
-        class="tower"
-        :class="{towerAvailable: tower.playerId === turn}"
-        text-anchor="middle"
-        alignment-baseline="central"
-        x="50%"
-        y="50%"
-        font-size="4vh"
-        font-weight="bold"
-        :fill="getTowerColor(tower.colorId)"
-        @click="towerClicked"
-      >{{ getSymbol(tower.colorId)}}</text>
-    </svg>-->
   </div>
 </template>
 
@@ -38,7 +20,12 @@ import Colors from "../assets/Colors.json";
 import Symbols from "../assets/Symbols.json";
 
 export default {
-  props: ["tower", "turn"],
+  props: ["tower", "turn", "selected"],
+  data() {
+    return {
+      isSelected: true
+    };
+  },
   methods: {
     getPlayerColor(id) {
       return Colors.players[id];
@@ -50,8 +37,12 @@ export default {
       return Symbols[id];
     },
     towerClicked() {
+      if (this.selected === this.tower) {
+        this.$emit("towerSelected", null);
+        return;
+      }
       if (this.turn === this.tower.playerId) {
-        console.log("clicked");
+        this.$emit("towerSelected", this.tower);
       }
     }
   }
@@ -66,14 +57,20 @@ export default {
   width: 7vh;
   margin: auto;
 }
-.tower span {
+.tower__text {
   width: 7vh;
   height: 7vh;
   display: inline-block;
-  font-size: 2vh;
+  font-size: 4vh;
   font-weight: bold;
   text-align: center;
   vertical-align: middle;
+}
+.tower--shadow {
+  box-shadow: 0 0 2vh 0px #222;
+}
+.tower__text--shadow {
+  text-shadow: 0 0 1vh #222;
 }
 .towerAvailable:hover {
   cursor: pointer;
