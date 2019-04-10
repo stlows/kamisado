@@ -1,13 +1,20 @@
 <template>
   <div>
-    <svg width="10vh" height="10vh">
+    <div
+      class="tower"
+      :class="{towerAvailable: tower.playerId === turn}"
+      :style="{backgroundColor:getPlayerColor(tower.playerId)}"
+    >
+      <span :style="{color:getTowerColor(tower.colorId)}">{{ getSymbol(tower.colorId)}}</span>
+    </div>
+    <!-- <svg width="10vh" height="10vh">
       <circle
         cx="50%"
         cy="50%"
         r="35%"
         class="tower"
         :fill="getPlayerColor(tower.playerId)"
-        :class="{towerAvailable: tower.playerId === turn}"
+        
         @click="towerClicked"
       ></circle>
       <text
@@ -22,7 +29,7 @@
         :fill="getTowerColor(tower.colorId)"
         @click="towerClicked"
       >{{ getSymbol(tower.colorId)}}</text>
-    </svg>
+    </svg>-->
   </div>
 </template>
 
@@ -54,6 +61,19 @@ export default {
 <style>
 .tower {
   cursor: default;
+  border-radius: 50%;
+  line-height: 7vh;
+  width: 7vh;
+  margin: auto;
+}
+.tower span {
+  width: 7vh;
+  height: 7vh;
+  display: inline-block;
+  font-size: 2vh;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
 }
 .towerAvailable:hover {
   cursor: pointer;
