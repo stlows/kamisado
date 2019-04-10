@@ -8,7 +8,7 @@
           :key="'tile_' + x + '_' + y"
           :style="{backgroundColor: getColor(tileColors[y-1][x-1])}"
         >
-          <app-tower v-if="getTower(x,y) !== null" :tower="getTower(x,y)"></app-tower>
+          <app-tower v-if="getTower(x,y) !== null" :tower="getTower(x,y)" :turn="turn"></app-tower>
         </td>
       </tr>
     </table>
@@ -25,7 +25,8 @@ export default {
   data() {
     return {
       tileColors: TileColors,
-      towers: []
+      towers: [],
+      turn: 0
     };
   },
   methods: {
