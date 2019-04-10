@@ -1,0 +1,5 @@
+{
+    "tiles": ["darkorange", "dodgerblue", "indigo", "lightpink", "gold", "firebrick", "seagreen", "saddlebrown"],
+    "towers": ["darkorange", "dodgerblue", "indigo", "lightpink", "gold", "firebrick", "seagreen", "saddlebrown"],
+    "players": ["white", "black"]
+}

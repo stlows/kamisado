@@ -1,82 +1,10 @@
 [
-  [
-    "darkorange",
-    "dodgerblue",
-    "indigo",
-    "lightpink",
-    "gold",
-    "firebrick",
-    "seagreen",
-    "saddlebrown"
-  ],
-  [
-    "firebrick",
-    "darkorange",
-    "lightpink",
-    "seagreen",
-    "dodgerblue",
-    "gold",
-    "saddlebrown",
-    "indigo"
-  ],
-  [
-    "seagreen",
-    "lightpink",
-    "darkorange",
-    "firebrick",
-    "indigo",
-    "saddlebrown",
-    "gold",
-    "dodgerblue"
-  ],
-  [
-    "lightpink",
-    "indigo",
-    "dodgerblue",
-    "darkorange",
-    "saddlebrown",
-    "seagreen",
-    "firebrick",
-    "gold"
-  ],
-  [
-    "gold",
-    "firebrick",
-    "seagreen",
-    "saddlebrown",
-    "darkorange",
-    "dodgerblue",
-    "indigo",
-    "lightpink"
-  ],
-  [
-    "dodgerblue",
-    "gold",
-    "saddlebrown",
-    "indigo",
-    "firebrick",
-    "darkorange",
-    "lightpink",
-    "seagreen"
-  ],
-  [
-    "indigo",
-    "saddlebrown",
-    "gold",
-    "dodgerblue",
-    "seagreen",
-    "lightpink",
-    "darkorange",
-    "firebrick"
-  ],
-  [
-    "saddlebrown",
-    "seagreen",
-    "firebrick",
-    "gold",
-    "lightpink",
-    "indigo",
-    "dodgerblue",
-    "darkorange"
-  ]
+  [0, 1, 2, 3, 4, 5, 6, 7],
+  [5, 0, 3, 6, 1, 4, 7, 2],
+  [6, 3, 0, 5, 2, 7, 4, 1],
+  [3, 2, 1, 0, 7, 6, 5, 4],
+  [4, 5, 6, 7, 0, 1, 2, 3],
+  [1, 4, 7, 2, 5, 0, 3, 6],
+  [2, 7, 4, 1, 6, 3, 0, 5],
+  [7, 6, 5, 4, 3, 2, 1, 0]
 ]
