@@ -1,22 +1,26 @@
 <template>
   <div>
+    <p>Turn: {{turn}}</p>
     <table v-if="tileColors.length > 0">
       <tr v-for="y in 8" :key="'kamiRow_' + y">
         <td
-          :class="{possible: possibleMovesArray !== null && isPossibleMove(x, y)}"
           v-for="x in 8"
           :key="'tile_' + x + '_' + y"
-          :style="{ backgroundColor: getColor(tileColors[y-1][x-1]) }"
+          :class="getTileClass(x,y)"
+          :style="getTileStyle(x, y)"
           @click="tileClicked(x, y)"
         >
-          <app-tower
-            @towerSelected="setSelectedTower"
+          <div
             v-if="getTower(x,y) !== null"
-            :tower="getTower(x,y)"
-            :selected="selectedTower"
-            :turn="turn"
-            :isFirstTurn="isFirstTurn"
-          ></app-tower>
+            :class="getTowerClass(x,y)"
+            :style="getTowerStyle(x,y)"
+            @click="towerClicked(x, y)"
+          >
+            <span
+              class="tower__symbol"
+              :style="{color:getTowerColor( getTower(x,y).colorId) }"
+            >{{ getSymbol( getTower(x,y).colorId)}}</span>
+          </div>
         </td>
       </tr>
     </table>
@@ -24,15 +28,15 @@
 </template>
 
 <script>
-import Tower from "./Tower.vue";
 import axios from "axios";
 import TileColors from "../assets/TileColors.json";
 import Colors from "../assets/Colors.json";
+import Symbols from "../assets/Symbols.json";
 
 export default {
   data() {
     return {
-      tileColors: TileColors,
+      tileColors: [],
       towers: [],
       turn: 1,
       isFirstTurn: true,
@@ -46,8 +50,17 @@ export default {
       else if (this.turn === 0) this.turn = 1;
       else console.error(id + " is invalid.");
     },
-    getColor(id) {
+    getTileColor(id) {
       return Colors.tiles[id];
+    },
+    getPlayerColor(id) {
+      return Colors.players[id];
+    },
+    getTowerColor(id) {
+      return Colors.towers[id];
+    },
+    getSymbol(id) {
+      return Symbols[id];
     },
     getTower(x, y) {
       let filter = this.towers.filter(t => t.x === x && t.y === y);
@@ -116,15 +129,76 @@ export default {
     nextY(y, playerId) {
       return playerId === 0 ? y + 1 : y - 1;
     },
+    getTowerClass(x, y) {
+      let classes = ["tower"];
+      let tower = this.getTower(x, y);
+      if (tower.playerId === this.turn && this.isFirstTurn) {
+        classes.push("possible");
+      }
+      if (this.selectedTower === tower) {
+        classes.push("tower--selectedPlayer" + this.turn);
+      }
+      return classes;
+    },
+    getTowerStyle(x, y) {
+      return {
+        backgroundColor: this.getPlayerColor(this.getTower(x, y).playerId)
+      };
+    },
+    getTileClass(x, y) {
+      let classes = ["tile"];
+      if (this.possibleMovesArray !== null && this.isPossibleMove(x, y)) {
+        classes.push("possible");
+      }
+      return classes;
+    },
+    getTileStyle(x, y) {
+      if (this.isPossibleMove(x, y)) {
+        return {
+          backgroundColor: this.tileColors[y - 1][x - 1],
+          boxShadow: "0 0 5px 0 #aaa inset, 0 0 0 5px #000 inset",
+          cursor: "pointer"
+        };
+      } else if (
+        this.selectedTower !== null &&
+        this.selectedTower.x === x &&
+        this.selectedTower.y === y
+      ) {
+        return {
+          backgroundColor: this.tileColors[y - 1][x - 1],
+          boxShadow: "0 0 5px 0 #aaa inset, 0 0 0 5px #000 inset"
+        };
+      } else {
+        return {
+          backgroundColor: this.tileColors[y - 1][x - 1]
+        };
+      }
+    },
     tileClicked(x, y) {
       if (this.isPossibleMove(x, y)) {
         this.moveTower(this.selectedTower, x, y);
         this.switchTurn();
         let towerToPlay = this.getTowerByPlayerIdAndColor(
           this.turn,
-          this.tileColors[y - 1][x - 1]
+          TileColors[y - 1][x - 1]
         );
+
         this.setSelectedTower(towerToPlay);
+      }
+    },
+    towerClicked(x, y) {
+      let tower = this.getTower(x, y);
+      if (this.isFirstTurn) {
+        if (this.selectedTower === tower) {
+          this.selectedTower = null;
+          this.possibleMovesArray = [];
+          return;
+        }
+        if (this.turn === tower.playerId) {
+          this.selectedTower = tower;
+          this.possibleMovesArray = this.getPossibleMoves(tower).slice();
+          return;
+        }
       }
     },
     moveTower(tower, newX, newY) {
@@ -171,9 +245,9 @@ export default {
     //   this.tileColorsAxios = rows.slice();
     //});
     this.updateBoard();
-  },
-  components: {
-    AppTower: Tower
+    this.tileColors = TileColors.map(row =>
+      row.map(id => this.getTileColor(id))
+    );
   }
 };
 </script>
@@ -182,14 +256,35 @@ export default {
 table {
   margin: auto;
 }
-td {
+.tile {
   width: 10vh;
   height: 10vh;
 }
-td.possible {
-  box-shadow: 0 0 30px 0 #000 inset;
-}
-td.possible:hover {
+.tile.possible:hover,
+.tower.possible:hover {
   cursor: pointer;
+}
+
+.tower {
+  cursor: default;
+  border-radius: 50%;
+  line-height: 7vh;
+  width: 7vh;
+  margin: auto;
+}
+.tower__symbol {
+  width: 7vh;
+  height: 7vh;
+  display: inline-block;
+  font-size: 4vh;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+}
+.tower--selectedPlayer0 {
+  box-shadow: 0 0 0 3px #000;
+}
+.tower--selectedPlayer1 {
+  box-shadow: 0 0 0 3px #fff, 0 0 0 6px #000;
 }
 </style>
