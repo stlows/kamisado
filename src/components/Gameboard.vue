@@ -3,6 +3,7 @@
     <h3>Game: {{ gameId }}</h3>
     <h5>Turn's: {{ turn === 0 ? "White" : "Black" }}</h5>
     <button class="btn btn-large btn-primary" @click="saveGame">Save</button>
+    <b-alert show variant="success" v-if="message!==''">{{message}}</b-alert>
     <table v-if="tileColors.length > 0 && towers.length == 16">
       <tr v-for="y in 8" :key="'kamiRow_' + y">
         <td
@@ -45,7 +46,8 @@ export default {
       turn: 1,
       isFirstTurn: true,
       selectedTower: null,
-      possibleMovesArray: []
+      possibleMovesArray: [],
+      message: ""
     };
   },
   methods: {
@@ -238,13 +240,20 @@ export default {
       });
     },
     saveGame() {
-      axios.put("games/" + this.gameId + ".json", {
-        towers: this.towers,
-        turn: this.turn,
-        isFirstTurn: this.isFirstTurn,
-        selectedTower: this.towers.indexOf(this.selectedTower),
-        possibleMovesArray: this.possibleMovesArray
-      });
+      axios
+        .put("games/" + this.gameId + ".json", {
+          towers: this.towers,
+          turn: this.turn,
+          isFirstTurn: this.isFirstTurn,
+          selectedTower: this.towers.indexOf(this.selectedTower),
+          possibleMovesArray: this.possibleMovesArray
+        })
+        .then(res => {
+          this.message = "Game saved successfully!";
+          setTimeout(() => {
+            this.message = "";
+          }, 2500);
+        });
     }
   },
   created() {

@@ -1,28 +1,29 @@
 <template>
   <div class="lobby">
-    <h2>The Lobby</h2>
-    <template v-if="games.length > 0">
-      <div class="card games-container">
-        <div class="card-header">
-          <h3>Active games</h3>
-        </div>
-        <div class="card-body">
-          <ul class="list-group">
-            <li class="list-group-item" v-for="game in games" :key="game">
-              <a href="#" @click.prevent="goToGame(game)">Go to game {{game}}</a>
-            </li>
-          </ul>
-        </div>
-        <div class="card-footer">
-          <button class="btn btn-large btn-primary" @click="newGame">New Game</button>
-        </div>
+    <div class="card games-container">
+      <div class="card-header">
+        <h3>Active games</h3>
       </div>
-    </template>
-    <template v-else>
-      <p>No games yet...</p>
-    </template>
+      <div class="card-body">
+        <template v-if="games.length > 0">
+          <div class="list-group">
+            <div class="list-group-item" v-for="game in games" :key="game">
+              <a href="#" @click.prevent="goToGame(game)">Go to game {{game}}</a>
+            </div>
+          </div>
+        </template>
+        <template v-else>
+          <p>No games yet...</p>
+        </template>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-large btn-primary" @click="newGame">New Game</button>
+      </div>
+    </div>
   </div>
 </template>
+
+  </div>
 
 <script>
 import { Component, Vue } from "vue-property-decorator";
