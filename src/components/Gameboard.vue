@@ -1,7 +1,9 @@
 <template>
   <div>
-    <p>Turn: {{turn}}</p>
-    <table v-if="tileColors.length > 0">
+    <h3>Game: {{ gameId }}</h3>
+    <h5>Turn's: {{ turn === 0 ? "White" : "Black" }}</h5>
+    <button class="btn btn-large btn-primary" @click="saveGame">Save</button>
+    <table v-if="tileColors.length > 0 && towers.length == 16">
       <tr v-for="y in 8" :key="'kamiRow_' + y">
         <td
           v-for="x in 8"
@@ -36,6 +38,8 @@ import Symbols from "../assets/Symbols.json";
 export default {
   data() {
     return {
+      moves: [],
+      gameId: this.$route.params.id,
       tileColors: [],
       towers: [],
       turn: 1,
@@ -75,14 +79,17 @@ export default {
       else return null;
     },
     isPossibleMove(x, y) {
-      for (let i in this.possibleMovesArray) {
-        if (
-          this.possibleMovesArray[i].x === x &&
-          this.possibleMovesArray[i].y === y
-        ) {
-          return true;
+      if (this.possibleMovesArray !== null) {
+        for (let i in this.possibleMovesArray) {
+          if (
+            this.possibleMovesArray[i].x === x &&
+            this.possibleMovesArray[i].y === y
+          ) {
+            return true;
+          }
         }
       }
+
       return false;
     },
     getPossibleMoves(tower) {
@@ -135,7 +142,7 @@ export default {
       if (tower.playerId === this.turn && this.isFirstTurn) {
         classes.push("possible");
       }
-      if (this.selectedTower === tower) {
+      if (this.selectedTower !== null && this.selectedTower === tower) {
         classes.push("tower--selectedPlayer" + this.turn);
       }
       return classes;
@@ -156,7 +163,7 @@ export default {
       if (this.isPossibleMove(x, y)) {
         return {
           backgroundColor: this.tileColors[y - 1][x - 1],
-          boxShadow: "0 0 5px 0 #aaa inset, 0 0 0 5px #000 inset",
+          boxShadow: "0 0 5px 0 #fff inset, 0 0 0 5px #000 inset",
           cursor: "pointer"
         };
       } else if (
@@ -210,25 +217,34 @@ export default {
       this.selectedTower = tower;
       this.possibleMovesArray = this.getPossibleMoves(tower).slice();
     },
-    updateBoard() {
-      this.towers = [
-        { playerId: 0, colorId: 0, x: 1, y: 1, sumo: 0 },
-        { playerId: 0, colorId: 1, x: 2, y: 1, sumo: 0 },
-        { playerId: 0, colorId: 2, x: 3, y: 1, sumo: 0 },
-        { playerId: 0, colorId: 3, x: 4, y: 1, sumo: 0 },
-        { playerId: 0, colorId: 4, x: 5, y: 1, sumo: 0 },
-        { playerId: 0, colorId: 5, x: 6, y: 1, sumo: 0 },
-        { playerId: 0, colorId: 6, x: 7, y: 1, sumo: 0 },
-        { playerId: 0, colorId: 7, x: 8, y: 1, sumo: 0 },
-        { playerId: 1, colorId: 7, x: 1, y: 8, sumo: 0 },
-        { playerId: 1, colorId: 6, x: 2, y: 8, sumo: 0 },
-        { playerId: 1, colorId: 5, x: 3, y: 8, sumo: 0 },
-        { playerId: 1, colorId: 4, x: 4, y: 8, sumo: 0 },
-        { playerId: 1, colorId: 3, x: 5, y: 8, sumo: 0 },
-        { playerId: 1, colorId: 2, x: 6, y: 8, sumo: 0 },
-        { playerId: 1, colorId: 1, x: 7, y: 8, sumo: 0 },
-        { playerId: 1, colorId: 0, x: 8, y: 8, sumo: 0 }
-      ];
+    loadGame() {
+      axios.get("games/" + this.gameId + ".json").then(res => {
+        const data = res.data;
+        const towers = [];
+        for (let key in data.towers) {
+          towers.push(data.towers[key]);
+        }
+        this.towers = towers;
+        this.turn = data.turn;
+        this.isFirstTurn = data.isFirstTurn;
+        this.selectedTower =
+          typeof data.selectedTower === "undefined"
+            ? null
+            : this.towers[data.selectedTower];
+        this.possibleMovesArray =
+          typeof data.possibleMovesArray === "undefined"
+            ? []
+            : data.possibleMovesArray;
+      });
+    },
+    saveGame() {
+      axios.put("games/" + this.gameId + ".json", {
+        towers: this.towers,
+        turn: this.turn,
+        isFirstTurn: this.isFirstTurn,
+        selectedTower: this.towers.indexOf(this.selectedTower),
+        possibleMovesArray: this.possibleMovesArray
+      });
     }
   },
   created() {
@@ -244,7 +260,7 @@ export default {
     //   }
     //   this.tileColorsAxios = rows.slice();
     //});
-    this.updateBoard();
+    this.loadGame();
     this.tileColors = TileColors.map(row =>
       row.map(id => this.getTileColor(id))
     );
@@ -254,7 +270,7 @@ export default {
 
 <style scoped>
 table {
-  margin: auto;
+  margin: 15px auto;
 }
 .tile {
   width: 10vh;
@@ -282,9 +298,9 @@ table {
   vertical-align: middle;
 }
 .tower--selectedPlayer0 {
-  box-shadow: 0 0 0 3px #000;
+  box-shadow: 0 0 0 3px #000, 0 0 0 6px #eee;
 }
 .tower--selectedPlayer1 {
-  box-shadow: 0 0 0 3px #fff, 0 0 0 6px #000;
+  box-shadow: 0 0 0 3px #eee, 0 0 0 6px #000;
 }
 </style>

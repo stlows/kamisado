@@ -12,7 +12,7 @@ export default new Router({
       component: () => import("./views/Lobby.vue")
     },
     {
-      path: "/game",
+      path: "/game/:id",
       name: "game",
       component: () => import("./views/Game.vue")
     }
