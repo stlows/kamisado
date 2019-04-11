@@ -1,9 +1,10 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Lobby</router-link>|
-      <router-link to="/game/">Game</router-link>
-    </div>
+    <b-navbar toggleable="lg" type="light">
+      <b-navbar-brand href="#">Kamisado</b-navbar-brand>
+      <b-nav-item to="/">Lobby</b-nav-item>
+      <b-nav-item to="/game">Game</b-nav-item>
+    </b-navbar>
     <router-view/>
   </div>
 </template>
@@ -21,15 +22,5 @@
   text-align: center;
   color: #2c3e50;
   padding-bottom: 30px;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
 </style>
