@@ -4,7 +4,7 @@
     <h5>Turn's: {{ turn === 0 ? "White" : "Black" }}</h5>
     <input type="text" v-model="userId">
     <span>{{userId}}</span>
-    <button class="btn btn-primary mb-3" @click="saveGame">Save</button>
+    <button class="btn btn-primary mb-3" @click="saveGame">Confirm move and Save</button>
     <br>
     <button
       class="btn btn-large btn-secondary"
@@ -273,17 +273,17 @@ export default {
           points: 1
         });
       }
-      this.saveGame();
+      //this.saveGame();
     },
     undoMove() {
       let move = this.moves[this.moveCounter - 1];
       move.tower.x = move.from.x;
       move.tower.y = move.from.y;
-      tower.isWon = false;
+      move.tower.isWon = false;
       this.switchTurn();
       this.setSelectedTower(move.tower);
       this.moveCounter--;
-      this.saveGame();
+      //this.saveGame();
     },
     moveTower(tower, newX, newY) {
       tower.x = newX;
