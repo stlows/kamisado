@@ -2,8 +2,21 @@
   <div>
     <h3>Game: {{ gameId }}</h3>
     <h5>Turn's: {{ turn === 0 ? "White" : "Black" }}</h5>
-    <button class="btn btn-large btn-primary" @click="saveGame">Save</button>
-    <b-alert show variant="success" v-if="message!==''">{{message}}</b-alert>
+    <button class="btn btn-large btn-primary mb-3" @click="saveGame">Save</button>
+    <span v-if="message !== ''" class="text-success ml-3">{{message}}</span>
+    <br>
+    <p v-for="m in moves">{{m}}</p>
+    <button
+      class="btn btn-large btn-secondary"
+      @click="undoMove"
+      :disabled="moveCounter == 0"
+    >&laquo;</button>
+    <span class="mx-3">{{moveCounter}}</span>
+    <button
+      class="btn btn-large btn-secondary"
+      @click="doMove"
+      :disabled="moveCounter == moves.length"
+    >&raquo;</button>
     <table v-if="tileColors.length > 0 && towers.length == 16">
       <tr v-for="y in 8" :key="'kamiRow_' + y">
         <td
@@ -39,15 +52,16 @@ import Symbols from "../assets/Symbols.json";
 export default {
   data() {
     return {
+      message: "",
+      messageDuration: 3000,
       moves: [],
       gameId: this.$route.params.id,
       tileColors: [],
       towers: [],
       turn: 1,
-      isFirstTurn: true,
       selectedTower: null,
       possibleMovesArray: [],
-      message: ""
+      moveCounter: 0
     };
   },
   methods: {
@@ -141,7 +155,7 @@ export default {
     getTowerClass(x, y) {
       let classes = ["tower"];
       let tower = this.getTower(x, y);
-      if (tower.playerId === this.turn && this.isFirstTurn) {
+      if (tower.playerId === this.turn && this.moveCounter === 0) {
         classes.push("possible");
       }
       if (this.selectedTower !== null && this.selectedTower === tower) {
@@ -185,19 +199,16 @@ export default {
     },
     tileClicked(x, y) {
       if (this.isPossibleMove(x, y)) {
-        this.moveTower(this.selectedTower, x, y);
-        this.switchTurn();
-        let towerToPlay = this.getTowerByPlayerIdAndColor(
-          this.turn,
-          TileColors[y - 1][x - 1]
-        );
-
-        this.setSelectedTower(towerToPlay);
+        if (this.moveCounter !== this.moves.length) {
+          this.moves.splice(this.moveCounter);
+        }
+        this.moves.push(this.getMove(this.selectedTower, { x, y }));
+        this.doMove();
       }
     },
     towerClicked(x, y) {
       let tower = this.getTower(x, y);
-      if (this.isFirstTurn) {
+      if (this.moveCounter === 0) {
         if (this.selectedTower === tower) {
           this.selectedTower = null;
           this.possibleMovesArray = [];
@@ -210,10 +221,42 @@ export default {
         }
       }
     },
+    getMove(tower, to) {
+      return {
+        tower: tower,
+        from: {
+          x: tower.x,
+          y: tower.y
+        },
+        to: {
+          x: to.x,
+          y: to.y
+        }
+      };
+    },
+    doMove() {
+      let move = this.moves[this.moveCounter];
+      move.tower.x = move.to.x;
+      move.tower.y = move.to.y;
+      this.switchTurn();
+      let towerToPlay = this.getTowerByPlayerIdAndColor(
+        this.turn,
+        TileColors[move.to.y - 1][move.to.x - 1]
+      );
+      this.setSelectedTower(towerToPlay);
+      this.moveCounter++;
+    },
+    undoMove() {
+      let move = this.moves[this.moveCounter - 1];
+      move.tower.x = move.from.x;
+      move.tower.y = move.from.y;
+      this.switchTurn();
+      this.setSelectedTower(move.tower);
+      this.moveCounter--;
+    },
     moveTower(tower, newX, newY) {
       tower.x = newX;
       tower.y = newY;
-      this.isFirstTurn = false;
     },
     setSelectedTower(tower) {
       this.selectedTower = tower;
@@ -228,7 +271,7 @@ export default {
         }
         this.towers = towers;
         this.turn = data.turn;
-        this.isFirstTurn = data.isFirstTurn;
+        this.moveCounter = data.moveCounter;
         this.selectedTower =
           typeof data.selectedTower === "undefined"
             ? null
@@ -237,6 +280,7 @@ export default {
           typeof data.possibleMovesArray === "undefined"
             ? []
             : data.possibleMovesArray;
+        this.moves = typeof data.moves === "undefined" ? [] : data.moves;
       });
     },
     saveGame() {
@@ -244,31 +288,24 @@ export default {
         .put("games/" + this.gameId + ".json", {
           towers: this.towers,
           turn: this.turn,
-          isFirstTurn: this.isFirstTurn,
+          moveCounter: this.moveCounter,
           selectedTower: this.towers.indexOf(this.selectedTower),
-          possibleMovesArray: this.possibleMovesArray
+          possibleMovesArray: this.possibleMovesArray,
+          moves: this.moves
         })
         .then(res => {
-          this.message = "Game saved successfully!";
-          setTimeout(() => {
-            this.message = "";
-          }, 2500);
+          this.emitMessage("✓");
         });
+    },
+    emitMessage(message) {
+      this.message = message;
+      console.log(message);
+      setTimeout(() => {
+        this.message = "";
+      }, this.messageDuration);
     }
   },
   created() {
-    // axios.get("defaultBoard/tileColors.json").then(res => {
-    //   const data = res.data;
-    //   const rows = [];
-    //   for (let key in data) {
-    //     const row = [];
-    //     for (let sec_key in data[key]) {
-    //       row.push(data[key][sec_key]);
-    //     }
-    //     rows.push(row);
-    //   }
-    //   this.tileColorsAxios = rows.slice();
-    //});
     this.loadGame();
     this.tileColors = TileColors.map(row =>
       row.map(id => this.getTileColor(id))

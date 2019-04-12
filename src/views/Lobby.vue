@@ -58,9 +58,10 @@ export default {
             { playerId: 1, colorId: 0, x: 8, y: 8, sumo: 0 }
           ],
           turn: 0,
-          isFirstTurn: true,
+          moveCounter: 0,
           selectedTower: null,
-          possibleMovesArray: []
+          possibleMovesArray: [],
+          moves: []
         })
         .then(res => {
           this.$router.push("/game/" + res.data.name);
@@ -72,7 +73,9 @@ export default {
   },
   created() {
     axios.get("games.json").then(res => {
-      this.games = Object.keys(res.data);
+      if (res.data) {
+        this.games = Object.keys(res.data);
+      }
     });
   }
 };

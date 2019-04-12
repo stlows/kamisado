@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <b-navbar toggleable="lg" type="dark" variant="info">
+    <b-navbar toggleable="lg" type="light" variant="light">
       <b-navbar-brand to="/">가미 사도 &mdash; Kamisado</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -11,13 +11,6 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-    <!--
-    <b-navbar toggleable="lg" type="light">
-      <b-navbar-brand href="#">Kamisado</b-navbar-brand>
-      <b-nav-item to="/">Lobby</b-nav-item>
-      <b-nav-item to="/game">Game</b-nav-item>
-    </b-navbar>
-    -->
     <router-view/>
   </div>
 </template>
