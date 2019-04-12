@@ -17,7 +17,8 @@ export default {
         { id: "User4564", username: "Vincent" }
       ],
       scores: [0, 0],
-      pointsToWin: 5
+      pointsToWin: 5,
+      rounds: []
     };
   },
   methods: {

@@ -279,6 +279,7 @@ export default {
       let move = this.moves[this.moveCounter - 1];
       move.tower.x = move.from.x;
       move.tower.y = move.from.y;
+      tower.isWon = false;
       this.switchTurn();
       this.setSelectedTower(move.tower);
       this.moveCounter--;
