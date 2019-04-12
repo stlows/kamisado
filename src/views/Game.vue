@@ -1,6 +1,6 @@
 <template>
   <div>
-    <app-gameboard></app-gameboard>
+    <app-gameboard @notify="notify"></app-gameboard>
   </div>
 </template>
 
@@ -10,6 +10,11 @@ import Gameboard from "../components/Gameboard.vue";
 export default {
   data() {
     return {};
+  },
+  methods: {
+    notify(e) {
+      this.$emit("notify", e);
+    }
   },
   components: {
     AppGameboard: Gameboard

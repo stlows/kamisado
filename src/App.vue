@@ -11,9 +11,36 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-    <router-view/>
+    <router-view @notify="notify"/>
+    <div id="notifications-panel" class="panel">
+      <div v-for="notification in notifications" :key="notification.id">
+        <b-alert :variant="notification.variant" dismissible :show="2" fade>{{notification.message}}</b-alert>
+      </div>
+    </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      notifications: []
+    };
+  },
+  methods: {
+    notify(_notification) {
+      let notification = {
+        message: _notification.message,
+        variant:
+          typeof _notification.variant === "undefined"
+            ? "info"
+            : _notification.variant,
+        id: "notification" + Date.now()
+      };
+      this.notifications.push(notification);
+    }
+  }
+};
+</script>
 
 <style lang="scss">
 #app {
@@ -23,5 +50,21 @@
   text-align: center;
   color: #2c3e50;
   padding-bottom: 30px;
+}
+#notifications-panel {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  padding-right: 20px;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

@@ -2,10 +2,8 @@
   <div>
     <h3>Game: {{ gameId }}</h3>
     <h5>Turn's: {{ turn === 0 ? "White" : "Black" }}</h5>
-    <button class="btn btn-large btn-primary mb-3" @click="saveGame">Save</button>
-    <span v-if="message !== ''" class="text-success ml-3">{{message}}</span>
+    <button class="btn btn-primary mb-3" @click="saveGame">Save</button>
     <br>
-    <p v-for="m in moves">{{m}}</p>
     <button
       class="btn btn-large btn-secondary"
       @click="undoMove"
@@ -294,15 +292,11 @@ export default {
           moves: this.moves
         })
         .then(res => {
-          this.emitMessage("✓");
+          this.$emit("notify", {
+            message: "✓ Game saved !",
+            variant: "success"
+          });
         });
-    },
-    emitMessage(message) {
-      this.message = message;
-      console.log(message);
-      setTimeout(() => {
-        this.message = "";
-      }, this.messageDuration);
     }
   },
   created() {
