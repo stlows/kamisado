@@ -2,6 +2,8 @@
   <div>
     <h3>Game: {{ gameId }}</h3>
     <h5>Turn's: {{ turn === 0 ? "White" : "Black" }}</h5>
+    <input type="text" v-model="userId">
+    <span>{{userId}}</span>
     <button class="btn btn-primary mb-3" @click="saveGame">Save</button>
     <br>
     <button
@@ -59,7 +61,9 @@ export default {
       turn: 1,
       selectedTower: null,
       possibleMovesArray: [],
-      moveCounter: 0
+      moveCounter: 0,
+      users: ["User4563", "User4564"],
+      userId: "User4563"
     };
   },
   methods: {
@@ -80,6 +84,18 @@ export default {
     getSymbol(id) {
       return Symbols[id];
     },
+    isWin() {
+      for (let i = 0; i < this.towers.length; i++) {
+        let tower = this.towers[i];
+        if (tower.playerId === 0 && tower.y === 8) {
+          return tower;
+        }
+        if (tower.playerId === 1 && tower.y === 0) {
+          return tower;
+        }
+      }
+      return null;
+    },
     getTower(x, y) {
       let filter = this.towers.filter(t => t.x === x && t.y === y);
       if (filter.length === 1) return filter[0];
@@ -93,7 +109,12 @@ export default {
       else return null;
     },
     isPossibleMove(x, y) {
-      if (this.possibleMovesArray !== null) {
+      if (
+        this.possibleMovesArray !== null &&
+        (this.moveCounter == this.moves.length ||
+          this.moveCounter == this.moves.length - 1) &&
+        this.users[this.turn] === this.userId
+      ) {
         for (let i in this.possibleMovesArray) {
           if (
             this.possibleMovesArray[i].x === x &&
