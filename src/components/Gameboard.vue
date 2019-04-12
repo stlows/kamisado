@@ -50,10 +50,9 @@ import Colors from "../assets/Colors.json";
 import Symbols from "../assets/Symbols.json";
 
 export default {
+  props: ["users"],
   data() {
     return {
-      message: "",
-      messageDuration: 3000,
       moves: [],
       gameId: this.$route.params.id,
       tileColors: [],
@@ -62,7 +61,6 @@ export default {
       selectedTower: null,
       possibleMovesArray: [],
       moveCounter: 0,
-      users: ["User4563", "User4564"],
       userId: "User4563"
     };
   },
@@ -113,7 +111,7 @@ export default {
         this.possibleMovesArray !== null &&
         (this.moveCounter == this.moves.length ||
           this.moveCounter == this.moves.length - 1) &&
-        this.users[this.turn] === this.userId
+        this.users.map(u => u.id)[this.turn] === this.userId
       ) {
         for (let i in this.possibleMovesArray) {
           if (
@@ -179,6 +177,9 @@ export default {
       }
       if (this.selectedTower !== null && this.selectedTower === tower) {
         classes.push("tower--selectedPlayer" + this.turn);
+      }
+      if (tower.isWon) {
+        classes.push("tower--winner");
       }
       return classes;
     },
@@ -264,6 +265,15 @@ export default {
       );
       this.setSelectedTower(towerToPlay);
       this.moveCounter++;
+      let winningTower = this.isWin();
+      if (winningTower !== null) {
+        winningTower.isWon = true;
+        this.$emit("winRound", {
+          playerId: winningTower.playerId,
+          points: 1
+        });
+      }
+      this.saveGame();
     },
     undoMove() {
       let move = this.moves[this.moveCounter - 1];
@@ -272,6 +282,7 @@ export default {
       this.switchTurn();
       this.setSelectedTower(move.tower);
       this.moveCounter--;
+      this.saveGame();
     },
     moveTower(tower, newX, newY) {
       tower.x = newX;
@@ -300,6 +311,11 @@ export default {
             ? []
             : data.possibleMovesArray;
         this.moves = typeof data.moves === "undefined" ? [] : data.moves;
+
+        this.$emit("notify", {
+          message: "✓ Game loaded",
+          variant: "success"
+        });
       });
     },
     saveGame() {
@@ -314,7 +330,7 @@ export default {
         })
         .then(res => {
           this.$emit("notify", {
-            message: "✓ Game saved !",
+            message: "✓ Game saved",
             variant: "success"
           });
         });
@@ -363,5 +379,26 @@ table {
 }
 .tower--selectedPlayer1 {
   box-shadow: 0 0 0 3px #eee, 0 0 0 6px #000;
+}
+
+.tower--winner {
+  animation: ping 0.8s ease-in-out infinite both;
+}
+@keyframes ping {
+  0% {
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  50% {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+    opacity: 1;
+  }
 }
 </style>
