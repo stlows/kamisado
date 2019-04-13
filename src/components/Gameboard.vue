@@ -4,19 +4,23 @@
     <h5>Turn's: {{ turn === 0 ? "White" : "Black" }}</h5>
     <input type="text" v-model="userId">
     <span>{{userId}}</span>
-    <button class="btn btn-primary mb-3" @click="saveGame">Confirm move and Save</button>
+    <button
+      class="btn btn-primary mb-3"
+      @click="confirmMove"
+      :disabled="!isMyTurn"
+    >{{saveButtonText}}</button>
     <br>
     <button
       class="btn btn-large btn-secondary"
       @click="undoMove"
-      :disabled="moveCounter == 0"
+      :disabled="moveCounter == 0 "
     >&laquo;</button>
     <span class="mx-3">{{moveCounter}}</span>
-    <button
+    <!-- <button
       class="btn btn-large btn-secondary"
       @click="doMove"
       :disabled="moveCounter == moves.length"
-    >&raquo;</button>
+    >&raquo;</button>-->
     <table v-if="tileColors.length > 0 && towers.length == 16">
       <tr v-for="y in 8" :key="'kamiRow_' + y">
         <td
@@ -54,6 +58,7 @@ export default {
   data() {
     return {
       moves: [],
+      moveToConfirm: null,
       gameId: this.$route.params.id,
       tileColors: [],
       towers: [],
@@ -64,12 +69,20 @@ export default {
       userId: "User4563"
     };
   },
-  methods: {
-    switchTurn() {
-      if (this.turn === 1) this.turn = 0;
-      else if (this.turn === 0) this.turn = 1;
-      else console.error(id + " is invalid.");
+  computed: {
+    isMyTurn() {
+      return this.users.map(u => u.id)[this.turn] === this.userId;
     },
+    saveButtonText() {
+      return this.isMyTurn ? "Confirm and save" : "Waiting for other player";
+    },
+    otherTurn() {
+      if (this.turn === 1) return 0;
+      else if (this.turn === 0) return 1;
+      else console.error(id + " is invalid.");
+    }
+  },
+  methods: {
     getTileColor(id) {
       return Colors.tiles[id];
     },
@@ -111,7 +124,7 @@ export default {
         this.possibleMovesArray !== null &&
         (this.moveCounter == this.moves.length ||
           this.moveCounter == this.moves.length - 1) &&
-        this.users.map(u => u.id)[this.turn] === this.userId
+        this.isMyTurn
       ) {
         for (let i in this.possibleMovesArray) {
           if (
@@ -222,20 +235,27 @@ export default {
         if (this.moveCounter !== this.moves.length) {
           this.moves.splice(this.moveCounter);
         }
-        this.moves.push(this.getMove(this.selectedTower, { x, y }));
-        this.doMove();
+        this.moveToConfirm = this.getMove(this.selectedTower, { x, y });
+        this.selectedTower.x = this.moveToConfirm.to.x;
+        this.selectedTower.y = this.moveToConfirm.to.y;
       }
     },
     towerClicked(x, y) {
-      let tower = this.getTower(x, y);
       if (this.moveCounter === 0) {
-        if (this.selectedTower === tower) {
-          this.selectedTower = null;
-          this.possibleMovesArray = [];
-          return;
-        }
+        let tower = this.getTower(x, y);
+
         if (this.turn === tower.playerId) {
+          if (this.moveToConfirm !== null) {
+            this.towers[
+              this.moveToConfirm.towerIndex
+            ].x = this.moveToConfirm.from.x;
+            this.towers[
+              this.moveToConfirm.towerIndex
+            ].y = this.moveToConfirm.from.y;
+            this.moveToConfirm = null;
+          }
           this.selectedTower = tower;
+
           this.possibleMovesArray = this.getPossibleMoves(tower).slice();
           return;
         }
@@ -243,10 +263,10 @@ export default {
     },
     getMove(tower, to) {
       return {
-        tower: tower,
+        towerIndex: this.towers.indexOf(tower),
         from: {
-          x: tower.x,
-          y: tower.y
+          x: this.moveToConfirm === null ? tower.x : this.moveToConfirm.from.x,
+          y: this.moveToConfirm === null ? tower.y : this.moveToConfirm.from.y
         },
         to: {
           x: to.x,
@@ -254,17 +274,21 @@ export default {
         }
       };
     },
-    doMove() {
-      let move = this.moves[this.moveCounter];
-      move.tower.x = move.to.x;
-      move.tower.y = move.to.y;
-      this.switchTurn();
-      let towerToPlay = this.getTowerByPlayerIdAndColor(
-        this.turn,
-        TileColors[move.to.y - 1][move.to.x - 1]
+    confirmMove() {
+      this.moves.push(this.moveToConfirm);
+      let towerToPlayNext = this.getTowerByPlayerIdAndColor(
+        this.otherTurn,
+        TileColors[this.moveToConfirm.to.y - 1][this.moveToConfirm.to.x - 1]
       );
-      this.setSelectedTower(towerToPlay);
+      this.checkWin();
+      this.moveToConfirm == null;
+      this.selectedTower = towerToPlayNext;
+      this.setPossibleMoves(towerToPlayNext);
       this.moveCounter++;
+      this.turn = this.otherTurn;
+      this.saveGame();
+    },
+    checkWin() {
       let winningTower = this.isWin();
       if (winningTower !== null) {
         winningTower.isWon = true;
@@ -273,24 +297,22 @@ export default {
           points: 1
         });
       }
-      //this.saveGame();
     },
     undoMove() {
       let move = this.moves[this.moveCounter - 1];
-      move.tower.x = move.from.x;
-      move.tower.y = move.from.y;
-      move.tower.isWon = false;
-      this.switchTurn();
-      this.setSelectedTower(move.tower);
+      let tower = this.towers[move.towerIndex];
       this.moveCounter--;
+      tower.x = move.from.x;
+      tower.y = move.from.y;
+      this.selectedTower = tower;
+      this.setPossibleMoves(tower);
       //this.saveGame();
     },
     moveTower(tower, newX, newY) {
       tower.x = newX;
       tower.y = newY;
     },
-    setSelectedTower(tower) {
-      this.selectedTower = tower;
+    setPossibleMoves(tower) {
       this.possibleMovesArray = this.getPossibleMoves(tower).slice();
     },
     loadGame() {
