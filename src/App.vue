@@ -8,6 +8,7 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item to="/">Lobby</b-nav-item>
+          <b-nav-item to="/tutorial" disabled>Tutorial</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>

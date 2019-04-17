@@ -39,29 +39,37 @@ export default {
     newGame() {
       axios
         .post("games.json", {
-          towers: [
-            { playerId: 0, colorId: 0, x: 1, y: 1, sumo: 0 },
-            { playerId: 0, colorId: 1, x: 2, y: 1, sumo: 0 },
-            { playerId: 0, colorId: 2, x: 3, y: 1, sumo: 0 },
-            { playerId: 0, colorId: 3, x: 4, y: 1, sumo: 0 },
-            { playerId: 0, colorId: 4, x: 5, y: 1, sumo: 0 },
-            { playerId: 0, colorId: 5, x: 6, y: 1, sumo: 0 },
-            { playerId: 0, colorId: 6, x: 7, y: 1, sumo: 0 },
-            { playerId: 0, colorId: 7, x: 8, y: 1, sumo: 0 },
-            { playerId: 1, colorId: 7, x: 1, y: 8, sumo: 0 },
-            { playerId: 1, colorId: 6, x: 2, y: 8, sumo: 0 },
-            { playerId: 1, colorId: 5, x: 3, y: 8, sumo: 0 },
-            { playerId: 1, colorId: 4, x: 4, y: 8, sumo: 0 },
-            { playerId: 1, colorId: 3, x: 5, y: 8, sumo: 0 },
-            { playerId: 1, colorId: 2, x: 6, y: 8, sumo: 0 },
-            { playerId: 1, colorId: 1, x: 7, y: 8, sumo: 0 },
-            { playerId: 1, colorId: 0, x: 8, y: 8, sumo: 0 }
+          rounds: [
+            {
+              towers: [
+                { id: 0, playerId: 0, colorId: 0, x: 1, y: 1, sumo: 0 },
+                { id: 1, playerId: 0, colorId: 1, x: 2, y: 1, sumo: 0 },
+                { id: 2, playerId: 0, colorId: 2, x: 3, y: 1, sumo: 0 },
+                { id: 3, playerId: 0, colorId: 3, x: 4, y: 1, sumo: 0 },
+                { id: 4, playerId: 0, colorId: 4, x: 5, y: 1, sumo: 0 },
+                { id: 5, playerId: 0, colorId: 5, x: 6, y: 1, sumo: 0 },
+                { id: 6, playerId: 0, colorId: 6, x: 7, y: 1, sumo: 0 },
+                { id: 7, playerId: 0, colorId: 7, x: 8, y: 1, sumo: 0 },
+                { id: 8, playerId: 1, colorId: 7, x: 1, y: 8, sumo: 0 },
+                { id: 9, playerId: 1, colorId: 6, x: 2, y: 8, sumo: 0 },
+                { id: 10, playerId: 1, colorId: 5, x: 3, y: 8, sumo: 0 },
+                { id: 11, playerId: 1, colorId: 4, x: 4, y: 8, sumo: 0 },
+                { id: 12, playerId: 1, colorId: 3, x: 5, y: 8, sumo: 0 },
+                { id: 13, playerId: 1, colorId: 2, x: 6, y: 8, sumo: 0 },
+                { id: 14, playerId: 1, colorId: 1, x: 7, y: 8, sumo: 0 },
+                { id: 15, playerId: 1, colorId: 0, x: 8, y: 8, sumo: 0 }
+              ],
+              turn: 0,
+              selectedTowerId: null,
+              moves: []
+            }
           ],
-          turn: 0,
-          moveCounter: 0,
-          selectedTower: null,
-          possibleMovesArray: [],
-          moves: []
+          users: [
+            { id: "User4563", username: "Charles" },
+            { id: "User4564", username: "Vincent" }
+          ],
+          scores: [0, 0],
+          pointsToWin: 5
         })
         .then(res => {
           this.$router.push("/game/" + res.data.name);

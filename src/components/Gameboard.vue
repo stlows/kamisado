@@ -7,20 +7,9 @@
     <button
       class="btn btn-primary mb-3"
       @click="confirmMove"
-      :disabled="!isMyTurn"
+      :disabled="!isMyTurn || moveToConfirm === null"
     >{{saveButtonText}}</button>
     <br>
-    <button
-      class="btn btn-large btn-secondary"
-      @click="undoMove"
-      :disabled="moveCounter == 0 "
-    >&laquo;</button>
-    <span class="mx-3">{{moveCounter}}</span>
-    <!-- <button
-      class="btn btn-large btn-secondary"
-      @click="doMove"
-      :disabled="moveCounter == moves.length"
-    >&raquo;</button>-->
     <table v-if="tileColors.length > 0 && towers.length == 16">
       <tr v-for="y in 8" :key="'kamiRow_' + y">
         <td
@@ -54,18 +43,16 @@ import Colors from "../assets/Colors.json";
 import Symbols from "../assets/Symbols.json";
 
 export default {
-  props: ["users"],
+  props: ["users", "roundId", "gameId"],
+
   data() {
     return {
       moves: [],
       moveToConfirm: null,
-      gameId: this.$route.params.id,
       tileColors: [],
       towers: [],
       turn: 1,
-      selectedTower: null,
-      possibleMovesArray: [],
-      moveCounter: 0,
+      selectedTowerId: null,
       userId: "User4563"
     };
   },
@@ -74,12 +61,78 @@ export default {
       return this.users.map(u => u.id)[this.turn] === this.userId;
     },
     saveButtonText() {
-      return this.isMyTurn ? "Confirm and save" : "Waiting for other player";
+      if (this.isMyTurn) {
+        if (this.moveToConfirm === null) {
+          return "Make a move";
+        } else {
+          return "Confirm and save";
+        }
+      }
+      return "Waiting for other player";
     },
     otherTurn() {
       if (this.turn === 1) return 0;
       else if (this.turn === 0) return 1;
       else console.error(id + " is invalid.");
+    },
+    selectedTower() {
+      if (this.selectedTowerId === null) {
+        return null;
+      }
+      return this.towers[this.selectedTowerId];
+    },
+    possibleMovesArray() {
+      let possibles = [];
+      let move = this.moveToConfirm;
+      let nextY = function(y, towerId) {
+        return towerId < 8 ? y + 1 : y - 1;
+      };
+
+      if (move === null) return possibles;
+      let y = nextY(move.from.y, move.towerId);
+      let xLeft = move.from.x - 1;
+      let xRight = move.from.x + 1;
+
+      // Vertical
+      while (
+        (this.getTower(move.from.x, y) === null ||
+          this.getTower(move.from.x, y).id === move.towerId) &&
+        y >= 1 &&
+        y <= 8
+      ) {
+        possibles.push({ x: move.from.x, y: y });
+        y = nextY(y, move.towerId);
+      }
+
+      // Diagonally to the left
+      y = nextY(move.from.y, move.towerId);
+      while (
+        (this.getTower(xLeft, y) === null ||
+          this.getTower(xLeft, y).id === move.towerId) &&
+        y >= 1 &&
+        y <= 8 &&
+        xLeft >= 1
+      ) {
+        possibles.push({ x: xLeft, y: y });
+        y = nextY(y, move.towerId);
+        xLeft--;
+      }
+
+      // Diagonally to the right
+      y = nextY(move.from.y, move.towerId);
+      while (
+        (this.getTower(xRight, y) === null ||
+          this.getTower(xRight, y).id === move.towerId) &&
+        y >= 1 &&
+        y <= 8 &&
+        xRight <= 8
+      ) {
+        possibles.push({ x: xRight, y: y });
+        y = nextY(y, move.towerId);
+        xRight++;
+      }
+
+      return possibles;
     }
   },
   methods: {
@@ -101,7 +154,7 @@ export default {
         if (tower.playerId === 0 && tower.y === 8) {
           return tower;
         }
-        if (tower.playerId === 1 && tower.y === 0) {
+        if (tower.playerId === 1 && tower.y === 1) {
           return tower;
         }
       }
@@ -122,8 +175,8 @@ export default {
     isPossibleMove(x, y) {
       if (
         this.possibleMovesArray !== null &&
-        (this.moveCounter == this.moves.length ||
-          this.moveCounter == this.moves.length - 1) &&
+        // (this.moveCounter == this.moves.length ||
+        //   this.moveCounter == this.moves.length - 1) &&
         this.isMyTurn
       ) {
         for (let i in this.possibleMovesArray) {
@@ -138,54 +191,10 @@ export default {
 
       return false;
     },
-    getPossibleMoves(tower) {
-      let possibles = [];
-      if (tower === null) return possibles;
-      let y = this.nextY(tower.y, tower.playerId);
-      let xLeft = tower.x - 1;
-      let xRight = tower.x + 1;
-
-      // Vertical
-      while (this.getTower(tower.x, y) === null && y >= 1 && y <= 8) {
-        possibles.push({ x: tower.x, y: y });
-        y = this.nextY(y, tower.playerId);
-      }
-
-      // Diagonally to the left
-      y = this.nextY(tower.y, tower.playerId);
-      while (
-        this.getTower(xLeft, y) === null &&
-        y >= 1 &&
-        y <= 8 &&
-        xLeft >= 1
-      ) {
-        possibles.push({ x: xLeft, y: y });
-        y = this.nextY(y, tower.playerId);
-        xLeft--;
-      }
-
-      // Diagonally to the right
-      y = this.nextY(tower.y, tower.playerId);
-      while (
-        this.getTower(xRight, y) === null &&
-        y >= 1 &&
-        y <= 8 &&
-        xRight <= 8
-      ) {
-        possibles.push({ x: xRight, y: y });
-        y = this.nextY(y, tower.playerId);
-        xRight++;
-      }
-
-      return possibles;
-    },
-    nextY(y, playerId) {
-      return playerId === 0 ? y + 1 : y - 1;
-    },
     getTowerClass(x, y) {
       let classes = ["tower"];
       let tower = this.getTower(x, y);
-      if (tower.playerId === this.turn && this.moveCounter === 0) {
+      if (tower.playerId === this.turn && this.moves.length === 0) {
         classes.push("possible");
       }
       if (this.selectedTower !== null && this.selectedTower === tower) {
@@ -232,16 +241,16 @@ export default {
     },
     tileClicked(x, y) {
       if (this.isPossibleMove(x, y)) {
-        if (this.moveCounter !== this.moves.length) {
-          this.moves.splice(this.moveCounter);
-        }
+        // if (this.moveCounter !== this.moves.length) {
+        //   this.moves.splice(this.moveCounter);
+        // }
         this.moveToConfirm = this.getMove(this.selectedTower, { x, y });
         this.selectedTower.x = this.moveToConfirm.to.x;
         this.selectedTower.y = this.moveToConfirm.to.y;
       }
     },
     towerClicked(x, y) {
-      if (this.moveCounter === 0) {
+      if (this.moves.length === 0) {
         let tower = this.getTower(x, y);
 
         if (this.turn === tower.playerId) {
@@ -254,16 +263,16 @@ export default {
             ].y = this.moveToConfirm.from.y;
             this.moveToConfirm = null;
           }
-          this.selectedTower = tower;
-
-          this.possibleMovesArray = this.getPossibleMoves(tower).slice();
+          this.selectedTowerId = tower.id;
+          this.moveToConfirm = this.getMove(this.selectedTower, { x, y });
+          //this.possibleMovesArray = this.getPossibleMoves(tower).slice();
           return;
         }
       }
     },
     getMove(tower, to) {
       return {
-        towerIndex: this.towers.indexOf(tower),
+        towerId: tower.id,
         from: {
           x: this.moveToConfirm === null ? tower.x : this.moveToConfirm.from.x,
           y: this.moveToConfirm === null ? tower.y : this.moveToConfirm.from.y
@@ -282,11 +291,9 @@ export default {
       );
       this.checkWin();
       this.moveToConfirm == null;
-      this.selectedTower = towerToPlayNext;
-      this.setPossibleMoves(towerToPlayNext);
-      this.moveCounter++;
+      this.selectedTowerId = towerToPlayNext.id;
       this.turn = this.otherTurn;
-      this.saveGame();
+      this.saveRound();
     },
     checkWin() {
       let winningTower = this.isWin();
@@ -299,68 +306,49 @@ export default {
       }
     },
     undoMove() {
-      let move = this.moves[this.moveCounter - 1];
+      let move = this.moves[this.moves.length - 1];
       let tower = this.towers[move.towerIndex];
-      this.moveCounter--;
       tower.x = move.from.x;
       tower.y = move.from.y;
-      this.selectedTower = tower;
-      this.setPossibleMoves(tower);
-      //this.saveGame();
+      this.selectedTowerId = tower.id;
     },
     moveTower(tower, newX, newY) {
       tower.x = newX;
       tower.y = newY;
     },
-    setPossibleMoves(tower) {
-      this.possibleMovesArray = this.getPossibleMoves(tower).slice();
-    },
-    loadGame() {
-      axios.get("games/" + this.gameId + ".json").then(res => {
+    loadRound() {
+      axios.get("games/" + this.gameId + "/rounds.json").then(res => {
         const data = res.data;
-        const towers = [];
-        for (let key in data.towers) {
-          towers.push(data.towers[key]);
-        }
-        this.towers = towers;
-        this.turn = data.turn;
-        this.moveCounter = data.moveCounter;
-        this.selectedTower =
-          typeof data.selectedTower === "undefined"
+        const round = data[this.roundId];
+        this.towers = round.towers.slice();
+        this.turn = round.turn;
+        this.selectedTowerId =
+          typeof round.selectedTowerId === "undefined"
             ? null
-            : this.towers[data.selectedTower];
-        this.possibleMovesArray =
-          typeof data.possibleMovesArray === "undefined"
-            ? []
-            : data.possibleMovesArray;
-        this.moves = typeof data.moves === "undefined" ? [] : data.moves;
+            : round.selectedTowerId;
+        // this.possibleMovesArray =
+        //   typeof data.possibleMovesArray === "undefined"
+        //     ? []
+        //     : data.possibleMovesArray;
+        this.moves = typeof round.moves === "undefined" ? [] : round.moves;
 
         this.$emit("notify", {
-          message: "✓ Game loaded",
+          message: "✓ Round loaded",
           variant: "success"
         });
       });
     },
-    saveGame() {
-      axios
-        .put("games/" + this.gameId + ".json", {
-          towers: this.towers,
-          turn: this.turn,
-          moveCounter: this.moveCounter,
-          selectedTower: this.towers.indexOf(this.selectedTower),
-          possibleMovesArray: this.possibleMovesArray,
-          moves: this.moves
-        })
-        .then(res => {
-          this.$emit("notify", {
-            message: "✓ Game saved",
-            variant: "success"
-          });
-        });
+    saveRound() {
+      this.$emit("save-round", {
+        towers: this.towers,
+        turn: this.turn,
+        selectedTowerId: this.selectedTowerId,
+        moves: this.moves
+      });
     }
   },
   created() {
-    this.loadGame();
+    this.loadRound();
     this.tileColors = TileColors.map(row =>
       row.map(id => this.getTileColor(id))
     );
