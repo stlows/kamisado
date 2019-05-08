@@ -10,6 +10,18 @@
       :disabled="!isMyTurn || moveToConfirm === null"
     >{{saveButtonText}}</button>
     <br>
+    <div id="gameboardContainer">
+      <div id="gameboard" v-if="tileColors.length > 0">
+        <div
+          class="tile"
+          v-for="i in 64"
+          :key="'tile_' + i"
+          :class="getTileClass(getXFromIndex(i), getYFromIndex(i))"
+          :style="getTileStyle(getXFromIndex(i), getYFromIndex(i))"
+          @click="tileClicked(getXFromIndex(i), getYFromIndex(i))"
+        ></div>
+      </div>
+    </div>
     <table v-if="tileColors.length > 0 && towers.length == 16">
       <tr v-for="y in 8" :key="'kamiRow_' + y">
         <td
@@ -159,6 +171,12 @@ export default {
         }
       }
       return null;
+    },
+    getXFromIndex(i) {
+      return ((i - 1) % 8) + 1;
+    },
+    getYFromIndex(i) {
+      return Math.floor((i - 1) / 8) + 1;
     },
     getTower(x, y) {
       let filter = this.towers.filter(t => t.x === x && t.y === y);
@@ -360,9 +378,18 @@ export default {
 table {
   margin: 15px auto;
 }
+
+#gameboard {
+  display: grid;
+  grid-template-columns: repeat(8, fit-content(10vh));
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+}
 .tile {
   width: 10vh;
   height: 10vh;
+  background-color: #00aadd;
 }
 .tile.possible:hover,
 .tower.possible:hover {
