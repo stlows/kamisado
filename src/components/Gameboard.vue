@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>Game: {{ gameId }}</h3>
-    <h5>Turn's: {{ turn === 0 ? "White" : "Black" }}</h5>
+    <h5>{{ turn === 0 ? "White" : "Black" }}'s turn</h5>
     <input type="text" v-model="userId">
     <span>{{userId}}</span>
     <button
@@ -10,19 +10,8 @@
       :disabled="!isMyTurn || moveToConfirm === null"
     >{{saveButtonText}}</button>
     <br>
-    <div id="gameboardContainer">
-      <div id="gameboard" v-if="tileColors.length > 0">
-        <div
-          class="tile"
-          v-for="i in 64"
-          :key="'tile_' + i"
-          :class="getTileClass(getXFromIndex(i), getYFromIndex(i))"
-          :style="getTileStyle(getXFromIndex(i), getYFromIndex(i))"
-          @click="tileClicked(getXFromIndex(i), getYFromIndex(i))"
-        ></div>
-      </div>
-    </div>
-    <table v-if="tileColors.length > 0 && towers.length == 16">
+
+    <table v-if="tileColors.length > 0 && towers.length == 16" id="gameboard">
       <tr v-for="y in 8" :key="'kamiRow_' + y">
         <td
           v-for="x in 8"
@@ -375,17 +364,11 @@ export default {
 </script>
 
 <style scoped>
-table {
+#gameboard {
   margin: 15px auto;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
 }
 
-#gameboard {
-  display: grid;
-  grid-template-columns: repeat(8, fit-content(10vh));
-  justify-content: center;
-  justify-items: center;
-  align-items: center;
-}
 .tile {
   width: 10vh;
   height: 10vh;
