@@ -1,15 +1,10 @@
 <template>
   <div>
-    <h3>Game: {{ gameId }}</h3>
-    <h5>{{ turn === 0 ? "White" : "Black" }}'s turn</h5>
-    <input type="text" v-model="userId">
-    <span>{{userId}}</span>
-    <button
-      class="btn btn-primary mb-3"
-      @click="confirmMove"
-      :disabled="!isMyTurn || moveToConfirm === null"
-    >{{saveButtonText}}</button>
-    <br>
+    <div id="tiles">
+      <game-tile v-for="tile in tiles" :tile="tile" :key="tile.id"></game-tile>
+    </div>
+
+    <game-tower v-for="tower in towers" :tower="tower" :key="tower.id"></game-tower>
 
     <table v-if="tileColors.length > 0 && towers.length == 16" id="gameboard">
       <tr v-for="y in 8" :key="'kamiRow_' + y">
@@ -42,10 +37,15 @@ import axios from "axios";
 import TileColors from "../assets/TileColors.json";
 import Colors from "../assets/Colors.json";
 import Symbols from "../assets/Symbols.json";
+import Tile from "./Tile.vue";
+import Tower from "./Tower.vue";
 
 export default {
   props: ["users", "roundId", "gameId"],
-
+  components: {
+    'game-tower': Tower,
+    'game-tile':Tile
+  },
   data() {
     return {
       moves: [],
@@ -58,8 +58,11 @@ export default {
     };
   },
   computed: {
+    activeUserId(){
+      return this.users.map(u => u.id)[this.turn];
+    },
     isMyTurn() {
-      return this.users.map(u => u.id)[this.turn] === this.userId;
+      return this.activeUserId === this.userId;
     },
     saveButtonText() {
       if (this.isMyTurn) {
@@ -71,7 +74,8 @@ export default {
       }
       return "Waiting for other player";
     },
-    otherTurn() {
+    otherTurn() {¸
+      return Math.abs(this.turn - 1);
       if (this.turn === 1) return 0;
       else if (this.turn === 0) return 1;
       else console.error(id + " is invalid.");

@@ -1,20 +1,21 @@
 <template>
   <div>
-    <p>White's score: {{ scores[0] }}</p>
-    <p>Blacks's score: {{ scores[0] }}</p>
-    <app-gameboard
+    <game-controls></game-controls>
+
+    <game-board
       @notify="notify"
       @save-round="saveRound"
       :users="users"
       @winRound="winRound"
       :roundId="activeRound"
       :gameId="gameId"
-    ></app-gameboard>
+    ></game-board>
   </div>
 </template>
 
 <script>
 import Gameboard from "../components/Gameboard.vue";
+import GameControls from "../components/GameControls.vue";
 import axios from "axios";
 export default {
   data() {
@@ -118,7 +119,8 @@ export default {
     this.loadGame();
   },
   components: {
-    AppGameboard: Gameboard
+    "game-board": Gameboard,
+    "game-controls": GameControls
   }
 };
 </script>
