@@ -1,30 +1,26 @@
 <template>
   <div>
-    <game-controls></game-controls>
-
-    <game-board
-      @notify="notify"
-      @save-round="saveRound"
-      :users="users"
-      @winRound="winRound"
-      :roundId="activeRound"
-      :gameId="gameId"
-    ></game-board>
+    <game-info :game="game"></game-info>
+    <game-controls @moveConfirmed="moveConfirmed" :game="game"></game-controls>
+    <game-board @notify="notify" @save-round="saveRound" @winRound="winRound" :game="game"></game-board>
   </div>
 </template>
 
 <script>
-import Gameboard from "../components/Gameboard.vue";
-import GameControls from "../components/GameControls.vue";
+import GameInfo from "../components/GameInfo.vue";
+import Board from "../components/Board.vue";
+import Controls from "../components/Controls.vue";
 import axios from "axios";
 export default {
   data() {
     return {
-      gameId: this.$route.params.id,
-      users: [],
-      scores: [],
-      pointsToWin: 0,
-      rounds: []
+      game: {
+        id: this.$route.params.id,
+        users: [],
+        scores: [],
+        pointsToWin: 0,
+        rounds: []
+      }
     };
   },
   computed: {
@@ -44,40 +40,14 @@ export default {
       });
     },
     loadGame() {
-      axios.get("games/" + this.gameId + ".json").then(res => {
+      console.log("Loading game" + this.game.id);
+      axios.get("games/" + this.game.id + ".json").then(res => {
         const data = res.data;
-
-        this.pointsToWin = data.pointsToWin;
-        this.scores = data.scores;
-
-        const users = [];
-        for (let key in data.users) {
-          users.push(data.users[key]);
-        }
-        this.users = users;
-
-        this.rounds = data.rounds;
-        // console.log(rounds);
-        // for (let key in rounds) {
-        //   console.log(key);
-        //   console.log(rounds[key]);
-        //   const round = {};
-        //   const towers = [];
-        //   for (let key in rounds[key].towers) {
-        //     towers.push(rounds[key].towers[key]);
-        //   }
-        //   round.towers = towers;
-        //   round.turn = rounds[key].turn;
-        //   round.selectedTowerId = rounds[key].selectedTowerId;
-        //   round.moves =
-        //     typeof rounds[key].moves === "undefined"
-        //       ? []
-        //       : data.rounds[key].moves;
-        //   rounds.push(round);
-        // }
-
-        // this.rounds = rounds;
-
+        console.log(data);
+        this.game.pointsToWin = data.pointsToWin;
+        this.game.scores = data.scores;
+        this.game.users = data.users;
+        this.game.rounds = data.rounds;
         this.$emit("notify", {
           message: "✓ Game loaded",
           variant: "success"
@@ -119,8 +89,9 @@ export default {
     this.loadGame();
   },
   components: {
-    "game-board": Gameboard,
-    "game-controls": GameControls
+    "game-board": Board,
+    "game-controls": Controls,
+    "game-info": GameInfo
   }
 };
 </script>

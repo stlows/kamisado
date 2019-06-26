@@ -59,14 +59,12 @@ export default {
                 { id: 14, playerId: 1, colorId: 1, x: 7, y: 8, sumo: 0 },
                 { id: 15, playerId: 1, colorId: 0, x: 8, y: 8, sumo: 0 }
               ],
-              turn: 0,
-              selectedTowerId: null,
-              moves: []
+              turnId: "User4563"
             }
           ],
           users: [
-            { id: "User4563", username: "Charles" },
-            { id: "User4564", username: "Vincent" }
+            { id: "User4563", username: "Charles", score: 0 },
+            { id: "User4564", username: "Vincent", score: 0 }
           ],
           scores: [0, 0],
           pointsToWin: 5

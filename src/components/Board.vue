@@ -6,7 +6,7 @@
 
     <game-tower v-for="tower in towers" :tower="tower" :key="tower.id"></game-tower>
 
-    <table v-if="tileColors.length > 0 && towers.length == 16" id="gameboard">
+    <!-- <table v-if="tileColors.length > 0 && towers.length == 16" id="gameboard">
       <tr v-for="y in 8" :key="'kamiRow_' + y">
         <td
           v-for="x in 8"
@@ -28,7 +28,7 @@
           </div>
         </td>
       </tr>
-    </table>
+    </table>-->
   </div>
 </template>
 
@@ -41,24 +41,21 @@ import Tile from "./Tile.vue";
 import Tower from "./Tower.vue";
 
 export default {
-  props: ["users", "roundId", "gameId"],
+  //props: ["users", "turnId", "tiles", "towers", "colorToMove", "loginUserId"],
+  props: ["game"],
   components: {
-    'game-tower': Tower,
-    'game-tile':Tile
+    "game-tower": Tower,
+    "game-tile": Tile
   },
   data() {
     return {
-      moves: [],
       moveToConfirm: null,
       tileColors: [],
-      towers: [],
-      turn: 1,
-      selectedTowerId: null,
-      userId: "User4563"
+      selectedTowerId: null
     };
   },
   computed: {
-    activeUserId(){
+    activeUserId() {
       return this.users.map(u => u.id)[this.turn];
     },
     isMyTurn() {
@@ -74,7 +71,7 @@ export default {
       }
       return "Waiting for other player";
     },
-    otherTurn() {¸
+    otherTurn() {
       return Math.abs(this.turn - 1);
       if (this.turn === 1) return 0;
       else if (this.turn === 0) return 1;

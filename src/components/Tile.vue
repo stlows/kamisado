@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  props: ["tower", "color"]
+  props: ["game"]
 };
 </script>
 

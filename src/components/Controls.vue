@@ -1,9 +1,5 @@
 <template>
   <div id="game-controls">
-    <p>White's score: {{ scores[0] }}</p>
-    <p>Blacks's score: {{ scores[0] }}</p>
-    <h3>Game: {{ gameId }}</h3>
-    <h5>{{ turn === 0 ? "White" : "Black" }}'s turn</h5>
     <input type="text" v-model="userId">
     <span>{{userId}}</span>
     <button
@@ -16,7 +12,12 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["moveToConfirm", "scores"],
+  data() {
+    return {};
+  }
+};
 </script>
 
 <style>
