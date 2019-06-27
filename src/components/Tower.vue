@@ -1,38 +1,90 @@
 <template>
-  <div class="tower" :class="[tower.color, tower.playerColor]"></div>
+  <div
+    class="tower"
+    :class="[tower.color, tower.playerColor, {selectable: tower.selectable, selected: tower.selected}]"
+    @click.stop="towerClicked"
+  >
+    <span v-for="i in tower.sumo" class="sumo" :class="'sumo' + i">★</span>
+  </div>
 </template>
 
 <script>
 export default {
-  props: ["tower"]
+  props: ["tower"],
+  methods: {
+    towerClicked() {
+      this.$emit("towerClicked");
+    }
+  }
 };
 </script>
 
 <style lang="scss">
 @import "../assets/colors.scss";
+@import "../assets/constants.scss";
 .tower {
+  z-index: 999;
   cursor: default;
   border-radius: 50%;
-  line-height: 7vh;
-  width: 7vh;
+  line-height: $tower-size;
+  width: $tower-size;
   margin: auto;
-
+  position: relative;
+  &.selectable {
+    cursor: pointer;
+  }
   &:after {
-    width: 7vh;
-    height: 7vh;
+    width: 100%;
+    height: 100%;
     display: inline-block;
-    font-size: 4vh;
+    font-size: $symbol-size;
     font-weight: bold;
     text-align: center;
     vertical-align: middle;
   }
+  .sumo {
+    position: absolute;
+    line-height: $sumo-size;
+    font-size: $sumo-size;
+    &.sumo1 {
+      top: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    &.sumo2 {
+      top: 50%;
+      transform: translateY(-50%);
+      left: 2px;
+    }
+    &.sumo3 {
+      top: 50%;
+      transform: translateY(-50%);
+      right: 2px;
+    }
+    &.sumo4 {
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
   &.white {
     background-color: $player-white;
-    //box-shadow: 0 0 0 3px #000, 0 0 0 6px #eee;
+    &.selected {
+      box-shadow: 0 0 0 3px $player-black, 0 0 0 6px $player-white;
+    }
+    .sumo {
+      color: $player-black;
+    }
   }
   &.black {
     background-color: $player-black;
-    //box-shadow: 0 0 0 3px #eee, 0 0 0 6px #000;
+    &.selected {
+      box-shadow: 0 0 0 3px $player-white, 0 0 0 6px $player-black;
+    }
+    .sumo {
+      color: $player-white;
+    }
   }
   &.orange:after {
     content: "주";
@@ -67,10 +119,5 @@ export default {
     content: "녹";
     color: $green;
   }
-
-  //[, "gold", "firebrick", "seagreen", "saddlebrown"]
-  // ["노", "빨", "녹", "갈"]
-}
-.tower__symbol {
 }
 </style>

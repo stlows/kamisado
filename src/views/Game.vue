@@ -88,7 +88,7 @@ export default {
     }
   },
   created() {
-    this.loadGame();
+    //this.loadGame();
   },
   components: {
     "game-board": Board,
