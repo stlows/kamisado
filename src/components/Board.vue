@@ -4,7 +4,7 @@
       <game-tile v-for="tile in tiles" :tile="tile" :key="tile.id"></game-tile>
     </div>
 
-    <game-tower v-for="tower in towers" :tower="tower" :key="tower.id"></game-tower>
+    <!-- <game-tower v-for="tower in towers" :tower="tower" :key="tower.id"></game-tower> -->
 
     <!-- <table v-if="tileColors.length > 0 && towers.length == 16" id="gameboard">
       <tr v-for="y in 8" :key="'kamiRow_' + y">

@@ -1,14 +1,16 @@
 <template>
   <div>
-    <game-info :game="game"></game-info>
+    <!-- <game-info :game="game"></game-info>
     <game-controls @moveConfirmed="moveConfirmed" :game="game"></game-controls>
-    <game-board @notify="notify" @save-round="saveRound" @winRound="winRound" :game="game"></game-board>
+    <game-board @notify="notify" @save-round="saveRound" @winRound="winRound" :game="game"></game-board>-->
+    <game-board></game-board>
   </div>
 </template>
 
 <script>
 import GameInfo from "../components/GameInfo.vue";
-import Board from "../components/Board.vue";
+import Board from "../components/NewBoard.vue";
+import Tile from "../components/Tile.vue";
 import Controls from "../components/Controls.vue";
 import axios from "axios";
 export default {
@@ -91,7 +93,8 @@ export default {
   components: {
     "game-board": Board,
     "game-controls": Controls,
-    "game-info": GameInfo
+    "game-info": GameInfo,
+    "game-tile": Tile
   }
 };
 </script>
