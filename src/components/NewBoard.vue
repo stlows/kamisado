@@ -3,6 +3,7 @@
     <div id="board">
       <game-tile
         v-for="tile in tiles"
+        :key="tile.x + '_' + tile.y"
         :tile="tile"
         @towerClicked="towerClicked"
         @tileClicked="tileClicked"
@@ -115,54 +116,54 @@ export default {
             selected: false
           }
         },
-        { x: 0, y: 1, color: "red", selectable: false },
-        { x: 1, y: 1, color: "orange", selectable: false },
-        { x: 2, y: 1, color: "pink", selectable: false },
-        { x: 3, y: 1, color: "green", selectable: false },
-        { x: 4, y: 1, color: "blue", selectable: false },
-        { x: 5, y: 1, color: "yellow", selectable: false },
-        { x: 6, y: 1, color: "brown", selectable: false },
-        { x: 7, y: 1, color: "indigo", selectable: false },
-        { x: 0, y: 2, color: "green", selectable: false },
-        { x: 1, y: 2, color: "pink", selectable: false },
-        { x: 2, y: 2, color: "orange", selectable: false },
-        { x: 3, y: 2, color: "red", selectable: false },
-        { x: 4, y: 2, color: "indigo", selectable: false },
-        { x: 5, y: 2, color: "brown", selectable: false },
-        { x: 6, y: 2, color: "yellow", selectable: false },
-        { x: 7, y: 2, color: "blue", selectable: false },
-        { x: 0, y: 3, color: "pink", selectable: false },
-        { x: 1, y: 3, color: "indigo", selectable: false },
-        { x: 2, y: 3, color: "blue", selectable: false },
-        { x: 3, y: 3, color: "orange", selectable: false },
-        { x: 4, y: 3, color: "brown", selectable: false },
-        { x: 5, y: 3, color: "green", selectable: false },
-        { x: 6, y: 3, color: "red", selectable: false },
-        { x: 7, y: 3, color: "yellow", selectable: false },
-        { x: 0, y: 4, color: "yellow", selectable: false },
-        { x: 1, y: 4, color: "red", selectable: false },
-        { x: 2, y: 4, color: "green", selectable: false },
-        { x: 3, y: 4, color: "brown", selectable: false },
-        { x: 4, y: 4, color: "orange", selectable: false },
-        { x: 5, y: 4, color: "blue", selectable: false },
-        { x: 6, y: 4, color: "indigo", selectable: false },
-        { x: 7, y: 4, color: "pink", selectable: false },
-        { x: 0, y: 5, color: "blue", selectable: false },
-        { x: 1, y: 5, color: "yellow", selectable: false },
-        { x: 2, y: 5, color: "brown", selectable: false },
-        { x: 3, y: 5, color: "indigo", selectable: false },
-        { x: 4, y: 5, color: "red", selectable: false },
-        { x: 5, y: 5, color: "orange", selectable: false },
-        { x: 6, y: 5, color: "pink", selectable: false },
-        { x: 7, y: 5, color: "green", selectable: false },
-        { x: 0, y: 6, color: "indigo", selectable: false },
-        { x: 1, y: 6, color: "brown", selectable: false },
-        { x: 2, y: 6, color: "yellow", selectable: false },
-        { x: 3, y: 6, color: "blue", selectable: false },
-        { x: 4, y: 6, color: "green", selectable: false },
-        { x: 5, y: 6, color: "pink", selectable: false },
-        { x: 6, y: 6, color: "orange", selectable: false },
-        { x: 7, y: 6, color: "red", selectable: false },
+        { x: 0, y: 1, color: "red", selectable: false, tower: null },
+        { x: 1, y: 1, color: "orange", selectable: false, tower: null },
+        { x: 2, y: 1, color: "pink", selectable: false, tower: null },
+        { x: 3, y: 1, color: "green", selectable: false, tower: null },
+        { x: 4, y: 1, color: "blue", selectable: false, tower: null },
+        { x: 5, y: 1, color: "yellow", selectable: false, tower: null },
+        { x: 6, y: 1, color: "brown", selectable: false, tower: null },
+        { x: 7, y: 1, color: "indigo", selectable: false, tower: null },
+        { x: 0, y: 2, color: "green", selectable: false, tower: null },
+        { x: 1, y: 2, color: "pink", selectable: false, tower: null },
+        { x: 2, y: 2, color: "orange", selectable: false, tower: null },
+        { x: 3, y: 2, color: "red", selectable: false, tower: null },
+        { x: 4, y: 2, color: "indigo", selectable: false, tower: null },
+        { x: 5, y: 2, color: "brown", selectable: false, tower: null },
+        { x: 6, y: 2, color: "yellow", selectable: false, tower: null },
+        { x: 7, y: 2, color: "blue", selectable: false, tower: null },
+        { x: 0, y: 3, color: "pink", selectable: false, tower: null },
+        { x: 1, y: 3, color: "indigo", selectable: false, tower: null },
+        { x: 2, y: 3, color: "blue", selectable: false, tower: null },
+        { x: 3, y: 3, color: "orange", selectable: false, tower: null },
+        { x: 4, y: 3, color: "brown", selectable: false, tower: null },
+        { x: 5, y: 3, color: "green", selectable: false, tower: null },
+        { x: 6, y: 3, color: "red", selectable: false, tower: null },
+        { x: 7, y: 3, color: "yellow", selectable: false, tower: null },
+        { x: 0, y: 4, color: "yellow", selectable: false, tower: null },
+        { x: 1, y: 4, color: "red", selectable: false, tower: null },
+        { x: 2, y: 4, color: "green", selectable: false, tower: null },
+        { x: 3, y: 4, color: "brown", selectable: false, tower: null },
+        { x: 4, y: 4, color: "orange", selectable: false, tower: null },
+        { x: 5, y: 4, color: "blue", selectable: false, tower: null },
+        { x: 6, y: 4, color: "indigo", selectable: false, tower: null },
+        { x: 7, y: 4, color: "pink", selectable: false, tower: null },
+        { x: 0, y: 5, color: "blue", selectable: false, tower: null },
+        { x: 1, y: 5, color: "yellow", selectable: false, tower: null },
+        { x: 2, y: 5, color: "brown", selectable: false, tower: null },
+        { x: 3, y: 5, color: "indigo", selectable: false, tower: null },
+        { x: 4, y: 5, color: "red", selectable: false, tower: null },
+        { x: 5, y: 5, color: "orange", selectable: false, tower: null },
+        { x: 6, y: 5, color: "pink", selectable: false, tower: null },
+        { x: 7, y: 5, color: "green", selectable: false, tower: null },
+        { x: 0, y: 6, color: "indigo", selectable: false, tower: null },
+        { x: 1, y: 6, color: "brown", selectable: false, tower: null },
+        { x: 2, y: 6, color: "yellow", selectable: false, tower: null },
+        { x: 3, y: 6, color: "blue", selectable: false, tower: null },
+        { x: 4, y: 6, color: "green", selectable: false, tower: null },
+        { x: 5, y: 6, color: "pink", selectable: false, tower: null },
+        { x: 6, y: 6, color: "orange", selectable: false, tower: null },
+        { x: 7, y: 6, color: "red", selectable: false, tower: null },
         {
           x: 0,
           y: 7,
@@ -264,16 +265,71 @@ export default {
   },
   methods: {
     towerClicked(tile) {
-      if (tile.tower === this.getSelectedTower()) {
-        tile.tower.selected = false;
+      if (tile.tower.selectable && tile.tower === this.getSelectedTower()) {
+        this.unselectTower(tile.tower);
       } else if (tile.tower.selectable) {
         this.selectTower(tile.tower);
       }
     },
+    switchPlayer() {
+      this.playersTurn = this.playersTurn === "white" ? "black" : "white";
+    },
     tileClicked(tile) {
-      //if (tile.selectable) {
-      tile.selectable = !tile.selectable;
-      //}
+      if (tile.selectable) {
+        let color = this.moveTower(this.getSelectedTower(), tile);
+        this.unselectTower(this.getSelectedTower());
+        this.setPropertyToTowers(this.getTowers(), "selectable", false);
+        this.switchPlayer();
+        this.selectTower(this.getTower(this.playersTurn, color));
+      }
+    },
+    moveTower(tower, targetTile) {
+      let copy = {};
+      for (var attr in tower) {
+        copy[attr] = tower[attr];
+      }
+      this.getTileByTower(tower).tower = null;
+      targetTile.tower = copy;
+      return targetTile.color;
+    },
+    unsetPossibleTiles() {
+      for (var i = 0; i < this.tiles.length; i++) {
+        this.tiles[i].selectable = false;
+      }
+    },
+    nextY(y, playerColor) {
+      return playerColor === "white" ? y + 1 : y - 1;
+    },
+    setPossibleTiles() {
+      this.unsetPossibleTiles();
+
+      if (!this.getSelectedTower()) {
+        return;
+      }
+      this.setPossibleTilesVertically(this.getSelectedTower());
+      this.setPossibleTilesDiagonnally(this.getSelectedTower(), 1);
+      this.setPossibleTilesDiagonnally(this.getSelectedTower(), -1);
+    },
+    inBound(x, y) {
+      return x >= 0 && x <= 7 && y >= 0 && y <= 7;
+    },
+    setPossibleTilesVertically(tower) {
+      let tile = this.getTileByTower(tower);
+      let y = this.nextY(tile.y, tower.playerColor);
+      while (this.inBound(tile.x, y) && !this.getTileByCoord(tile.x, y).tower) {
+        this.getTileByCoord(tile.x, y).selectable = true;
+        y = this.nextY(y, tower.playerColor);
+      }
+    },
+    setPossibleTilesDiagonnally(tower, deltaX) {
+      let tile = this.getTileByTower(tower);
+      let x = tile.x + deltaX;
+      let y = this.nextY(tile.y, tower.playerColor);
+      while (this.inBound(x, y) && !this.getTileByCoord(x, y).tower) {
+        this.getTileByCoord(x, y).selectable = true;
+        y = this.nextY(y, tower.playerColor);
+        x = x + deltaX;
+      }
     },
     setPropertyToTower(tower, property, value) {
       tower[property] = value;
@@ -283,12 +339,17 @@ export default {
         this.setPropertyToTower(towers[i], property, value);
       }
     },
+    unselectTower(tower) {
+      tower.selected = false;
+      this.unsetPossibleTiles();
+    },
     selectTower(tower) {
       let selectedTower = this.getSelectedTower();
       if (selectedTower) {
         selectedTower.selected = false;
       }
       tower.selected = true;
+      this.setPossibleTiles();
     },
     getSelectedTower() {
       return this.getTowers().filter(t => t.selected)[0];
@@ -297,15 +358,18 @@ export default {
       let towers = this.getTowers();
       return towers.filter(t => t.playerColor === playerColor);
     },
+    getTileByCoord(x, y) {
+      return this.tiles.filter(t => t.x === x && t.y === y)[0];
+    },
+    getTileByTower(tower) {
+      return this.tiles.filter(t => t.tower === tower)[0];
+    },
     getTowers() {
       return this.tiles.filter(t => t.tower).map(t => t.tower);
     },
     getTower(playerColor, color) {
       let playerTowers = this.getPlayerTowers(playerColor);
-      return towers.filter(t => t.color === color)[0];
-    },
-    getTileById(id) {
-      return this.tiles.filter(x => x.id === id)[0];
+      return playerTowers.filter(t => t.color === color)[0];
     }
   },
   components: {
