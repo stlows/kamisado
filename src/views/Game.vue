@@ -3,13 +3,13 @@
     <!-- <game-info :game="game"></game-info>
     <game-controls @moveConfirmed="moveConfirmed" :game="game"></game-controls>
     <game-board @notify="notify" @save-round="saveRound" @winRound="winRound" :game="game"></game-board>-->
-    <game-board></game-board>
+    <game-manager></game-manager>
   </div>
 </template>
 
 <script>
 import GameInfo from "../components/GameInfo.vue";
-import Board from "../components/NewBoard.vue";
+import GameManager from "../components/GameManager.vue";
 import Tile from "../components/Tile.vue";
 import Controls from "../components/Controls.vue";
 import axios from "axios";
@@ -91,7 +91,7 @@ export default {
     //this.loadGame();
   },
   components: {
-    "game-board": Board,
+    "game-manager": GameManager,
     "game-controls": Controls,
     "game-info": GameInfo,
     "game-tile": Tile

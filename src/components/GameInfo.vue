@@ -1,26 +1,32 @@
 <template>
   <div id="gameInfo">
-    <h3>Game ID: {{ game.id }}</h3>
+    <h3>Game ID: {{ $route.params.id }}</h3>
     <table id="scores">
       <thead>
         <tr>
-          <th>{{ game.users[0].username }}</th>
-          <th>{{ game.users[1].username }}</th>
+          <th>{{ users[0].username }} ({{users[0].color}})</th>
+          <th>{{ users[1].username }} ({{users[1].color}})</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <th>{{ game.users[0].score }}</th>
-          <th>{{ game.users[1].score }}</th>
+          <th>{{ users[0].score }}</th>
+          <th>{{ users[1].score }}</th>
         </tr>
       </tbody>
     </table>
+    <p>{{ getTurnsUsername }}'s turn</p>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["game"]
+  props: ["users", "playersTurn"],
+  computed: {
+    getTurnsUsername() {
+      return this.users.find(u => u.color === this.playersTurn).username;
+    }
+  }
 };
 </script>
 
