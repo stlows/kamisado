@@ -37,9 +37,10 @@ h3 {
 #scores {
   display: inline-block;
   box-shadow: 0 0 10px rgba(black, 0.2);
+  margin-bottom: 1em;
   th,
   td {
-    padding: 1em;
+    padding: 10px;
   }
   th:first-child {
     border-right: 1px solid #eee;
