@@ -34,11 +34,87 @@ export default {
           score: 0
         }
       ],
+      pointsBySumo: [1, 3, 5, 7],
       playersTurn: "white",
       tiles: InitialTiles
     };
   },
   methods: {
+    newRound(leftOrRight, winningTower) {
+      let winningPlayer = winningTower.playerColor;
+      let losingPlayer = winningPlayer === "white" ? "black" : "white";
+      this.replaceTowers(winningPlayer);
+      this.replaceTowers(losingPlayer);
+      this.playersTurn = losingPlayer;
+      this.setPropertyToTowers(
+        this.getPlayerTowers(this.playersTurn),
+        "selectable",
+        "true"
+      );
+    },
+    replaceTowers(playerColor, leftOrRight) {
+      // Towers to move
+      let playerTowers = this.getPlayerTowers(playerColor);
+      let conditionToReplace = function(y) {
+        if (playerColor === "white") {
+          return y > 0;
+        }
+        return y < 7;
+      };
+      let toReplaceTowers = playerTowers.filter(t =>
+        conditionToReplace(this.getTileByTower(t).y)
+      );
+      let vue = this;
+      toReplaceTowers.sort(function(t1, t2) {
+        let tile1 = vue.getTileByTower(t1);
+        let tile2 = vue.getTileByTower(t2);
+        return tile1.y * 10 + tile1.x - tile2.y * 10 - tile2.x;
+      });
+
+      // Empty tiles on home row
+      let conditionEmptyHome = function(tile) {
+        if (tile.tower) {
+          return false;
+        }
+        return tile.y === (playerColor === "white" ? 0 : 7);
+      };
+      let emptyHomeTiles = this.tiles.filter(t => conditionEmptyHome(t));
+      let homeSorting = function(tile1, tile2) {
+        if (
+          (playerColor === "white" && leftOrRight === "left") ||
+          (playerColor === "black" && leftOrRight === "right")
+        ) {
+          tile1.x - tile2.x;
+        }
+        return tile2.x - tile1.x;
+      };
+      emptyHomeTiles.sort(homeSorting);
+
+      // Moving
+      for (var i = 0; i < toReplaceTowers.length; i++) {
+        this.moveTower(toReplaceTowers[i], emptyHomeTiles[i]);
+      }
+    },
+    getTileCopy(tile) {
+      let copy = {};
+      copy.x = tile.x;
+      copy.y = tile.y;
+      copy.color = tile.color;
+      copy.selectable = tile.selectable;
+      if (tile.tower) {
+        copy.tower = this.getTowerCopy(tile.tower);
+      }
+      return copy;
+    },
+    getTowerCopy(tower) {
+      let copy = {};
+      copy.color = tower.color;
+      copy.playerColor = tower.playerColor;
+      copy.selectable = tower.selectable;
+      copy.selected = tower.selected;
+      copy.sumo = tower.sumo;
+      return copy;
+    },
     towerClicked(tile) {
       if (tile.tower.selectable && tile.tower === this.getSelectedTower()) {
         this.unselectTower(tile.tower);
@@ -54,15 +130,41 @@ export default {
         let color = this.moveTower(this.getSelectedTower(), tile);
         this.unselectTower(this.getSelectedTower());
         this.setPropertyToTowers(this.getTowers(), "selectable", false);
+        let winningTower = this.checkWin();
+        if (winningTower) {
+          this.handleWin(winningTower);
+          return;
+        }
         this.switchPlayer();
         this.selectTower(this.getTower(this.playersTurn, color));
       }
     },
-    moveTower(tower, targetTile) {
-      let copy = {};
-      for (var attr in tower) {
-        copy[attr] = tower[attr];
+    handleWin(winningTower) {
+      let user = this.users.find(u => u.color === winningTower.playerColor);
+      user.score += this.pointsBySumo[winningTower.sumo];
+      winningTower.sumo++;
+
+      this.newRound("right", winningTower);
+    },
+    checkWin() {
+      let whiteTowers = this.getPlayerTowers("white");
+      let whiteTowerWinner = whiteTowers.find(
+        tower => this.getTileByTower(tower).y === 7
+      );
+      if (whiteTowerWinner) {
+        return whiteTowerWinner;
       }
+
+      let blackTowers = this.getPlayerTowers("black");
+      let blackTowerWinner = blackTowers.find(
+        tower => this.getTileByTower(tower).y === 0
+      );
+      if (blackTowerWinner) {
+        return blackTowerWinner;
+      }
+    },
+    moveTower(tower, targetTile) {
+      let copy = this.getTowerCopy(tower);
       this.getTileByTower(tower).tower = null;
       targetTile.tower = copy;
       return targetTile.color;
