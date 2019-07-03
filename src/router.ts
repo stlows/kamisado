@@ -8,12 +8,23 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "lobby",
-      component: () => import("./views/Lobby.vue")
+      name: "home",
+      component: () => import("./views/Home.vue")
     },
     {
-      path: "/game/:id",
-      name: "game",
+      path: "/local/lobby",
+      name: "local/lobby",
+      component: () => import("./views/LocalLobby.vue")
+    },
+    {
+      path: "/local/game",
+      name: "local/game",
+      component: () => import("./views/LocalGame.vue"),
+      props: true
+    },
+    {
+      path: "/online/game/:id",
+      name: "online/game",
       component: () => import("./views/Game.vue")
     }
   ]

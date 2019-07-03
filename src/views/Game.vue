@@ -14,6 +14,7 @@ import Tile from "../components/Tile.vue";
 import Controls from "../components/Controls.vue";
 import axios from "axios";
 export default {
+  props: ["users"],
   data() {
     return {
       game: {

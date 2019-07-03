@@ -7,8 +7,9 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item to="/">Lobby</b-nav-item>
-          <b-nav-item to="/tutorial" disabled>Tutorial</b-nav-item>
+          <b-nav-item to="/local/lobby">Local games</b-nav-item>
+          <b-nav-item to="/online/lobby" disabled title="Not yet implemented...">Online games</b-nav-item>
+          <b-nav-item to="/tutorial" disabled title="Not yet implemented...">Tutorial</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -51,6 +52,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   padding-bottom: 30px;
+}
+h1.header {
+  margin: 30px 0;
 }
 #notifications-panel {
   position: fixed;

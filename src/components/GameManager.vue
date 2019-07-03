@@ -20,21 +20,11 @@ export default {
     "game-board": Board,
     "game-info": GameInfo
   },
+  props: ["users", "settings"],
   data() {
     return {
-      users: [
-        {
-          username: "Vincent",
-          color: "white",
-          score: 0
-        },
-        {
-          username: "Charles",
-          color: "black",
-          score: 0
-        }
-      ],
       pointsBySumo: [1, 3, 5, 7],
+      maxTilesBySumo: [8, 5, 3, 1],
       playersTurn: "white",
       tiles: InitialTiles
     };
@@ -193,19 +183,31 @@ export default {
     setPossibleTilesVertically(tower) {
       let tile = this.getTileByTower(tower);
       let y = this.nextY(tile.y, tower.playerColor);
-      while (this.inBound(tile.x, y) && !this.getTileByCoord(tile.x, y).tower) {
+      let counter = 1;
+      while (
+        this.inBound(tile.x, y) &&
+        !this.getTileByCoord(tile.x, y).tower &&
+        counter <= this.maxTilesBySumo[tower.sumo]
+      ) {
         this.getTileByCoord(tile.x, y).selectable = true;
         y = this.nextY(y, tower.playerColor);
+        counter++;
       }
     },
     setPossibleTilesDiagonnally(tower, deltaX) {
       let tile = this.getTileByTower(tower);
       let x = tile.x + deltaX;
       let y = this.nextY(tile.y, tower.playerColor);
-      while (this.inBound(x, y) && !this.getTileByCoord(x, y).tower) {
+      let counter = 1;
+      while (
+        this.inBound(x, y) &&
+        !this.getTileByCoord(x, y).tower &&
+        counter <= this.maxTilesBySumo[tower.sumo]
+      ) {
         this.getTileByCoord(x, y).selectable = true;
         y = this.nextY(y, tower.playerColor);
         x = x + deltaX;
+        counter++;
       }
     },
     setPropertyToTower(tower, property, value) {
@@ -259,5 +261,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="scss">
+.game-manager {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+}
 </style>

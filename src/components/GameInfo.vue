@@ -4,8 +4,8 @@
     <table id="scores">
       <thead>
         <tr>
-          <th>{{ users[0].username }} ({{users[0].color}})</th>
-          <th>{{ users[1].username }} ({{users[1].color}})</th>
+          <th>{{ users[0].name }} ({{users[0].color}})</th>
+          <th>{{ users[1].name }} ({{users[1].color}})</th>
         </tr>
       </thead>
       <tbody>
@@ -24,7 +24,7 @@ export default {
   props: ["users", "playersTurn"],
   computed: {
     getTurnsUsername() {
-      return this.users.find(u => u.color === this.playersTurn).username;
+      return this.users.find(u => u.color === this.playersTurn).name;
     }
   }
 };
