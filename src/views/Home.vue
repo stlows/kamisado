@@ -3,13 +3,13 @@
     <h1 class="header">Kamisado</h1>
     <ul class="list-group container">
       <li class="list-group-item">
-        <a @click.prevent="localLobby" href="#">Local games</a>
+        <router-link to="/local/lobby">Local Lobby</router-link>
       </li>
       <li class="list-group-item">
-        <a @click.prevent="localLobby" href="#">Online games</a>
+        <router-link to="/online/lobby">Online games</router-link>
       </li>
       <li class="list-group-item">
-        <a @click.prevent="localLobby" href="#">Tutorial</a>
+        <router-link to="/tutorial" disabled>Tutorial</router-link>
       </li>
     </ul>
   </div>
