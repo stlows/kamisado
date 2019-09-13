@@ -32,12 +32,9 @@ export default {
     }
   },
   methods: {
-    notify(e) {
-      this.$emit("notify", e);
-    },
     winRound(e) {
       this.scores[e.playerId] += e.points;
-      this.$emit("notify", {
+      this.$store.commit("notify", {
         message: this.users[e.playerId].username + " wins the round!",
         variant: "success"
       });
@@ -51,7 +48,7 @@ export default {
         this.game.scores = data.scores;
         this.game.users = data.users;
         this.game.rounds = data.rounds;
-        this.$emit("notify", {
+        this.$store.commit("notify", {
           message: "✓ Game loaded",
           variant: "success"
         });
@@ -66,7 +63,7 @@ export default {
           users: this.users
         })
         .then(res => {
-          this.$emit("notify", {
+          this.$store.commit("notify", {
             message: "✓ Game saved",
             variant: "success"
           });
@@ -81,7 +78,7 @@ export default {
           selectedTowerId: round.selectedTowerId
         })
         .then(res => {
-          this.$emit("notify", {
+          this.$store.commit("notify", {
             message: "✓ Round saved",
             variant: "success"
           });

@@ -7,16 +7,17 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item to="/local/lobby">Local games</b-nav-item>
-          <b-nav-item to="/online/lobby" disabled title="Not yet implemented...">Online games</b-nav-item>
+          <b-nav-item to="/local/lobby">Local lobby</b-nav-item>
+          <b-nav-item to="/online/lobby" disabled title="Not yet implemented...">Online lobby</b-nav-item>
           <b-nav-item to="/tutorial" disabled title="Not yet implemented...">Tutorial</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-    <router-view @notify="notify"/>
+    <router-link to="/" class="home-link" v-if="$router.history.current.name !== 'home'">← Go to home </router-link>
+    <router-view/>
     <div id="notifications-panel" class="panel">
       <div v-for="notification in notifications" :key="notification.id">
-        <b-alert :variant="notification.variant" dismissible :show="2" fade>{{notification.message}}</b-alert>
+        <b-alert :variant="notification.variant" dismissible :show="2" fade>{{ notification.message }}</b-alert>
       </div>
     </div>
   </div>
@@ -24,21 +25,11 @@
 <script>
 export default {
   data() {
-    return {
-      notifications: []
-    };
+    return {}
   },
-  methods: {
-    notify(_notification) {
-      let notification = {
-        message: _notification.message,
-        variant:
-          typeof _notification.variant === "undefined"
-            ? "info"
-            : _notification.variant,
-        id: "notification" + Date.now()
-      };
-      this.notifications.push(notification);
+  computed: {
+    notifications(){
+      return this.$store.state.notifications;
     }
   }
 };
@@ -49,12 +40,12 @@ export default {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   padding-bottom: 30px;
 }
 h1.header {
   margin: 30px 0;
+  text-align:center;
 }
 #notifications-panel {
   position: fixed;
@@ -71,5 +62,15 @@ h1.header {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+.home-link {
+  margin-top: 5px;
+  margin-left: 5px;
+  padding: 5px 10px;
+  display:inline-block;
+  border-radius:10px;
+  &:hover{
+    background-color: #fafafa;
+  }
 }
 </style>

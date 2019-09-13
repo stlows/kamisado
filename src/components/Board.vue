@@ -340,7 +340,7 @@ export default {
         //     : data.possibleMovesArray;
         this.moves = typeof round.moves === "undefined" ? [] : round.moves;
 
-        this.$emit("notify", {
+        this.$store.commit("notify", {
           message: "✓ Round loaded",
           variant: "success"
         });
