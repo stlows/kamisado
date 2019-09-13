@@ -13,8 +13,8 @@
         </b-form-group>
         <hr>
         <b-form-group label="Local or online">
-            <b-form-radio v-model="localOrOnline" name="localOrOnlineRadio" value="local">Local</b-form-radio>
-            <b-form-radio v-model="localOrOnline" name="localOrOnlineRadio" value="online" disabled title="Not yet implemented...">Online</b-form-radio>
+            <b-form-radio v-model="settings.localOrOnline" name="localOrOnlineRadio" value="local">Local</b-form-radio>
+            <b-form-radio v-model="settings.localOrOnline" name="localOrOnlineRadio" value="online" disabled title="Not yet implemented...">Online</b-form-radio>
         </b-form-group>
         <hr>
         <b-form-group label="Points to win:">
@@ -32,7 +32,7 @@ export default {
         return {
             pointsToWinOptions: [1, 3, 7, 15],
             settings: {
-                localOrOnline: '',
+                localOrOnline: 'local',
                 pointsToWin: 15
             },
             users:[

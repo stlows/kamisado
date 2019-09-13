@@ -10,6 +10,7 @@
         <b-navbar-nav>
           <b-nav-item to="/local/lobby">Local lobby</b-nav-item>
           <b-nav-item to="/online/lobby" disabled title="Not yet implemented...">Online lobby</b-nav-item>
+          <b-nav-item to="/newGame">New game</b-nav-item>
           <b-nav-item to="/tutorial" disabled title="Not yet implemented...">Tutorial</b-nav-item>
         </b-navbar-nav>
 
@@ -22,14 +23,19 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-    <router-link to="/" class="home-link" v-if="$router.history.current.name !== 'home'">← Go to home </router-link>
+    <router-link to="/" class="home-link" v-if="showHome">← Go to home </router-link>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
 export default {
-    computed: mapState(['loginAs']),
+    computed: {
+      showHome(){
+        return this.$route.name !== 'home'
+      },
+       ...mapState(['loginAs'])
+    },
     methods:{
         updateLogin(updatedLogin){
             this.$store.commit("updateLogin", updatedLogin)

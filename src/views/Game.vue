@@ -15,7 +15,6 @@ export default {
   data() {
     return {
       game: {
-        localOrOnline: settings.localOrOnline,
         id: this.$route.params.id,
         rounds: []
       }
