@@ -1,6 +1,6 @@
 <template>
   <div>
-    <game-manager></game-manager>
+    <game-manager :users="users" :settings="settings"></game-manager>
   </div>
 </template>
 
@@ -80,7 +80,7 @@ export default {
     }
   },
   created() {
-    //this.loadGame();
+    this.loadGame();
   },
   components: {
     "game-manager": GameManager,

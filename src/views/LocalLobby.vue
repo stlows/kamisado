@@ -1,13 +1,12 @@
 <template>
   <div>
     <h1 class="header">Local lobby</h1>
-    <button
-      class="btn btn-large btn-primary"
-      @click="newGameVsAi"
-      disabled
-      title="Not yet implemented..."
-    >New game vs. AI</button>
-    <button class="btn btn-large btn-primary" @click="newGameVsHuman">New game vs. Human</button>
+    <ul>
+      <li v-for="localGame in $store.state.localGames" :key="localGame.id">
+        <b-link :to="{ name: 'local/game', params: { users: localGame.users, settings: localGame.settings, id: localGame.id } }">{{ localGame.id }}</b-link>
+      </li>
+    </ul>
+    <button class="btn btn-large btn-primary" @click="newGameVsHuman">New game</button>
   </div>
 </template>
 

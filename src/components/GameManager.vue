@@ -13,20 +13,20 @@
 <script>
 import Board from "./NewBoard.vue";
 import GameInfo from "./GameInfo.vue";
-import InitialTiles from "../assets/InitialTiles.json";
+//import InitialTiles from "../assets/InitialTiles.json";
 
 export default {
   components: {
     "game-board": Board,
     "game-info": GameInfo
   },
-  props: ["users", "settings"],
+  props: ["users", "settings", "tiles"],
   data() {
     return {
       pointsBySumo: [1, 3, 5, 7],
       maxTilesBySumo: [8, 5, 3, 1],
-      playersTurn: "white",
-      tiles: InitialTiles
+      playersTurn: "white"
+      //tiles: InitialTiles
     };
   },
   methods: {

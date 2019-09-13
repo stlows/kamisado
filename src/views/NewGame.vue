@@ -16,6 +16,10 @@
             <b-form-radio v-model="settings.localOrOnline" name="localOrOnlineRadio" value="local">Local</b-form-radio>
             <b-form-radio v-model="settings.localOrOnline" name="localOrOnlineRadio" value="online" disabled title="Not yet implemented...">Online</b-form-radio>
         </b-form-group>
+        <b-form-group label="Vs Human or computer?" v-if="settings.localOrOnline === 'local'">
+            <b-form-radio v-model="settings.aiOrHuman" name="aiOrHumanRadio" value="human">Human</b-form-radio>
+            <b-form-radio v-model="settings.aiOrHuman" name="aiOrHumanRadio" value="ai" disabled title="Not yet implemented...">Computer</b-form-radio>
+        </b-form-group>
         <hr>
         <b-form-group label="Points to win:">
             <b-form-select v-model="settings.pointsToWin" :options="pointsToWinOptions"></b-form-select>
@@ -27,12 +31,15 @@
 </template>
 
 <script>
+import InitialTiles from "../assets/InitialTiles.json";
+
 export default {
     data(){
         return {
             pointsToWinOptions: [1, 3, 7, 15],
             settings: {
                 localOrOnline: 'local',
+                aiOrHuman: 'human',
                 pointsToWin: 15
             },
             users:[
@@ -45,7 +52,17 @@ export default {
     methods: {
       onSubmit(evt) {
         evt.preventDefault()
-
+        let id = Date.now();
+        if(this.settings.localOrOnline === 'local'){
+            console.log("creating new game locally.")
+            let newGame = {
+                users: [...this.users],
+                settings: this.settings,
+                tiles: [...InitialTiles],
+                id: id
+            }
+            this.$store.commit("addLocalGame", newGame);
+        }
         this.$store.commit('notify', {
           message: "✓ New game created locally",
           variant: "success"
@@ -53,7 +70,7 @@ export default {
 
         this.$router.push({
             name: "local/game",
-            params: { users: this.users, settings: this.settings }
+            params: { users: this.users, settings: this.settings, id: id }
         });
       }      
     }
