@@ -17,9 +17,9 @@ export default new Router({
       component: () => import("./views/LocalLobby.vue")
     },
     {
-      path: "/local/settings",
-      name: "local/settings",
-      component: () => import("./views/Settings.vue")
+      path: "/local/newGame",
+      name: "local/newGame",
+      component: () => import("./views/NewGame.vue")
     },
     {
       path: "/local/game",

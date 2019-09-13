@@ -1,8 +1,5 @@
 <template>
   <div>
-    <!-- <game-info :game="game"></game-info>
-    <game-controls @moveConfirmed="moveConfirmed" :game="game"></game-controls>
-    <game-board @notify="notify" @save-round="saveRound" @winRound="winRound" :game="game"></game-board>-->
     <game-manager></game-manager>
   </div>
 </template>
@@ -14,14 +11,12 @@ import Tile from "../components/Tile.vue";
 import Controls from "../components/Controls.vue";
 import axios from "axios";
 export default {
-  props: ["users"],
+  props: ["users", "settings"],
   data() {
     return {
       game: {
+        localOrOnline: settings.localOrOnline,
         id: this.$route.params.id,
-        users: [],
-        scores: [],
-        pointsToWin: 0,
         rounds: []
       }
     };
@@ -96,4 +91,7 @@ export default {
   }
 };
 </script>
+<style lang="scss">
+
+</style>
 

@@ -16,7 +16,9 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    notifications: [] as any
+    notifications: [] as any,
+    loginAs: "cprovost",
+    localGames: [] as any
   },
   mutations: {
     notify(state, _notification) {
@@ -29,6 +31,12 @@ const store = new Vuex.Store({
         id: "notification" + Date.now()
       };
       state.notifications.push(notification);
+    },
+    updateLogin(state, updatedLogin){
+      state.loginAs = updatedLogin;
+    },
+    addLocalGame(state, game){
+      state.localGames.push(game);
     }
   }
 })

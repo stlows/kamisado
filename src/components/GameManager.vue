@@ -262,6 +262,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  #gameManager {
+    text-align: center;
+  }
 .game-manager {
   display: grid;
   grid-template-columns: 1fr 5fr;
