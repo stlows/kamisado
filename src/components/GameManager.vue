@@ -25,9 +25,7 @@ export default {
   data() {
     return {
       pointsBySumo: [1, 3, 5, 7],
-      maxTilesBySumo: [8, 5, 3, 1],
-      //playersTurn: "white"
-      //tiles: InitialTiles
+      maxTilesBySumo: [8, 5, 3, 1]
     };
   },
   methods: {
@@ -111,7 +109,7 @@ export default {
       }
     },
     handleWin(winningTower) {
-      let user = this.users.find(u => u.color === winningTower.playerColor);
+      let user = this.game.users.find(u => u.color === winningTower.playerColor);
       user.score += this.pointsBySumo[winningTower.sumo];
       winningTower.sumo++;
 
@@ -136,7 +134,8 @@ export default {
     },
     moveTower(tower, targetTile) {
       let copy = getTowerCopy(tower);
-      this.getTileByTower(tower).tower = null;
+      let fromTile = this.getTileByTower(tower);
+      fromTile.tower = null;
       targetTile.tower = copy;
       return targetTile.color;
     },

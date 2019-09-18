@@ -9,7 +9,7 @@ import GameManager from "../components/GameManager.vue";
 export default {
   computed: {
     game(){
-      return this.$store.state.localGames.find(x=> x.id === this.$attrs.id);
+      return this.$store.getters.activeGame;
     }
   },
   components: {

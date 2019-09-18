@@ -69,6 +69,8 @@ export default {
           variant: "success"
         })
 
+        this.$store.commit('loadLocalGame', id);
+        
         this.$router.push({
             name: "local/game",
             params: { id: id }
