@@ -15,7 +15,33 @@ export function getTileCopy(tile){
     copy.color = tile.color;
     copy.selectable = tile.selectable;
     if (tile.tower) {
-      copy.tower = this.getTowerCopy(tile.tower);
+      copy.tower = getTowerCopy(tile.tower);
     }
+    return copy;
+}
+
+export function getTilesCopy(tiles){
+    let copy = [];
+    for(let i = 0; i < tiles.length; i++){
+        copy.push(getTileCopy(tiles[i]));
+    }
+    return copy;
+}
+
+
+export function getUsersCopy(users){
+    let copy = [];
+    for(let i = 0; i < users.length; i++){
+        copy.push(getUserCopy(users[i]));
+    }
+    return copy;
+}
+
+export function getUserCopy(user){
+    let copy = {};
+    copy.username = user.username;
+    copy.name = user.name;
+    copy.score = user.score;
+    copy.color = user.color;
     return copy;
 }

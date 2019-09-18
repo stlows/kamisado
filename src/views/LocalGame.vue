@@ -1,26 +1,16 @@
 <template>
   <div>
-    <game-manager :users="users" :settings="settings" :tiles="tiles"></game-manager>
+    <game-manager :game="game"></game-manager>
   </div>
 </template>
 
 <script>
 import GameManager from "../components/GameManager.vue";
 export default {
-  data(){
-    return {
-      tiles: null
+  computed: {
+    game(){
+      return this.$store.state.localGames.find(x=> x.id === this.$attrs.id);
     }
-  },
-  props: ["users", "settings", "id"],
-  methods:{
-    loadGame(){
-      let game = this.$store.state.localGames.find(g=>g.id === this.id);
-      this.tiles = game.tiles;
-    }
-  },
-  created(){
-    this.loadGame();
   },
   components: {
     "game-manager": GameManager

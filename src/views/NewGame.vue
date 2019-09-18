@@ -32,6 +32,7 @@
 
 <script>
 import InitialTiles from "../assets/InitialTiles.json";
+import { getTilesCopy, getUsersCopy } from "../copier.js";
 
 export default {
     data(){
@@ -54,12 +55,12 @@ export default {
         evt.preventDefault()
         let id = Date.now();
         if(this.settings.localOrOnline === 'local'){
-            console.log("creating new game locally.")
             let newGame = {
-                users: [...this.users],
+                users: getUsersCopy(this.users),
                 settings: this.settings,
-                tiles: [...InitialTiles],
-                id: id
+                tiles: getTilesCopy(InitialTiles),
+                id: id,
+                playersTurn: "white"
             }
             this.$store.commit("addLocalGame", newGame);
         }
@@ -67,11 +68,6 @@ export default {
           message: "✓ New game created locally",
           variant: "success"
         })
-
-        this.$router.push({
-            name: "local/game",
-            params: { users: this.users, settings: this.settings, id: id }
-        });
       }      
     }
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <game-manager :users="users" :settings="settings"></game-manager>
+    <game-manager :game="game"></game-manager>
   </div>
 </template>
 
@@ -11,18 +11,10 @@ import Tile from "../components/Tile.vue";
 import Controls from "../components/Controls.vue";
 import axios from "axios";
 export default {
-  props: ["users", "settings"],
-  data() {
-    return {
-      game: {
-        id: this.$route.params.id,
-        rounds: []
-      }
-    };
-  },
+  props: ["game"],
   computed: {
     activeRound() {
-      return this.rounds.length - 1;
+      return this.game.rounds.length - 1;
     }
   },
   methods: {
@@ -34,10 +26,8 @@ export default {
       });
     },
     loadGame() {
-      console.log("Loading game" + this.game.id);
       axios.get("games/" + this.game.id + ".json").then(res => {
         const data = res.data;
-        console.log(data);
         this.game.pointsToWin = data.pointsToWin;
         this.game.scores = data.scores;
         this.game.users = data.users;
