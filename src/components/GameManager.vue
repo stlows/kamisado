@@ -13,6 +13,7 @@
 <script>
 import Board from "./NewBoard.vue";
 import GameInfo from "./GameInfo.vue";
+import { getTowerCopy, getTileCopy } from "../copier.js";
 //import InitialTiles from "../assets/InitialTiles.json";
 
 export default {
@@ -84,26 +85,6 @@ export default {
       for (var i = 0; i < toReplaceTowers.length; i++) {
         this.moveTower(toReplaceTowers[i], emptyHomeTiles[i]);
       }
-    },
-    getTileCopy(tile) {
-      let copy = {};
-      copy.x = tile.x;
-      copy.y = tile.y;
-      copy.color = tile.color;
-      copy.selectable = tile.selectable;
-      if (tile.tower) {
-        copy.tower = this.getTowerCopy(tile.tower);
-      }
-      return copy;
-    },
-    getTowerCopy(tower) {
-      let copy = {};
-      copy.color = tower.color;
-      copy.playerColor = tower.playerColor;
-      copy.selectable = tower.selectable;
-      copy.selected = tower.selected;
-      copy.sumo = tower.sumo;
-      return copy;
     },
     towerClicked(tile) {
       if (tile.tower.selectable && tile.tower === this.getSelectedTower()) {
