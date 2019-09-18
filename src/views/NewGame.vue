@@ -68,6 +68,11 @@ export default {
           message: "✓ New game created locally",
           variant: "success"
         })
+
+        this.$router.push({
+            name: "local/game",
+            params: { id: id }
+        })
       }      
     }
 }
