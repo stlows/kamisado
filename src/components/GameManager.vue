@@ -24,7 +24,7 @@ export default {
   props: ["game"],
   data() {
     return {
-      pointsBySumo: [1, 3, 5, 7],
+      pointsBySumo: [1, 1, 3, 7, 15],
       maxTilesBySumo: [8, 5, 3, 1]
     };
   },
@@ -96,7 +96,12 @@ export default {
     },
     tileClicked(tile) {
       if (tile.selectable) {
-        let color = this.moveTower(this.getSelectedTower(), tile);
+        this.handleTowerMoveDuringPlay(tile)
+      }
+    },
+    handleTowerMoveDuringPlay(tile, deadEndCount = 0){
+        let color = tile.color;
+        this.moveTower(this.getSelectedTower(), tile);
         this.unselectTower(this.getSelectedTower());
         this.setPropertyToTowers(this.getTowers(), "selectable", false);
         let winningTower = this.checkWin();
@@ -106,8 +111,7 @@ export default {
         }
         this.switchPlayer();
         this.selectTower(this.getTower(this.game.playersTurn, color));
-        this.checkDeadEnd();
-      }
+        this.checkDeadEnd(deadEndCount);
     },
     handleWin(winningTower) {
       let user = this.game.users.find(u => u.color === winningTower.playerColor);
@@ -138,7 +142,6 @@ export default {
       let fromTile = this.getTileByTower(tower);
       fromTile.tower = null;
       targetTile.tower = copy;
-      return targetTile.color;
     },
     unsetPossibleTiles() {
       for (var i = 0; i < this.game.tiles.length; i++) {
@@ -167,13 +170,35 @@ export default {
       let counter = 1;
       while (
         this.inBound(tile.x, y) &&
-        !this.getTileByCoord(tile.x, y).tower &&
+        (!this.getTileByCoord(tile.x, y).tower || this.canPush(tower, this.getTileByCoord(tile.x, y).tower) ) &&
         counter <= this.maxTilesBySumo[tower.sumo]
       ) {
         this.getTileByCoord(tile.x, y).selectable = true;
         y = this.nextY(y, tower.playerColor);
         counter++;
       }
+    },
+    canPush(tower, otherTower){
+
+      console.log(tower, otherTower);
+      if (tower.sumo === 0) {
+        return false;
+      }
+      
+      // Check push by one
+      if (tower.playerColor === otherTower.playerColor) {
+        return false;
+      }
+
+      let tile = this.getTileByTower(tower);
+      if (tower.playerColor === "white") {
+        let checkY = tile.y + 2;
+        return checkY > 7 && !this.getTileByCoord(tile.x, checkY).tower;
+      }else if (tower.playerColor === "black") {
+        let checkY = tile.y - 2;
+        return checkY < 0 && !this.getTileByCoord(tile.x, checkY).tower;
+      }
+
     },
     setPossibleTilesDiagonnally(tower, deltaX) {
       let tile = this.getTileByTower(tower);
@@ -211,12 +236,16 @@ export default {
       tower.selected = true;
       this.setPossibleTiles();
     },
-    checkDeadEnd(){
+    checkDeadEnd(deadEndCount){
       let possibleMovesCount = this.getSelectableTiles().length;
       if (possibleMovesCount === 0) {
+        if (deadEndCount === 1) {
+
+          return;
+        }
         let selectedTower = this.getSelectedTower();
         let currentTile = this.getTileByTower(selectedTower);
-        this.moveTower(selectedTower, currentTile)
+        this.handleTowerMoveDuringPlay(currentTile, 1)
       }
     },
     getSelectedTower() {
