@@ -8,8 +8,8 @@
 import GameManager from "../components/GameManager.vue";
 export default {
   computed: {
-    game(){
-      return this.$store.getters.activeGame;
+    game() {
+      return this.$store.getters.gameById(this.$route.params.id);
     }
   },
   components: {
@@ -17,4 +17,3 @@ export default {
   }
 };
 </script>
-

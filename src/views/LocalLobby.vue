@@ -15,7 +15,7 @@ export default {
   methods: {
     newGameVsAi() {},
     newGameVsHuman() {
-      this.$router.push({name: "newGame"});
+      this.$router.push({ name: "newGame" });
     }
   }
 };

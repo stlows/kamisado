@@ -1,25 +1,18 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import Notification from "./models/Notification"
+import Game from './models/Game';
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
-      notifications: [] as any,
+      notifications : [] as Notification[],
       loginAs: "cprovost",
-      localGames: [] as any,
-      activeId: -1
+      localGames: [] as Game[]
     },
     mutations: {
-      notify(state, _notification) {
-        let notification = {
-          message: _notification.message,
-          variant:
-            typeof _notification.variant === "undefined"
-              ? "info"
-              : _notification.variant,
-          id: "notification" + Date.now()
-        };
+      notify(state, notification : Notification) {
         state.notifications.push(notification);
       },
       updateLogin(state, updatedLogin){
@@ -27,15 +20,14 @@ export const store = new Vuex.Store({
       },
       addLocalGame(state, game){
         state.localGames.push(game);
-      },
-      loadLocalGame(state, id){
-        state.activeId = id;
-        console.log(id);
-      }      
+      }
+    },
+    actions: {
+
     },
     getters: {
-      activeGame(state){
-        return state.localGames.find((g:any)  => g.id === state.activeId)
+      gameById : (state) => (id : number) => {
+        return state.localGames.find((g:Game)  => g.id === id)
       }
     }
   })

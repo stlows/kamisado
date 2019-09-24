@@ -10,6 +10,7 @@ import GameManager from "../components/GameManager.vue";
 import Tile from "../components/Tile.vue";
 import Controls from "../components/Controls.vue";
 import axios from "axios";
+
 export default {
   props: ["game"],
   computed: {
@@ -73,14 +74,8 @@ export default {
     this.loadGame();
   },
   components: {
-    "game-manager": GameManager,
-    "game-controls": Controls,
-    "game-info": GameInfo,
-    "game-tile": Tile
+    "game-manager": GameManager
   }
 };
 </script>
-<style lang="scss">
-
-</style>
-
+<style lang="scss"></style>
