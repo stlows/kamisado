@@ -17,8 +17,4 @@ export default class Game {
         this.id = id;
         this.playersTurn = playersTurn
     }
-
-    
-
-
 }

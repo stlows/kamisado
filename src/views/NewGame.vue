@@ -77,6 +77,7 @@ import { getTilesCopy, getUsersCopy } from "../copier.js";
 import Settings from "../models/Settings";
 import Game from "../models/Game";
 import Utils from "../models/Utils";
+import Notification from "../models/Notification";
 
 export default {
   data() {
@@ -108,19 +109,16 @@ export default {
       evt.preventDefault();
       let id = Date.now();
       if (this.settings.localOrOnline === "local") {
-        let newGame = {
-          users: getUsersCopy(this.users),
-          settings: this.settings,
-          tiles: new Utils().getInitialtiles(),
-          id: id,
-          playersTurn: "white"
-        };
+        let newGame = new Game(
+          getUsersCopy(this.users),
+          this.settings,
+          new Utils().getInitialtiles(),
+          id,
+          "white"
+        );
         this.$store.commit("addLocalGame", newGame);
       }
-      this.$store.commit("notify", {
-        message: "✓ New game created locally",
-        variant: "success"
-      });
+      this.$store.commit("notify", new Notification("✓ New game created locally", "success"));
 
       this.$router.push({
         name: "local/game",

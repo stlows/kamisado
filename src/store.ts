@@ -22,9 +22,6 @@ export const store = new Vuex.Store({
         state.localGames.push(game);
       }
     },
-    actions: {
-
-    },
     getters: {
       gameById : (state) => (id : number) => {
         return state.localGames.find((g:Game)  => g.id === id)

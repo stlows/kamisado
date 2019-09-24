@@ -106,6 +106,7 @@ export default {
         }
         this.switchPlayer();
         this.selectTower(this.getTower(this.game.playersTurn, color));
+        this.checkDeadEnd();
       }
     },
     handleWin(winningTower) {
@@ -210,8 +211,19 @@ export default {
       tower.selected = true;
       this.setPossibleTiles();
     },
+    checkDeadEnd(){
+      let possibleMovesCount = this.getSelectableTiles().length;
+      if (possibleMovesCount === 0) {
+        let selectedTower = this.getSelectedTower();
+        let currentTile = this.getTileByTower(selectedTower);
+        this.moveTower(selectedTower, currentTile)
+      }
+    },
     getSelectedTower() {
       return this.getTowers().find(t => t.selected);
+    },
+    getSelectableTiles() {
+      return this.game.tiles.filter(t => t.selectable);
     },
     getPlayerTowers(playerColor) {
       let towers = this.getTowers();
