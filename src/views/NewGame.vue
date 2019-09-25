@@ -32,8 +32,6 @@
           v-model="settings.localOrOnline"
           name="localOrOnlineRadio"
           value="online"
-          disabled
-          title="Not yet implemented..."
         >
           Online
         </b-form-radio>
@@ -78,6 +76,7 @@ import Settings from "../models/Settings";
 import Game from "../models/Game";
 import Utils from "../models/Utils";
 import Notification from "../models/Notification";
+import axios from "axios";
 
 export default {
   data() {
@@ -108,22 +107,33 @@ export default {
     onSubmit(evt) {
       evt.preventDefault();
       let id = Date.now();
-      if (this.settings.localOrOnline === "local") {
-        let newGame = new Game(
+
+      let newGame = new Game(
           getUsersCopy(this.users),
           this.settings,
           new Utils().getInitialtiles(),
           id,
           "white"
         );
-        this.$store.commit("addLocalGame", newGame);
-      }
-      this.$store.commit("notify", new Notification("✓ New game created locally", "success"));
 
-      this.$router.push({
-        name: "local/game",
-        params: { id: id }
-      });
+      if (this.settings.localOrOnline === "local") {
+        
+        this.$store.commit("addLocalGame", newGame);
+        this.$store.commit("notify", new Notification("✓ New game created locally", "success"));
+        this.$router.push({
+            name: "local/game",
+            params: { id: id }
+        });
+      }else{
+           axios
+        .post("games.json", newGame)
+        .then(res => {
+          this.$router.push({
+              name: "online/game/" + res.data.name,
+          });
+        });
+      }
+      
     }
   }
 };

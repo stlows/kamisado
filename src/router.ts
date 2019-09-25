@@ -30,7 +30,8 @@ export default new Router({
     {
       path: "/online/game/:id",
       name: "online/game",
-      component: () => import("./views/Game.vue")
+      component: () => import("./views/OnlineGame.vue"),
+      props: true
     }
   ]
 });
