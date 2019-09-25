@@ -6,23 +6,13 @@
         <b-link to="/local/lobby">Local lobby</b-link>
       </li>
       <li class="list-group-item">
-        <b-link
-          to="/online/lobby"
-          :disabled="true"
-          title="Not yet implemented...">
-            Online lobby
-        </b-link>
+        <b-link to="/online/lobby" :disabled="true" title="Not yet implemented...">Online lobby</b-link>
       </li>
       <li class="list-group-item">
         <b-link to="/newGame">New game</b-link>
       </li>
       <li class="list-group-item">
-        <b-link 
-          to="/tutorial" 
-          :disabled="true" 
-          title="Not yet implemented...">
-            Tutorial
-        </b-link>
+        <b-link to="/tutorial" :disabled="true" title="Not yet implemented...">Tutorial</b-link>
       </li>
     </ul>
   </div>

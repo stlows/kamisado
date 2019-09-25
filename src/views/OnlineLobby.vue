@@ -23,7 +23,6 @@
   </div>
 </template>
 
-  </div>
 
 <script>
 import { Component, Vue } from "vue-property-decorator";
