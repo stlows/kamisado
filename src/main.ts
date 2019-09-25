@@ -12,7 +12,10 @@ Vue.config.productionTip = false;
 
 Vue.use(BootstrapVue);
 
+import { store } from "./store";
+
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount("#app");

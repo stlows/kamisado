@@ -1,9 +1,9 @@
 <template>
   <div id="gameManager">
-    <game-info :users="users" :playersTurn="playersTurn"></game-info>
+    <game-info :users="game.users" :playersTurn="game.playersTurn" :id="game.id"></game-info>
     <game-board
-      :playersTurn="playersTurn"
-      :tiles="tiles"
+      :playersTurn="game.playersTurn"
+      :tiles="game.tiles"
       @towerClicked="towerClicked"
       @tileClicked="tileClicked"
     ></game-board>
@@ -13,20 +13,19 @@
 <script>
 import Board from "./NewBoard.vue";
 import GameInfo from "./GameInfo.vue";
-import InitialTiles from "../assets/InitialTiles.json";
+import { getTowerCopy, getTileCopy } from "../copier.js";
+//import InitialTiles from "../assets/InitialTiles.json";
 
 export default {
   components: {
     "game-board": Board,
     "game-info": GameInfo
   },
-  props: ["users", "settings"],
+  props: ["game"],
   data() {
     return {
-      pointsBySumo: [1, 3, 5, 7],
-      maxTilesBySumo: [8, 5, 3, 1],
-      playersTurn: "white",
-      tiles: InitialTiles
+      pointsBySumo: [1, 1, 3, 7, 15],
+      maxTilesBySumo: [8, 5, 3, 1]
     };
   },
   methods: {
@@ -35,9 +34,9 @@ export default {
       let losingPlayer = winningPlayer === "white" ? "black" : "white";
       this.replaceTowers(winningPlayer);
       this.replaceTowers(losingPlayer);
-      this.playersTurn = losingPlayer;
+      this.game.playersTurn = losingPlayer;
       this.setPropertyToTowers(
-        this.getPlayerTowers(this.playersTurn),
+        this.getPlayerTowers(this.game.playersTurn),
         "selectable",
         "true"
       );
@@ -68,7 +67,7 @@ export default {
         }
         return tile.y === (playerColor === "white" ? 0 : 7);
       };
-      let emptyHomeTiles = this.tiles.filter(t => conditionEmptyHome(t));
+      let emptyHomeTiles = this.game.tiles.filter(t => conditionEmptyHome(t));
       let homeSorting = function(tile1, tile2) {
         if (
           (playerColor === "white" && leftOrRight === "left") ||
@@ -85,26 +84,6 @@ export default {
         this.moveTower(toReplaceTowers[i], emptyHomeTiles[i]);
       }
     },
-    getTileCopy(tile) {
-      let copy = {};
-      copy.x = tile.x;
-      copy.y = tile.y;
-      copy.color = tile.color;
-      copy.selectable = tile.selectable;
-      if (tile.tower) {
-        copy.tower = this.getTowerCopy(tile.tower);
-      }
-      return copy;
-    },
-    getTowerCopy(tower) {
-      let copy = {};
-      copy.color = tower.color;
-      copy.playerColor = tower.playerColor;
-      copy.selectable = tower.selectable;
-      copy.selected = tower.selected;
-      copy.sumo = tower.sumo;
-      return copy;
-    },
     towerClicked(tile) {
       if (tile.tower.selectable && tile.tower === this.getSelectedTower()) {
         this.unselectTower(tile.tower);
@@ -113,11 +92,16 @@ export default {
       }
     },
     switchPlayer() {
-      this.playersTurn = this.playersTurn === "white" ? "black" : "white";
+      this.game.playersTurn = this.game.playersTurn === "white" ? "black" : "white";
     },
     tileClicked(tile) {
       if (tile.selectable) {
-        let color = this.moveTower(this.getSelectedTower(), tile);
+        this.handleTowerMoveDuringPlay(tile)
+      }
+    },
+    handleTowerMoveDuringPlay(tile, deadEndCount = 0){
+        let color = tile.color;
+        this.moveTower(this.getSelectedTower(), tile);
         this.unselectTower(this.getSelectedTower());
         this.setPropertyToTowers(this.getTowers(), "selectable", false);
         let winningTower = this.checkWin();
@@ -126,11 +110,11 @@ export default {
           return;
         }
         this.switchPlayer();
-        this.selectTower(this.getTower(this.playersTurn, color));
-      }
+        this.selectTower(this.getTower(this.game.playersTurn, color));
+        this.checkDeadEnd(deadEndCount);
     },
     handleWin(winningTower) {
-      let user = this.users.find(u => u.color === winningTower.playerColor);
+      let user = this.game.users.find(u => u.color === winningTower.playerColor);
       user.score += this.pointsBySumo[winningTower.sumo];
       winningTower.sumo++;
 
@@ -154,14 +138,14 @@ export default {
       }
     },
     moveTower(tower, targetTile) {
-      let copy = this.getTowerCopy(tower);
-      this.getTileByTower(tower).tower = null;
+      let copy = getTowerCopy(tower);
+      let fromTile = this.getTileByTower(tower);
+      fromTile.tower = null;
       targetTile.tower = copy;
-      return targetTile.color;
     },
     unsetPossibleTiles() {
-      for (var i = 0; i < this.tiles.length; i++) {
-        this.tiles[i].selectable = false;
+      for (var i = 0; i < this.game.tiles.length; i++) {
+        this.game.tiles[i].selectable = false;
       }
     },
     nextY(y, playerColor) {
@@ -186,13 +170,35 @@ export default {
       let counter = 1;
       while (
         this.inBound(tile.x, y) &&
-        !this.getTileByCoord(tile.x, y).tower &&
+        (!this.getTileByCoord(tile.x, y).tower || this.canPush(tower, this.getTileByCoord(tile.x, y).tower) ) &&
         counter <= this.maxTilesBySumo[tower.sumo]
       ) {
         this.getTileByCoord(tile.x, y).selectable = true;
         y = this.nextY(y, tower.playerColor);
         counter++;
       }
+    },
+    canPush(tower, otherTower){
+
+      console.log(tower, otherTower);
+      if (tower.sumo === 0) {
+        return false;
+      }
+      
+      // Check push by one
+      if (tower.playerColor === otherTower.playerColor) {
+        return false;
+      }
+
+      let tile = this.getTileByTower(tower);
+      if (tower.playerColor === "white") {
+        let checkY = tile.y + 2;
+        return checkY > 7 && !this.getTileByCoord(tile.x, checkY).tower;
+      }else if (tower.playerColor === "black") {
+        let checkY = tile.y - 2;
+        return checkY < 0 && !this.getTileByCoord(tile.x, checkY).tower;
+      }
+
     },
     setPossibleTilesDiagonnally(tower, deltaX) {
       let tile = this.getTileByTower(tower);
@@ -230,21 +236,36 @@ export default {
       tower.selected = true;
       this.setPossibleTiles();
     },
+    checkDeadEnd(deadEndCount){
+      let possibleMovesCount = this.getSelectableTiles().length;
+      if (possibleMovesCount === 0) {
+        if (deadEndCount === 1) {
+
+          return;
+        }
+        let selectedTower = this.getSelectedTower();
+        let currentTile = this.getTileByTower(selectedTower);
+        this.handleTowerMoveDuringPlay(currentTile, 1)
+      }
+    },
     getSelectedTower() {
       return this.getTowers().find(t => t.selected);
+    },
+    getSelectableTiles() {
+      return this.game.tiles.filter(t => t.selectable);
     },
     getPlayerTowers(playerColor) {
       let towers = this.getTowers();
       return towers.filter(t => t.playerColor === playerColor);
     },
     getTileByCoord(x, y) {
-      return this.tiles.find(t => t.x === x && t.y === y);
+      return this.game.tiles.find(t => t.x === x && t.y === y);
     },
     getTileByTower(tower) {
-      return this.tiles.find(t => t.tower === tower);
+      return this.game.tiles.find(t => t.tower === tower);
     },
     getTowers() {
-      return this.tiles.filter(t => t.tower).map(t => t.tower);
+      return this.game.tiles.filter(t => t.tower).map(t => t.tower);
     },
     getTower(playerColor, color) {
       let playerTowers = this.getPlayerTowers(playerColor);
@@ -253,7 +274,7 @@ export default {
   },
   created() {
     this.setPropertyToTowers(
-      this.getPlayerTowers(this.playersTurn),
+      this.getPlayerTowers(this.game.playersTurn),
       "selectable",
       "true"
     );
@@ -262,6 +283,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  #gameManager {
+    text-align: center;
+  }
 .game-manager {
   display: grid;
   grid-template-columns: 1fr 5fr;

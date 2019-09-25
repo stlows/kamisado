@@ -1,15 +1,18 @@
 <template>
   <div>
-    <h1 class="header">Kamisado</h1>
+    <h1 class="header">가미 사도 &mdash; Kamisado</h1>
     <ul class="list-group container">
       <li class="list-group-item">
-        <router-link to="/local/lobby">Local Lobby</router-link>
+        <b-link to="/local/lobby">Local lobby</b-link>
       </li>
       <li class="list-group-item">
-        <router-link to="/online/lobby">Online games</router-link>
+        <b-link to="/online/lobby" :disabled="true" title="Not yet implemented...">Online lobby</b-link>
       </li>
       <li class="list-group-item">
-        <router-link to="/tutorial" disabled>Tutorial</router-link>
+        <b-link to="/newGame">New game</b-link>
+      </li>
+      <li class="list-group-item">
+        <b-link to="/tutorial" :disabled="true" title="Not yet implemented...">Tutorial</b-link>
       </li>
     </ul>
   </div>
@@ -24,4 +27,9 @@ export default {
 </script>
 
 <style>
+a.disabled {
+  opacity: 0.5;
+  cursor: default;
+  text-decoration: none;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div id="gameInfo">
-    <h3>Game ID: {{ $route.params.id }}</h3>
+    <h3>Game ID: {{ id }}</h3>
     <table id="scores">
       <thead>
         <tr>
@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  props: ["users", "playersTurn"],
+  props: ["users", "playersTurn", "id"],
   computed: {
     getTurnsUsername() {
       return this.users.find(u => u.color === this.playersTurn).name;

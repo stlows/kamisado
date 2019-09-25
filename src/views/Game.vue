@@ -1,9 +1,6 @@
 <template>
   <div>
-    <!-- <game-info :game="game"></game-info>
-    <game-controls @moveConfirmed="moveConfirmed" :game="game"></game-controls>
-    <game-board @notify="notify" @save-round="saveRound" @winRound="winRound" :game="game"></game-board>-->
-    <game-manager></game-manager>
+    <game-manager :game="game"></game-manager>
   </div>
 </template>
 
@@ -13,45 +10,30 @@ import GameManager from "../components/GameManager.vue";
 import Tile from "../components/Tile.vue";
 import Controls from "../components/Controls.vue";
 import axios from "axios";
+
 export default {
-  props: ["users"],
-  data() {
-    return {
-      game: {
-        id: this.$route.params.id,
-        users: [],
-        scores: [],
-        pointsToWin: 0,
-        rounds: []
-      }
-    };
-  },
+  props: ["game"],
   computed: {
     activeRound() {
-      return this.rounds.length - 1;
+      return this.game.rounds.length - 1;
     }
   },
   methods: {
-    notify(e) {
-      this.$emit("notify", e);
-    },
     winRound(e) {
       this.scores[e.playerId] += e.points;
-      this.$emit("notify", {
+      this.$store.commit("notify", {
         message: this.users[e.playerId].username + " wins the round!",
         variant: "success"
       });
     },
     loadGame() {
-      console.log("Loading game" + this.game.id);
       axios.get("games/" + this.game.id + ".json").then(res => {
         const data = res.data;
-        console.log(data);
         this.game.pointsToWin = data.pointsToWin;
         this.game.scores = data.scores;
         this.game.users = data.users;
         this.game.rounds = data.rounds;
-        this.$emit("notify", {
+        this.$store.commit("notify", {
           message: "✓ Game loaded",
           variant: "success"
         });
@@ -66,7 +48,7 @@ export default {
           users: this.users
         })
         .then(res => {
-          this.$emit("notify", {
+          this.$store.commit("notify", {
             message: "✓ Game saved",
             variant: "success"
           });
@@ -81,7 +63,7 @@ export default {
           selectedTowerId: round.selectedTowerId
         })
         .then(res => {
-          this.$emit("notify", {
+          this.$store.commit("notify", {
             message: "✓ Round saved",
             variant: "success"
           });
@@ -89,14 +71,11 @@ export default {
     }
   },
   created() {
-    //this.loadGame();
+    this.loadGame();
   },
   components: {
-    "game-manager": GameManager,
-    "game-controls": Controls,
-    "game-info": GameInfo,
-    "game-tile": Tile
+    "game-manager": GameManager
   }
 };
 </script>
-
+<style lang="scss"></style>
