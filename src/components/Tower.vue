@@ -1,11 +1,7 @@
 <template>
   <div
     class="tower"
-    :class="[
-      tower.color,
-      tower.playerColor,
-      { selectable: tower.selectable, selected: tower.selected }
-    ]"
+    :class="[tower.color, tower.playerColor, {selectable: tower.selectable, selected: tower.selected}]"
     @click.stop="towerClicked"
   >
     <span v-for="i in tower.sumo" class="sumo" :class="'sumo' + i">★</span>

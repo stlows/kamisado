@@ -1,15 +1,13 @@
 <template>
   <div id="game-controls">
-    <input type="text" v-model="userId" />
-    <span>{{ userId }}</span>
+    <input type="text" v-model="userId">
+    <span>{{userId}}</span>
     <button
       class="btn btn-primary mb-3"
       @click="confirmMove"
       :disabled="!isMyTurn || moveToConfirm === null"
-    >
-      {{ saveButtonText }}
-    </button>
-    <br />
+    >{{ saveButtonText }}</button>
+    <br>
   </div>
 </template>
 
@@ -22,4 +20,5 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+</style>

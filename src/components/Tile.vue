@@ -1,14 +1,6 @@
 <template>
-  <div
-    class="tile"
-    :class="[tile.color, { selectable: tile.selectable }]"
-    @click="tileClicked"
-  >
-    <game-tower
-      v-if="tile.tower"
-      :tower="tile.tower"
-      @towerClicked="towerClicked()"
-    ></game-tower>
+  <div class="tile" :class="[tile.color, {selectable: tile.selectable}]" @click="tileClicked">
+    <game-tower v-if="tile.tower" :tower="tile.tower" @towerClicked="towerClicked()"></game-tower>
   </div>
 </template>
 

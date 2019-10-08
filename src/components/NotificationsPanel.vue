@@ -1,21 +1,19 @@
 <template>
   <div id="notifications-panel" class="panel">
-    <div v-for="notification in notifications" :key="notification.id">
-      <b-alert :variant="notification.variant" dismissible :show="2" fade>{{
-        notification.message
-      }}</b-alert>
+      <div v-for="notification in notifications" :key="notification.id">
+        <b-alert :variant="notification.variant" dismissible :show="2" fade>{{ notification.message }}</b-alert>
+      </div>
     </div>
-  </div>
 </template>
 
 <script>
 export default {
-  computed: {
-    notifications() {
+computed: {
+    notifications(){
       return this.$store.state.notifications;
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

@@ -4,19 +4,17 @@
       <h1>Settings</h1>
       <div class="form-group">
         <label for="white-name">White's name</label>
-        <input type="text" v-model="users[0].name" />
+        <input type="text" v-model="users[0].name">
       </div>
       <div class="form-group">
         <label for="black-name">Black's name</label>
-        <input type="text" v-model="users[1].name" />
+        <input type="text" v-model="users[1].name">
       </div>
       <div class="form-group">
         <label for="pointsToWin">Points to win</label>
-        <input type="number" v-model="settings.pointsToWin" />
+        <input type="number" v-model="settings.pointsToWin">
       </div>
-      <button class="btn btn-large btn-primary" @click="newGameVsHuman">
-        All set !
-      </button>
+      <button class="btn btn-large btn-primary" @click="newGameVsHuman">All set !</button>
     </div>
   </div>
 </template>

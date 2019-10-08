@@ -8,9 +8,7 @@
         <template v-if="games.length > 0">
           <div class="list-group">
             <div class="list-group-item" v-for="game in games" :key="game">
-              <a href="#" @click.prevent="goToGame(game)"
-                >Go to game {{ game }}</a
-              >
+              <a href="#" @click.prevent="goToGame(game)">Go to game {{game}}</a>
             </div>
           </div>
         </template>
@@ -19,13 +17,12 @@
         </template>
       </div>
       <div class="card-footer">
-        <button class="btn btn-large btn-primary" @click="newGame">
-          New Game
-        </button>
+        <button class="btn btn-large btn-primary" @click="newGame">New Game</button>
       </div>
     </div>
   </div>
 </template>
+
 
 <script>
 import { Component, Vue } from "vue-property-decorator";
@@ -94,3 +91,4 @@ export default {
   margin: 15px 20%;
 }
 </style>
+
