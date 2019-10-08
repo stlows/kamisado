@@ -129,7 +129,7 @@ export default {
         .post("games.json", newGame)
         .then(res => {
           this.$router.push({
-              name: "online/game/" + res.data.name,
+              path: "online/game/" + res.data.name,
           });
         });
       }
