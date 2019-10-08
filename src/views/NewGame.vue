@@ -109,31 +109,30 @@ export default {
       let id = Date.now();
 
       let newGame = new Game(
-          getUsersCopy(this.users),
-          this.settings,
-          new Utils().getInitialtiles(),
-          id,
-          "white"
-        );
+        getUsersCopy(this.users),
+        this.settings,
+        new Utils().getInitialtiles(),
+        id,
+        "white"
+      );
 
       if (this.settings.localOrOnline === "local") {
-        
         this.$store.commit("addLocalGame", newGame);
-        this.$store.commit("notify", new Notification("✓ New game created locally", "success"));
+        this.$store.commit(
+          "notify",
+          new Notification("✓ New game created locally", "success")
+        );
         this.$router.push({
-            name: "local/game",
-            params: { id: id }
+          name: "local/game",
+          params: { id: id }
         });
-      }else{
-           axios
-        .post("games.json", newGame)
-        .then(res => {
+      } else {
+        axios.post("games.json", newGame).then(res => {
           this.$router.push({
-              name: "online/game/" + res.data.name,
+            name: "online/game/" + res.data.name
           });
         });
       }
-      
     }
   }
 };

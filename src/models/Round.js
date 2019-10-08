@@ -1,5 +1,3 @@
 class Round {
-    constructor() {
-
-    }
+  constructor() {}
 }

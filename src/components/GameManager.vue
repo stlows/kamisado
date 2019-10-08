@@ -1,6 +1,10 @@
 <template>
   <div id="gameManager">
-    <game-info :users="game.users" :playersTurn="game.playersTurn" :id="game.id"></game-info>
+    <game-info
+      :users="game.users"
+      :playersTurn="game.playersTurn"
+      :id="game.id"
+    ></game-info>
     <game-board
       :playersTurn="game.playersTurn"
       :tiles="game.tiles"
@@ -92,29 +96,32 @@ export default {
       }
     },
     switchPlayer() {
-      this.game.playersTurn = this.game.playersTurn === "white" ? "black" : "white";
+      this.game.playersTurn =
+        this.game.playersTurn === "white" ? "black" : "white";
     },
     tileClicked(tile) {
       if (tile.selectable) {
-        this.handleTowerMoveDuringPlay(tile)
+        this.handleTowerMoveDuringPlay(tile);
       }
     },
-    handleTowerMoveDuringPlay(tile, deadEndCount = 0){
-        let color = tile.color;
-        this.moveTower(this.getSelectedTower(), tile);
-        this.unselectTower(this.getSelectedTower());
-        this.setPropertyToTowers(this.getTowers(), "selectable", false);
-        let winningTower = this.checkWin();
-        if (winningTower) {
-          this.handleWin(winningTower);
-          return;
-        }
-        this.switchPlayer();
-        this.selectTower(this.getTower(this.game.playersTurn, color));
-        this.checkDeadEnd(deadEndCount);
+    handleTowerMoveDuringPlay(tile, deadEndCount = 0) {
+      let color = tile.color;
+      this.moveTower(this.getSelectedTower(), tile);
+      this.unselectTower(this.getSelectedTower());
+      this.setPropertyToTowers(this.getTowers(), "selectable", false);
+      let winningTower = this.checkWin();
+      if (winningTower) {
+        this.handleWin(winningTower);
+        return;
+      }
+      this.switchPlayer();
+      this.selectTower(this.getTower(this.game.playersTurn, color));
+      this.checkDeadEnd(deadEndCount);
     },
     handleWin(winningTower) {
-      let user = this.game.users.find(u => u.color === winningTower.playerColor);
+      let user = this.game.users.find(
+        u => u.color === winningTower.playerColor
+      );
       user.score += this.pointsBySumo[winningTower.sumo];
       winningTower.sumo++;
 
@@ -170,7 +177,8 @@ export default {
       let counter = 1;
       while (
         this.inBound(tile.x, y) &&
-        (!this.getTileByCoord(tile.x, y).tower || this.canPush(tower, this.getTileByCoord(tile.x, y).tower) ) &&
+        (!this.getTileByCoord(tile.x, y).tower ||
+          this.canPush(tower, this.getTileByCoord(tile.x, y).tower)) &&
         counter <= this.maxTilesBySumo[tower.sumo]
       ) {
         this.getTileByCoord(tile.x, y).selectable = true;
@@ -178,13 +186,12 @@ export default {
         counter++;
       }
     },
-    canPush(tower, otherTower){
-
+    canPush(tower, otherTower) {
       console.log(tower, otherTower);
       if (tower.sumo === 0) {
         return false;
       }
-      
+
       // Check push by one
       if (tower.playerColor === otherTower.playerColor) {
         return false;
@@ -194,11 +201,10 @@ export default {
       if (tower.playerColor === "white") {
         let checkY = tile.y + 2;
         return checkY > 7 && !this.getTileByCoord(tile.x, checkY).tower;
-      }else if (tower.playerColor === "black") {
+      } else if (tower.playerColor === "black") {
         let checkY = tile.y - 2;
         return checkY < 0 && !this.getTileByCoord(tile.x, checkY).tower;
       }
-
     },
     setPossibleTilesDiagonnally(tower, deltaX) {
       let tile = this.getTileByTower(tower);
@@ -236,16 +242,15 @@ export default {
       tower.selected = true;
       this.setPossibleTiles();
     },
-    checkDeadEnd(deadEndCount){
+    checkDeadEnd(deadEndCount) {
       let possibleMovesCount = this.getSelectableTiles().length;
       if (possibleMovesCount === 0) {
         if (deadEndCount === 1) {
-
           return;
         }
         let selectedTower = this.getSelectedTower();
         let currentTile = this.getTileByTower(selectedTower);
-        this.handleTowerMoveDuringPlay(currentTile, 1)
+        this.handleTowerMoveDuringPlay(currentTile, 1);
       }
     },
     getSelectedTower() {
@@ -283,9 +288,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  #gameManager {
-    text-align: center;
-  }
+#gameManager {
+  text-align: center;
+}
 .game-manager {
   display: grid;
   grid-template-columns: 1fr 5fr;

@@ -4,8 +4,8 @@
     <table id="scores">
       <thead>
         <tr>
-          <th>{{ users[0].name }} ({{users[0].color}})</th>
-          <th>{{ users[1].name }} ({{users[1].color}})</th>
+          <th>{{ users[0].name }} ({{ users[0].color }})</th>
+          <th>{{ users[1].name }} ({{ users[1].color }})</th>
         </tr>
       </thead>
       <tbody>
@@ -52,6 +52,3 @@ h3 {
   }
 }
 </style>
-
-
-

@@ -1,17 +1,14 @@
 <template>
-    <div>
+  <div>
     <h1>Online game</h1>
     <p>{{ id }}</p>
-    </div>
-
+  </div>
 </template>
 
 <script>
 export default {
-    props: ["id"]
-}
+  props: ["id"]
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
