@@ -1,36 +1,40 @@
 <template>
-    <div>
-        <game-manager v-if="loaded" :game="game"></game-manager> 
+  <div>
+    <div class="text-center mb-3">
+      <p>Game ID: {{gameId}}</p>
+      <button class="btn btn-primary text-center">Confirm</button>
     </div>
 
+    <Board v-if="towers" :towers="towers"></Board>
+    <template v-else>Loading...</template>
+  </div>
 </template>
 
 <script>
-import GameManager from "../components/GameManager.vue";
-import axios from "axios";
+import { newGame, getGame } from "../plugins/api.js";
+import Board from "../components/Board";
 
 export default {
+  components: {
+    Board
+  },
   data() {
     return {
-        game: null
-     }
+      towers: null
+    };
+  },
+  computed: {
+    gameId() {
+      return this.$route.params.id;
+    }
   },
   created() {
-      axios.get("games/" + this.$route.params.id + ".json").then(res => {
-          this.game = res.data;
-        
-        this.$store.commit("notify", {
-          message: "✓ Game loaded",
-          variant: "success"
-        });
-      });
-  },
-  components: {
-    "game-manager": GameManager
+    getGame(this.gameId).then(res => {
+      this.towers = res.data.towers;
+    });
   }
 };
 </script>
 
 <style>
-
 </style>

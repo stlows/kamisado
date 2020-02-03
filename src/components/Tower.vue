@@ -1,20 +1,58 @@
 <template>
-  <div
+  <g
     class="tower"
-    :class="[tower.color, tower.playerColor, {selectable: tower.selectable, selected: tower.selected}]"
-    @click.stop="towerClicked"
+    :class="{dragging}"
+    :transform="'translate(' + x + ',' + y + ')'"
+    @mousedown="mouseDown($event, tower)"
+    @mouseup="mouseUp($event)"
   >
-    <span v-for="i in tower.sumo" class="sumo" :class="'sumo' + i">★</span>
-  </div>
+    <circle :class="[tower.player_color, tower.tower_color]" :r="towerSize / 2"></circle>
+    <text
+      text-anchor="middle"
+      dominant-baseline="central"
+      :class="tower.tower_color"
+      :font-size="towerSize * 0.7"
+    >{{tower.symbol}}</text>
+  </g>
 </template>
 
 <script>
 export default {
-  props: ["tower"],
+  props: ["tower", "towerSize", "tileSize"],
+  data() {
+    return {
+      x: 0,
+      y: 0,
+      dragging: false
+    };
+  },
   methods: {
-    towerClicked() {
-      this.$emit("towerClicked");
+    mouseDown(ev, tower) {
+      this.dragging = true;
+      document.addEventListener("mousemove", this.mouseMove);
+      document.addEventListener("mouseup", this.mouseUp);
+    },
+    mouseMove(ev) {
+      this.x = ev.offsetX;
+      this.y = ev.offsetY;
+    },
+    mouseUp(ev, towerId) {
+      this.dragging = false;
+      this.x = this.tileToFullCoord(this.fullToTileCoord(this.x));
+      this.y = this.tileToFullCoord(this.fullToTileCoord(this.y));
+      document.removeEventListener("mousemove", this.mouseMove);
+      document.removeEventListener("mouseup", this.mouseUp);
+    },
+    fullToTileCoord(x) {
+      return Math.round((x + this.tileSize / 2) / this.tileSize);
+    },
+    tileToFullCoord(x) {
+      return x * this.tileSize - this.tileSize / 2;
     }
+  },
+  mounted() {
+    this.x = this.tileToFullCoord(this.tower.position_x);
+    this.y = this.tileToFullCoord(this.tower.position_y);
   }
 };
 </script>
@@ -23,24 +61,11 @@ export default {
 @import "../assets/colors.scss";
 @import "../assets/constants.scss";
 .tower {
-  z-index: 999;
-  cursor: default;
-  border-radius: 50%;
-  line-height: $tower-size;
-  width: $tower-size;
-  margin: auto;
-  position: relative;
-  &.selectable {
-    cursor: pointer;
-  }
-  &:after {
-    width: 100%;
-    height: 100%;
-    display: inline-block;
-    font-size: $symbol-size;
-    font-weight: bold;
-    text-align: center;
-    vertical-align: middle;
+  cursor: grab;
+  transition: transform 0.2s ease;
+  &.dragging {
+    cursor: grabbing;
+    transition: none;
   }
   .sumo {
     position: absolute;
@@ -68,56 +93,39 @@ export default {
     }
   }
 
-  &.white {
-    background-color: $player-white;
-    &.selected {
-      box-shadow: 0 0 0 3px $player-black, 0 0 0 6px $player-white;
-    }
-    .sumo {
-      color: $player-black;
-    }
+  .white {
+    fill: $player-white;
   }
-  &.black {
-    background-color: $player-black;
-    &.selected {
-      box-shadow: 0 0 0 3px $player-white, 0 0 0 6px $player-black;
-    }
-    .sumo {
-      color: $player-white;
-    }
-  }
-  &.orange:after {
-    content: "주";
-    color: $orange;
-  }
-  &.blue:after {
-    content: "푸";
-    color: $blue;
-  }
-  &.red:after {
-    content: "빨";
-    color: $red;
+  .black {
+    fill: $player-black;
   }
 
-  &.yellow:after {
-    content: "노";
-    color: $yellow;
-  }
-  &.indigo:after {
-    content: "남";
-    color: $indigo;
-  }
-  &.brown:after {
-    content: "갈";
-    color: $brown;
-  }
-  &.pink:after {
-    content: "담";
-    color: $pink;
-  }
-  &.green:after {
-    content: "녹";
-    color: $green;
+  text {
+    pointer-events: none;
+    &.orange {
+      fill: $orange;
+    }
+    &.green {
+      fill: $green;
+    }
+    &.red {
+      fill: $red;
+    }
+    &.indigo {
+      fill: $indigo;
+    }
+    &.blue {
+      fill: $blue;
+    }
+    &.yellow {
+      fill: $yellow;
+    }
+    &.brown {
+      fill: $brown;
+    }
+    &.pink {
+      fill: $pink;
+    }
   }
 }
 </style>
