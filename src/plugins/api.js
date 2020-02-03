@@ -18,3 +18,7 @@ export const newGame = (player1Id, player2Id, pointsToWin) => {
 export const getGame = (gameId) => {
   return api.get("get-game?gameId=" + gameId)
 }
+
+export const getTiles = () => {
+  return api.get("tiles")
+}

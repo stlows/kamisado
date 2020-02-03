@@ -84,3 +84,16 @@ function getTower($tower_id)
     return $towerResult->fetch_assoc();
   }
 }
+
+function getTiles()
+{
+  $conn = getNewConn();
+  $query = "SELECT * FROM tiles";
+
+  $result = $conn->query($query);
+
+  if ($result->num_rows != 64) {
+  } else {
+    return $result->fetch_all(MYSQLI_ASSOC);
+  }
+}

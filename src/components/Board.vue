@@ -1,13 +1,13 @@
 <template>
-  <svg class="board" :width="8 * tileSize" :height="8 * tileSize">
+  <svg v-if="tiles" class="board" :width="8 * tileSize" :height="8 * tileSize">
     <g class="board--background">
       <BoardTile
         v-for="(tile, i) in tiles"
         :key="i"
         :color="tile.color"
         :tileSize="tileSize"
-        :x="tile.x"
-        :y="tile.y"
+        :x="tile.position_x - 1"
+        :y="tile.position_y - 1"
       />
     </g>
     <g class="towers">
@@ -24,8 +24,8 @@
 
 <script>
 import BoardTile from "./BoardTile";
-import InitialTiles from "../assets/InitialTiles.json";
 import Tower from "./Tower";
+import { getTiles } from "../plugins/api";
 export default {
   components: {
     BoardTile,
@@ -34,9 +34,12 @@ export default {
   props: ["towers"],
   data() {
     return {
-      tiles: InitialTiles,
+      tiles: null,
       tileSize: 90
     };
+  },
+  created() {
+    getTiles().then(res => (this.tiles = res.data));
   }
 };
 </script>
