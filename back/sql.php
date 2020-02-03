@@ -70,3 +70,17 @@ function getGame($game_id)
     }
   }
 }
+
+function getTower($tower_id)
+{
+  $conn = getNewConn();
+  $towerQuery = "SELECT * FROM towers WHERE tower_id = $tower_id";
+
+  $towerResult = $conn->query($towerQuery);
+
+  if ($towerResult->num_rows > 1) {
+  } else if ($towerResult->num_rows == 0) {
+  } else {
+    return $towerResult->fetch_assoc();
+  }
+}
