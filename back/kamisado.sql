@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  lun. 03 fév. 2020 à 23:34
+-- Généré le :  mer. 05 fév. 2020 à 05:19
 -- Version du serveur :  10.3.15-MariaDB
 -- Version de PHP :  7.1.30
 
@@ -40,12 +40,17 @@ CREATE TABLE `games` (
   `turn` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Déchargement des données de la table `games`
+-- Structure de la table `lobby`
 --
 
-INSERT INTO `games` (`game_id`, `player_1_id`, `player_2_id`, `player_1_score`, `player_2_score`, `points_to_win`, `tower_id_to_move`, `is_first_move`, `turn`) VALUES
-(27, 1, 3, 0, 0, 1, NULL, 1, '');
+CREATE TABLE `lobby` (
+  `lobby_id` int(11) NOT NULL,
+  `points_to_win` int(11) NOT NULL,
+  `player_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -169,28 +174,6 @@ CREATE TABLE `towers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `towers`
---
-
-INSERT INTO `towers` (`tower_id`, `game_id`, `tower_color`, `player_color`, `sumo`, `position_x`, `position_y`, `symbol`) VALUES
-(513, 27, 'orange', 'white', 0, 1, 1, '주'),
-(514, 27, 'blue', 'white', 0, 2, 1, '푸'),
-(515, 27, 'indigo', 'white', 0, 3, 1, '남'),
-(516, 27, 'pink', 'white', 0, 4, 1, '담'),
-(517, 27, 'yellow', 'white', 0, 5, 1, '노'),
-(518, 27, 'red', 'white', 0, 6, 1, '빨'),
-(519, 27, 'green', 'white', 0, 7, 1, '녹'),
-(520, 27, 'brown', 'white', 0, 8, 1, '갈'),
-(521, 27, 'brown', 'black', 0, 1, 8, '갈'),
-(522, 27, 'green', 'black', 0, 2, 8, '녹'),
-(523, 27, 'red', 'black', 0, 3, 8, '빨'),
-(524, 27, 'yellow', 'black', 0, 4, 8, '노'),
-(525, 27, 'pink', 'black', 0, 5, 8, '담'),
-(526, 27, 'indigo', 'black', 0, 6, 8, '남'),
-(527, 27, 'blue', 'black', 0, 7, 8, '푸'),
-(528, 27, 'orange', 'black', 0, 8, 8, '주');
-
---
 -- Index pour les tables déchargées
 --
 
@@ -202,6 +185,13 @@ ALTER TABLE `games`
   ADD KEY `player_1_id` (`player_1_id`),
   ADD KEY `player_2_id` (`player_2_id`),
   ADD KEY `tower_id_to_move` (`tower_id_to_move`);
+
+--
+-- Index pour la table `lobby`
+--
+ALTER TABLE `lobby`
+  ADD PRIMARY KEY (`lobby_id`),
+  ADD KEY `player_id` (`player_id`);
 
 --
 -- Index pour la table `players`
@@ -230,7 +220,13 @@ ALTER TABLE `towers`
 -- AUTO_INCREMENT pour la table `games`
 --
 ALTER TABLE `games`
-  MODIFY `game_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `game_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+
+--
+-- AUTO_INCREMENT pour la table `lobby`
+--
+ALTER TABLE `lobby`
+  MODIFY `lobby_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `players`
@@ -248,7 +244,7 @@ ALTER TABLE `tiles`
 -- AUTO_INCREMENT pour la table `towers`
 --
 ALTER TABLE `towers`
-  MODIFY `tower_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=529;
+  MODIFY `tower_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=913;
 
 --
 -- Contraintes pour les tables déchargées
@@ -261,6 +257,12 @@ ALTER TABLE `games`
   ADD CONSTRAINT `games_ibfk_1` FOREIGN KEY (`player_1_id`) REFERENCES `players` (`player_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `games_ibfk_2` FOREIGN KEY (`player_2_id`) REFERENCES `players` (`player_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `games_ibfk_3` FOREIGN KEY (`tower_id_to_move`) REFERENCES `towers` (`tower_id`);
+
+--
+-- Contraintes pour la table `lobby`
+--
+ALTER TABLE `lobby`
+  ADD CONSTRAINT `lobby_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`player_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `towers`
