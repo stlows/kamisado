@@ -17,6 +17,16 @@ export default new Router({
       component: () => import("./views/LocalLobby.vue")
     },
     {
+      path: "/online/lobby",
+      name: "online/lobby",
+      component: () => import("./views/OnlineLobby.vue")
+    },
+    {
+      path: "/myGames",
+      name: "myGames",
+      component: () => import("./views/MyGames.vue")
+    },
+    {
       path: "/newGame",
       name: "newGame",
       component: () => import("./views/NewGame.vue")

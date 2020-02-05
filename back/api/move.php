@@ -1,8 +1,8 @@
 <?php
 
-include_once("../../includes/check-post.php");
-include_once("../../includes/sql.php");
-include_once("../../prettify.php");
+include_once("../check-post.php");
+include_once("../sql.php");
+include_once("../prettify.php");
 
 $move = json_decode(file_get_contents('php://input'), true);
 

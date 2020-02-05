@@ -2,18 +2,22 @@
   <div class="lobby">
     <div class="card games-container">
       <div class="card-header">
-        <h3>Active games</h3>
+        <h3>Lobby</h3>
+        <a href="#" @click="refreshLobby">Refresh</a>
       </div>
       <div class="card-body">
-        <template v-if="games.length > 0">
-          <div class="list-group">
-            <div class="list-group-item" v-for="game in games" :key="game">
-              <a href="#" @click.prevent="goToGame(game)">Go to game {{game}}</a>
-            </div>
-          </div>
-        </template>
+        <template v-if="loading"></template>
         <template v-else>
-          <p>No games yet...</p>
+          <template v-if="games.length > 0">
+            <b-table :items="games" :fields="fields">
+              <template v-slot:cell(lobby_id)="data">
+                <a href="#" @click.prevent="goToGame(data)">Join</a>
+              </template>
+            </b-table>
+          </template>
+          <template v-else>
+            <p>No games yet...</p>
+          </template>
         </template>
       </div>
       <div class="card-footer">
@@ -26,62 +30,40 @@
 
 <script>
 import { Component, Vue } from "vue-property-decorator";
-import axios from "axios";
+import { getLobby, newGame, deleteLobby } from "../plugins/api";
 
 export default {
   data() {
     return {
-      games: []
+      fields: [
+        "player_name",
+        "points_to_win",
+        { key: "lobby_id", label: "Link" }
+      ],
+      games: [],
+      loading: true
     };
   },
   methods: {
-    newGame() {
-      axios
-        .post("games.json", {
-          rounds: [
-            {
-              towers: [
-                { id: 0, playerId: 0, colorId: 0, x: 1, y: 1, sumo: 0 },
-                { id: 1, playerId: 0, colorId: 1, x: 2, y: 1, sumo: 0 },
-                { id: 2, playerId: 0, colorId: 2, x: 3, y: 1, sumo: 0 },
-                { id: 3, playerId: 0, colorId: 3, x: 4, y: 1, sumo: 0 },
-                { id: 4, playerId: 0, colorId: 4, x: 5, y: 1, sumo: 0 },
-                { id: 5, playerId: 0, colorId: 5, x: 6, y: 1, sumo: 0 },
-                { id: 6, playerId: 0, colorId: 6, x: 7, y: 1, sumo: 0 },
-                { id: 7, playerId: 0, colorId: 7, x: 8, y: 1, sumo: 0 },
-                { id: 8, playerId: 1, colorId: 7, x: 1, y: 8, sumo: 0 },
-                { id: 9, playerId: 1, colorId: 6, x: 2, y: 8, sumo: 0 },
-                { id: 10, playerId: 1, colorId: 5, x: 3, y: 8, sumo: 0 },
-                { id: 11, playerId: 1, colorId: 4, x: 4, y: 8, sumo: 0 },
-                { id: 12, playerId: 1, colorId: 3, x: 5, y: 8, sumo: 0 },
-                { id: 13, playerId: 1, colorId: 2, x: 6, y: 8, sumo: 0 },
-                { id: 14, playerId: 1, colorId: 1, x: 7, y: 8, sumo: 0 },
-                { id: 15, playerId: 1, colorId: 0, x: 8, y: 8, sumo: 0 }
-              ],
-              turnId: "User4563"
-            }
-          ],
-          users: [
-            { id: "User4563", username: "Charles", score: 0 },
-            { id: "User4564", username: "Vincent", score: 0 }
-          ],
-          scores: [0, 0],
-          pointsToWin: 5
-        })
-        .then(res => {
-          this.$router.push("/game/" + res.data.name);
-        });
+    refreshLobby() {
+      this.loading = true;
+      getLobby().then(res => {
+        this.games = res.data;
+        this.loading = false;
+      });
     },
-    goToGame(id) {
-      this.$router.push({ path: "/game/" + id });
+    newGame() {
+      this.$router.push({ path: "/newGame" });
+    },
+    goToGame(data) {
+      newGame(parseInt(data.value)).then(res => {
+        deleteLobby(parseInt(data.value));
+        this.$router.push({ path: "/online/game/" + res.data });
+      });
     }
   },
   created() {
-    axios.get("games.json").then(res => {
-      if (res.data) {
-        this.games = Object.keys(res.data);
-      }
-    });
+    this.refreshLobby();
   }
 };
 </script>

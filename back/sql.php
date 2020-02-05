@@ -6,15 +6,19 @@ function getNewConn()
   return $conn;
 }
 
-function newGame($player_1_id, $player_2_id, $points_to_win)
+function newGame($lobby_id)
 {
   $conn = getNewConn();
+
+  $lobby = getLobby($lobby_id);
+
+  $loginUserId = 3;
 
   $gameQuery = "
   INSERT INTO games
   (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move)
   VALUES
-  ($player_1_id, $player_2_id, 0, 0, $points_to_win, true, null)";
+  (" . $lobby["player_id"] . ", $loginUserId, 0, 0, " . $lobby["points_to_win"] . ", true, null)";
 
   $conn->query($gameQuery);
 
@@ -71,6 +75,24 @@ function getGame($game_id)
   }
 }
 
+function getMyGames()
+{
+  $conn = getNewConn();
+
+  $loginUserId = 3;
+
+  $query = "SELECT game_id, points_to_win, player_1_score, player_2_score, p1.player_name player_1_name, p2.player_name player_2_name
+  FROM games
+  LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+  LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+  WHERE $loginUserId IN (p1.player_id, p2.player_id)
+  ";
+
+  $result = $conn->query($query);
+
+  return $result->fetch_all(MYSQLI_ASSOC);
+}
+
 function getTower($tower_id)
 {
   $conn = getNewConn();
@@ -96,4 +118,51 @@ function getTiles()
   } else {
     return $result->fetch_all(MYSQLI_ASSOC);
   }
+}
+
+function newLobby($points_to_win)
+{
+  $conn = getNewConn();
+
+  $loginPlayerId = 3;
+
+  $query = "
+  INSERT INTO lobby
+  (points_to_win, player_id)
+  VALUES
+  ($points_to_win, $loginPlayerId)";
+
+  $conn->query($query);
+
+  return $conn->insert_id;
+}
+
+function getAllLobby()
+{
+  $conn = getNewConn();
+  $query = "SELECT player_name, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id";
+
+  $result = $conn->query($query);
+
+  return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+function getLobby($lobby_id)
+{
+  $conn = getNewConn();
+  $query = "SELECT * FROM lobby WHERE lobby_id = $lobby_id";
+
+  $result = $conn->query($query);
+  if ($result->num_rows != 1) {
+  } else {
+    return $result->fetch_assoc();
+  }
+}
+
+function deleteLobby($lobby_id)
+{
+  $conn = getNewConn();
+  $query = "DELETE FROM lobby WHERE lobby_id = $lobby_id";
+
+  $conn->query($query);
 }
