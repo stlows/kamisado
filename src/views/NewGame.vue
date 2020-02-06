@@ -45,7 +45,7 @@ export default {
       settings: {
         localOrOnline: "online",
         aiOrHuman: "human",
-        pointsToWin: 15
+        pointsToWin: 3
       }
     };
   },

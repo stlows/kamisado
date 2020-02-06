@@ -7,39 +7,79 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item to="/local/lobby" disabled title="Not yet implemented...">Local lobby</b-nav-item>
+          <!-- <b-nav-item to="/local/lobby" disabled title="Not yet implemented...">Local lobby</b-nav-item> -->
           <b-nav-item to="/online/lobby">Online lobby</b-nav-item>
-          <b-nav-item to="/tutorial" disabled title="Not yet implemented...">Tutorial</b-nav-item>
+          <b-nav-item to="/mygames">My Games</b-nav-item>
+          <!-- <b-nav-item to="/tutorial" disabled title="Not yet implemented...">Tutorial</b-nav-item> -->
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
-          <b-nav-form>
-            <b-form-group label="Login as:" label-cols-lg="4" label-size="sm">
-              <b-form-input
-                size="sm"
-                placeholder="Login as..."
-                :value="loginAs"
-                @input="updateLogin"
-              ></b-form-input>
-            </b-form-group>
-          </b-nav-form>
+          <div id="my-signin2" v-if="!isSignedIn"></div>
+          <template v-if="isSignedIn">
+            <b-dropdown
+              id="dropdown-1"
+              variant="outline-primary"
+              :text="'Logged in as ' +  name"
+              class="m-md-2"
+            >
+              <b-dropdown-item @click="signout">Sign Out</b-dropdown-item>
+            </b-dropdown>
+          </template>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-    <router-link to="/" class="home-link" v-if="showHome">← Go to home</router-link>
+    <!-- <router-link to="/" class="home-link" v-if="showHome">← Go to home</router-link> -->
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 export default {
-  computed: {
-    showHome() {
-      return this.$route.name !== "home";
-    },
-    ...mapState(["loginAs"])
+  data() {
+    return {
+      isSignedIn: false,
+      name: ""
+    };
+  },
+  computed: {},
+  watch: {
+    isSignedIn(newVal) {
+      if (!newVal) {
+        this.renderSignin();
+      }
+    }
+  },
+  created() {
+    this.renderSignin();
   },
   methods: {
+    ...mapMutations(["setToken"]),
+    renderSignin() {
+      setTimeout(() => {
+        window.gapi.signin2.render("my-signin2", {
+          width: 150,
+          height: 40,
+          longtitle: false,
+          theme: "dark",
+          onsuccess: this.onSuccess,
+          onfailure: this.onFailure
+        });
+      });
+    },
+    signout() {
+      var auth2 = gapi.auth2.getAuthInstance();
+      let vue = this;
+      auth2.signOut().then(() => {
+        vue.isSignedIn = false;
+      });
+    },
+    onSuccess(googleUser) {
+      this.isSignedIn = true;
+      var profile = googleUser.getBasicProfile();
+      this.name = profile.getName();
+      this.setToken(googleUser.getAuthResponse().id_token);
+    },
+    onFailure(error) {},
     updateLogin(updatedLogin) {
       this.$store.commit("updateLogin", updatedLogin);
     }

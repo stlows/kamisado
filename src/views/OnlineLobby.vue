@@ -1,12 +1,14 @@
 <template>
   <div class="lobby">
-    <div class="card games-container">
+    <div class="card lobby-container">
       <div class="card-header">
         <h3>Lobby</h3>
         <a href="#" @click="refreshLobby">Refresh</a>
       </div>
       <div class="card-body">
-        <template v-if="loading"></template>
+        <template v-if="loading">
+          <p>Loading...</p>
+        </template>
         <template v-else>
           <template v-if="games.length > 0">
             <b-table :items="games" :fields="fields">
@@ -31,6 +33,7 @@
 <script>
 import { Component, Vue } from "vue-property-decorator";
 import { getLobby, newGame, deleteLobby } from "../plugins/api";
+import { mapGetters } from "vuex";
 
 export default {
   data() {
@@ -44,10 +47,15 @@ export default {
       loading: true
     };
   },
+  computed: {
+    ...mapGetters({
+      token: "getToken"
+    })
+  },
   methods: {
     refreshLobby() {
       this.loading = true;
-      getLobby().then(res => {
+      getLobby(this.token).then(res => {
         this.games = res.data;
         this.loading = false;
       });
@@ -69,8 +77,9 @@ export default {
 </script>
 
 <style>
-.games-container {
-  margin: 15px 20%;
+.lobby-container {
+  max-width: 800px;
+  margin: 50px auto;
 }
 </style>
 

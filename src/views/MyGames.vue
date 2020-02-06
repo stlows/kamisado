@@ -63,7 +63,8 @@ export default {
 
 <style>
 .games-container {
-  margin: 15px 10%;
+  max-width: 1000px;
+  margin: 50px auto;
 }
 </style>
 

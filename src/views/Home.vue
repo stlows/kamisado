@@ -1,32 +1,19 @@
 <template>
   <div>
-    <h1 class="header">가미 사도 &mdash; Kamisado</h1>
-    <ul class="list-group container">
-      <li class="list-group-item">
-        <b-link to="/local/lobby" disabled title="Not yet implemented...">Local lobby</b-link>
-      </li>
-      <li class="list-group-item">
-        <b-link to="/online/lobby">Online lobby</b-link>
-      </li>
-      <li class="list-group-item">
-        <b-link to="/tutorial" :disabled="true" title="Not yet implemented...">Tutorial</b-link>
-      </li>
-    </ul>
+    <b-jumbotron>
+      <template v-slot:header>가미 사도 &mdash; Kamisado</template>
+      <template v-slot:lead>
+        Welcome to the world of Kamisado!
+        Enjoy your stay.
+      </template>
+      <p>Made with ❤️ by Vincent Beaulieu</p>
+    </b-jumbotron>
   </div>
 </template>
 
 <script>
-export default {
-  methods: {
-    localLobby() {}
-  }
-};
+export default {};
 </script>
 
 <style>
-a.disabled {
-  opacity: 0.5;
-  cursor: default;
-  text-decoration: none;
-}
 </style>

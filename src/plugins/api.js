@@ -7,12 +7,20 @@ export const api = axios.create({
   }
 });
 
-export const newGame = (lobbyId) => {
-  return api.post("new-game.php", { lobbyId })
+export const newGame = (lobbyId, token) => {
+  return api.post("new-game.php", { lobbyId }, {
+    headers: {
+      'Authorization': token
+    }
+  })
 }
 
-export const getGame = (gameId) => {
-  return api.get("game.php?gameId=" + gameId)
+export const getGame = (gameId, token) => {
+  return api.get("game.php?gameId=" + gameId, {
+    headers: {
+      'Authorization': token
+    }
+  })
 }
 
 export const getMyGames = () => {
@@ -23,8 +31,12 @@ export const getTiles = () => {
   return api.get("tiles.php")
 }
 
-export const getLobby = () => {
-  return api.get("lobby.php")
+export const getLobby = (token) => {
+  return api.get("lobby.php", {
+    headers: {
+      'Authorization': token
+    }
+  })
 }
 
 export const newLobby = (pointsToWin) => {
