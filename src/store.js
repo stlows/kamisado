@@ -9,7 +9,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     notifications: [],
-    token: null,
+    token: "test_0002",
     localGames: []
   },
   mutations: {

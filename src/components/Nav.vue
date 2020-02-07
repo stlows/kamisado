@@ -7,10 +7,10 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <!-- <b-nav-item to="/local/lobby" disabled title="Not yet implemented...">Local lobby</b-nav-item> -->
-          <b-nav-item to="/online/lobby">Online lobby</b-nav-item>
-          <b-nav-item to="/mygames">My Games</b-nav-item>
-          <!-- <b-nav-item to="/tutorial" disabled title="Not yet implemented...">Tutorial</b-nav-item> -->
+          <template v-if="token">
+            <b-nav-item to="/online/lobby">Online lobby</b-nav-item>
+            <b-nav-item to="/mygames">My Games</b-nav-item>
+          </template>
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
@@ -25,7 +25,7 @@
               <b-dropdown-item @click="signout">Sign Out</b-dropdown-item>
             </b-dropdown>
           </template>
-          <input type="text" v-model="fakeToken" />
+          <input type="text" v-model="token" />
           <button @click="setFakeToken">Set</button>
         </b-navbar-nav>
       </b-collapse>
@@ -35,16 +35,17 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapGetters } from "vuex";
 export default {
   data() {
     return {
       isSignedIn: false,
-      name: "",
-      fakeToken: ""
+      name: ""
     };
   },
-  computed: {},
+  computed: {
+    ...mapGetters({token: "getToken"}),
+  },
   watch: {
     isSignedIn(newVal) {
       if (!newVal) {
@@ -67,7 +68,7 @@ export default {
           onsuccess: this.onSuccess,
           onfailure: this.onFailure
         });
-      });
+      }, 500);
     },
     signout() {
       var auth2 = gapi.auth2.getAuthInstance();
