@@ -23,26 +23,26 @@ export const getGame = (gameId, token) => {
   })
 }
 
-export const getMyGames = () => {
+export const getMyGames = (token) => {
   return api.get("my-games.php")
 }
 
-export const getTiles = () => {
+export const getTiles = (token) => {
   return api.get("tiles.php")
 }
 
 export const getLobby = (token) => {
   return api.get("lobby.php", {
     headers: {
-      'Authorization': token
+      'Authorization': 'test_0001'
     }
   })
 }
 
-export const newLobby = (pointsToWin) => {
+export const newLobby = (pointsToWin, token) => {
   return api.post("new-lobby.php", { pointsToWin })
 }
 
-export const deleteLobby = (lobbyId) => {
+export const deleteLobby = (lobbyId, token) => {
   return api.post("delete-lobby.php", { lobbyId })
 }

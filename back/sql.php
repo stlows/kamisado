@@ -1,4 +1,6 @@
 <?php
+require_once 'errors.php';
+
 function getNewConn()
 {
   $conn = new mysqli("localhost", "root", "", "kamisado");
@@ -6,19 +8,40 @@ function getNewConn()
   return $conn;
 }
 
+function getLoginPlayerId($conn)
+{
+  $google_id = $_SESSION["google_id"];
+  $query = "SELECT * FROM players WHERE google_id = '$google_id'";
+  $result = $conn->query($query);
+  if ($result->num_rows == 1) {
+    return $result->fetch_assoc()["player_id"];
+  } else if ($result->num_rows == 0) {
+    $name = $_SESSION["google_name"];
+    $query = "INSERT INTO players (player_name, google_id) VALUES ('$name', '$google_id')";
+    $result = $conn->query($query);
+    return  $conn->insert_id;
+  } else {
+  }
+}
 function newGame($lobby_id)
 {
   $conn = getNewConn();
 
   $lobby = getLobby($lobby_id);
 
-  $loginUserId = 3;
+  $player_id = getLoginPlayerId($conn);
+
+  if ($lobby["player_id"] == $player_id) {
+    global $CANT_JOIN_YOUR_OWN_GAME;
+    echo json_encode($CANT_JOIN_YOUR_OWN_GAME);
+    exit;
+  }
 
   $gameQuery = "
   INSERT INTO games
   (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move)
   VALUES
-  (" . $lobby["player_id"] . ", $loginUserId, 0, 0, " . $lobby["points_to_win"] . ", true, null)";
+  (" . $lobby["player_id"] . ", $player_id, 0, 0, " . $lobby["points_to_win"] . ", true, null)";
 
   $conn->query($gameQuery);
 
@@ -52,6 +75,7 @@ function newGame($lobby_id)
 function getGame($game_id)
 {
   $conn = getNewConn();
+  $player_id = getLoginPlayerId($conn);
   $gameQuery = "SELECT * FROM games WHERE game_id = $game_id";
 
   $gameResult = $conn->query($gameQuery);
@@ -79,13 +103,13 @@ function getMyGames()
 {
   $conn = getNewConn();
 
-  $loginUserId = 3;
+  $player_id = getLoginPlayerId($conn);
 
   $query = "SELECT game_id, points_to_win, player_1_score, player_2_score, p1.player_name player_1_name, p2.player_name player_2_name
   FROM games
   LEFT JOIN players p1 ON games.player_1_id = p1.player_id
   LEFT JOIN players p2 ON games.player_2_id = p2.player_id
-  WHERE $loginUserId IN (p1.player_id, p2.player_id)
+  WHERE $player_id IN (p1.player_id, p2.player_id)
   ";
 
   $result = $conn->query($query);
@@ -124,13 +148,13 @@ function newLobby($points_to_win)
 {
   $conn = getNewConn();
 
-  $loginPlayerId = 3;
+  $player_id = getLoginPlayerId($conn);
 
   $query = "
   INSERT INTO lobby
   (points_to_win, player_id)
   VALUES
-  ($points_to_win, $loginPlayerId)";
+  ($points_to_win, $player_id)";
 
   $conn->query($query);
 
@@ -140,6 +164,7 @@ function newLobby($points_to_win)
 function getAllLobby()
 {
   $conn = getNewConn();
+  $player_id = getLoginPlayerId($conn);
   $query = "SELECT player_name, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id";
 
   $result = $conn->query($query);
@@ -150,6 +175,7 @@ function getAllLobby()
 function getLobby($lobby_id)
 {
   $conn = getNewConn();
+  $player_id = getLoginPlayerId($conn);
   $query = "SELECT * FROM lobby WHERE lobby_id = $lobby_id";
 
   $result = $conn->query($query);
@@ -162,6 +188,7 @@ function getLobby($lobby_id)
 function deleteLobby($lobby_id)
 {
   $conn = getNewConn();
+  $player_id = getLoginPlayerId($conn);
   $query = "DELETE FROM lobby WHERE lobby_id = $lobby_id";
 
   $conn->query($query);

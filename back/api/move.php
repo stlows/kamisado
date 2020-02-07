@@ -1,6 +1,7 @@
 <?php
 
 include_once("../check-post.php");
+include_once("../check-google-token.php");
 include_once("../sql.php");
 include_once("../prettify.php");
 

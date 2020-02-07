@@ -26,7 +26,7 @@
 
 
 <script>
-import { getLobby, newGame, deleteLobby, getMyGames } from "../plugins/api";
+import { mapActions } from "vuex";
 
 export default {
   data() {
@@ -44,9 +44,10 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["getMyGames"]),
     refreshGames() {
       this.loading = true;
-      getMyGames().then(res => {
+      this.getMyGames().then(res => {
         this.games = res.data;
         this.loading = false;
       });

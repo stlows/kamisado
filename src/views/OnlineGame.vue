@@ -2,17 +2,16 @@
   <div>
     <div class="text-center mb-3">
       <p>Game ID: {{gameId}}</p>
-      <button class="btn btn-primary text-center">Confirm</button>
+      <a href="#" @click.prevent="fetchGame">Refresh</a>
     </div>
 
-    <Board v-if="towers" :towers="towers"></Board>
-    <template v-else>Loading...</template>
+    <Board :towers="towers"></Board>
   </div>
 </template>
 
 <script>
-import { newGame, getGame } from "../plugins/api.js";
 import Board from "../components/Board";
+import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -20,8 +19,25 @@ export default {
   },
   data() {
     return {
-      towers: null
+      towers: []
     };
+  },
+  methods: {
+    ...mapActions(["getGame", "notify"]),
+    fetchGame() {
+      this.towers = [];
+      this.getGame(this.gameId).then(res => {
+        if (res.data.error) {
+          this.notify({
+            id: new Date().valueOf(),
+            variant: "danger",
+            message: res.data.message
+          });
+        } else {
+          this.towers = res.data.towers;
+        }
+      });
+    }
   },
   computed: {
     gameId() {
@@ -29,9 +45,7 @@ export default {
     }
   },
   created() {
-    getGame(this.gameId).then(res => {
-      this.towers = res.data.towers;
-    });
+    this.fetchGame();
   }
 };
 </script>

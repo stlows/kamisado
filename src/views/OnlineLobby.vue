@@ -3,7 +3,7 @@
     <div class="card lobby-container">
       <div class="card-header">
         <h3>Lobby</h3>
-        <a href="#" @click="refreshLobby">Refresh</a>
+        <a href="#" @click.prevent="refreshLobby">Refresh</a>
       </div>
       <div class="card-body">
         <template v-if="loading">
@@ -13,7 +13,7 @@
           <template v-if="games.length > 0">
             <b-table :items="games" :fields="fields">
               <template v-slot:cell(lobby_id)="data">
-                <a href="#" @click.prevent="goToGame(data)">Join</a>
+                <a href="#" @click.prevent="joinGame(data)">Join</a>
               </template>
             </b-table>
           </template>
@@ -23,7 +23,7 @@
         </template>
       </div>
       <div class="card-footer">
-        <button class="btn btn-large btn-primary" @click="newGame">New Game</button>
+        <button class="btn btn-large btn-primary" @click="newLobby">New Game</button>
       </div>
     </div>
   </div>
@@ -32,8 +32,7 @@
 
 <script>
 import { Component, Vue } from "vue-property-decorator";
-import { getLobby, newGame, deleteLobby } from "../plugins/api";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   data() {
@@ -47,26 +46,30 @@ export default {
       loading: true
     };
   },
-  computed: {
-    ...mapGetters({
-      token: "getToken"
-    })
-  },
   methods: {
+    ...mapActions(["getLobby", "newGame", "deleteLobby", "notify"]),
     refreshLobby() {
       this.loading = true;
-      getLobby(this.token).then(res => {
+      this.getLobby().then(res => {
         this.games = res.data;
         this.loading = false;
       });
     },
-    newGame() {
+    newLobby() {
       this.$router.push({ path: "/newGame" });
     },
-    goToGame(data) {
-      newGame(parseInt(data.value)).then(res => {
-        deleteLobby(parseInt(data.value));
-        this.$router.push({ path: "/online/game/" + res.data });
+    joinGame(data) {
+      this.newGame(parseInt(data.value)).then(res => {
+        if (res.data.error) {
+          this.notify({
+            id: new Date().valueOf(),
+            variant: "danger",
+            message: res.data.message
+          });
+        } else {
+          this.deleteLobby(parseInt(data.value));
+          this.$router.push({ path: "/online/game/" + res.data });
+        }
       });
     }
   },

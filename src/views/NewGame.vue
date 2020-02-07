@@ -36,7 +36,7 @@ import Settings from "../models/Settings";
 import Game from "../models/Game";
 import Utils from "../models/Utils";
 import Notification from "../models/Notification";
-import { newLobby } from "../plugins/api";
+import { mapActions } from "vuex";
 
 export default {
   data() {
@@ -50,11 +50,12 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["newLobby"]),
     onSubmit(evt) {
       evt.preventDefault();
 
       if (this.settings.localOrOnline === "online") {
-        newLobby(this.settings.pointsToWin).then(res => {
+        this.newLobby(this.settings.pointsToWin).then(res => {
           this.$router.push({ path: "/online/lobby" });
         });
       }

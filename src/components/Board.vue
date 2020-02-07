@@ -25,7 +25,7 @@
 <script>
 import BoardTile from "./BoardTile";
 import Tower from "./Tower";
-import { getTiles } from "../plugins/api";
+import { mapActions } from "vuex";
 export default {
   components: {
     BoardTile,
@@ -38,8 +38,13 @@ export default {
       tileSize: 90
     };
   },
+  methods: {
+    ...mapActions(["getTiles"])
+  },
   created() {
-    getTiles().then(res => (this.tiles = res.data));
+    this.getTiles().then(res => {
+      this.tiles = res.data;
+    });
   }
 };
 </script>

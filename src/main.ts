@@ -12,7 +12,7 @@ Vue.config.productionTip = false;
 
 Vue.use(BootstrapVue);
 
-import { store } from "./store";
+import { store } from "./store.js";
 
 new Vue({
   router,

@@ -25,6 +25,8 @@
               <b-dropdown-item @click="signout">Sign Out</b-dropdown-item>
             </b-dropdown>
           </template>
+          <input type="text" v-model="fakeToken" />
+          <button @click="setFakeToken">Set</button>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -38,7 +40,8 @@ export default {
   data() {
     return {
       isSignedIn: false,
-      name: ""
+      name: "",
+      fakeToken: ""
     };
   },
   computed: {},
@@ -72,6 +75,7 @@ export default {
       auth2.signOut().then(() => {
         vue.isSignedIn = false;
       });
+      this.setToken("");
     },
     onSuccess(googleUser) {
       this.isSignedIn = true;
@@ -80,6 +84,9 @@ export default {
       this.setToken(googleUser.getAuthResponse().id_token);
     },
     onFailure(error) {},
+    setFakeToken() {
+      this.setToken(this.fakeToken);
+    },
     updateLogin(updatedLogin) {
       this.$store.commit("updateLogin", updatedLogin);
     }
