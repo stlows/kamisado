@@ -23,12 +23,15 @@ export default {
     "app-nav": Nav,
     "notifications-panel": NotificationsPanel
   },
-  onlogin(){
+  methods:{
+      onlogin(){
     this.loggedIn = true
   },
   onlogout(){
     this.loggedIn = false
   }
+  }
+
 
 };
 </script>

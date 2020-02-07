@@ -51,6 +51,9 @@ export default {
       if (!newVal) {
         this.renderSignin();
       }
+    },
+    token(newVal, oldVal){
+      console.log("token changed")
     }
   },
   created() {
