@@ -77,12 +77,14 @@ export default {
         vue.isSignedIn = false;
       });
       this.setToken("");
+      this.$emit("onlogout")
     },
     onSuccess(googleUser) {
       this.isSignedIn = true;
       var profile = googleUser.getBasicProfile();
       this.name = profile.getName();
       this.setToken(googleUser.getAuthResponse().id_token);
+      this.$emit("onlogin")
     },
     onFailure(error) {},
     setFakeToken() {
