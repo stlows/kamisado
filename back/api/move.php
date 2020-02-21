@@ -9,7 +9,7 @@ $move = json_decode(file_get_contents('php://input'), true);
 
 $towerId = $move["tower"];
 $targetX = $move["target"]["x"];
-$targetX = $move["target"]["y"];
+$targetY = $move["target"]["y"];
 
 $gameObject = getGame($move["gameId"]);
 $game = $gameObject["game"];
@@ -48,12 +48,60 @@ if (!$game["is_first_move"] && $game["tower_id_to_move"] != $towerId) {
 };
 
 
+if ($targetX < 1 || $targetX > 8 || $targetY < 1 || $targetY > 8) {
+  echo (json_encode([
+    "valid" => false,
+    "message" => "Stay in bound buddy."
+  ]));
+  exit;
+};
+
+// Is there is a tower already there
+foreach($towers as $t){
+  if ($t["position_x"] == $targetX && $t["position_y"] == $targetY) {
+    // TODO Gérer les push ici ?
+    echo (json_encode([
+      "valid" => false,
+      "message" => "There's already a tower there buddy."
+    ]));
+    exit;
+  };
+}
+
+// Is it going forward
+if($tower["player_color"] == "white"){
+  if($targetY <= $tower["position_y"]){
+    echo (json_encode([
+      "valid" => false,
+      "message" => "You must go forward."
+    ]));
+    exit;
+  }
+  // Same X, must go forward
+  if($targetX == $tower["position_x"]){
+    
+  }
+  // Different Y, must be diagonally
+  else{
+
+  }
+}
+else if($tower["player_color"] == "black"){
+  if($targetY >= $tower["position_y"]){
+    echo (json_encode([
+      "valid" => false,
+      "message" => "You must go forward."
+    ]));
+    exit;
+  }
+}
 
 
 
-// function inBound($x, $y) {
-//   return $x >= 0 && $x <= 7 && $y >= 0 && $y <= 7;
-// }
+
+
+
+
 // setPossibleTilesVertically(tower) {
 //   let tile = this.getTileByTower(tower);
 //   let y = this.nextY(tile.y, tower.playerColor);
