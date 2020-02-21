@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mer. 05 fév. 2020 à 05:19
--- Version du serveur :  10.3.15-MariaDB
--- Version de PHP :  7.1.30
+-- Généré le :  ven. 21 fév. 2020 à 21:27
+-- Version du serveur :  10.4.6-MariaDB
+-- Version de PHP :  7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -40,6 +40,15 @@ CREATE TABLE `games` (
   `turn` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `games`
+--
+
+INSERT INTO `games` (`game_id`, `player_1_id`, `player_2_id`, `player_1_score`, `player_2_score`, `points_to_win`, `tower_id_to_move`, `is_first_move`, `turn`) VALUES
+(47, 7, 6, 0, 0, 3, NULL, 1, '7'),
+(48, 6, 7, 0, 0, 3, NULL, 1, '6'),
+(49, 5, 8, 0, 0, 3, NULL, 1, '5');
+
 -- --------------------------------------------------------
 
 --
@@ -52,6 +61,14 @@ CREATE TABLE `lobby` (
   `player_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `lobby`
+--
+
+INSERT INTO `lobby` (`lobby_id`, `points_to_win`, `player_id`) VALUES
+(16, 3, 6),
+(17, 3, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -60,18 +77,23 @@ CREATE TABLE `lobby` (
 
 CREATE TABLE `players` (
   `player_id` int(11) NOT NULL,
-  `player_name` varchar(20) NOT NULL
+  `player_name` varchar(20) NOT NULL,
+  `google_id` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `players`
 --
 
-INSERT INTO `players` (`player_id`, `player_name`) VALUES
-(1, 'Vincent'),
-(2, 'Stéphanie'),
-(3, 'Charles'),
-(4, 'Julie');
+INSERT INTO `players` (`player_id`, `player_name`, `google_id`) VALUES
+(1, 'Vincent', ''),
+(2, 'Stéphanie', ''),
+(3, 'Charles', ''),
+(4, 'Julie', ''),
+(5, 'test_0002', 'test_0002'),
+(6, 'test_0003', 'test_0003'),
+(7, 'test_0004', 'test_0004'),
+(8, 'test_0001', 'test_0001');
 
 -- --------------------------------------------------------
 
@@ -170,8 +192,63 @@ CREATE TABLE `towers` (
   `sumo` int(11) NOT NULL,
   `position_x` int(11) NOT NULL,
   `position_y` int(11) NOT NULL,
-  `symbol` varchar(1) CHARACTER SET utf8 NOT NULL
+  `symbol` varchar(1) CHARACTER SET utf8 NOT NULL,
+  `player_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `towers`
+--
+
+INSERT INTO `towers` (`tower_id`, `game_id`, `tower_color`, `player_color`, `sumo`, `position_x`, `position_y`, `symbol`, `player_id`) VALUES
+(977, 47, 'orange', 'white', 0, 1, 4, '주', 7),
+(978, 47, 'blue', 'white', 0, 2, 1, '푸', 7),
+(979, 47, 'indigo', 'white', 0, 3, 1, '남', 7),
+(980, 47, 'pink', 'white', 0, 4, 1, '담', 7),
+(981, 47, 'yellow', 'white', 0, 5, 1, '노', 7),
+(982, 47, 'red', 'white', 0, 6, 1, '빨', 7),
+(983, 47, 'green', 'white', 0, 7, 1, '녹', 7),
+(984, 47, 'brown', 'white', 0, 8, 1, '갈', 7),
+(985, 47, 'brown', 'black', 0, 1, 8, '갈', 6),
+(986, 47, 'green', 'black', 0, 2, 8, '녹', 6),
+(987, 47, 'red', 'black', 0, 3, 8, '빨', 6),
+(988, 47, 'yellow', 'black', 0, 4, 8, '노', 6),
+(989, 47, 'pink', 'black', 0, 5, 8, '담', 6),
+(990, 47, 'indigo', 'black', 0, 6, 8, '남', 6),
+(991, 47, 'blue', 'black', 0, 7, 8, '푸', 6),
+(992, 47, 'orange', 'black', 0, 8, 8, '주', 6),
+(993, 48, 'orange', 'white', 0, 1, 1, '주', 6),
+(994, 48, 'blue', 'white', 0, 2, 1, '푸', 6),
+(995, 48, 'indigo', 'white', 0, 3, 1, '남', 6),
+(996, 48, 'pink', 'white', 0, 4, 1, '담', 6),
+(997, 48, 'yellow', 'white', 0, 5, 1, '노', 6),
+(998, 48, 'red', 'white', 0, 6, 1, '빨', 6),
+(999, 48, 'green', 'white', 0, 7, 1, '녹', 6),
+(1000, 48, 'brown', 'white', 0, 8, 1, '갈', 6),
+(1001, 48, 'brown', 'black', 0, 1, 8, '갈', 7),
+(1002, 48, 'green', 'black', 0, 2, 8, '녹', 7),
+(1003, 48, 'red', 'black', 0, 3, 8, '빨', 7),
+(1004, 48, 'yellow', 'black', 0, 4, 8, '노', 7),
+(1005, 48, 'pink', 'black', 0, 5, 8, '담', 7),
+(1006, 48, 'indigo', 'black', 0, 6, 8, '남', 7),
+(1007, 48, 'blue', 'black', 0, 7, 8, '푸', 7),
+(1008, 48, 'orange', 'black', 0, 8, 8, '주', 7),
+(1009, 49, 'orange', 'white', 0, 1, 1, '주', 5),
+(1010, 49, 'blue', 'white', 0, 2, 1, '푸', 5),
+(1011, 49, 'indigo', 'white', 0, 3, 1, '남', 5),
+(1012, 49, 'pink', 'white', 0, 4, 1, '담', 5),
+(1013, 49, 'yellow', 'white', 0, 5, 1, '노', 5),
+(1014, 49, 'red', 'white', 0, 6, 1, '빨', 5),
+(1015, 49, 'green', 'white', 0, 7, 1, '녹', 5),
+(1016, 49, 'brown', 'white', 0, 8, 1, '갈', 5),
+(1017, 49, 'brown', 'black', 0, 1, 8, '갈', 8),
+(1018, 49, 'green', 'black', 0, 2, 8, '녹', 8),
+(1019, 49, 'red', 'black', 0, 3, 8, '빨', 8),
+(1020, 49, 'yellow', 'black', 0, 4, 8, '노', 8),
+(1021, 49, 'pink', 'black', 0, 5, 8, '담', 8),
+(1022, 49, 'indigo', 'black', 0, 6, 8, '남', 8),
+(1023, 49, 'blue', 'black', 0, 7, 8, '푸', 8),
+(1024, 49, 'orange', 'black', 0, 8, 8, '주', 8);
 
 --
 -- Index pour les tables déchargées
@@ -210,7 +287,8 @@ ALTER TABLE `tiles`
 --
 ALTER TABLE `towers`
   ADD PRIMARY KEY (`tower_id`),
-  ADD KEY `game_id` (`game_id`);
+  ADD KEY `game_id` (`game_id`),
+  ADD KEY `player_id` (`player_id`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -220,19 +298,19 @@ ALTER TABLE `towers`
 -- AUTO_INCREMENT pour la table `games`
 --
 ALTER TABLE `games`
-  MODIFY `game_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `game_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT pour la table `lobby`
 --
 ALTER TABLE `lobby`
-  MODIFY `lobby_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `lobby_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT pour la table `players`
 --
 ALTER TABLE `players`
-  MODIFY `player_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `player_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `tiles`
@@ -244,7 +322,7 @@ ALTER TABLE `tiles`
 -- AUTO_INCREMENT pour la table `towers`
 --
 ALTER TABLE `towers`
-  MODIFY `tower_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=913;
+  MODIFY `tower_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1025;
 
 --
 -- Contraintes pour les tables déchargées
@@ -268,7 +346,8 @@ ALTER TABLE `lobby`
 -- Contraintes pour la table `towers`
 --
 ALTER TABLE `towers`
-  ADD CONSTRAINT `towers_ibfk_1` FOREIGN KEY (`game_id`) REFERENCES `games` (`game_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `towers_ibfk_1` FOREIGN KEY (`game_id`) REFERENCES `games` (`game_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `towers_ibfk_2` FOREIGN KEY (`player_id`) REFERENCES `players` (`player_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
