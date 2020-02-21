@@ -1,5 +1,5 @@
 <?php
-require_once 'errors.php';
+require_once '../errors.php';
 
 function getNewConn()
 {
@@ -29,9 +29,9 @@ function newGame($lobby_id)
 
   $lobby = getLobby($lobby_id);
 
-  $player_id = getLoginPlayerId($conn);
-
-  if ($lobby["player_id"] == $player_id) {
+  $player_2_id = getLoginPlayerId($conn);
+  $player_1_id = $lobby["player_id"];
+  if ($lobby["player_id"] == $player_2_id) {
     global $CANT_JOIN_YOUR_OWN_GAME;
     echo json_encode($CANT_JOIN_YOUR_OWN_GAME);
     exit;
@@ -39,9 +39,9 @@ function newGame($lobby_id)
 
   $gameQuery = "
   INSERT INTO games
-  (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move)
+  (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn)
   VALUES
-  (" . $lobby["player_id"] . ", $player_id, 0, 0, " . $lobby["points_to_win"] . ", true, null)";
+  ($player_1_id, $player_2_id, 0, 0, " . $lobby["points_to_win"] . ", true, null, $player_1_id)";
 
   $conn->query($gameQuery);
 
@@ -49,24 +49,24 @@ function newGame($lobby_id)
 
   $towersQuery = "
   INSERT INTO towers
-  (game_id,tower_color,player_color,position_x,position_y,sumo,symbol)
+  (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
   VALUES
-  ($game_id,'orange','white',1,1,0,'주'),
-  ($game_id,'blue','white',2,1,0,'푸'),
-  ($game_id,'indigo','white',3,1,0,'남'),
-  ($game_id,'pink','white',4,1,0,'담'),
-  ($game_id,'yellow','white',5,1,0,'노'),
-  ($game_id,'red','white',6,1,0,'빨'),
-  ($game_id,'green','white',7,1,0,'녹'),
-  ($game_id,'brown','white',8,1,0,'갈'),
-  ($game_id,'brown','black',1,8,0,'갈'),
-  ($game_id,'green','black',2,8,0,'녹'),
-  ($game_id,'red','black',3,8,0,'빨'),
-  ($game_id,'yellow','black',4,8,0,'노'),
-  ($game_id,'pink','black',5,8,0,'담'),
-  ($game_id,'indigo','black',6,8,0,'남'),
-  ($game_id,'blue','black',7,8,0,'푸'),
-  ($game_id,'orange','black',8,8,0,'주')
+  ($game_id,'orange','white',1,1,0,'주',$player_1_id),
+  ($game_id,'blue','white',2,1,0,'푸',$player_1_id),
+  ($game_id,'indigo','white',3,1,0,'남',$player_1_id),
+  ($game_id,'pink','white',4,1,0,'담',$player_1_id),
+  ($game_id,'yellow','white',5,1,0,'노',$player_1_id),
+  ($game_id,'red','white',6,1,0,'빨',$player_1_id),
+  ($game_id,'green','white',7,1,0,'녹',$player_1_id),
+  ($game_id,'brown','white',8,1,0,'갈',$player_1_id),
+  ($game_id,'brown','black',1,8,0,'갈',$player_2_id),
+  ($game_id,'green','black',2,8,0,'녹',$player_2_id),
+  ($game_id,'red','black',3,8,0,'빨',$player_2_id),
+  ($game_id,'yellow','black',4,8,0,'노',$player_2_id),
+  ($game_id,'pink','black',5,8,0,'담',$player_2_id),
+  ($game_id,'indigo','black',6,8,0,'남',$player_2_id),
+  ($game_id,'blue','black',7,8,0,'푸',$player_2_id),
+  ($game_id,'orange','black',8,8,0,'주',$player_2_id)
   ";
   $conn->query($towersQuery);
   return $game_id;
@@ -82,12 +82,14 @@ function getGame($game_id)
 
   if ($gameResult->num_rows > 1) {
   } else if ($gameResult->num_rows == 0) {
+    global $NO_GAME_FOUND;
+    echo json_encode($NO_GAME_FOUND);
+    exit;
   } else {
     $game = $gameResult->fetch_assoc();
     $towersQuery = "SELECT * FROM towers WHERE game_id = $game_id";
 
     $towersResult = $conn->query($towersQuery);
-
     if ($towersResult->num_rows == 16) {
       $towers = $towersResult->fetch_all(MYSQLI_ASSOC);
       return [
@@ -95,6 +97,9 @@ function getGame($game_id)
         "towers" => $towers
       ];
     } else {
+      global $GAME_DOESNT_HAVE_SIXTEEN_TOWERS;
+      echo json_encode($GAME_DOESNT_HAVE_SIXTEEN_TOWERS);
+      exit;
     }
   }
 }

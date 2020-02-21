@@ -25,7 +25,7 @@
               <b-dropdown-item @click="signout">Sign Out</b-dropdown-item>
             </b-dropdown>
           </template>
-          <input type="text" v-model="token" />
+          <input type="text" v-model="fakeToken" />
           <button @click="setFakeToken">Set</button>
         </b-navbar-nav>
       </b-collapse>
@@ -40,7 +40,8 @@ export default {
   data() {
     return {
       isSignedIn: false,
-      name: ""
+      name: "",
+      fakeToken: ''
     };
   },
   computed: {
@@ -92,6 +93,9 @@ export default {
     onFailure(error) {},
     setFakeToken() {
       this.setToken(this.fakeToken);
+      if(this.fakeToken.includes("test")){
+        this.$emit("onlogin");
+      }
     },
     updateLogin(updatedLogin) {
       this.$store.commit("updateLogin", updatedLogin);

@@ -29,3 +29,13 @@ $CANT_JOIN_YOUR_OWN_GAME  = [
   "error" => 5005,
   "message" => "Can't join your own game."
 ];
+
+$NO_GAME_FOUND  = [
+  "error" => 5006,
+  "message" => "No game found with this ID."
+];
+
+$GAME_DOESNT_HAVE_SIXTEEN_TOWERS  = [
+  "error" => 5007,
+  "message" => "This game doesn't have 16 towers."
+];

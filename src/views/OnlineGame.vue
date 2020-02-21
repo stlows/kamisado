@@ -5,7 +5,7 @@
       <a href="#" @click.prevent="fetchGame">Refresh</a>
     </div>
 
-    <Board :towers="towers"></Board>
+    <Board :towers="game.towers" @towerMoved="towerMoved"></Board>
   </div>
 </template>
 
@@ -19,13 +19,13 @@ export default {
   },
   data() {
     return {
-      towers: []
+      game: {},
     };
   },
   methods: {
-    ...mapActions(["getGame", "notify"]),
+    ...mapActions(["getGame", "notify", "move"]),
     fetchGame() {
-      this.towers = [];
+      this.game = {};
       this.getGame(this.gameId).then(res => {
         if (res.data.error) {
           this.notify({
@@ -34,7 +34,28 @@ export default {
             message: res.data.message
           });
         } else {
-          this.towers = res.data.towers;
+          this.game = res.data;
+        }
+      });
+    },
+    towerMoved(tower){
+      this.move({
+        gameId: this.gameId,
+        tower: tower.tower_id,
+        target: {
+          x: tower.position_x,
+          y: tower.position_y
+        }
+      }).then(res => {
+        if(res.data.valid){
+          return
+        }else{
+          this.notify({
+            id: new Date().valueOf(),
+            variant: "danger",
+            message: res.data.message
+          });
+          this.fetchGame()
         }
       });
     }

@@ -2,7 +2,7 @@
 
 include_once("../check-post.php");
 include_once("../check-google-token.php");
-include_once("../sql.php");
+include_once("../sql/sql.php");
 include_once("../prettify.php");
 
 $move = json_decode(file_get_contents('php://input'), true);
@@ -17,11 +17,23 @@ $towers = $gameObject["towers"];
 
 $tower = getTower($towerId);
 
+$conn = getNewConn();
+$loggedInId = getLoginPlayerId($conn);
+
 // Is it my turn
-if ($game["turn"] != $tower["player_color"]) {
+if ($game["turn"] != $loggedInId ) {
   echo (json_encode([
     "valid" => false,
     "message" => "It's not your turn."
+  ]));
+  exit;
+}
+
+// Is it my color
+if ($tower["player_id"] != $loggedInId ) {
+  echo (json_encode([
+    "valid" => false,
+    "message" => "That is not your tower sir."
   ]));
   exit;
 }
@@ -74,5 +86,5 @@ if (!$game["is_first_move"] && $game["tower_id_to_move"] != $towerId) {
 // }
 echo (json_encode([
   "valid" => true,
-  "game" => $gameObject
+  "message" => "Move is valid."
 ]));

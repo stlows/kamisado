@@ -1,7 +1,7 @@
 <template>
   <div id="notifications-panel" class="panel">
       <div v-for="notification in notifications" :key="notification.id">
-        <b-alert :variant="notification.variant" dismissible :show="2" fade>{{ notification.message }}</b-alert>
+        <b-alert :variant="notification.variant" dismissible :show="5" fade>{{ notification.message }}</b-alert>
       </div>
     </div>
 </template>
@@ -21,7 +21,7 @@ computed: {
   position: fixed;
   bottom: 0;
   right: 0;
-  width: 300px;
+  width: 500px;
   padding-right: 20px;
 }
 

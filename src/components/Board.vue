@@ -17,6 +17,7 @@
         :tower="tower"
         :towerSize="0.8 * tileSize"
         :tileSize="tileSize"
+        @towerMoved="towerMoved"
       />
     </g>
   </svg>
@@ -39,7 +40,10 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["getTiles"])
+    ...mapActions(["getTiles"]),
+    towerMoved(tower){
+      this.$emit('towerMoved', tower);
+    }
   },
   created() {
     this.getTiles().then(res => {

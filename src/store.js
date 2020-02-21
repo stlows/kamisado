@@ -10,7 +10,7 @@ export const store = new Vuex.Store({
   state: {
     notifications: [],
     token: "",
-    localGames: []
+    localGames: [],
   },
   mutations: {
 
@@ -69,6 +69,13 @@ export const store = new Vuex.Store({
     },
     deleteLobby({ commit, state }, lobbyId) {
       return api.post("delete-lobby.php", { lobbyId }, {
+        headers: {
+          'Authorization': state.token
+        }
+      })
+    },
+    move({ commit, state }, game){
+      return api.post("move.php", game, {
         headers: {
           'Authorization': state.token
         }

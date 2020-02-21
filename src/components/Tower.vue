@@ -38,8 +38,9 @@ export default {
     },
     mouseUp(ev, towerId) {
       this.dragging = false;
-      this.x = this.tileToFullCoord(this.fullToTileCoord(this.x));
-      this.y = this.tileToFullCoord(this.fullToTileCoord(this.y));
+      this.setCoordFromFull();
+      this.setFullFromTower();
+      this.$emit('towerMoved', this.tower);
       document.removeEventListener("mousemove", this.mouseMove);
       document.removeEventListener("mouseup", this.mouseUp);
     },
@@ -48,11 +49,18 @@ export default {
     },
     tileToFullCoord(x) {
       return x * this.tileSize - this.tileSize / 2;
+    },
+    setFullFromTower(){
+      this.x = this.tileToFullCoord(this.tower.position_x);
+      this.y = this.tileToFullCoord(this.tower.position_y);
+    },
+    setCoordFromFull(){
+      this.tower.position_x = this.fullToTileCoord(this.x);
+      this.tower.position_y = this.fullToTileCoord(this.y);
     }
   },
   mounted() {
-    this.x = this.tileToFullCoord(this.tower.position_x);
-    this.y = this.tileToFullCoord(this.tower.position_y);
+    this.setFullFromTower();
   }
 };
 </script>
