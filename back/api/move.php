@@ -8,15 +8,16 @@ include_once("../validations.php");
 
 $move = json_decode(file_get_contents('php://input'), true);
 
-$towerId = $move["tower"];
+$towerId = $move["towerId"];
 $targetX = $move["target"]["x"];
 $targetY = $move["target"]["y"];
 
-$gameObject = getGame($move["gameId"]);
+$tower = getTower($towerId);
+
+$gameId = $tower["game_id"];
+$gameObject = getGame($gameId);
 $game = $gameObject["game"];
 $towers = $gameObject["towers"];
-
-$tower = getTower($towerId);
 
 $conn = getNewConn();
 $loggedInId = getLoginPlayerId($conn);
@@ -27,7 +28,7 @@ if ($game["turn"] != $loggedInId ) {
   exit;
 }
 
-// Is it my color
+// Is it my tower
 if ($tower["player_id"] != $loggedInId ) {
   echo (json_encode($NOT_YOUR_TOWER));
   exit;
@@ -39,7 +40,7 @@ if (!$game["is_first_move"] && $game["tower_id_to_move"] != $towerId) {
   exit;
 };
 
-
+// Is it in bound
 if ($targetX < 1 || $targetX > 8 || $targetY < 1 || $targetY > 8) {
   echo (json_encode($OUT_OF_BOUND));
   exit;
