@@ -68,8 +68,8 @@ foreach($towers as $t){
   };
 }
 
-// Is it going forward
 if($tower["player_color"] == "white"){
+  // Is it going forward
   if($targetY <= $tower["position_y"]){
     echo (json_encode([
       "valid" => false,
@@ -77,16 +77,21 @@ if($tower["player_color"] == "white"){
     ]));
     exit;
   }
-  // Same X, must go forward
-  if($targetX == $tower["position_x"]){
-    
+  // Different X, must be diagonnally
+  if($targetX != $tower["position_x"]){
+    $deltaX = $targetX - $tower["position_x"];
+    $deltaY = $targetY - $tower["position_y"];
+    if($deltaX != $deltaY){
+      echo (json_encode([
+        "valid" => false,
+        "message" => "You must go forward or diagonnally."
+      ]));
+      exit;
   }
-  // Different Y, must be diagonally
-  else{
-
   }
 }
 else if($tower["player_color"] == "black"){
+  // Is it going forward
   if($targetY >= $tower["position_y"]){
     echo (json_encode([
       "valid" => false,
@@ -94,6 +99,24 @@ else if($tower["player_color"] == "black"){
     ]));
     exit;
   }
+   // Different X, must be diagonnally
+   if($targetX != $tower["position_x"]){
+    $deltaX = $tower["position_x"] - $targetX;
+    $deltaY = $tower["position_y"] - $targetY ;
+    if($deltaX != $deltaY){
+      echo (json_encode([
+        "valid" => false,
+        "message" => "You must go forward or diagonnally."
+      ]));
+      exit;
+  }
+  }
+}else{
+  echo (json_encode([
+    "valid" => false,
+    "message" => "Tower color unknown."
+  ]));
+  exit;
 }
 
 
