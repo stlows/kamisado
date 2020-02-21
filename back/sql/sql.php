@@ -136,6 +136,13 @@ function getTower($tower_id)
   }
 }
 
+function moveTower($tower_id, $target_x, $target_y){
+  $conn = getNewConn();
+  $towerQuery = "UPDATE towers SET position_x = $target_x, position_y = $target_y WHERE tower_id = $tower_id";
+
+  $towerResult = $conn->query($towerQuery);
+}
+
 function getTiles()
 {
   $conn = getNewConn();

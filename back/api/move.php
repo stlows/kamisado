@@ -5,6 +5,7 @@ include_once("../check-google-token.php");
 include_once("../sql/sql.php");
 include_once("../prettify.php");
 include_once("../validations.php");
+include_once("../errors.php");
 
 $move = json_decode(file_get_contents('php://input'), true);
 
@@ -68,9 +69,16 @@ if(($tower["player_color"] == "white" && $targetY <= $tower["position_y"]) || ($
 }
 
 // If it's a different X, is it in the same diagonal
-if($targetX != $tower["position_x"] && ($targetX - $tower["position_x"] != $targetY - $tower["position_y"])){
+if($targetX != $tower["position_x"] && (abs($targetX - $tower["position_x"]) != abs($targetY - $tower["position_y"]))){
   echo (json_encode($MUST_GO_DIAGONNALLY_OR_STRAIGHT_AHEAD));
   exit;
 }
 
-echo (json_encode($VALID));
+try {
+  moveTower($towerId, $targetX, $targetY);
+  echo (json_encode($VALID));
+}catch(Exception $ex){
+  echo (json_encode($ERROR_MOVING_TOWER));
+}
+
+

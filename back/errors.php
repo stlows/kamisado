@@ -39,3 +39,8 @@ $GAME_DOESNT_HAVE_SIXTEEN_TOWERS  = [
   "error" => 5007,
   "message" => "This game doesn't have 16 towers."
 ];
+
+$ERROR_MOVING_TOWER  = [
+  "error" => 5008,
+  "message" => "Error moving your tower. Try again later."
+];
