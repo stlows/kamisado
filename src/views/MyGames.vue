@@ -16,7 +16,7 @@
             </b-table>
           </template>
           <template v-else>
-            <p>Head to the lobby!</p>
+            <p>Join a game in the lobby!</p>
           </template>
         </template>
       </div>
@@ -32,11 +32,10 @@ export default {
   data() {
     return {
       fields: [
-        "player_1_name",
-        "player_2_name",
-        "points_to_win",
-        "player_1_score",
-        "player_2_score",
+        { key: "rival_name", label: "Vs." },
+        { key: "points_to_win", label: "To win" },
+        "your_score",
+        "rival_score",
         { key: "game_id", label: "Link" }
       ],
       games: [],
@@ -54,6 +53,7 @@ export default {
     },
     goToGame(data) {
       this.$router.push({ path: "/online/game/" + parseInt(data.value) });
+      this.$emit("refreshGame");
     }
   },
   created() {

@@ -74,8 +74,15 @@ export const store = new Vuex.Store({
         }
       })
     },
-    move({ commit, state }, game){
+    move({ commit, state }, game) {
       return api.post("move.php", game, {
+        headers: {
+          'Authorization': state.token
+        }
+      })
+    },
+    forfeit({ commit, state }, gameId) {
+      return api.post("forfeit.php", { gameId }, {
         headers: {
           'Authorization': state.token
         }

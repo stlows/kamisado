@@ -2,16 +2,25 @@
   <g
     class="tower"
     :class="{dragging}"
-    :transform="'translate(' + x + ',' + y + ')'"
     @mousedown="mouseDown($event, tower)"
     @mouseup="mouseUp($event)"
   >
-    <circle :class="[tower.player_color, tower.tower_color]" :r="towerSize / 2"></circle>
+    <line v-if="dragging" class="arrow" :x1="arrowStartX" :y1="arrowStartY" :x2="x" :y2="y" />
+
+    <circle
+      :class="[tower.player_color, tower.tower_color, dragging]"
+      :cx="x"
+      :cy="y"
+      :r="towerSize / 2"
+    ></circle>
+
     <text
       text-anchor="middle"
       dominant-baseline="central"
       :class="tower.tower_color"
       :font-size="towerSize * 0.7"
+      :x="x"
+      :y="y"
     >{{tower.symbol}}</text>
   </g>
 </template>
@@ -23,12 +32,16 @@ export default {
     return {
       x: 0,
       y: 0,
-      dragging: false
+      dragging: false,
+      arrowStartX: 0,
+      arrowStartY: 0
     };
   },
   methods: {
     mouseDown(ev, tower) {
       this.dragging = true;
+      this.arrowStartX = this.x;
+      this.arrowStartY = this.y;
       document.addEventListener("mousemove", this.mouseMove);
       document.addEventListener("mouseup", this.mouseUp);
     },
@@ -40,7 +53,7 @@ export default {
       this.dragging = false;
       this.setCoordFromFull();
       this.setFullFromTower();
-      this.$emit('towerMoved', this.tower);
+      this.$emit("towerMoved", this.tower);
       document.removeEventListener("mousemove", this.mouseMove);
       document.removeEventListener("mouseup", this.mouseUp);
     },
@@ -50,11 +63,11 @@ export default {
     tileToFullCoord(x) {
       return x * this.tileSize - this.tileSize / 2;
     },
-    setFullFromTower(){
+    setFullFromTower() {
       this.x = this.tileToFullCoord(this.tower.position_x);
       this.y = this.tileToFullCoord(this.tower.position_y);
     },
-    setCoordFromFull(){
+    setCoordFromFull() {
       this.tower.position_x = this.fullToTileCoord(this.x);
       this.tower.position_y = this.fullToTileCoord(this.y);
     }
@@ -68,6 +81,12 @@ export default {
 <style lang="scss">
 @import "../assets/colors.scss";
 @import "../assets/constants.scss";
+.arrow {
+  stroke: rgba(0, 0, 0, 0.4);
+  stroke-dasharray: 60 50;
+  stroke-width: 20;
+  stroke-linecap: round;
+}
 .tower {
   cursor: grab;
   transition: transform 0.2s ease;
@@ -110,6 +129,7 @@ export default {
 
   text {
     pointer-events: none;
+    user-select: none;
     &.orange {
       fill: $orange;
     }

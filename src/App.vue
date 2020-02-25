@@ -2,7 +2,7 @@
   <div id="app">
     <app-nav @onlogin="onlogin" @onlogout="onlogout"></app-nav>
     <template v-if="loggedIn">
-      <router-view/>
+      <router-view />
     </template>
     <template v-else>
       <p>Please login.</p>
@@ -11,28 +11,26 @@
   </div>
 </template>
 <script>
-import Nav from "./components/Nav"
-import NotificationsPanel from "./components/NotificationsPanel"
+import Nav from "./components/Nav";
+import NotificationsPanel from "./components/NotificationsPanel";
 export default {
-  data(){
+  data() {
     return {
-      loggedIn:false
-    }
+      loggedIn: false
+    };
   },
-  components:{
+  components: {
     "app-nav": Nav,
     "notifications-panel": NotificationsPanel
   },
-  methods:{
-      onlogin(){
-    this.loggedIn = true
-  },
-  onlogout(){
-    this.loggedIn = false
+  methods: {
+    onlogin() {
+      this.loggedIn = true;
+    },
+    onlogout() {
+      this.loggedIn = false;
+    }
   }
-  }
-
-
 };
 </script>
 
@@ -46,6 +44,6 @@ export default {
 }
 h1.header {
   margin: 30px 0;
-  text-align:center;
+  text-align: center;
 }
 </style>

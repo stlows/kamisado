@@ -110,7 +110,21 @@ function getMyGames()
 
   $player_id = getLoginPlayerId($conn);
 
-  $query = "SELECT game_id, points_to_win, player_1_score, player_2_score, p1.player_name player_1_name, p2.player_name player_2_name
+  $query = "SELECT
+  game_id,
+  points_to_win,
+  CASE
+    WHEN p1.player_id = $player_id THEN p2.player_name
+    WHEN p2.player_id = $player_id THEN p1.player_name
+  END AS rival_name,
+  CASE
+    WHEN p1.player_id = $player_id THEN games.player_1_score
+    WHEN p2.player_id = $player_id THEN games.player_2_score
+  END AS your_score,
+  CASE
+    WHEN p1.player_id = $player_id THEN games.player_2_score
+    WHEN p2.player_id = $player_id THEN games.player_1_score
+  END AS rival_score
   FROM games
   LEFT JOIN players p1 ON games.player_1_id = p1.player_id
   LEFT JOIN players p2 ON games.player_2_id = p2.player_id
@@ -202,6 +216,15 @@ function deleteLobby($lobby_id)
   $conn = getNewConn();
   $player_id = getLoginPlayerId($conn);
   $query = "DELETE FROM lobby WHERE lobby_id = $lobby_id";
+
+  $conn->query($query);
+}
+
+function forfeit($game_id)
+{
+  $conn = getNewConn();
+  $player_id = getLoginPlayerId($conn);
+  $query = "DELETE FROM games WHERE game_id = $game_id";
 
   $conn->query($query);
 }

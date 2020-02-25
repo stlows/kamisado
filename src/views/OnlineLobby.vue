@@ -22,9 +22,9 @@
           </template>
         </template>
       </div>
-      <div class="card-footer">
+      <!-- <div class="card-footer">
         <button class="btn btn-large btn-primary" @click="newLobby">New Game</button>
-      </div>
+      </div>-->
     </div>
   </div>
 </template>
