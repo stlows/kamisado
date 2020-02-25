@@ -49,6 +49,8 @@ export default {
     fill: rgb(26, 23, 39);
   }
   .helper {
+    pointer-events: none;
+    user-select: none;
     fill: rgb(218, 223, 250);
   }
 }

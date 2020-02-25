@@ -44,3 +44,8 @@ $ERROR_MOVING_TOWER  = [
   "error" => 5008,
   "message" => "Error moving your tower. Try again later."
 ];
+
+$ERROR_UPDATING_GAME  = [
+  "error" => 5009,
+  "message" => "Error updating game."
+];

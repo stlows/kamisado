@@ -41,7 +41,6 @@ export default {
   },
   methods: {
     mouseDown(ev, tower) {
-      console.log(ev);
       this.dragging = true;
       this.arrowStartX = this.x;
       this.arrowStartY = this.y;
@@ -49,8 +48,8 @@ export default {
       document.addEventListener("mouseup", this.mouseUp);
     },
     mouseMove(ev) {
-      this.x = ev.offsetX - this.borderSize;
-      this.y = ev.offsetY - this.borderSize;
+      this.x = Math.max(0, ev.offsetX - this.borderSize);
+      this.y = Math.max(0, ev.offsetY - this.borderSize);
     },
     mouseUp(ev, towerId) {
       this.dragging = false;

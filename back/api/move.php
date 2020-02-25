@@ -80,12 +80,9 @@ if($tower["player_color"] == "white"){
     }
   }else{
     for($delta = 1; $delta <= $targetY - $tower["position_y"]; $delta++){
+      $direction = $targetX - $tower["position_x"] > 0 ? $delta : -$delta;
       foreach($towers as $t){
-        if ($t["position_x"] == $tower["position_x"] + $delta && $t["position_y"] == $tower["position_y"] + $delta) {
-          echo (json_encode($CANT_PASS_THROUGH));
-          exit;
-        }
-        if ($t["position_x"] == $tower["position_x"] - $delta && $t["position_y"] == $tower["position_y"] + $delta) {
+        if ($t["position_x"] == $tower["position_x"] + $direction && $t["position_y"] == $tower["position_y"] + $delta) {
           echo (json_encode($CANT_PASS_THROUGH));
           exit;
         }
@@ -95,7 +92,7 @@ if($tower["player_color"] == "white"){
 }
 else{
   if($tower["position_x"] == $targetX){
-    for($y = $tower["position_y"] - 1; $y <= $targetY; $y--){
+    for($y = $tower["position_y"] - 1; $y >= $targetY; $y--){
       // Is there is a tower already there
       foreach($towers as $t){
         if ($t["position_x"] == $targetX && $t["position_y"] == $y) {
@@ -106,13 +103,10 @@ else{
       }
     }
   }else{
-    for($delta = 1; $delta <= $targetY - $tower["position_y"]; $delta++){
+    for($delta = 1; $delta <= $tower["position_y"] - $targetY; $delta++){
+      $direction = $targetX - $tower["position_x"] > 0 ? $delta : -$delta;
       foreach($towers as $t){
-        if ($t["position_x"] == $tower["position_x"] + $delta && $t["position_y"] == $tower["position_y"] + $delta) {
-          echo (json_encode($CANT_PASS_THROUGH));
-          exit;
-        }
-        if ($t["position_x"] == $tower["position_x"] - $delta && $t["position_y"] == $tower["position_y"] + $delta) {
+        if ($t["position_x"] == $tower["position_x"] + $direction && $t["position_y"] == $tower["position_y"] - $delta) {
           echo (json_encode($CANT_PASS_THROUGH));
           exit;
         }
@@ -121,15 +115,23 @@ else{
   }
 }
 
-
-
-
-
 try {
-  moveTower($towerId, $targetX, $targetY);
-  echo (json_encode($VALID));
+  if(moveTower($towerId, $targetX, $targetY)){
+    if(updateGame($gameId, $loggedInId, $targetX, $targetY)){
+      echo (json_encode($VALID));
+      exit;
+    }else{
+      echo (json_encode($ERROR_UPDATING_GAME));
+      exit;
+    }
+  }else{
+    echo (json_encode($ERROR_MOVING_TOWER));
+    exit;
+  };
+
 }catch(Exception $ex){
-  echo (json_encode($ERROR_MOVING_TOWER));
+  echo (json_encode($UNHANDLED));
+  exit;
 }
 
 

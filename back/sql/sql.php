@@ -154,7 +154,39 @@ function moveTower($tower_id, $target_x, $target_y){
   $conn = getNewConn();
   $towerQuery = "UPDATE towers SET position_x = $target_x, position_y = $target_y WHERE tower_id = $tower_id";
 
-  $towerResult = $conn->query($towerQuery);
+  return $conn->query($towerQuery);
+}
+
+function getTileColor($x, $y, $conn){
+  $query = "SELECT color FROM tiles WHERE position_x = $x AND position_y = $y";
+  $result = $conn->query($query);
+  if($result->num_rows == 1){
+    return $result->fetch_assoc()["color"];
+  }
+}
+
+function getTowerByColorAndGame($game_id, $color, $loggedInId, $conn){
+  $query = "SELECT tower_id FROM towers WHERE game_id = $game_id AND tower_color = '$color' AND player_id != $loggedInId";
+  $result = $conn->query($query);
+  if($result->num_rows == 1){
+    return $result->fetch_assoc()["tower_id"];
+  }
+}
+
+function updateGame($game_id, $loggedInId, $target_x, $target_y){
+  $conn = getNewConn();
+  $color = getTileColor($target_x, $target_y, $conn);
+  $tower_to_move = getTowerByColorAndGame($game_id, $color, $loggedInId, $conn);
+  $query = "UPDATE games
+  SET
+  is_first_move = 0,
+  turn = CASE WHEN player_1_id = $loggedInId THEN player_2_id
+              WHEN player_2_id = $loggedInId THEN player_1_id
+              END,
+  tower_id_to_move = $tower_to_move
+  WHERE game_id = $game_id";
+
+  return $conn->query($query);
 }
 
 function getTiles()

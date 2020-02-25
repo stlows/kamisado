@@ -27,7 +27,7 @@ $CANT_PASS_THROUGH = [
 
 $MUST_GO_FORWARD = [
   "valid" => false,
-  "message" => "You can't go back."
+  "message" => "You can't go back nor sideways."
 ];
 
 $MUST_GO_DIAGONNALLY_OR_STRAIGHT_AHEAD = [

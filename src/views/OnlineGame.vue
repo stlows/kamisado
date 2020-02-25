@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="left">
-      <OnlineLobby ref="onlineLobbyRef" />
+      <OnlineLobby ref="onlineLobbyRef" @lobbyJoined="fetchGame" />
       <NewGame @refreshLobby="$refs.onlineLobbyRef.refreshLobby()" />
     </div>
     <div class="center">

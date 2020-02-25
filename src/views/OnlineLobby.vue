@@ -67,8 +67,11 @@ export default {
             message: res.data.message
           });
         } else {
-          this.deleteLobby(parseInt(data.value));
+          this.deleteLobby(parseInt(data.value)).then(res => {
+            this.refreshLobby();
+          });
           this.$router.push({ path: "/online/game/" + res.data });
+          this.$emit("lobbyJoined");
         }
       });
     }
