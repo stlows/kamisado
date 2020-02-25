@@ -9,7 +9,6 @@
         <a href="#" @click.prevent="forfeit(gameId)">Forfeit</a> |
         <a href="#" @click.prevent="fetchGame">Refresh</a>
       </div>
-
       <Board :towers="game.towers" @towerMoved="towerMoved"></Board>
     </div>
     <div class="right">

@@ -47,15 +47,6 @@ if ($targetX < 1 || $targetX > 8 || $targetY < 1 || $targetY > 8) {
   exit;
 };
 
-// Is there is a tower already there
-foreach($towers as $t){
-  if ($t["position_x"] == $targetX && $t["position_y"] == $targetY) {
-    // TODO Gérer les push de sumo ici ?
-    echo (json_encode($TILE_OCCUPIED));
-    exit;
-  };
-}
-
 // Is the tower color white or black
 if($tower["player_color"] != "white" && $tower["player_color"] != "black"){
   echo (json_encode($TOWER_COLOR_UNKNOWN));
@@ -73,6 +64,66 @@ if($targetX != $tower["position_x"] && (abs($targetX - $tower["position_x"]) != 
   echo (json_encode($MUST_GO_DIAGONNALLY_OR_STRAIGHT_AHEAD));
   exit;
 }
+
+// Check les overlaps
+if($tower["player_color"] == "white"){
+  if($tower["position_x"] == $targetX){
+    for($y = $tower["position_y"] + 1; $y <= $targetY; $y++){
+      // Is there is a tower already there
+      foreach($towers as $t){
+        if ($t["position_x"] == $targetX && $t["position_y"] == $y) {
+          // TODO Gérer les push de sumo ici ?
+          echo (json_encode($CANT_PASS_THROUGH));
+          exit;
+        }
+      }
+    }
+  }else{
+    for($delta = 1; $delta <= $targetY - $tower["position_y"]; $delta++){
+      foreach($towers as $t){
+        if ($t["position_x"] == $tower["position_x"] + $delta && $t["position_y"] == $tower["position_y"] + $delta) {
+          echo (json_encode($CANT_PASS_THROUGH));
+          exit;
+        }
+        if ($t["position_x"] == $tower["position_x"] - $delta && $t["position_y"] == $tower["position_y"] + $delta) {
+          echo (json_encode($CANT_PASS_THROUGH));
+          exit;
+        }
+      }
+    }
+  }
+}
+else{
+  if($tower["position_x"] == $targetX){
+    for($y = $tower["position_y"] - 1; $y <= $targetY; $y--){
+      // Is there is a tower already there
+      foreach($towers as $t){
+        if ($t["position_x"] == $targetX && $t["position_y"] == $y) {
+          // TODO Gérer les push de sumo ici ?
+          echo (json_encode($CANT_PASS_THROUGH));
+          exit;
+        }
+      }
+    }
+  }else{
+    for($delta = 1; $delta <= $targetY - $tower["position_y"]; $delta++){
+      foreach($towers as $t){
+        if ($t["position_x"] == $tower["position_x"] + $delta && $t["position_y"] == $tower["position_y"] + $delta) {
+          echo (json_encode($CANT_PASS_THROUGH));
+          exit;
+        }
+        if ($t["position_x"] == $tower["position_x"] - $delta && $t["position_y"] == $tower["position_y"] + $delta) {
+          echo (json_encode($CANT_PASS_THROUGH));
+          exit;
+        }
+      }
+    }
+  }
+}
+
+
+
+
 
 try {
   moveTower($towerId, $targetX, $targetY);

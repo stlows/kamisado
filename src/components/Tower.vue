@@ -4,30 +4,32 @@
     :class="{dragging}"
     @mousedown="mouseDown($event, tower)"
     @mouseup="mouseUp($event)"
+    :style="'transform: translate(' + x + 'px,' + y + 'px)' "
   >
-    <line v-if="dragging" class="arrow" :x1="arrowStartX" :y1="arrowStartY" :x2="x" :y2="y" />
+    <line
+      v-if="dragging"
+      class="arrow"
+      :x1="arrowStartX"
+      :y1="arrowStartY"
+      :x2="x"
+      :y2="y"
+      :style="'transform: translate(-' + x + 'px,-' + y + 'px)' "
+    />
 
-    <circle
-      :class="[tower.player_color, tower.tower_color, dragging]"
-      :cx="x"
-      :cy="y"
-      :r="towerSize / 2"
-    ></circle>
+    <circle :class="[tower.player_color, tower.tower_color, {dragging}]" :r="towerSize / 2"></circle>
 
     <text
       text-anchor="middle"
       dominant-baseline="central"
-      :class="tower.tower_color"
+      :class="[tower.tower_color, {dragging}]"
       :font-size="towerSize * 0.7"
-      :x="x"
-      :y="y"
     >{{tower.symbol}}</text>
   </g>
 </template>
 
 <script>
 export default {
-  props: ["tower", "towerSize", "tileSize"],
+  props: ["tower", "towerSize", "tileSize", "borderSize"],
   data() {
     return {
       x: 0,
@@ -39,6 +41,7 @@ export default {
   },
   methods: {
     mouseDown(ev, tower) {
+      console.log(ev);
       this.dragging = true;
       this.arrowStartX = this.x;
       this.arrowStartY = this.y;
@@ -46,19 +49,24 @@ export default {
       document.addEventListener("mouseup", this.mouseUp);
     },
     mouseMove(ev) {
-      this.x = ev.offsetX;
-      this.y = ev.offsetY;
+      this.x = ev.offsetX - this.borderSize;
+      this.y = ev.offsetY - this.borderSize;
     },
     mouseUp(ev, towerId) {
       this.dragging = false;
       this.setCoordFromFull();
       this.setFullFromTower();
-      this.$emit("towerMoved", this.tower);
+      if (!ev.shiftKey) {
+        this.$emit("towerMoved", this.tower);
+      }
       document.removeEventListener("mousemove", this.mouseMove);
       document.removeEventListener("mouseup", this.mouseUp);
     },
     fullToTileCoord(x) {
-      return Math.round((x + this.tileSize / 2) / this.tileSize);
+      return Math.min(
+        8,
+        Math.max(1, Math.round((x + this.tileSize / 2) / this.tileSize))
+      );
     },
     tileToFullCoord(x) {
       return x * this.tileSize - this.tileSize / 2;
@@ -89,10 +97,12 @@ export default {
 }
 .tower {
   cursor: grab;
-  transition: transform 0.2s ease;
+  &:not(.dragging) {
+    transition: all 0.2s ease;
+  }
+
   &.dragging {
     cursor: grabbing;
-    transition: none;
   }
   .sumo {
     position: absolute;

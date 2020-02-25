@@ -20,9 +20,9 @@ $OUT_OF_BOUND = [
   "message" => "Stay in bound buddy."
 ];
 
-$TILE_OCCUPIED = [
+$CANT_PASS_THROUGH = [
   "valid" => false,
-  "message" => "There's already a tower there buddy."
+  "message" => "Can't pass through or land on a tower."
 ];
 
 $MUST_GO_FORWARD = [
