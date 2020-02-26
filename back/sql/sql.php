@@ -39,9 +39,9 @@ function newGame($lobby_id)
 
   $gameQuery = "
   INSERT INTO games
-  (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn)
+  (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color)
   VALUES
-  ($player_1_id, $player_2_id, 0, 0, " . $lobby["points_to_win"] . ", true, null, $player_1_id)";
+  ($player_1_id, $player_2_id, 0, 0, " . $lobby["points_to_win"] . ", true, null, $player_1_id, 'white')";
 
   $conn->query($gameQuery);
 
@@ -177,16 +177,23 @@ function updateGame($game_id, $loggedInId, $target_x, $target_y){
   $conn = getNewConn();
   $color = getTileColor($target_x, $target_y, $conn);
   $tower_to_move = getTowerByColorAndGame($game_id, $color, $loggedInId, $conn);
+
   $query = "UPDATE games
   SET
   is_first_move = 0,
-  turn = CASE WHEN player_1_id = $loggedInId THEN player_2_id
-              WHEN player_2_id = $loggedInId THEN player_1_id
-              END,
-  tower_id_to_move = $tower_to_move
+  turn_player_id = CASE WHEN player_1_id = $loggedInId THEN player_2_id
+                        WHEN player_2_id = $loggedInId THEN player_1_id
+                        END,
+  tower_id_to_move = $tower_to_move,
+  turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                    WHEN turn_color = 'black' THEN 'white'
+                    END
   WHERE game_id = $game_id";
 
-  return $conn->query($query);
+  if($conn->query($query)){
+    return $tower_to_move;
+  }
+  return null;
 }
 
 function getTiles()

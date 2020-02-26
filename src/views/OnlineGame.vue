@@ -1,18 +1,37 @@
 <template>
   <div class="main">
     <div class="left">
-      <OnlineLobby ref="onlineLobbyRef" @lobbyJoined="fetchGame" />
+      <OnlineLobby ref="onlineLobbyRef" @lobbyJoined="fetchGame;$refs.myGames.refreshGames()" />
       <NewGame @refreshLobby="$refs.onlineLobbyRef.refreshLobby()" />
     </div>
     <div class="center">
       <div class="text-center mb-3">
-        <a href="#" @click.prevent="forfeit(gameId)">Forfeit</a> |
+        <a href="#" @click.prevent="forfeitGame">Forfeit</a> |
         <a href="#" @click.prevent="fetchGame">Refresh</a>
       </div>
+      <div>
+        <div v-if="history.length > 0">
+          <span
+            v-for="tower in history"
+            :key="tower.tower_id"
+            class="tower-description"
+            :class="[tower.player_color, tower.tower_color]"
+          >{{ tower.symbol }}</span>
+        </div>
+        <div v-if="towerToMove">
+          <span
+            v-for="tower in history"
+            :key="tower.tower_id"
+            class="tower-description"
+            :class="[tower.player_color, tower.tower_color]"
+          >{{ tower.symbol }}</span>
+        </div>
+      </div>
+      <div v-if="!towerToMove && game.game">Turn: {{ game.game.turn_color }}</div>
       <Board :towers="game.towers" @towerMoved="towerMoved"></Board>
     </div>
     <div class="right">
-      <MyGames @refreshGame="fetchGame" />
+      <MyGames ref="myGames" @refreshGame="fetchGame" />
     </div>
   </div>
 </template>
@@ -20,6 +39,7 @@
 <script>
 import Board from "../components/Board";
 import OnlineLobby from "./OnlineLobby";
+import Tower from "../components/Tower";
 import NewGame from "./NewGame";
 import MyGames from "./MyGames";
 import { mapActions } from "vuex";
@@ -29,15 +49,18 @@ export default {
     OnlineLobby,
     NewGame,
     MyGames,
-    Board
+    Board,
+    Tower
   },
   data() {
     return {
-      game: {}
+      game: {},
+      history: [],
+      towerToMove: null
     };
   },
   methods: {
-    ...mapActions(["getGame", "notify", "move", "forfeit"]),
+    ...mapActions(["getGame", "notify", "move", "forfeit", "getTower"]),
     fetchGame() {
       this.game = {};
       this.getGame(this.gameId).then(res => {
@@ -49,8 +72,18 @@ export default {
           });
         } else {
           this.game = res.data;
+          this.fetchTowerToMove();
         }
       });
+    },
+    fetchTowerToMove() {
+      if (this.game.game.tower_id_to_move) {
+        this.getTower(this.game.game.tower_id_to_move).then(res => {
+          this.towerToMove = res.data;
+        });
+      } else {
+        this.towerToMove = null;
+      }
     },
     towerMoved(tower) {
       this.move({
@@ -61,6 +94,9 @@ export default {
         }
       }).then(res => {
         if (res.data.valid) {
+          this.history.push(tower);
+          this.game.game.tower_id_to_move = res.data.tower_id_to_move;
+          this.fetchTowerToMove();
           return;
         } else {
           this.notify({
@@ -70,6 +106,12 @@ export default {
           });
           this.fetchGame();
         }
+      });
+    },
+    forfeitGame() {
+      this.forfeit(this.gameId).then(res => {
+        this.fetchGame();
+        this.$refs.myGames.refreshGames();
       });
     }
   },
@@ -84,7 +126,8 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+@import "../assets/colors.scss";
 .main {
   padding: 30px;
   display: flex;
@@ -97,5 +140,44 @@ export default {
 }
 .right {
   width: 900px;
+}
+.tower-description {
+  display: inline-block;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  line-height: 50px;
+  text-align: center;
+  &.white {
+    background-color: $player-white;
+  }
+  &.black {
+    background-color: $player-black;
+  }
+  &.orange {
+    color: $orange;
+  }
+  &.green {
+    color: $green;
+  }
+  &.red {
+    color: $red;
+  }
+  &.indigo {
+    color: $indigo;
+  }
+  &.blue {
+    color: $blue;
+  }
+  &.yellow {
+    color: $yellow;
+  }
+  &.brown {
+    color: $brown;
+  }
+  &.pink {
+    color: $pink;
+  }
 }
 </style>

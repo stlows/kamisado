@@ -39,6 +39,13 @@ export const store = new Vuex.Store({
         }
       })
     },
+    getTower({ commit, state }, towerId) {
+      return api.get("tower.php?towerId=" + towerId, {
+        headers: {
+          'Authorization': state.token
+        }
+      })
+    },
     getMyGames({ commit, state }, ) {
       return api.get("my-games.php", {
         headers: {

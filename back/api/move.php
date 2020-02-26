@@ -24,7 +24,7 @@ $conn = getNewConn();
 $loggedInId = getLoginPlayerId($conn);
 
 // Is it my turn
-if ($game["turn"] != $loggedInId ) {
+if ($game["turn_player_id"] != $loggedInId ) {
   echo (json_encode($NOT_YOUR_TURN));
   exit;
 }
@@ -117,8 +117,12 @@ else{
 
 try {
   if(moveTower($towerId, $targetX, $targetY)){
-    if(updateGame($gameId, $loggedInId, $targetX, $targetY)){
-      echo (json_encode($VALID));
+    $tower_id_to_move = updateGame($gameId, $loggedInId, $targetX, $targetY);
+    if($tower_id_to_move != null){
+      echo (json_encode([
+        "valid" => true,
+        "tower_id_to_move" => $tower_id_to_move
+      ]));
       exit;
     }else{
       echo (json_encode($ERROR_UPDATING_GAME));
