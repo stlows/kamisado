@@ -6,6 +6,7 @@ include_once("../sql/sql.php");
 
 $settings = json_decode(file_get_contents('php://input'), true);
 
-$game_id = newGame($settings["lobbyId"]);
+$sql = new Sql();
+$game_id = $sql->newGame($settings["lobbyId"]);
 
 echo $game_id;

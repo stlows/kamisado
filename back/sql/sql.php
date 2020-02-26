@@ -1,35 +1,43 @@
 <?php
 require_once '../errors.php';
 
-function getNewConn()
-{
-  $conn = new mysqli("localhost", "root", "", "kamisado");
-  $conn->set_charset("utf8");
-  return $conn;
-}
 
-function getLoginPlayerId($conn)
+class Sql {
+
+  private $conn;
+
+  function __construct(){
+    $this->conn = $this->getNewConn();
+  }
+
+  function getNewConn(){
+    $conn = new mysqli("localhost", "root", "", "kamisado");
+    $conn->set_charset("utf8");
+    return $conn;
+  }
+
+  function getLoginPlayerId()
 {
+
   $google_id = $_SESSION["google_id"];
   $query = "SELECT * FROM players WHERE google_id = '$google_id'";
-  $result = $conn->query($query);
+  $result = $this->conn->query($query);
   if ($result->num_rows == 1) {
     return $result->fetch_assoc()["player_id"];
   } else if ($result->num_rows == 0) {
     $name = $_SESSION["google_name"];
     $query = "INSERT INTO players (player_name, google_id) VALUES ('$name', '$google_id')";
-    $result = $conn->query($query);
-    return  $conn->insert_id;
+    $result = $this->conn->query($query);
+    return  $this->conn->insert_id;
   } else {
   }
 }
 function newGame($lobby_id)
 {
-  $conn = getNewConn();
 
-  $lobby = getLobby($lobby_id);
+  $lobby = $this->getLobby($lobby_id);
 
-  $player_2_id = getLoginPlayerId($conn);
+  $player_2_id = $this->getLoginPlayerId();
   $player_1_id = $lobby["player_id"];
   if ($lobby["player_id"] == $player_2_id) {
     global $CANT_JOIN_YOUR_OWN_GAME;
@@ -43,9 +51,9 @@ function newGame($lobby_id)
   VALUES
   ($player_1_id, $player_2_id, 0, 0, " . $lobby["points_to_win"] . ", true, null, $player_1_id, 'white')";
 
-  $conn->query($gameQuery);
+  $this->conn->query($gameQuery);
 
-  $game_id = $conn->insert_id;
+  $game_id = $this->conn->insert_id;
 
   $towersQuery = "
   INSERT INTO towers
@@ -68,17 +76,18 @@ function newGame($lobby_id)
   ($game_id,'blue','black',7,8,0,'푸',$player_2_id),
   ($game_id,'orange','black',8,8,0,'주',$player_2_id)
   ";
-  $conn->query($towersQuery);
+  $this->conn->query($towersQuery);
   return $game_id;
 }
 
 function getGame($game_id)
 {
-  $conn = getNewConn();
-  $player_id = getLoginPlayerId($conn);
+
+  $player_id = $this->getLoginPlayerId();
+
   $gameQuery = "SELECT * FROM games WHERE game_id = $game_id";
 
-  $gameResult = $conn->query($gameQuery);
+  $gameResult = $this->conn->query($gameQuery);
 
   if ($gameResult->num_rows > 1) {
   } else if ($gameResult->num_rows == 0) {
@@ -89,7 +98,7 @@ function getGame($game_id)
     $game = $gameResult->fetch_assoc();
     $towersQuery = "SELECT * FROM towers WHERE game_id = $game_id";
 
-    $towersResult = $conn->query($towersQuery);
+    $towersResult = $this->conn->query($towersQuery);
     if ($towersResult->num_rows == 16) {
       $towers = $towersResult->fetch_all(MYSQLI_ASSOC);
       return [
@@ -106,9 +115,8 @@ function getGame($game_id)
 
 function getMyGames()
 {
-  $conn = getNewConn();
 
-  $player_id = getLoginPlayerId($conn);
+  $player_id = $this->getLoginPlayerId();
 
   $query = "SELECT
   game_id,
@@ -131,17 +139,17 @@ function getMyGames()
   WHERE $player_id IN (p1.player_id, p2.player_id)
   ";
 
-  $result = $conn->query($query);
+  $result = $this->conn->query($query);
 
   return $result->fetch_all(MYSQLI_ASSOC);
 }
 
 function getTower($tower_id)
 {
-  $conn = getNewConn();
+
   $towerQuery = "SELECT * FROM towers WHERE tower_id = $tower_id";
 
-  $towerResult = $conn->query($towerQuery);
+  $towerResult = $this->conn->query($towerQuery);
 
   if ($towerResult->num_rows > 1) {
   } else if ($towerResult->num_rows == 0) {
@@ -151,32 +159,34 @@ function getTower($tower_id)
 }
 
 function moveTower($tower_id, $target_x, $target_y){
-  $conn = getNewConn();
+
   $towerQuery = "UPDATE towers SET position_x = $target_x, position_y = $target_y WHERE tower_id = $tower_id";
 
-  return $conn->query($towerQuery);
+  return $this->conn->query($towerQuery);
 }
 
-function getTileColor($x, $y, $conn){
+function getTileColor($x, $y){
+
   $query = "SELECT color FROM tiles WHERE position_x = $x AND position_y = $y";
-  $result = $conn->query($query);
+  $result = $this->conn->query($query);
   if($result->num_rows == 1){
     return $result->fetch_assoc()["color"];
   }
 }
 
-function getTowerByColorAndGame($game_id, $color, $loggedInId, $conn){
+function getTowerByColorAndGame($game_id, $color, $loggedInId){
+
   $query = "SELECT tower_id FROM towers WHERE game_id = $game_id AND tower_color = '$color' AND player_id != $loggedInId";
-  $result = $conn->query($query);
+  $result = $this->conn->query($query);
   if($result->num_rows == 1){
     return $result->fetch_assoc()["tower_id"];
   }
 }
 
 function updateGame($game_id, $loggedInId, $target_x, $target_y){
-  $conn = getNewConn();
-  $color = getTileColor($target_x, $target_y, $conn);
-  $tower_to_move = getTowerByColorAndGame($game_id, $color, $loggedInId, $conn);
+
+  $color = $this->getTileColor($target_x, $target_y);
+  $tower_to_move = $this->getTowerByColorAndGame($game_id, $color, $loggedInId);
 
   $query = "UPDATE games
   SET
@@ -190,7 +200,7 @@ function updateGame($game_id, $loggedInId, $target_x, $target_y){
                     END
   WHERE game_id = $game_id";
 
-  if($conn->query($query)){
+  if($this->conn->query($query)){
     return $tower_to_move;
   }
   return null;
@@ -198,10 +208,10 @@ function updateGame($game_id, $loggedInId, $target_x, $target_y){
 
 function getTiles()
 {
-  $conn = getNewConn();
+
   $query = "SELECT * FROM tiles";
 
-  $result = $conn->query($query);
+  $result = $this->conn->query($query);
 
   if ($result->num_rows != 64) {
   } else {
@@ -211,9 +221,8 @@ function getTiles()
 
 function newLobby($points_to_win)
 {
-  $conn = getNewConn();
 
-  $player_id = getLoginPlayerId($conn);
+  $player_id = $this->getLoginPlayerId();
 
   $query = "
   INSERT INTO lobby
@@ -221,29 +230,30 @@ function newLobby($points_to_win)
   VALUES
   ($points_to_win, $player_id)";
 
-  $conn->query($query);
+  $this->conn->query($query);
 
-  return $conn->insert_id;
+  return $this->conn->insert_id;
 }
 
 function getAllLobby()
 {
-  $conn = getNewConn();
-  $player_id = getLoginPlayerId($conn);
+
+  $player_id = $this->getLoginPlayerId();
+
   $query = "SELECT player_name, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id";
 
-  $result = $conn->query($query);
+  $result = $this->conn->query($query);
 
   return $result->fetch_all(MYSQLI_ASSOC);
 }
 
 function getLobby($lobby_id)
 {
-  $conn = getNewConn();
-  $player_id = getLoginPlayerId($conn);
+  $player_id = $this->getLoginPlayerId();
+
   $query = "SELECT * FROM lobby WHERE lobby_id = $lobby_id";
 
-  $result = $conn->query($query);
+  $result = $this->conn->query($query);
   if ($result->num_rows != 1) {
   } else {
     return $result->fetch_assoc();
@@ -252,18 +262,25 @@ function getLobby($lobby_id)
 
 function deleteLobby($lobby_id)
 {
-  $conn = getNewConn();
-  $player_id = getLoginPlayerId($conn);
+  $player_id = $this->getLoginPlayerId();
   $query = "DELETE FROM lobby WHERE lobby_id = $lobby_id";
 
-  $conn->query($query);
+  $this->conn->query($query);
 }
 
 function forfeit($game_id)
 {
-  $conn = getNewConn();
-  $player_id = getLoginPlayerId($conn);
+  $player_id = $this->getLoginPlayerId();
   $query = "DELETE FROM games WHERE game_id = $game_id";
 
-  $conn->query($query);
+  $this->conn->query($query);
 }
+
+function resetGameAfterRoundWon($game, $tower){
+  $towers = $game["towers"];
+
+}
+}
+
+
+

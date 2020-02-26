@@ -3,6 +3,7 @@
 include_once("../check-get.php");
 include_once("../sql/sql.php");
 
-$tiles = getTiles();
+$sql = new Sql();
+$tiles = $sql->getTiles();
 
 echo (json_encode($tiles));

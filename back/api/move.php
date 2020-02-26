@@ -9,19 +9,20 @@ include_once("../errors.php");
 
 $move = json_decode(file_get_contents('php://input'), true);
 
+$sql = new Sql();
+
 $towerId = $move["towerId"];
 $targetX = $move["target"]["x"];
 $targetY = $move["target"]["y"];
 
-$tower = getTower($towerId);
+$tower = $sql->getTower($towerId);
 
 $gameId = $tower["game_id"];
-$gameObject = getGame($gameId);
+$gameObject = $sql->getGame($gameId);
 $game = $gameObject["game"];
 $towers = $gameObject["towers"];
 
-$conn = getNewConn();
-$loggedInId = getLoginPlayerId($conn);
+$loggedInId = $sql->getLoginPlayerId();
 
 // Is it my turn
 if ($game["turn_player_id"] != $loggedInId ) {
@@ -115,8 +116,18 @@ else{
   }
 }
 
+
+
 try {
   if(moveTower($towerId, $targetX, $targetY)){
+    // Check win
+    if($targetY == 1 || $targetY == 8){
+      resetGameAfterRoundWon($game, $tower);
+      echo(json_encode([
+        "valid" => true,
+        "round_won_by" => $tower["player_color"]
+      ]));
+    }
     $tower_id_to_move = updateGame($gameId, $loggedInId, $targetX, $targetY);
     if($tower_id_to_move != null){
       echo (json_encode([

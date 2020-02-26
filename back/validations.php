@@ -49,3 +49,15 @@ $VALID = [
   "valid" => true,
   "message" => "Move is valid."
 ];
+
+$WHITE_WINS_ROUND = [
+  "valid" => true,
+  "message" => "White won the round.",
+  "round_won" => true
+];
+
+$BLACK_WINS_ROUND = [
+  "valid" => false,
+  "message" => "Black won the round.",
+  "round_won" => true
+];

@@ -5,5 +5,6 @@ include_once("../check-get.php");
 include_once("../check-google-token.php");
 include_once("../sql/sql.php");
 
-$lobby = getAllLobby();
+$sql = new Sql();
+$lobby = $sql->getAllLobby();
 echo (json_encode($lobby));
