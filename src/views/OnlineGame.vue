@@ -5,27 +5,15 @@
       <NewGame @refreshLobby="$refs.onlineLobbyRef.refreshLobby()" />
     </div>
     <div class="center">
-      <div class="text-center mb-3">
+      <div class="text-center mb-2">
         <a href="#" @click.prevent="forfeitGame">Forfeit</a> |
         <a href="#" @click.prevent="fetchGame">Refresh</a>
       </div>
-      <div>
-        <div v-if="history.length > 0">
-          <span
-            v-for="tower in history"
-            :key="tower.tower_id"
-            class="tower-description"
-            :class="[tower.player_color, tower.tower_color]"
-          >{{ tower.symbol }}</span>
-        </div>
-        <div v-if="towerToMove">
-          <span
-            v-for="tower in history"
-            :key="tower.tower_id"
-            class="tower-description"
-            :class="[tower.player_color, tower.tower_color]"
-          >{{ tower.symbol }}</span>
-        </div>
+      <div v-if="towerToMove" class="mb-2">
+        <span
+          class="tower-description"
+          :class="[towerToMove.player_color, towerToMove.tower_color]"
+        >{{ towerToMove.symbol }}</span>
       </div>
       <div v-if="!towerToMove && game.game">Turn: {{ game.game.turn_color }}</div>
       <Board :towers="game.towers" @towerMoved="towerMoved"></Board>
@@ -55,7 +43,6 @@ export default {
   data() {
     return {
       game: {},
-      history: [],
       towerToMove: null
     };
   },
@@ -80,6 +67,7 @@ export default {
       if (this.game.game.tower_id_to_move) {
         this.getTower(this.game.game.tower_id_to_move).then(res => {
           this.towerToMove = res.data;
+          console.log(res.data);
         });
       } else {
         this.towerToMove = null;
@@ -94,7 +82,6 @@ export default {
         }
       }).then(res => {
         if (res.data.valid) {
-          this.history.push(tower);
           this.game.game.tower_id_to_move = res.data.tower_id_to_move;
           this.fetchTowerToMove();
           return;
@@ -149,6 +136,9 @@ export default {
   font-size: 30px;
   line-height: 50px;
   text-align: center;
+  border: 1px solid black;
+  pointer-events: none;
+  user-select: none;
   &.white {
     background-color: $player-white;
   }
