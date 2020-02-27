@@ -49,3 +49,9 @@ $ERROR_UPDATING_GAME  = [
   "error" => 5009,
   "message" => "Error updating game."
 ];
+
+$UNEXPECTED_VALUE = [
+    "error" => 5010,
+    "message" => "Unexpected value in request."
+];
+

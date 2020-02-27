@@ -31,8 +31,10 @@ try {
       exit;
     }
   }
-} catch (Exception $ex) {
-  // echo $ex;
+} catch (UnexpectedValueException $ex) {
+  echo json_encode($UNEXPECTED_VALUE);
+  exit;
+}catch (Exception $ex){
   echo json_encode($UNHANDLED);
   exit;
 }

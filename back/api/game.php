@@ -1,11 +1,17 @@
 <?php
 
 include_once("../check-get.php");
+include_once("../check-id.php");
 include_once("../check-google-token.php");
 include_once("../sql/sql.php");
 
-$sql = new Sql();
+$settings = json_decode(file_get_contents('php://input'), true);
 
-$game = $sql->getGame($_GET["gameId"]);
+$gameId = $settings["gameId"];
+
+checkId($gameId);
+
+$sql = new Sql();
+$game = $sql->getGame($gameId);
 
 echo (json_encode($game));

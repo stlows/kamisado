@@ -1,6 +1,7 @@
 <?php
 
 include_once("../check-post.php");
+include_once("../check-id.php");
 include_once("../check-google-token.php");
 include_once("../sql/sql.php");
 include_once("../prettify.php");
@@ -9,11 +10,15 @@ include_once("../errors.php");
 
 $move = json_decode(file_get_contents('php://input'), true);
 
-$sql = new Sql();
-
 $towerId = $move["towerId"];
 $targetX = $move["target"]["x"];
 $targetY = $move["target"]["y"];
+
+checkId($towerId);
+checkId($targetX);
+checkId($targetY);
+
+$sql = new Sql();
 
 $tower = $sql->getTower($towerId);
 

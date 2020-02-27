@@ -16,7 +16,7 @@ class Sql {
     return $conn;
   }
 
-  function getLoginPlayerId()
+function getLoginPlayerId()
 {
 
   $google_id = $_SESSION["google_id"];
@@ -32,6 +32,7 @@ class Sql {
   } else {
   }
 }
+
 function newGame($lobby_id)
 {
 
@@ -265,7 +266,7 @@ function deleteLobby($lobby_id)
   $player_id = $this->getLoginPlayerId();
   $query = "DELETE FROM lobby WHERE lobby_id = $lobby_id";
 
-  $this->conn->query($query);
+  return $this->conn->query($query);
 }
 
 function forfeit($game_id)
