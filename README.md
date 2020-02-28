@@ -137,4 +137,46 @@ Response: The game
 }
 ```
 ---
+#### `move`
+Request:
+```
+{
+	"towerId": 497,
+	"target":{
+		"x": 3,
+		"y": 2
+	}
+}
 
+```
+Response: The game
+```
+{
+  "game": {
+      "game_id": "70",
+      "player_1_id": "10",
+      "player_2_id": "9",
+      "player_1_score": "0",
+      "player_2_score": "0",
+      "points_to_win": "3",
+      "tower_id_to_move": null,
+      "is_first_move": "1",
+      "turn_player_id": "10",
+      "turn_color": ""
+  },
+  "towers": [
+      {
+          "tower_id": "1313",
+          "game_id": "70",
+          "tower_color": "orange",
+          "player_color": "white",
+          "sumo": "0",
+          "position_x": "1",
+          "position_y": "1",
+          "symbol": "주",
+          "player_id": "10"
+      },
+      ...
+  ]
+}
+```

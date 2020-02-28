@@ -33,16 +33,22 @@ export const store = new Vuex.Store({
       })
     },
     getGame({ commit, state }, gameId) {
-      return api.get("game.php?gameId=" + gameId, {
+      return api.get("game.php", {
         headers: {
           'Authorization': state.token
+        },
+        params: {
+          gameId: gameId
         }
       })
     },
     getTower({ commit, state }, towerId) {
-      return api.get("tower.php?towerId=" + towerId, {
+      return api.get("tower.php", {
         headers: {
           'Authorization': state.token
+        },
+        params: {
+          towerId: towerId
         }
       })
     },
@@ -81,8 +87,8 @@ export const store = new Vuex.Store({
         }
       })
     },
-    move({ commit, state }, game) {
-      return api.post("move.php", game, {
+    move({ commit, state }, move) {
+      return api.post("move.php", move, {
         headers: {
           'Authorization': state.token
         }

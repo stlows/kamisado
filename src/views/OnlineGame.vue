@@ -75,10 +75,10 @@ export default {
     },
     towerMoved(tower) {
       this.move({
-        towerId: tower.tower_id,
+        towerId: parseInt(tower.tower_id),
         target: {
-          x: tower.position_x,
-          y: tower.position_y
+          x: parseInt(tower.position_x),
+          y: parseInt(tower.position_y)
         }
       }).then(res => {
         if (res.data.valid) {

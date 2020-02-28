@@ -5,11 +5,12 @@ include_once("../check-id.php");
 include_once("../check-google-token.php");
 include_once("../sql/sql.php");
 
-$settings = json_decode(file_get_contents('php://input'), true);
+//$settings = json_decode(file_get_contents('php://input'), true);
 
-$gameId = $settings["gameId"];
+//$lobbyId = $settings["lobbyId"];
 
-checkId($gameId);
+$gameId = isset($_GET["gameId"]) ? $_GET["gameId"] : "";
+//checkId($gameId);
 
 $sql = new Sql();
 $game = $sql->getGame($gameId);
