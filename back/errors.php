@@ -2,56 +2,56 @@
 
 $ONLY_POST = [
   "error" => 5000,
-  "message" => "Only POST requested are allowed."
+  "message" => "Only POST requested are allowed"
 ];
 
 $ONLY_GET = [
   "error" => 5001,
-  "message" => "Only GET requested are allowed."
+  "message" => "Only GET requested are allowed"
 ];
 
 $UNHANDLED = [
   "error" => 5002,
-  "message" => "Unhandled error."
+  "message" => "Unhandled error"
 ];
 
 $NO_AUTHORIZATION_HEADER = [
   "error" => 5003,
-  "message" => "No authorization header."
+  "message" => "No authorization header"
 ];
 
 $CANT_AUTHENTICATE  = [
   "error" => 5004,
-  "message" => "Can't authenticate user."
+  "message" => "Can't authenticate user"
 ];
 
 $CANT_JOIN_YOUR_OWN_GAME  = [
   "error" => 5005,
-  "message" => "Can't join your own game."
+  "message" => "Can't join your own game"
 ];
 
 $NO_GAME_FOUND  = [
   "error" => 5006,
-  "message" => "No game found with this ID."
+  "message" => "No game found with this ID"
 ];
 
 $GAME_DOESNT_HAVE_SIXTEEN_TOWERS  = [
   "error" => 5007,
-  "message" => "This game doesn't have 16 towers."
+  "message" => "This game doesn't have 16 towers"
 ];
 
 $ERROR_MOVING_TOWER  = [
   "error" => 5008,
-  "message" => "Error moving your tower. Try again later."
+  "message" => "Error moving your tower"
 ];
 
 $ERROR_UPDATING_GAME  = [
   "error" => 5009,
-  "message" => "Error updating game."
+  "message" => "Error updating game"
 ];
 
 $UNEXPECTED_VALUE = [
     "error" => 5010,
-    "message" => "Unexpected value in request."
+    "message" => "Unexpected value in request"
 ];
 
