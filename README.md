@@ -250,3 +250,4 @@ Response on error:
 |5008|Error moving your tower|
 |5009|Error updating game|
 |5010|Unexpected value in request|
+|5011|Unexpected pointsToWin value. Accepted values are 1, 3, 7 and 15|

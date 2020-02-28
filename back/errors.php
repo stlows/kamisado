@@ -55,3 +55,8 @@ $UNEXPECTED_VALUE = [
     "message" => "Unexpected value in request"
 ];
 
+$UNEXPECTED_VALUE_POINTS_TO_WIN = [
+  "error" => 5011,
+  "message" => "Unexpected pointsToWin value. Accepted values are 1, 3, 7 and 15"
+];
+
