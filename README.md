@@ -1,5 +1,15 @@
 # Kamisado
 
+## TODO
+
+- [ ] Gérer un win de round et replacer les tours
+- [ ] Supprimer une game après qu'elle soit terminée
+- [ ] Gérer les sumos
+    - [ ] Avancement de {5, 3, 1} maximum
+    - [ ] Peut push
+    - [ ] Quand on gagne avec un sumo = plus de points
+- [ ] Gérer les block
+
 ## FRONT
 
 Front is in Vue JS.
