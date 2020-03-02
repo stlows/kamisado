@@ -49,7 +49,7 @@
 
 <script>
 export default {
-  props: ["tower", "towerSize", "tileSize", "borderSize"],
+  props: ["tower", "towerSize", "tileSize", "borderSize", "playgroundMode"],
   data() {
     return {
       x: 0,
@@ -76,7 +76,7 @@ export default {
       this.dragging = false;
       this.setCoordFromFull();
       this.setFullFromTower();
-      if (!ev.shiftKey) {
+      if (!this.playgroundMode) {
         this.$emit("towerMoved", this.tower);
       }else{
         this.playgroundHistory.push({

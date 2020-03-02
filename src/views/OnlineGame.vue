@@ -16,10 +16,16 @@
         >{{ towerToMove.symbol }}</span>
       </div>
       <div v-if="!towerToMove && game.game">Turn: {{ game.game.turn_color }}</div>
-      <Board :towers="game.towers" @towerMoved="towerMoved"></Board>
+      <Board :towers="game.towers" @towerMoved="towerMoved" :playgroundMode="playgroundMode"></Board>
     </div>
     <div class="right">
       <MyGames ref="myGames" @refreshGame="fetchGame" />
+      <b-form-checkbox
+        id="playgroundModeCheckbox"
+        v-model="playgroundMode"
+      >
+      Playground Mode
+      </b-form-checkbox>
     </div>
   </div>
 </template>
@@ -27,7 +33,6 @@
 <script>
 import Board from "../components/Board";
 import OnlineLobby from "./OnlineLobby";
-import Tower from "../components/Tower";
 import NewGame from "./NewGame";
 import MyGames from "./MyGames";
 import { mapActions } from "vuex";
@@ -38,12 +43,12 @@ export default {
     NewGame,
     MyGames,
     Board,
-    Tower
   },
   data() {
     return {
       game: {},
-      towerToMove: null
+      towerToMove: null,
+      playgroundMode: false
     };
   },
   methods: {
@@ -109,6 +114,13 @@ export default {
   },
   created() {
     this.fetchGame();
+    var vue = this;
+    document.addEventListener(
+      "keydown", function (event) {
+        if(event.keyCode == 80){
+          vue.playgroundMode = !vue.playgroundMode
+        }
+    })
   }
 };
 </script>

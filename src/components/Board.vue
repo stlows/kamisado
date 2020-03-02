@@ -20,6 +20,7 @@
           :towerSize="0.8 * tileSize"
           :tileSize="tileSize"
           :borderSize="borderSize"
+          :playgroundMode="playgroundMode"
           @towerMoved="towerMoved"
         />
       </g>
@@ -38,7 +39,7 @@ export default {
     BoardTile,
     Tower
   },
-  props: ["towers"],
+  props: ["towers", "playgroundMode"],
   data() {
     return {
       tiles: null,
