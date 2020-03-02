@@ -81,6 +81,25 @@ function newGame($lobby_id)
   return $game_id;
 }
 
+function getCurrentPlayerId($game_id){
+  $query = "SELECT turn_player_id FROM games WHERE game_id = $game_id";
+  $result = $this->conn->query($query);
+  if($result->num_rows == 1){
+    return $result->fetch_assoc()["turn_player_id"];
+  }
+}
+
+function getOtherPlayerId($game_id){
+  $query = "SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                        WHEN player_2_id = turn_player_id THEN player_1_id
+                        END AS other_player_id
+            FROM games WHERE game_id = $game_id";
+  $result = $this->conn->query($query);
+  if($result->num_rows == 1){
+    return $result->fetch_assoc()["other_player_id"];
+  }
+}
+
 function getGame($game_id)
 {
 
@@ -175,26 +194,24 @@ function getTileColor($x, $y){
   }
 }
 
-function getTowerByColorAndGame($game_id, $color, $loggedInId){
+function getTowerByColorGameAndPlayerId($game_id, $color, $playerId){
 
-  $query = "SELECT tower_id FROM towers WHERE game_id = $game_id AND tower_color = '$color' AND player_id != $loggedInId";
+  $query = "SELECT tower_id FROM towers WHERE game_id = $game_id AND tower_color = '$color' AND player_id = $playerId";
   $result = $this->conn->query($query);
   if($result->num_rows == 1){
     return $result->fetch_assoc()["tower_id"];
   }
 }
 
-function updateGame($game_id, $loggedInId, $target_x, $target_y){
+function updateGame($game_id, $target_x, $target_y){
 
   $color = $this->getTileColor($target_x, $target_y);
-  $tower_to_move = $this->getTowerByColorAndGame($game_id, $color, $loggedInId);
-
+  $other_player_id = $this->getOtherPlayerId($game_id);
+  $tower_to_move = $this->getTowerByColorAndGame($game_id, $color, $other_player_id);
   $query = "UPDATE games
   SET
   is_first_move = 0,
-  turn_player_id = CASE WHEN player_1_id = $loggedInId THEN player_2_id
-                        WHEN player_2_id = $loggedInId THEN player_1_id
-                        END,
+  turn_player_id = $other_player_id,
   tower_id_to_move = $tower_to_move,
   turn_color = CASE WHEN turn_color = 'white' THEN 'black'
                     WHEN turn_color = 'black' THEN 'white'

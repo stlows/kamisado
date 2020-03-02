@@ -87,9 +87,12 @@ export default {
         }
       }).then(res => {
         if (res.data.valid) {
-          this.game.game.tower_id_to_move = res.data.tower_id_to_move;
-          this.fetchTowerToMove();
-          return;
+          if(res.data.round_won_by){
+            this.fetchGame();
+          }else{
+            this.game.game.tower_id_to_move = res.data.tower_id_to_move;
+            this.fetchTowerToMove();
+          }
         } else {
           this.notify({
             id: new Date().valueOf(),

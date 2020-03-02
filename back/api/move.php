@@ -124,17 +124,43 @@ else{
 
 
 try {
-  if(moveTower($towerId, $targetX, $targetY)){
+  if($sql->moveTower($towerId, $targetX, $targetY)){
     // Check win
     if($targetY == 1 || $targetY == 8){
-      resetGameAfterRoundWon($game, $tower);
-      echo(json_encode([
-        "valid" => true,
-        "round_won_by" => $tower["player_color"]
-      ]));
+      // Check game won
+      $game_won = false; // isGameWon(...);
+      if($game_won){
+        //gameWon(...);
+        echo(json_encode([
+          "valid" => true,
+          "game_won_by" => $tower["player_color"]
+        ]));
+      }else{
+        $sql->resetGameAfterRoundWon($game, $tower);
+        echo(json_encode([
+          "valid" => true,
+          "round_won_by" => $tower["player_color"]
+        ]));
+      }
+
     }
-    $tower_id_to_move = updateGame($gameId, $loggedInId, $targetX, $targetY);
+
+    $tower_id_to_move = updateGame($gameId, $targetX, $targetY);
+
     if($tower_id_to_move != null){
+      // Check block
+      $game = $sql->getGame($gameId);
+      $towerToMove = $sql->getTower($tower_id_to_move);
+      $towerBlocked = isTowerBlocked($tower_id_to_move);
+      if($towerBlocked){
+        $tower_id_to_move = $sql->updateGame($gameId, $towerToMove["position_x"], $tower_to_move["position_y"]);
+        echo (json_encode([
+          "blocked" => true,
+          "valid" => true,
+          "tower_id_to_move" => $tower_id_to_move
+        ]));
+        exit;
+      }
       echo (json_encode([
         "valid" => true,
         "tower_id_to_move" => $tower_id_to_move
@@ -154,4 +180,60 @@ try {
   exit;
 }
 
+function isTowerBlocked($tower, $game){
+  if($tower["tower_color"] == "white"){
+    if($tower["position_x"] == 1){
+      $aboveTiles = [
+        ["x" => 1, "y" => $tower["position_y"] + 1],
+        ["x" => 2, "y" => $tower["position_y"] + 1]
+      ];
+    }else if($tower["position_x"] == 8){
+      $aboveTiles = [
+        ["x" => 8, "y" => $tower["position_y"] + 1],
+        ["x" => 7, "y" => $tower["position_y"] + 1]
+      ];
+    }else{
+      $aboveTiles = [
+        ["x" => $tower["position_x"] - 1, "y" => $tower["position_y"] + 1],
+        ["x" => $tower["position_x"], "y" => $tower["position_y"] + 1],
+        ["x" => $tower["position_x"] + 1, "y" => $tower["position_y"] + 1],
+      ];
+    }
+  }else if($tower["tower_color"] == "black"){
+    if($tower["position_x"] == 1){
+      $aboveTiles = [
+        ["x" => 1, "y" => $tower["position_y"] - 1],
+        ["x" => 2, "y" => $tower["position_y"] - 1]
+      ];
+    }else if($tower["position_x"] == 8){
+      $aboveTiles = [
+        ["x" => 8, "y" => $tower["position_y"] - 1],
+        ["x" => 7, "y" => $tower["position_y"] - 1]
+      ];
+    }else{
+      $aboveTiles = [
+        ["x" => $tower["position_x"] - 1, "y" => $tower["position_y"] - 1],
+        ["x" => $tower["position_x"], "y" => $tower["position_y"] - 1],
+        ["x" => $tower["position_x"] + 1, "y" => $tower["position_y"] - 1],
+      ];
+    }
+  }else{
+
+  }
+  foreach($aboveTiles as $aboveTile){
+    if(!tileOccupied($game["towers"], $aboveTile["x"], $aboveTile["y"])){
+      return false;
+    }
+  }
+  return true;
+}
+
+function tileOccupied($towers, $x, $y){
+  foreach($towers as $tower){
+    if($tower["position_x"] == $x && $tower["position_y"] == $y){
+      return $tower;
+    }
+  }
+  return false;
+}
 
