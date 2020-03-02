@@ -272,7 +272,7 @@ function deleteLobby($lobby_id)
 function forfeit($game_id)
 {
   $player_id = $this->getLoginPlayerId();
-  $query = "DELETE FROM games WHERE game_id = $game_id";
+  $query = "DELETE FROM games WHERE game_id = $game_id AND $player_id IN (player_1_id, player_2_id)";
 
   $this->conn->query($query);
 }
