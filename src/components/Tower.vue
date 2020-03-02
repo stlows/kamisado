@@ -1,21 +1,39 @@
 <template>
-  <g
-    class="tower"
+  <g>
+
+  <g v-for="(line, index) in playgroundHistory"
+    :key="index">
+    <line
+      class="arrow"
+      :x1="line.x1"
+      :y1="line.y1"
+      :x2="line.x2"
+      :y2="line.y2"
+    />
+    <text
+      fill="white"
+      text-anchor="middle"
+      dominant-baseline="central"
+      :x="(line.x2 + line.x1) / 2"
+      :y="(line.y2 + line.y1) / 2"
+    >{{index}}</text>
+  </g>
+
+  <line
+    v-if="dragging"
+    class="arrow"
+    :x1="arrowStartX"
+    :y1="arrowStartY"
+    :x2="x"
+    :y2="y"
+  />
+
+  <g class="tower"
     :class="{dragging}"
     @mousedown="mouseDown($event, tower)"
     @mouseup="mouseUp($event)"
     :style="'transform: translate(' + x + 'px,' + y + 'px)' "
-  >
-    <line
-      v-if="dragging"
-      class="arrow"
-      :x1="arrowStartX"
-      :y1="arrowStartY"
-      :x2="x"
-      :y2="y"
-      :style="'transform: translate(-' + x + 'px,-' + y + 'px)' "
-    />
-
+    >
     <circle :class="[tower.player_color, tower.tower_color, {dragging}]" :r="towerSize / 2"></circle>
 
     <text
@@ -24,6 +42,8 @@
       :class="[tower.tower_color, {dragging}]"
       :font-size="towerSize * 0.7"
     >{{tower.symbol}}</text>
+  </g>
+
   </g>
 </template>
 
@@ -35,6 +55,7 @@ export default {
       x: 0,
       y: 0,
       dragging: false,
+      playgroundHistory: [],
       arrowStartX: 0,
       arrowStartY: 0
     };
@@ -57,6 +78,13 @@ export default {
       this.setFullFromTower();
       if (!ev.shiftKey) {
         this.$emit("towerMoved", this.tower);
+      }else{
+        this.playgroundHistory.push({
+          x1: this.arrowStartX,
+          x2: this.tileToFullCoord(this.tower.position_x),
+          y1: this.arrowStartY,
+          y2: this.tileToFullCoord(this.tower.position_y)
+        })
       }
       document.removeEventListener("mousemove", this.mouseMove);
       document.removeEventListener("mouseup", this.mouseUp);
