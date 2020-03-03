@@ -12,7 +12,7 @@
         :font-size="borderSize * 0.7"
         :x="tileSize * (index + 1/2) + borderSize"
         :y="borderSize / 2 + (fullWidth- borderSize)*(i-1) "
-        :key="i + '_' +item"
+        :key="'row_' + i + '_' + item"
         class="helper"
       >{{item}}</text>
     </template>
@@ -24,7 +24,7 @@
         :font-size="borderSize * 0.7"
         :x="borderSize / 2 + (fullWidth- borderSize)*(i-1)"
         :y="tileSize * (index + 1/2) + borderSize"
-        :key="i + '_' +item"
+        :key="'col_' + i + '_' +item"
         class="helper"
       >{{item}}</text>
     </template>

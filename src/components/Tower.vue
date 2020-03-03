@@ -1,49 +1,33 @@
 <template>
   <g>
+    <g v-for="(line, index) in playgroundHistory" :key="index">
+      <line class="arrow" :x1="line.x1" :y1="line.y1" :x2="line.x2" :y2="line.y2" />
+      <text
+        fill="white"
+        text-anchor="middle"
+        dominant-baseline="central"
+        :x="(line.x2 + line.x1) / 2"
+        :y="(line.y2 + line.y1) / 2"
+      >{{index}}</text>
+    </g>
 
-  <g v-for="(line, index) in playgroundHistory"
-    :key="index">
-    <line
-      class="arrow"
-      :x1="line.x1"
-      :y1="line.y1"
-      :x2="line.x2"
-      :y2="line.y2"
-    />
-    <text
-      fill="white"
-      text-anchor="middle"
-      dominant-baseline="central"
-      :x="(line.x2 + line.x1) / 2"
-      :y="(line.y2 + line.y1) / 2"
-    >{{index}}</text>
-  </g>
+    <line v-if="dragging" class="arrow" :x1="arrowStartX" :y1="arrowStartY" :x2="x" :y2="y" />
 
-  <line
-    v-if="dragging"
-    class="arrow"
-    :x1="arrowStartX"
-    :y1="arrowStartY"
-    :x2="x"
-    :y2="y"
-  />
-
-  <g class="tower"
-    :class="{dragging}"
-    @mousedown="mouseDown($event, tower)"
-    @mouseup="mouseUp($event)"
-    :style="'transform: translate(' + x + 'px,' + y + 'px)' "
+    <g
+      class="tower"
+      :class="[tower.player_color, tower.tower_color, {dragging}]"
+      @mousedown="mouseDown($event, tower)"
+      @mouseup="mouseUp($event)"
+      :style="'transform: translate(' + x + 'px,' + y + 'px)' "
     >
-    <circle :class="[tower.player_color, tower.tower_color, {dragging}]" :r="towerSize / 2"></circle>
+      <circle :r="towerSize / 2"></circle>
 
-    <text
-      text-anchor="middle"
-      dominant-baseline="central"
-      :class="[tower.tower_color, {dragging}]"
-      :font-size="towerSize * 0.7"
-    >{{tower.symbol}}</text>
-  </g>
-
+      <text
+        text-anchor="middle"
+        dominant-baseline="central"
+        :font-size="towerSize * 0.7"
+      >{{tower.symbol}}</text>
+    </g>
   </g>
 </template>
 
@@ -78,13 +62,13 @@ export default {
       this.setFullFromTower();
       if (!this.playgroundMode) {
         this.$emit("towerMoved", this.tower);
-      }else{
+      } else {
         this.playgroundHistory.push({
           x1: this.arrowStartX,
           x2: this.tileToFullCoord(this.tower.position_x),
           y1: this.arrowStartY,
           y2: this.tileToFullCoord(this.tower.position_y)
-        })
+        });
       }
       document.removeEventListener("mousemove", this.mouseMove);
       document.removeEventListener("mouseup", this.mouseUp);
@@ -157,40 +141,40 @@ export default {
     }
   }
 
-  .white {
+  &.white {
     fill: $player-white;
   }
-  .black {
+  &.black {
     fill: $player-black;
   }
 
   text {
     pointer-events: none;
     user-select: none;
-    &.orange {
-      fill: $orange;
-    }
-    &.green {
-      fill: $green;
-    }
-    &.red {
-      fill: $red;
-    }
-    &.indigo {
-      fill: $indigo;
-    }
-    &.blue {
-      fill: $blue;
-    }
-    &.yellow {
-      fill: $yellow;
-    }
-    &.brown {
-      fill: $brown;
-    }
-    &.pink {
-      fill: $pink;
-    }
+  }
+  &.orange text {
+    fill: $orange;
+  }
+  &.green text {
+    fill: $green;
+  }
+  &.red text {
+    fill: $red;
+  }
+  &.indigo text {
+    fill: $indigo;
+  }
+  &.blue text {
+    fill: $blue;
+  }
+  &.yellow text {
+    fill: $yellow;
+  }
+  &.brown text {
+    fill: $brown;
+  }
+  &.pink text {
+    fill: $pink;
   }
 }
 </style>

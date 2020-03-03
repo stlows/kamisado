@@ -32,7 +32,7 @@
           <b-form-group label="Points to win:">
             <b-form-select v-model="settings.pointsToWin" :options="pointsToWinOptions"></b-form-select>
           </b-form-group>
-          <b-button type="submit" variant="primary">Create game !</b-button>
+          <b-button type="submit" id="newLobbyButton" variant="primary">Create game !</b-button>
         </b-form>
       </div>
     </div>

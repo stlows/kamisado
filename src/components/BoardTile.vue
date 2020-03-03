@@ -6,6 +6,7 @@
     :class="color"
     :x="tileSize*x"
     :y="tileSize*y"
+    :id="'tile_' + (x + 1) + '_' + (y + 1)"
   />
 </template>
 

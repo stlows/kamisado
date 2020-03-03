@@ -13,7 +13,7 @@
           <template v-if="games.length > 0">
             <b-table :items="games" :fields="fields">
               <template v-slot:cell(lobby_id)="data">
-                <a href="#" @click.prevent="joinGame(data)">Join</a>
+                <a href="#" class="joinGameLink" @click.prevent="joinGame(data)">Join</a>
               </template>
             </b-table>
           </template>

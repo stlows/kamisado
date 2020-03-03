@@ -4,16 +4,17 @@ include_once 'google-api-php-client-2.4.0/vendor/autoload.php';
 include_once 'errors.php';
 
 $headers = apache_request_headers();
+$headers = array_change_key_case($headers);
 try {
-  if (!isset($headers["Authorization"])) {
+  if (!isset($headers["authorization"])) {
     echo json_encode($NO_AUTHORIZATION_HEADER);
     exit;
   }
-  if ($headers["Authorization"] == "" || $headers["Authorization"] == null) {
+  if ($headers["authorization"] == "" || $headers["authorization"] == null) {
     echo json_encode($NO_AUTHORIZATION_HEADER);
     exit;
   }
-  $id_token = $headers["Authorization"];
+  $id_token = $headers["authorization"];
 
   // Pour développement seulement !
   if (strpos($id_token, "test") !== false) {

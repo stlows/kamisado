@@ -25,8 +25,8 @@
               <b-dropdown-item @click="signout">Sign Out</b-dropdown-item>
             </b-dropdown>
           </template>
-          <input type="text" v-model="fakeToken" />
-          <button @click="setFakeToken">Set</button>
+          <input type="text" id="setFakeTokenInput" v-model="fakeToken" />
+          <button @click="setFakeToken" id="setFakeTokenButton">Set</button>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -41,11 +41,11 @@ export default {
     return {
       isSignedIn: false,
       name: "",
-      fakeToken: ''
+      fakeToken: ""
     };
   },
   computed: {
-    ...mapGetters({token: "getToken"}),
+    ...mapGetters({ token: "getToken" })
   },
   watch: {
     isSignedIn(newVal) {
@@ -53,8 +53,8 @@ export default {
         this.renderSignin();
       }
     },
-    token(newVal, oldVal){
-      console.log("token changed")
+    token(newVal, oldVal) {
+      console.log("token changed");
     }
   },
   created() {
@@ -81,19 +81,19 @@ export default {
         vue.isSignedIn = false;
       });
       this.setToken("");
-      this.$emit("onlogout")
+      this.$emit("onlogout");
     },
     onSuccess(googleUser) {
       this.isSignedIn = true;
       var profile = googleUser.getBasicProfile();
       this.name = profile.getName();
       this.setToken(googleUser.getAuthResponse().id_token);
-      this.$emit("onlogin")
+      this.$emit("onlogin");
     },
     onFailure(error) {},
     setFakeToken() {
       this.setToken(this.fakeToken);
-      if(this.fakeToken.includes("test")){
+      if (this.fakeToken.includes("test")) {
         this.$emit("onlogin");
       }
     },

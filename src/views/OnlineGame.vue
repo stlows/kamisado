@@ -7,7 +7,7 @@
     <div class="center">
       <div class="text-center mb-2">
         <a href="#" @click.prevent="forfeitGame">Forfeit</a> |
-        <a href="#" @click.prevent="fetchGame">Refresh</a>
+        <a href="#" @click.prevent="fetchGame" id="refreshLink">Refresh</a>
       </div>
       <div v-if="towerToMove" class="mb-2">
         <span
@@ -20,12 +20,7 @@
     </div>
     <div class="right">
       <MyGames ref="myGames" @refreshGame="fetchGame" />
-      <b-form-checkbox
-        id="playgroundModeCheckbox"
-        v-model="playgroundMode"
-      >
-      Playground Mode
-      </b-form-checkbox>
+      <b-form-checkbox id="playgroundModeCheckbox" v-model="playgroundMode">Playground Mode</b-form-checkbox>
     </div>
   </div>
 </template>
@@ -42,7 +37,7 @@ export default {
     OnlineLobby,
     NewGame,
     MyGames,
-    Board,
+    Board
   },
   data() {
     return {
@@ -72,7 +67,6 @@ export default {
       if (this.game.game.tower_id_to_move) {
         this.getTower(this.game.game.tower_id_to_move).then(res => {
           this.towerToMove = res.data;
-          console.log(res.data);
         });
       } else {
         this.towerToMove = null;
@@ -87,9 +81,9 @@ export default {
         }
       }).then(res => {
         if (res.data.valid) {
-          if(res.data.round_won_by){
+          if (res.data.round_won_by) {
             this.fetchGame();
-          }else{
+          } else {
             this.game.game.tower_id_to_move = res.data.tower_id_to_move;
             this.fetchTowerToMove();
           }
@@ -118,12 +112,11 @@ export default {
   created() {
     this.fetchGame();
     var vue = this;
-    document.addEventListener(
-      "keydown", function (event) {
-        if(event.keyCode == 80){
-          vue.playgroundMode = !vue.playgroundMode
-        }
-    })
+    document.addEventListener("keydown", function(event) {
+      if (event.keyCode == 80) {
+        vue.playgroundMode = !vue.playgroundMode;
+      }
+    });
   }
 };
 </script>
