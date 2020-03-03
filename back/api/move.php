@@ -7,6 +7,7 @@ include_once("../sql/sql.php");
 include_once("../prettify.php");
 include_once("../validations.php");
 include_once("../errors.php");
+include_once("../board.php");
 
 $move = json_decode(file_get_contents('php://input'), true);
 
@@ -125,6 +126,10 @@ else{
 
 try {
   if($sql->moveTower($towerId, $targetX, $targetY)){
+    $tower_id_to_move = $sql->updateGame($gameId, $targetX, $targetY);
+    $gameObject = $sql->getGame($gameId);
+    $game = $gameObject["game"];
+    $towers = $gameObject["towers"];
     // Check win
     if($targetY == 1 || $targetY == 8){
       // Check game won
@@ -135,25 +140,35 @@ try {
           "valid" => true,
           "game_won_by" => $tower["player_color"]
         ]));
+        exit;
       }else{
-        $sql->resetGameAfterRoundWon($game, $tower);
-        echo(json_encode([
-          "valid" => true,
-          "round_won_by" => $tower["player_color"]
-        ]));
+        $sql->promoteSumo($towerId);
+        $dir = "left";
+        $newTowers = resetTowers($towers, $tower["player_color"], $dir);
+        if($sql->updateTowers($newTowers)){
+          echo(json_encode([
+            "valid" => true,
+            "round_won_by" => $tower["player_color"]
+          ]));
+          exit;
+        }else{
+          echo (json_encode($ERROR_UPDATING_GAME));
+          exit;
+        }
+        
       }
 
     }
 
-    $tower_id_to_move = updateGame($gameId, $targetX, $targetY);
+    
 
     if($tower_id_to_move != null){
       // Check block
       $game = $sql->getGame($gameId);
       $towerToMove = $sql->getTower($tower_id_to_move);
-      $towerBlocked = isTowerBlocked($tower_id_to_move);
+      $towerBlocked = isTowerBlocked($towerToMove, $game);
       if($towerBlocked){
-        $tower_id_to_move = $sql->updateGame($gameId, $towerToMove["position_x"], $tower_to_move["position_y"]);
+        $tower_id_to_move = $sql->updateGame($gameId, $towerToMove["position_x"], $towerToMove["position_y"]);
         echo (json_encode([
           "blocked" => true,
           "valid" => true,
@@ -181,7 +196,7 @@ try {
 }
 
 function isTowerBlocked($tower, $game){
-  if($tower["tower_color"] == "white"){
+  if($tower["player_color"] == "white"){
     if($tower["position_x"] == 1){
       $aboveTiles = [
         ["x" => 1, "y" => $tower["position_y"] + 1],
@@ -199,7 +214,7 @@ function isTowerBlocked($tower, $game){
         ["x" => $tower["position_x"] + 1, "y" => $tower["position_y"] + 1],
       ];
     }
-  }else if($tower["tower_color"] == "black"){
+  }else if($tower["player_color"] == "black"){
     if($tower["position_x"] == 1){
       $aboveTiles = [
         ["x" => 1, "y" => $tower["position_y"] - 1],
@@ -237,3 +252,16 @@ function tileOccupied($towers, $x, $y){
   return false;
 }
 
+function resetTowers($towers, $winner, $dir){
+  $board = new Board($towers);
+
+  if($winner == "black"){
+    $board->replaceBlacks($dir);
+    $board->replaceWhites($dir);
+  }else if($winner == "white"){
+    $board->replaceWhites($dir);
+    $board->replaceBlacks($dir);
+  }
+
+  return $board->towers();
+}

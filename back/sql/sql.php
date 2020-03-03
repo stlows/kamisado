@@ -207,7 +207,7 @@ function updateGame($game_id, $target_x, $target_y){
 
   $color = $this->getTileColor($target_x, $target_y);
   $other_player_id = $this->getOtherPlayerId($game_id);
-  $tower_to_move = $this->getTowerByColorAndGame($game_id, $color, $other_player_id);
+  $tower_to_move = $this->getTowerByColorGameAndPlayerId($game_id, $color, $other_player_id);
   $query = "UPDATE games
   SET
   is_first_move = 0,
@@ -294,10 +294,19 @@ function forfeit($game_id)
   $this->conn->query($query);
 }
 
-function resetGameAfterRoundWon($game, $tower){
-  $towers = $game["towers"];
-
+function promoteSumo($tower_id){
+  $query = "UPDATE towers SET sumo = (sumo + 1) WHERE tower_id = $tower_id";
+  return $this->conn->query($query);
 }
+
+function updateTowers($newTowers){
+  $query = "";
+  foreach($newTowers as $tower){
+    $query .= "UPDATE towers SET position_x = " . $tower["position_x"] . ", position_y = " . $tower["position_y"] . " WHERE tower_id = " . $tower["tower_id"] . ";";
+  }
+  return $this->conn->multi_query($query);
+}
+
 }
 
 

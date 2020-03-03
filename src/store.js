@@ -9,7 +9,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     notifications: [],
-    token: "",
+    token: "test_0004",
     localGames: [],
   },
   mutations: {
@@ -95,7 +95,7 @@ export const store = new Vuex.Store({
       })
     },
     forfeit({ commit, state }, gameId) {
-      return api.post("forfeit.php", { gameId }, {
+      return api.post("forfeit.php", { gameId: parseInt(gameId) }, {
         headers: {
           'Authorization': state.token
         }
