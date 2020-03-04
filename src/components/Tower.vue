@@ -21,6 +21,8 @@
       :style="'transform: translate(' + x + 'px,' + y + 'px)' "
     >
       <circle :r="towerSize / 2"></circle>
+      
+      <Star color="white" :size="0.08" style="transform:translate(-110px, -30px)"></Star>
 
       <text
         text-anchor="middle"
@@ -32,7 +34,11 @@
 </template>
 
 <script>
+import Star from './Star'
 export default {
+  components: {
+    Star
+  },
   props: ["tower", "towerSize", "tileSize", "borderSize", "playgroundMode"],
   data() {
     return {

@@ -105,7 +105,20 @@ function getGame($game_id)
 
   $player_id = $this->getLoginPlayerId();
 
-  $gameQuery = "SELECT * FROM games WHERE game_id = $game_id";
+  $gameQuery = "SELECT
+    game_id,
+    p1.player_name player_1_name,
+    p2.player_name player_2_name,
+    player_1_score, player_2_score, 
+    points_to_win, 
+    tower_id_to_move, 
+    is_first_move, 
+    turn_color, 
+    turn_player_id
+    From games
+    LEFT JOIN players p1 ON p1.player_id = player_1_id
+    LEFT JOIN players p2 ON p2.player_id = player_2_id
+    Where game_id = $game_id";
 
   $gameResult = $this->conn->query($gameQuery);
 
