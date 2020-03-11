@@ -10,14 +10,7 @@
         <a href="#" @click.prevent="fetchGame" id="refreshLink">Refresh</a> |
         <a href="#" @click.prevent="rotate = !rotate" id="refreshLink">Rotate</a>
       </div>
-      <div v-if="towerToMove" class="mb-2">
-        <span
-          class="tower-description"
-          :class="[towerToMove.player_color, towerToMove.tower_color]"
-        >{{ towerToMove.symbol }}</span>
-      </div>
-      <div v-if="!towerToMove && game.game">Turn: {{ game.game.turn_color }}</div>
-      <Scoreboard :game="game.game" />
+      <b-form-checkbox id="playgroundModeCheckbox" v-model="playgroundMode">Playground Mode</b-form-checkbox>
       <Board
         :towers="game.towers"
         @towerMoved="towerMoved"
@@ -26,15 +19,15 @@
       ></Board>
     </div>
     <div class="right">
+      <ActiveGameInfo :game="game.game"></ActiveGameInfo>
       <MyGames ref="myGames" @refreshGame="fetchGame" />
-      <b-form-checkbox id="playgroundModeCheckbox" v-model="playgroundMode">Playground Mode</b-form-checkbox>
     </div>
   </div>
 </template>
 
 <script>
 import Board from "../components/Board";
-import Scoreboard from "../components/Scoreboard";
+import ActiveGameInfo from "../components/ActiveGameInfo";
 import OnlineLobby from "./OnlineLobby";
 import NewGame from "./NewGame";
 import MyGames from "./MyGames";
@@ -46,12 +39,11 @@ export default {
     NewGame,
     MyGames,
     Board,
-    Scoreboard
+    ActiveGameInfo
   },
   data() {
     return {
       game: {},
-      towerToMove: null,
       playgroundMode: false,
       rotate: false
     };
@@ -69,18 +61,8 @@ export default {
           });
         } else {
           this.game = res.data;
-          this.fetchTowerToMove();
         }
       });
-    },
-    fetchTowerToMove() {
-      if (this.game.game.tower_id_to_move) {
-        this.getTower(this.game.game.tower_id_to_move).then(res => {
-          this.towerToMove = res.data;
-        });
-      } else {
-        this.towerToMove = null;
-      }
     },
     towerMoved(tower) {
       this.move({
@@ -89,23 +71,19 @@ export default {
           x: parseInt(tower.position_x),
           y: parseInt(tower.position_y)
         }
-      }).then(res => {
-        if (res.data.valid) {
-          if (res.data.round_won_by) {
-            this.fetchGame();
-          } else {
-            this.game.game.tower_id_to_move = res.data.tower_id_to_move;
-            this.fetchTowerToMove();
+      })
+        .then(res => {
+          if (!res.data.valid) {
+            this.notify({
+              id: new Date().valueOf(),
+              variant: "danger",
+              message: res.data.message
+            });
           }
-        } else {
-          this.notify({
-            id: new Date().valueOf(),
-            variant: "danger",
-            message: res.data.message
-          });
+        })
+        .finally(() => {
           this.fetchGame();
-        }
-      });
+        });
     },
     forfeitGame() {
       this.forfeit(this.gameId).then(res => {

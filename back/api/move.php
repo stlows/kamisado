@@ -122,14 +122,9 @@ else{
   }
 }
 
-
-
 try {
   if($sql->moveTower($towerId, $targetX, $targetY)){
-    $tower_id_to_move = $sql->updateGame($gameId, $targetX, $targetY);
-    $gameObject = $sql->getGame($gameId);
-    $game = $gameObject["game"];
-    $towers = $gameObject["towers"];
+    
     // Check win
     if($targetY == 1 || $targetY == 8){
       // Check game won
@@ -145,6 +140,7 @@ try {
         $sql->promoteSumo($towerId);
         $dir = "left";
         $newTowers = resetTowers($towers, $tower["player_color"], $dir);
+        $sql->updateGameAfterRoundWon($gameId, $tower);
         if($sql->updateTowers($newTowers)){
           echo(json_encode([
             "valid" => true,
@@ -158,32 +154,34 @@ try {
         
       }
 
-    }
-
-    
-
-    if($tower_id_to_move != null){
-      // Check block
-      $game = $sql->getGame($gameId);
-      $towerToMove = $sql->getTower($tower_id_to_move);
-      $towerBlocked = isTowerBlocked($towerToMove, $game);
-      if($towerBlocked){
-        $tower_id_to_move = $sql->updateGame($gameId, $towerToMove["position_x"], $towerToMove["position_y"]);
+    }else{
+      $tower_id_to_move = $sql->updateGame($gameId, $targetX, $targetY);
+      $gameObject = $sql->getGame($gameId);
+      $game = $gameObject["game"];
+      $towers = $gameObject["towers"];
+      if($tower_id_to_move != null){
+        // Check block
+        $game = $sql->getGame($gameId);
+        $towerToMove = $sql->getTower($tower_id_to_move);
+        $towerBlocked = isTowerBlocked($towerToMove, $game);
+        if($towerBlocked){
+          $tower_id_to_move = $sql->updateGame($gameId, $towerToMove["position_x"], $towerToMove["position_y"]);
+          echo (json_encode([
+            "blocked" => true,
+            "valid" => true,
+            "tower_id_to_move" => $tower_id_to_move
+          ]));
+          exit;
+        }
         echo (json_encode([
-          "blocked" => true,
           "valid" => true,
           "tower_id_to_move" => $tower_id_to_move
         ]));
         exit;
+      }else{
+        echo (json_encode($ERROR_UPDATING_GAME));
+        exit;
       }
-      echo (json_encode([
-        "valid" => true,
-        "tower_id_to_move" => $tower_id_to_move
-      ]));
-      exit;
-    }else{
-      echo (json_encode($ERROR_UPDATING_GAME));
-      exit;
     }
   }else{
     echo (json_encode($ERROR_MOVING_TOWER));

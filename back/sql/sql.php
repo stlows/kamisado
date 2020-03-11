@@ -48,9 +48,9 @@ function newGame($lobby_id)
 
   $gameQuery = "
   INSERT INTO games
-  (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color)
+  (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
   VALUES
-  ($player_1_id, $player_2_id, 0, 0, " . $lobby["points_to_win"] . ", true, null, $player_1_id, 'white')";
+  ($player_1_id, $player_2_id, 0, 0, " . $lobby["points_to_win"] . ", true, null, $player_1_id, 'white', null)";
 
   $this->conn->query($gameQuery);
 
@@ -114,7 +114,8 @@ function getGame($game_id)
     tower_id_to_move, 
     is_first_move, 
     turn_color, 
-    turn_player_id
+    turn_player_id,
+    turn_tower_color
     From games
     LEFT JOIN players p1 ON p1.player_id = player_1_id
     LEFT JOIN players p2 ON p2.player_id = player_2_id
@@ -209,11 +210,30 @@ function getTileColor($x, $y){
 
 function getTowerByColorGameAndPlayerId($game_id, $color, $playerId){
 
-  $query = "SELECT tower_id FROM towers WHERE game_id = $game_id AND tower_color = '$color' AND player_id = $playerId";
+  $query = "SELECT tower_id, tower_color FROM towers WHERE game_id = $game_id AND tower_color = '$color' AND player_id = $playerId";
   $result = $this->conn->query($query);
   if($result->num_rows == 1){
     return $result->fetch_assoc()["tower_id"];
   }
+}
+function updateGameAfterRoundWon($game_id, $tower){
+  
+  $other_player_id = $this->getOtherPlayerId($game_id);
+  $player_1_or_2 = $tower["player_color"] == 'white' ? '1' : '2';
+  $to_add = 1;
+
+  $query = "UPDATE games
+  SET
+  is_first_move = 1,
+  turn_player_id = $other_player_id,
+  player_" . $player_1_or_2 . "_score = (player_" . $player_1_or_2 . "_score + $to_add),
+  tower_id_to_move = NULL,
+  turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                    WHEN turn_color = 'black' THEN 'white'
+                    END,
+  turn_tower_color = NULL
+  WHERE game_id = $game_id";
+  $this->conn->query($query);
 }
 
 function updateGame($game_id, $target_x, $target_y){
@@ -228,7 +248,8 @@ function updateGame($game_id, $target_x, $target_y){
   tower_id_to_move = $tower_to_move,
   turn_color = CASE WHEN turn_color = 'white' THEN 'black'
                     WHEN turn_color = 'black' THEN 'white'
-                    END
+                    END,
+  turn_tower_color = '$color'
   WHERE game_id = $game_id";
 
   if($this->conn->query($query)){
