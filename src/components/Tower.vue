@@ -26,6 +26,8 @@
         text-anchor="middle"
         dominant-baseline="central"
         :font-size="towerSize * 0.7"
+        class="tower--symbol"
+        :class="{rotate}"
       >{{tower.symbol}}</text>
     </g>
   </g>
@@ -33,7 +35,14 @@
 
 <script>
 export default {
-  props: ["tower", "towerSize", "tileSize", "borderSize", "playgroundMode"],
+  props: [
+    "tower",
+    "towerSize",
+    "tileSize",
+    "borderSize",
+    "playgroundMode",
+    "rotate"
+  ],
   data() {
     return {
       x: 0,
@@ -148,32 +157,35 @@ export default {
     fill: $player-black;
   }
 
-  text {
+  text.tower--symbol {
     pointer-events: none;
     user-select: none;
+    &.rotate {
+      transform: rotate(180deg);
+    }
   }
-  &.orange text {
+  &.orange text.tower--symbol {
     fill: $orange;
   }
-  &.green text {
+  &.green text.tower--symbol {
     fill: $green;
   }
-  &.red text {
+  &.red text.tower--symbol {
     fill: $red;
   }
-  &.indigo text {
+  &.indigo text.tower--symbol {
     fill: $indigo;
   }
-  &.blue text {
+  &.blue text.tower--symbol {
     fill: $blue;
   }
-  &.yellow text {
+  &.yellow text.tower--symbol {
     fill: $yellow;
   }
-  &.brown text {
+  &.brown text.tower--symbol {
     fill: $brown;
   }
-  &.pink text {
+  &.pink text.tower--symbol {
     fill: $pink;
   }
 }

@@ -7,7 +7,8 @@
     <div class="center">
       <div class="text-center mb-2">
         <a href="#" @click.prevent="forfeitGame">Forfeit</a> |
-        <a href="#" @click.prevent="fetchGame" id="refreshLink">Refresh</a>
+        <a href="#" @click.prevent="fetchGame" id="refreshLink">Refresh</a> |
+        <a href="#" @click.prevent="rotate = !rotate" id="refreshLink">Rotate</a>
       </div>
       <div v-if="towerToMove" class="mb-2">
         <span
@@ -16,7 +17,12 @@
         >{{ towerToMove.symbol }}</span>
       </div>
       <div v-if="!towerToMove && game.game">Turn: {{ game.game.turn_color }}</div>
-      <Board :towers="game.towers" @towerMoved="towerMoved" :playgroundMode="playgroundMode"></Board>
+      <Board
+        :towers="game.towers"
+        @towerMoved="towerMoved"
+        :playgroundMode="playgroundMode"
+        :rotate="rotate"
+      ></Board>
     </div>
     <div class="right">
       <MyGames ref="myGames" @refreshGame="fetchGame" />
@@ -43,7 +49,8 @@ export default {
     return {
       game: {},
       towerToMove: null,
-      playgroundMode: false
+      playgroundMode: false,
+      rotate: false
     };
   },
   methods: {

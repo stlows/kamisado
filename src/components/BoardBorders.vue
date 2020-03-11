@@ -14,6 +14,7 @@
         :y="borderSize / 2 + (fullWidth- borderSize)*(i-1) "
         :key="'row_' + i + '_' + item"
         class="helper"
+        :class="{rotate}"
       >{{item}}</text>
     </template>
     <template v-for="i in 2">
@@ -26,6 +27,7 @@
         :y="tileSize * (index + 1/2) + borderSize"
         :key="'col_' + i + '_' +item"
         class="helper"
+        :class="{rotate}"
       >{{item}}</text>
     </template>
   </g>
@@ -33,7 +35,7 @@
 
 <script>
 export default {
-  props: ["borderSize", "fullWidth", "tileSize"],
+  props: ["borderSize", "fullWidth", "tileSize", "rotate"],
   data() {
     return {
       rows: ["1", "2", "3", "4", "5", "6", "7", "8"],
@@ -52,6 +54,10 @@ export default {
     pointer-events: none;
     user-select: none;
     fill: rgb(218, 223, 250);
+    &.rotate {
+      transform: rotate(180deg);
+      transform-origin: center center;
+    }
   }
 }
 </style>

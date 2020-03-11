@@ -1,6 +1,11 @@
 <template>
-  <svg v-if="tiles" class="board" :width="fullWidth" :height="fullWidth">
-    <BoardBorders :borderSize="borderSize" :fullWidth="fullWidth" :tileSize="tileSize" />
+  <svg v-if="tiles" class="board" :width="fullWidth" :height="fullWidth" :class="{rotate}">
+    <BoardBorders
+      :borderSize="borderSize"
+      :fullWidth="fullWidth"
+      :tileSize="tileSize"
+      :rotate="rotate"
+    />
     <g :style="'transform: translate(' + borderSize + 'px,' + borderSize + 'px)'">
       <g class="board--background">
         <BoardTile
@@ -21,6 +26,7 @@
           :tileSize="tileSize"
           :borderSize="borderSize"
           :playgroundMode="playgroundMode"
+          :rotate="rotate"
           @towerMoved="towerMoved"
         />
       </g>
@@ -39,7 +45,7 @@ export default {
     BoardTile,
     Tower
   },
-  props: ["towers", "playgroundMode"],
+  props: ["towers", "playgroundMode", "rotate"],
   data() {
     return {
       tiles: null,
@@ -66,8 +72,11 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .board {
   margin: auto;
+  &.rotate {
+    transform: rotate(180deg);
+  }
 }
 </style>
