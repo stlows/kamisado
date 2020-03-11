@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="left">
-      <OnlineLobby ref="onlineLobbyRef" @lobbyJoined="fetchGame;$refs.myGames.refreshGames()" />
+      <OnlineLobby ref="onlineLobbyRef" @lobbyJoined="lobbyJoined" />
       <NewGame @refreshLobby="$refs.onlineLobbyRef.refreshLobby()" />
     </div>
     <div class="center">
@@ -17,6 +17,7 @@
         >{{ towerToMove.symbol }}</span>
       </div>
       <div v-if="!towerToMove && game.game">Turn: {{ game.game.turn_color }}</div>
+      <Scoreboard :game="game.game" />
       <Board
         :towers="game.towers"
         @towerMoved="towerMoved"
@@ -33,6 +34,7 @@
 
 <script>
 import Board from "../components/Board";
+import Scoreboard from "../components/Scoreboard";
 import OnlineLobby from "./OnlineLobby";
 import NewGame from "./NewGame";
 import MyGames from "./MyGames";
@@ -43,7 +45,8 @@ export default {
     OnlineLobby,
     NewGame,
     MyGames,
-    Board
+    Board,
+    Scoreboard
   },
   data() {
     return {
@@ -109,6 +112,10 @@ export default {
         this.fetchGame();
         this.$refs.myGames.refreshGames();
       });
+    },
+    lobbyJoined() {
+      this.fetchGame();
+      this.$refs.myGames.refreshGames();
     }
   },
   computed: {
