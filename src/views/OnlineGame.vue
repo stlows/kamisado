@@ -83,6 +83,7 @@ export default {
         })
         .finally(() => {
           this.fetchGame();
+          this.$refs.myGames.refreshGames();
         });
     },
     forfeitGame() {
@@ -137,8 +138,6 @@ export default {
   line-height: 50px;
   text-align: center;
   border: 1px solid black;
-  pointer-events: none;
-  user-select: none;
   &.white {
     background-color: $player-white;
   }

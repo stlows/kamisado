@@ -78,5 +78,9 @@ export default {
   &.rotate {
     transform: rotate(180deg);
   }
+  text {
+    pointer-events: none;
+    user-select: none;
+  }
 }
 </style>

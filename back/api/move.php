@@ -123,14 +123,16 @@ else{
 }
 
 try {
-  if($sql->moveTower($towerId, $targetX, $targetY)){
+  $moved_tower_successful = $sql->moveTower($towerId, $targetX, $targetY);
+  if($moved_tower_successful){
     
     // Check win
     if($targetY == 1 || $targetY == 8){
+      // Ajout des points
+      $sql->addPoints($gameId, $tower);
       // Check game won
-      $game_won = false; // isGameWon(...);
+      $game_won = $sql->checkIfGameIsWon($gameId);
       if($game_won){
-        //gameWon(...);
         echo(json_encode([
           "valid" => true,
           "game_won_by" => $tower["player_color"]
@@ -140,48 +142,61 @@ try {
         $sql->promoteSumo($towerId);
         $dir = "left";
         $newTowers = resetTowers($towers, $tower["player_color"], $dir);
-        $sql->updateGameAfterRoundWon($gameId, $tower);
-        if($sql->updateTowers($newTowers)){
-          echo(json_encode([
-            "valid" => true,
-            "round_won_by" => $tower["player_color"]
-          ]));
-          exit;
-        }else{
-          echo (json_encode($ERROR_UPDATING_GAME));
-          exit;
-        }
+        $sql->setFirstMove($gameId, 1);
+        $sql->switchTurn($gameId);
+        $sql->setTowerIdToMove($gameId, null);
+        $sql->setTurnTowerColor($gameId, null);
+        $sql->updateTowers($newTowers);
+        echo(json_encode([
+          "valid" => true,
+          "round_won_by" => $tower["player_color"]
+        ]));
+        exit;
         
       }
 
-    }else{
-      $tower_id_to_move = $sql->updateGame($gameId, $targetX, $targetY);
+    }
+    else // Not win
+    { 
+      $tile_color = $sql->getTileColor($targetX, $targetY);
+      $other_player_id = $sql->getOtherPlayerId($gameId);
+      $tower_id_to_move = $sql->getTowerByColorGameAndPlayerId($gameId, $tile_color, $other_player_id);
+      
+      $sql->setFirstMove($gameId, 0);
+      $sql->switchTurn($gameId);
+      $sql->setTowerIdToMove($gameId, $tower_id_to_move);
+      $sql->setTurnTowerColor($gameId, $tile_color);
+
+      // Check block
       $gameObject = $sql->getGame($gameId);
-      $game = $gameObject["game"];
-      $towers = $gameObject["towers"];
-      if($tower_id_to_move != null){
-        // Check block
-        $game = $sql->getGame($gameId);
-        $towerToMove = $sql->getTower($tower_id_to_move);
-        $towerBlocked = isTowerBlocked($towerToMove, $game);
-        if($towerBlocked){
-          $tower_id_to_move = $sql->updateGame($gameId, $towerToMove["position_x"], $towerToMove["position_y"]);
-          echo (json_encode([
-            "blocked" => true,
-            "valid" => true,
-            "tower_id_to_move" => $tower_id_to_move
-          ]));
-          exit;
-        }
+      $towerToMove = $sql->getTower($tower_id_to_move);
+      $towerBlocked = isTowerBlocked($towerToMove, $gameObject);
+      if($towerBlocked){
+
+        $tile_color = $sql->getTileColor($towerToMove["position_x"], $towerToMove["position_y"]);
+        $other_player_id = $sql->getOtherPlayerId($gameId);
+        $tower_id_to_move = $sql->getTowerByColorGameAndPlayerId($gameId, $tile_color, $other_player_id);
+      
+        $sql->switchTurn($gameId);
+        $sql->setTowerIdToMove($gameId, $tower_id_to_move);
+        $sql->setTurnTowerColor($gameId, $tile_color);
+
+        echo (json_encode([
+          "blocked" => true,
+          "valid" => true,
+          "tower_id_to_move" => $tower_id_to_move
+        ]));
+        exit;
+      }
+      else{ // Not blocked
         echo (json_encode([
           "valid" => true,
           "tower_id_to_move" => $tower_id_to_move
         ]));
         exit;
-      }else{
-        echo (json_encode($ERROR_UPDATING_GAME));
-        exit;
       }
+      
+
     }
   }else{
     echo (json_encode($ERROR_MOVING_TOWER));

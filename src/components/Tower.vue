@@ -1,14 +1,19 @@
 <template>
   <g>
     <g v-for="(line, index) in playgroundHistory" :key="index">
-      <line class="arrow" :x1="line.x1" :y1="line.y1" :x2="line.x2" :y2="line.y2" />
-      <text
+      <line class="arrow" :x1="line.x1" :y1="line.y1" :x2="line.x2" :y2="line.y2">
+        <title>Playground line</title>
+      </line>
+      <!-- Problème avec la rotation -->
+      <!-- <text
         fill="white"
         text-anchor="middle"
         dominant-baseline="central"
         :x="(line.x2 + line.x1) / 2"
         :y="(line.y2 + line.y1) / 2"
-      >{{index}}</text>
+        class="line--index"
+        :class="{rotate}"
+      >{{index}}</text>-->
     </g>
 
     <line v-if="dragging" class="arrow" :x1="arrowStartX" :y1="arrowStartY" :x2="x" :y2="y" />
@@ -20,14 +25,14 @@
       @mouseup="mouseUp($event)"
       :style="'transform: translate(' + x + 'px,' + y + 'px)' "
     >
-      <circle :r="towerSize / 2"></circle>
+      <title>Tower — {{tower.player_color}}'s {{tower.tower_color}} — ({{tower.position_x}}, {{tower.position_y}}) — Sumo: {{tower.sumo}}</title>
 
-      <Star color="white" :size="0.08" style="transform:translate(-110px, -30px)"></Star>
+      <circle :r="towerSize / 2 "></circle>
 
       <text
         text-anchor="middle"
         dominant-baseline="central"
-        :font-size="towerSize * 0.7"
+        :font-size="towerSize * 0.6"
         class="tower--symbol"
         :class="{rotate}"
       >{{tower.symbol}}</text>
@@ -36,8 +41,8 @@
 </template>
 
 <script>
-import Star from "./Star";
 export default {
+  components: {},
   props: [
     "tower",
     "towerSize",
@@ -155,14 +160,29 @@ export default {
 
   &.white {
     fill: $player-white;
+    & circle.sumo1 {
+      fill: $player-black;
+    }
+    & circle.sumo2 {
+      fill: $player-white;
+    }
+    & circle.sumo3 {
+      fill: $player-black;
+    }
   }
   &.black {
     fill: $player-black;
+    & circle.sumo1 {
+      fill: $player-white;
+    }
+    & circle.sumo2 {
+      fill: $player-black;
+    }
+    & circle.sumo3 {
+      fill: $player-white;
+    }
   }
-
   text.tower--symbol {
-    pointer-events: none;
-    user-select: none;
     &.rotate {
       transform: rotate(180deg);
     }

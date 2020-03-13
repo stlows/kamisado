@@ -30,6 +30,7 @@ class Board
     }
     return $result;
   }
+  
   function replaceBlacks($dir){
     for($y = 1; $y <= 8; $y++){
       for($x = 1; $x <= 8; $x++){

@@ -1,7 +1,8 @@
 <template>
   <b-card>
-    <b-card-title>Active game: {{game.game_id}}</b-card-title>
-    <b-card-body>
+    <b-card-title v-if="game">Active game: {{game.game_id}}</b-card-title>
+    <b-card-title v-else>No game selected</b-card-title>
+    <b-card-body v-if="game">
       <b-list-group>
         <b-list-group-item class="d-flex justify-content-between align-items-center">
           <span
@@ -22,7 +23,7 @@
         </b-list-group-item>
         <b-list-group-item class="d-flex justify-content-between align-items-center">
           <span>Tower to move</span>
-          <span>{{towerToMove}}</span>
+          <span class="tower-color" :class="[towerToMove]">{{towerToMove}}</span>
         </b-list-group-item>
       </b-list-group>
     </b-card-body>
@@ -45,10 +46,38 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+@import "../assets/colors.scss";
+
 .vs {
   margin: 0 10px;
   text-transform: uppercase;
   color: rgb(31, 32, 90);
+}
+.tower-color {
+  &.orange {
+    color: $orange;
+  }
+  &.green {
+    color: $green;
+  }
+  &.red {
+    color: $red;
+  }
+  &.indigo {
+    color: $indigo;
+  }
+  &.blue {
+    color: $blue;
+  }
+  &.yellow {
+    color: $yellow;
+  }
+  &.brown {
+    color: $brown;
+  }
+  &.pink {
+    color: $pink;
+  }
 }
 </style>

@@ -7,7 +7,9 @@
     :x="tileSize*x"
     :y="tileSize*y"
     :id="'tile_' + (x + 1) + '_' + (y + 1)"
-  />
+  >
+    <title>Tile - {{color}} ({{x + 1}}, {{y + 1}})</title>
+  </rect>
 </template>
 
 <script>
