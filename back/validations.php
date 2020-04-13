@@ -45,6 +45,25 @@ $INVALID = [
   "message" => "Move is invalid."
 ];
 
+$SUMO_MAX_MOVES = [
+  1 => [
+    "valid" => false,
+    "message" => "Sumo can only advance 5 tiles."
+  ],
+  2 => [
+    "valid" => false,
+    "message" => "Double Sumo can only advance 3 tiles."
+  ],
+  3 => [
+    "valid" => false,
+    "message" => "Triple Sumo can only advance 1 tile."
+  ],
+  4 => [
+    "valid" => false,
+    "message" => "Quadruple Sumo can't advance."
+  ]
+];
+
 $VALID = [
   "valid" => true,
   "message" => "Move is valid."
@@ -61,3 +80,4 @@ $BLACK_WINS_ROUND = [
   "message" => "Black won the round.",
   "round_won" => true
 ];
+

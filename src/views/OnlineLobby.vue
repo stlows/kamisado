@@ -18,7 +18,7 @@
             </b-table>
           </template>
           <template v-else>
-            <p>No games yet...</p>
+            <p>No lobby</p>
           </template>
         </template>
       </div>

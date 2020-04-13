@@ -27,7 +27,33 @@
     >
       <title>Tower — {{tower.player_color}}'s {{tower.tower_color}} — ({{tower.position_x}}, {{tower.position_y}}) — Sumo: {{tower.sumo}}</title>
 
-      <circle :r="towerSize / 2 "></circle>
+      <circle :r="towerSize / 2" :stroke="tower.player_color === 'white' ? 'black' : 'white'"></circle>
+      <g>
+        <circle
+          :r="towerSize / 8"
+          :stroke="tower.player_color === 'white' ? 'black' : 'white'"
+          :style="'transform: translate(' + (towerSize / 3) + 'px, ' + (towerSize / 3) + 'px)'"
+          v-if="tower.sumo > 0"
+        ></circle>
+        <circle
+          :r="towerSize / 8"
+          :stroke="tower.player_color === 'white' ? 'black' : 'white'"
+          :style="'transform: translate(-' + (towerSize / 3) + 'px, ' + (towerSize / 3) + 'px)'"
+          v-if="tower.sumo > 1"
+        ></circle>
+        <circle
+          :r="towerSize / 8"
+          :stroke="tower.player_color === 'white' ? 'black' : 'white'"
+          :style="'transform: translate(' + (towerSize / 3) + 'px, -' + (towerSize / 3) + 'px)'"
+          v-if="tower.sumo > 2"
+        ></circle>
+        <circle
+          :r="towerSize / 8"
+          :stroke="tower.player_color === 'white' ? 'black' : 'white'"
+          :style="'transform: translate(-' + (towerSize / 3) + 'px, -' + (towerSize / 3) + 'px)'"
+          v-if="tower.sumo > 3"
+        ></circle>
+      </g>
 
       <text
         text-anchor="middle"

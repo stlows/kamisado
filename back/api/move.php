@@ -8,6 +8,7 @@ include_once("../prettify.php");
 include_once("../validations.php");
 include_once("../errors.php");
 include_once("../board.php");
+include_once("../constants.php");
 
 $move = json_decode(file_get_contents('php://input'), true);
 
@@ -72,11 +73,17 @@ if($targetX != $tower["position_x"] && (abs($targetX - $tower["position_x"]) != 
   exit;
 }
 
+// Respecte le maximum de movement du sumo
+if(abs($targetY - $tower["position_y"]) > $SUMO_MOVEMENTS[$tower["sumo"]]){
+  echo (json_encode($SUMO_MAX_MOVES[$tower["sumo"]]));
+  exit;
+}
+
 // Check les overlaps
 if($tower["player_color"] == "white"){
   if($tower["position_x"] == $targetX){
     for($y = $tower["position_y"] + 1; $y <= $targetY; $y++){
-      // Is there is a tower already there
+      // Is there a tower already there
       foreach($towers as $t){
         if ($t["position_x"] == $targetX && $t["position_y"] == $y) {
           // TODO Gérer les push de sumo ici ?

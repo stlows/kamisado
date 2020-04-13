@@ -2956,3 +2956,3450 @@ core
       LEFT JOIN players p2 ON p2.player_id = player_2_id
       Where game_id = 139
 1584129379 - SELECT * FROM towers WHERE game_id = 139
+1586787512 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787512 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586787514 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787514 - SELECT * FROM tiles
+1586787514 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586787514 - SELECT * FROM towers WHERE game_id = 139
+1586787514 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787514 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586787514 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787514 - SELECT player_name, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id
+1586787519 - SELECT * FROM towers WHERE tower_id = 2408
+1586787519 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787519 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586787519 - SELECT * FROM towers WHERE game_id = 139
+1586787519 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787519 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787519 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586787519 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787519 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586787570 - SELECT * FROM towers WHERE tower_id = 2409
+1586787570 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787570 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586787570 - SELECT * FROM towers WHERE game_id = 139
+1586787570 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787570 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787570 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586787570 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787570 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586787570 - SELECT * FROM towers WHERE game_id = 139
+1586787577 - SELECT * FROM towers WHERE tower_id = 2409
+1586787577 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586787577 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586787577 - SELECT * FROM towers WHERE game_id = 139
+1586787577 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586787577 - UPDATE towers SET position_x = 1, position_y = 4 WHERE tower_id = 2409
+1586787577 - SELECT color FROM tiles WHERE position_x = 1 AND position_y = 4
+1586787577 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 139
+1586787577 - SELECT tower_id, tower_color FROM towers WHERE game_id = 139 AND tower_color = 'pink' AND player_id = 10
+1586787577 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 139
+1586787577 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 139
+1586787577 - UPDATE games SET tower_id_to_move = 2404 WHERE game_id = 139
+1586787577 - UPDATE games SET turn_tower_color = 'pink' WHERE game_id = 139
+1586787577 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586787577 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586787577 - SELECT * FROM towers WHERE game_id = 139
+1586787577 - SELECT * FROM towers WHERE tower_id = 2404
+1586787577 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586787577 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586787577 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 9 THEN p2.player_name
+      WHEN p2.player_id = 9 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_1_score
+      WHEN p2.player_id = 9 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_2_score
+      WHEN p2.player_id = 9 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 9 IN (p1.player_id, p2.player_id)
+    
+1586787577 - SELECT * FROM towers WHERE game_id = 139
+1586787590 - SELECT * FROM towers WHERE tower_id = 2404
+1586787590 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787590 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586787590 - SELECT * FROM towers WHERE game_id = 139
+1586787590 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787590 - UPDATE towers SET position_x = 7, position_y = 4 WHERE tower_id = 2404
+1586787590 - SELECT color FROM tiles WHERE position_x = 7 AND position_y = 4
+1586787590 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 139
+1586787590 - SELECT tower_id, tower_color FROM towers WHERE game_id = 139 AND tower_color = 'red' AND player_id = 9
+1586787590 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 139
+1586787590 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 139
+1586787590 - UPDATE games SET tower_id_to_move = 2411 WHERE game_id = 139
+1586787590 - UPDATE games SET turn_tower_color = 'red' WHERE game_id = 139
+1586787590 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787590 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586787590 - SELECT * FROM towers WHERE game_id = 139
+1586787590 - SELECT * FROM towers WHERE tower_id = 2411
+1586787590 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787590 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586787590 - SELECT * FROM towers WHERE game_id = 139
+1586787590 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787590 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586787601 - SELECT * FROM towers WHERE tower_id = 2411
+1586787601 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586787601 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586787601 - SELECT * FROM towers WHERE game_id = 139
+1586787601 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586787601 - UPDATE towers SET position_x = 3, position_y = 2 WHERE tower_id = 2411
+1586787601 - SELECT color FROM tiles WHERE position_x = 3 AND position_y = 2
+1586787601 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 139
+1586787601 - SELECT tower_id, tower_color FROM towers WHERE game_id = 139 AND tower_color = 'pink' AND player_id = 10
+1586787601 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 139
+1586787601 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 139
+1586787601 - UPDATE games SET tower_id_to_move = 2404 WHERE game_id = 139
+1586787601 - UPDATE games SET turn_tower_color = 'pink' WHERE game_id = 139
+1586787601 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586787601 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586787601 - SELECT * FROM towers WHERE game_id = 139
+1586787601 - SELECT * FROM towers WHERE tower_id = 2404
+1586787601 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586787601 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586787601 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586787601 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 9 THEN p2.player_name
+      WHEN p2.player_id = 9 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_1_score
+      WHEN p2.player_id = 9 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_2_score
+      WHEN p2.player_id = 9 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 9 IN (p1.player_id, p2.player_id)
+    
+1586787601 - SELECT * FROM towers WHERE game_id = 139
+1586787608 - SELECT * FROM towers WHERE tower_id = 2404
+1586787608 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787608 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586787608 - SELECT * FROM towers WHERE game_id = 139
+1586787608 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787608 - UPDATE towers SET position_x = 3, position_y = 8 WHERE tower_id = 2404
+1586787608 - UPDATE games
+    SET
+    player_1_score = (player_1_score + 1)
+    WHERE game_id = 139
+1586787608 - SELECT
+    CASE WHEN player_1_score >= points_to_win OR player_2_score >= points_to_win THEN 1
+    ELSE 0
+    END AS is_game_won
+    FROM games
+    WHERE game_id = 139
+1586787608 - UPDATE towers SET sumo = (sumo + 1) WHERE tower_id = 2404
+1586787608 - UPDATE games
+    SET
+    is_first_move = 1
+    WHERE game_id = 139
+1586787608 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 139
+1586787608 - UPDATE games SET tower_id_to_move = NULL WHERE game_id = 139
+1586787608 - UPDATE games SET turn_tower_color = NULL WHERE game_id = 139
+1586787608 - UPDATE towers SET position_x = 1, position_y = 1 WHERE tower_id = 2401;UPDATE towers SET position_x = 2, position_y = 1 WHERE tower_id = 2402;UPDATE towers SET position_x = 3, position_y = 1 WHERE tower_id = 2403;UPDATE towers SET position_x = 4, position_y = 1 WHERE tower_id = 2404;UPDATE towers SET position_x = 5, position_y = 1 WHERE tower_id = 2405;UPDATE towers SET position_x = 6, position_y = 1 WHERE tower_id = 2406;UPDATE towers SET position_x = 7, position_y = 1 WHERE tower_id = 2407;UPDATE towers SET position_x = 8, position_y = 1 WHERE tower_id = 2408;UPDATE towers SET position_x = 1, position_y = 8 WHERE tower_id = 2411;UPDATE towers SET position_x = 2, position_y = 8 WHERE tower_id = 2410;UPDATE towers SET position_x = 3, position_y = 8 WHERE tower_id = 2409;UPDATE towers SET position_x = 4, position_y = 8 WHERE tower_id = 2412;UPDATE towers SET position_x = 5, position_y = 8 WHERE tower_id = 2413;UPDATE towers SET position_x = 6, position_y = 8 WHERE tower_id = 2415;UPDATE towers SET position_x = 7, position_y = 8 WHERE tower_id = 2414;UPDATE towers SET position_x = 8, position_y = 8 WHERE tower_id = 2416;
+1586787608 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787608 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586787608 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586787608 - SELECT * FROM towers WHERE game_id = 139
+1586787621 - SELECT * FROM towers WHERE tower_id = 2404
+1586787621 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787621 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586787621 - SELECT * FROM towers WHERE game_id = 139
+1586787621 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787621 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787621 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787621 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586787621 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586787621 - SELECT * FROM towers WHERE game_id = 139
+1586787674 - SELECT * FROM towers WHERE tower_id = 2404
+1586787674 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787674 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586787674 - SELECT * FROM towers WHERE game_id = 139
+1586787674 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787674 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787674 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586787674 - SELECT * FROM towers WHERE game_id = 139
+1586787674 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787674 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586787803 - SELECT * FROM towers WHERE tower_id = 2405
+1586787803 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787803 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586787803 - SELECT * FROM towers WHERE game_id = 139
+1586787803 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787803 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787803 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586787803 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787803 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586787803 - SELECT * FROM towers WHERE game_id = 139
+1586787900 - SELECT * FROM towers WHERE tower_id = 2405
+1586787900 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787900 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586787900 - SELECT * FROM towers WHERE game_id = 139
+1586787900 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787900 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586787900 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+core
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586787900 - SELECT * FROM towers WHERE game_id = 139
+1586788046 - SELECT * FROM tiles
+1586788046 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586788046 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586788046 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586788046 - SELECT player_name, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id
+1586788046 - SELECT * FROM towers WHERE game_id = 139
+1586788046 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586788046 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586788513 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586788513 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586788513 - SELECT * FROM towers WHERE game_id = 139
+1586789068 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789068 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789068 - SELECT * FROM towers WHERE game_id = 139
+1586789075 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789075 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789075 - SELECT * FROM towers WHERE game_id = 139
+1586789075 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789075 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586789091 - SELECT * FROM towers WHERE tower_id = 2414
+1586789091 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789091 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789091 - SELECT * FROM towers WHERE game_id = 139
+1586789091 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789091 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789091 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789091 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586789091 - SELECT * FROM towers WHERE game_id = 139
+1586789105 - SELECT * FROM towers WHERE tower_id = 2414
+1586789105 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789105 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789105 - SELECT * FROM towers WHERE game_id = 139
+1586789105 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789105 - UPDATE towers SET position_x = 7, position_y = 5 WHERE tower_id = 2414
+1586789105 - SELECT color FROM tiles WHERE position_x = 7 AND position_y = 5
+1586789105 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 139
+1586789105 - SELECT tower_id, tower_color FROM towers WHERE game_id = 139 AND tower_color = 'indigo' AND player_id = 10
+1586789105 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 139
+1586789105 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 139
+1586789105 - UPDATE games SET tower_id_to_move = 2403 WHERE game_id = 139
+1586789105 - UPDATE games SET turn_tower_color = 'indigo' WHERE game_id = 139
+1586789105 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789105 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789105 - SELECT * FROM towers WHERE game_id = 139
+1586789105 - SELECT * FROM towers WHERE tower_id = 2403
+1586789105 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789105 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789105 - SELECT * FROM towers WHERE game_id = 139
+1586789105 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789105 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 9 THEN p2.player_name
+      WHEN p2.player_id = 9 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_1_score
+      WHEN p2.player_id = 9 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_2_score
+      WHEN p2.player_id = 9 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 9 IN (p1.player_id, p2.player_id)
+    
+1586789119 - SELECT * FROM towers WHERE tower_id = 2406
+1586789119 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789119 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789119 - SELECT * FROM towers WHERE game_id = 139
+1586789119 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789119 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789119 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586789119 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789119 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789119 - SELECT * FROM towers WHERE game_id = 139
+1586789122 - SELECT * FROM towers WHERE tower_id = 2403
+1586789122 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789122 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789122 - SELECT * FROM towers WHERE game_id = 139
+1586789122 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789122 - UPDATE towers SET position_x = 3, position_y = 4 WHERE tower_id = 2403
+1586789122 - SELECT color FROM tiles WHERE position_x = 3 AND position_y = 4
+1586789122 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 139
+1586789122 - SELECT tower_id, tower_color FROM towers WHERE game_id = 139 AND tower_color = 'blue' AND player_id = 9
+1586789122 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 139
+1586789122 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 139
+1586789122 - UPDATE games SET tower_id_to_move = 2415 WHERE game_id = 139
+1586789122 - UPDATE games SET turn_tower_color = 'blue' WHERE game_id = 139
+1586789122 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789122 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789122 - SELECT * FROM towers WHERE game_id = 139
+1586789122 - SELECT * FROM towers WHERE tower_id = 2415
+1586789122 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789122 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586789122 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789122 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789122 - SELECT * FROM towers WHERE game_id = 139
+1586789127 - SELECT * FROM towers WHERE tower_id = 2415
+1586789127 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789127 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789127 - SELECT * FROM towers WHERE game_id = 139
+1586789127 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789127 - UPDATE towers SET position_x = 6, position_y = 7 WHERE tower_id = 2415
+1586789127 - SELECT color FROM tiles WHERE position_x = 6 AND position_y = 7
+1586789127 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 139
+1586789127 - SELECT tower_id, tower_color FROM towers WHERE game_id = 139 AND tower_color = 'pink' AND player_id = 10
+1586789127 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 139
+1586789127 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 139
+1586789127 - UPDATE games SET tower_id_to_move = 2404 WHERE game_id = 139
+1586789127 - UPDATE games SET turn_tower_color = 'pink' WHERE game_id = 139
+1586789127 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789127 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789127 - SELECT * FROM towers WHERE game_id = 139
+1586789127 - SELECT * FROM towers WHERE tower_id = 2404
+1586789127 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789127 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 9 THEN p2.player_name
+      WHEN p2.player_id = 9 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_1_score
+      WHEN p2.player_id = 9 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_2_score
+      WHEN p2.player_id = 9 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 9 IN (p1.player_id, p2.player_id)
+    
+1586789127 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789127 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789127 - SELECT * FROM towers WHERE game_id = 139
+1586789445 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789445 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789445 - SELECT * FROM towers WHERE game_id = 139
+1586789451 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789451 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789451 - SELECT * FROM towers WHERE game_id = 139
+1586789465 - SELECT * FROM towers WHERE tower_id = 2404
+1586789465 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789465 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789465 - SELECT * FROM towers WHERE game_id = 139
+1586789465 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789465 - UPDATE towers SET position_x = 4, position_y = 6 WHERE tower_id = 2404
+1586789465 - SELECT color FROM tiles WHERE position_x = 4 AND position_y = 6
+1586789465 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 139
+1586789465 - SELECT tower_id, tower_color FROM towers WHERE game_id = 139 AND tower_color = 'indigo' AND player_id = 9
+1586789465 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 139
+1586789465 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 139
+1586789465 - UPDATE games SET tower_id_to_move = 2414 WHERE game_id = 139
+1586789465 - UPDATE games SET turn_tower_color = 'indigo' WHERE game_id = 139
+1586789465 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789465 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789465 - SELECT * FROM towers WHERE game_id = 139
+1586789465 - SELECT * FROM towers WHERE tower_id = 2414
+1586789465 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789465 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789465 - SELECT * FROM towers WHERE game_id = 139
+1586789465 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789465 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586789477 - SELECT * FROM towers WHERE tower_id = 2414
+1586789477 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789477 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789477 - SELECT * FROM towers WHERE game_id = 139
+1586789477 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789477 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789477 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789477 - SELECT * FROM towers WHERE game_id = 139
+1586789477 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789477 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 9 THEN p2.player_name
+      WHEN p2.player_id = 9 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_1_score
+      WHEN p2.player_id = 9 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_2_score
+      WHEN p2.player_id = 9 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 9 IN (p1.player_id, p2.player_id)
+    
+1586789487 - SELECT * FROM towers WHERE tower_id = 2414
+1586789487 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789487 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789487 - SELECT * FROM towers WHERE game_id = 139
+1586789487 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789487 - UPDATE towers SET position_x = 7, position_y = 4 WHERE tower_id = 2414
+1586789487 - SELECT color FROM tiles WHERE position_x = 7 AND position_y = 4
+1586789487 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 139
+1586789487 - SELECT tower_id, tower_color FROM towers WHERE game_id = 139 AND tower_color = 'red' AND player_id = 10
+1586789487 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 139
+1586789487 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 139
+1586789487 - UPDATE games SET tower_id_to_move = 2406 WHERE game_id = 139
+1586789487 - UPDATE games SET turn_tower_color = 'red' WHERE game_id = 139
+1586789487 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789487 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789487 - SELECT * FROM towers WHERE game_id = 139
+1586789487 - SELECT * FROM towers WHERE tower_id = 2406
+1586789487 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789487 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789487 - SELECT * FROM towers WHERE game_id = 139
+1586789487 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789487 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 9 THEN p2.player_name
+      WHEN p2.player_id = 9 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_1_score
+      WHEN p2.player_id = 9 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_2_score
+      WHEN p2.player_id = 9 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 9 IN (p1.player_id, p2.player_id)
+    
+1586789501 - SELECT * FROM towers WHERE tower_id = 2415
+1586789501 - SELECT * FROM towers WHERE tower_id = 2406
+1586789501 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789501 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789501 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789501 - SELECT * FROM towers WHERE game_id = 139
+1586789501 - SELECT * FROM towers WHERE game_id = 139
+1586789501 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789501 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789501 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789501 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586789501 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789501 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789501 - SELECT * FROM towers WHERE game_id = 139
+1586789501 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789501 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789501 - SELECT * FROM towers WHERE game_id = 139
+1586789501 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789501 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586789524 - SELECT * FROM towers WHERE tower_id = 2406
+1586789524 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789524 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789524 - SELECT * FROM towers WHERE game_id = 139
+1586789524 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789524 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789524 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586789524 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789524 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789524 - SELECT * FROM towers WHERE game_id = 139
+1586789534 - SELECT * FROM towers WHERE tower_id = 2415
+1586789534 - SELECT * FROM towers WHERE tower_id = 2406
+1586789534 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789534 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789534 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789534 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789534 - SELECT * FROM towers WHERE game_id = 139
+1586789534 - SELECT * FROM towers WHERE game_id = 139
+1586789534 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789534 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789534 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789534 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789534 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586789534 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789534 - SELECT * FROM towers WHERE game_id = 139
+1586789534 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789534 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789534 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789534 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586789534 - SELECT * FROM towers WHERE game_id = 139
+1586789554 - SELECT * FROM towers WHERE tower_id = 2406
+1586789554 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789554 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789554 - SELECT * FROM towers WHERE game_id = 139
+1586789554 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789554 - UPDATE towers SET position_x = 4, position_y = 3 WHERE tower_id = 2406
+1586789554 - SELECT color FROM tiles WHERE position_x = 4 AND position_y = 3
+1586789554 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 139
+1586789554 - SELECT tower_id, tower_color FROM towers WHERE game_id = 139 AND tower_color = 'red' AND player_id = 9
+1586789554 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 139
+1586789554 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 139
+1586789554 - UPDATE games SET tower_id_to_move = 2411 WHERE game_id = 139
+1586789554 - UPDATE games SET turn_tower_color = 'red' WHERE game_id = 139
+1586789554 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789554 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789554 - SELECT * FROM towers WHERE game_id = 139
+1586789554 - SELECT * FROM towers WHERE tower_id = 2411
+1586789554 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789554 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789554 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789554 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586789554 - SELECT * FROM towers WHERE game_id = 139
+1586789561 - SELECT * FROM towers WHERE tower_id = 2411
+1586789561 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789561 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789561 - SELECT * FROM towers WHERE game_id = 139
+1586789561 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789561 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789561 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789561 - SELECT * FROM towers WHERE game_id = 139
+est_0003'
+1586789561 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 9 THEN p2.player_name
+      WHEN p2.player_id = 9 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_1_score
+      WHEN p2.player_id = 9 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_2_score
+      WHEN p2.player_id = 9 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 9 IN (p1.player_id, p2.player_id)
+    
+1586789569 - SELECT * FROM towers WHERE tower_id = 2411
+1586789569 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789569 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789569 - SELECT * FROM towers WHERE game_id = 139
+1586789569 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789569 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789569 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 9 THEN p2.player_name
+      WHEN p2.player_id = 9 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_1_score
+      WHEN p2.player_id = 9 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_2_score
+      WHEN p2.player_id = 9 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 9 IN (p1.player_id, p2.player_id)
+    
+1586789569 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789569 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789569 - SELECT * FROM towers WHERE game_id = 139
+1586789578 - SELECT * FROM towers WHERE tower_id = 2411
+1586789578 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789578 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789578 - SELECT * FROM towers WHERE game_id = 139
+1586789578 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789578 - UPDATE towers SET position_x = 1, position_y = 6 WHERE tower_id = 2411
+1586789578 - SELECT color FROM tiles WHERE position_x = 1 AND position_y = 6
+1586789578 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 139
+1586789578 - SELECT tower_id, tower_color FROM towers WHERE game_id = 139 AND tower_color = 'blue' AND player_id = 10
+1586789578 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 139
+1586789578 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 139
+1586789578 - UPDATE games SET tower_id_to_move = 2402 WHERE game_id = 139
+1586789578 - UPDATE games SET turn_tower_color = 'blue' WHERE game_id = 139
+1586789578 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789578 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789578 - SELECT * FROM towers WHERE game_id = 139
+1586789578 - SELECT * FROM towers WHERE tower_id = 2402
+1586789578 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789578 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789578 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789578 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 9 THEN p2.player_name
+      WHEN p2.player_id = 9 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_1_score
+      WHEN p2.player_id = 9 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_2_score
+      WHEN p2.player_id = 9 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 9 IN (p1.player_id, p2.player_id)
+    
+1586789578 - SELECT * FROM towers WHERE game_id = 139
+1586789584 - SELECT * FROM towers WHERE tower_id = 2402
+1586789584 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789584 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789584 - SELECT * FROM towers WHERE game_id = 139
+1586789584 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789584 - UPDATE towers SET position_x = 2, position_y = 2 WHERE tower_id = 2402
+1586789584 - SELECT color FROM tiles WHERE position_x = 2 AND position_y = 2
+1586789584 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 139
+1586789584 - SELECT tower_id, tower_color FROM towers WHERE game_id = 139 AND tower_color = 'orange' AND player_id = 9
+1586789584 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 139
+1586789584 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 139
+1586789584 - UPDATE games SET tower_id_to_move = 2416 WHERE game_id = 139
+1586789584 - UPDATE games SET turn_tower_color = 'orange' WHERE game_id = 139
+1586789584 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789584 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789584 - SELECT * FROM towers WHERE game_id = 139
+1586789584 - SELECT * FROM towers WHERE tower_id = 2416
+1586789584 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789584 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789584 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586789584 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789584 - SELECT * FROM towers WHERE game_id = 139
+1586789589 - SELECT * FROM towers WHERE tower_id = 2416
+1586789589 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789589 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789589 - SELECT * FROM towers WHERE game_id = 139
+1586789589 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789589 - UPDATE towers SET position_x = 4, position_y = 4 WHERE tower_id = 2416
+1586789589 - SELECT color FROM tiles WHERE position_x = 4 AND position_y = 4
+1586789589 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 139
+1586789589 - SELECT tower_id, tower_color FROM towers WHERE game_id = 139 AND tower_color = 'orange' AND player_id = 10
+1586789589 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 139
+1586789589 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 139
+1586789589 - UPDATE games SET tower_id_to_move = 2401 WHERE game_id = 139
+1586789589 - UPDATE games SET turn_tower_color = 'orange' WHERE game_id = 139
+1586789589 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789589 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789589 - SELECT * FROM towers WHERE game_id = 139
+1586789589 - SELECT * FROM towers WHERE tower_id = 2401
+1586789589 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789589 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 9 THEN p2.player_name
+      WHEN p2.player_id = 9 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_1_score
+      WHEN p2.player_id = 9 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_2_score
+      WHEN p2.player_id = 9 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 9 IN (p1.player_id, p2.player_id)
+    
+1586789589 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789589 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789589 - SELECT * FROM towers WHERE game_id = 139
+1586789597 - SELECT * FROM towers WHERE tower_id = 2401
+1586789597 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789597 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789597 - SELECT * FROM towers WHERE game_id = 139
+1586789597 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789597 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789597 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789597 - SELECT * FROM towers WHERE game_id = 139
+1586789597 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789597 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586789600 - SELECT * FROM towers WHERE tower_id = 2401
+1586789600 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789600 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789600 - SELECT * FROM towers WHERE game_id = 139
+1586789600 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789600 - UPDATE towers SET position_x = 1, position_y = 3 WHERE tower_id = 2401
+1586789600 - SELECT color FROM tiles WHERE position_x = 1 AND position_y = 3
+1586789600 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 139
+1586789600 - SELECT tower_id, tower_color FROM towers WHERE game_id = 139 AND tower_color = 'green' AND player_id = 9
+1586789600 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 139
+1586789600 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 139
+1586789600 - UPDATE games SET tower_id_to_move = 2410 WHERE game_id = 139
+1586789600 - UPDATE games SET turn_tower_color = 'green' WHERE game_id = 139
+1586789600 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789600 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789600 - SELECT * FROM towers WHERE game_id = 139
+1586789600 - SELECT * FROM towers WHERE tower_id = 2410
+1586789600 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789600 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789600 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789600 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586789600 - SELECT * FROM towers WHERE game_id = 139
+1586789612 - SELECT * FROM towers WHERE tower_id = 2410
+1586789612 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789612 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789612 - SELECT * FROM towers WHERE game_id = 139
+1586789612 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789612 - UPDATE towers SET position_x = 2, position_y = 7 WHERE tower_id = 2410
+1586789612 - SELECT color FROM tiles WHERE position_x = 2 AND position_y = 7
+1586789612 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 139
+1586789612 - SELECT tower_id, tower_color FROM towers WHERE game_id = 139 AND tower_color = 'brown' AND player_id = 10
+1586789612 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 139
+1586789612 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 139
+1586789612 - UPDATE games SET tower_id_to_move = 2408 WHERE game_id = 139
+1586789612 - UPDATE games SET turn_tower_color = 'brown' WHERE game_id = 139
+1586789612 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789612 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789612 - SELECT * FROM towers WHERE game_id = 139
+1586789612 - SELECT * FROM towers WHERE tower_id = 2408
+1586789612 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789612 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789612 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789612 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 9 THEN p2.player_name
+      WHEN p2.player_id = 9 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_1_score
+      WHEN p2.player_id = 9 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_2_score
+      WHEN p2.player_id = 9 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 9 IN (p1.player_id, p2.player_id)
+    
+1586789612 - SELECT * FROM towers WHERE game_id = 139
+1586789621 - SELECT * FROM towers WHERE tower_id = 2408
+1586789621 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789621 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789621 - SELECT * FROM towers WHERE game_id = 139
+1586789621 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789621 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789621 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789621 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586789621 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789621 - SELECT * FROM towers WHERE game_id = 139
+1586789625 - SELECT * FROM towers WHERE tower_id = 2408
+1586789625 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789625 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789625 - SELECT * FROM towers WHERE game_id = 139
+1586789625 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789625 - UPDATE towers SET position_x = 8, position_y = 2 WHERE tower_id = 2408
+1586789625 - SELECT color FROM tiles WHERE position_x = 8 AND position_y = 2
+1586789625 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 139
+1586789625 - SELECT tower_id, tower_color FROM towers WHERE game_id = 139 AND tower_color = 'indigo' AND player_id = 9
+1586789625 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 139
+1586789625 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 139
+1586789625 - UPDATE games SET tower_id_to_move = 2414 WHERE game_id = 139
+1586789625 - UPDATE games SET turn_tower_color = 'indigo' WHERE game_id = 139
+1586789625 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789625 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789625 - SELECT * FROM towers WHERE game_id = 139
+1586789625 - SELECT * FROM towers WHERE tower_id = 2414
+1586789625 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789625 - SELECT * FROM players WHERE google_id = 'test_0004'
+_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789625 - SELECT * FROM towers WHERE game_id = 139
+1586789625 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586789634 - SELECT * FROM towers WHERE tower_id = 2414
+1586789634 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789634 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789634 - SELECT * FROM towers WHERE game_id = 139
+1586789634 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789634 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789634 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789634 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789634 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 9 THEN p2.player_name
+      WHEN p2.player_id = 9 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_1_score
+      WHEN p2.player_id = 9 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_2_score
+      WHEN p2.player_id = 9 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 9 IN (p1.player_id, p2.player_id)
+    
+1586789634 - SELECT * FROM towers WHERE game_id = 139
+1586789636 - SELECT * FROM towers WHERE tower_id = 2414
+1586789636 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789636 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789636 - SELECT * FROM towers WHERE game_id = 139
+1586789636 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789636 - UPDATE towers SET position_x = 7, position_y = 3 WHERE tower_id = 2414
+1586789636 - SELECT color FROM tiles WHERE position_x = 7 AND position_y = 3
+1586789636 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 139
+1586789636 - SELECT tower_id, tower_color FROM towers WHERE game_id = 139 AND tower_color = 'yellow' AND player_id = 10
+1586789636 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 139
+1586789636 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 139
+1586789636 - UPDATE games SET tower_id_to_move = 2405 WHERE game_id = 139
+1586789636 - UPDATE games SET turn_tower_color = 'yellow' WHERE game_id = 139
+1586789636 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789636 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789636 - SELECT * FROM towers WHERE game_id = 139
+1586789636 - SELECT * FROM towers WHERE tower_id = 2405
+1586789636 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789636 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789636 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789636 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 9 THEN p2.player_name
+      WHEN p2.player_id = 9 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_1_score
+      WHEN p2.player_id = 9 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_2_score
+      WHEN p2.player_id = 9 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 9 IN (p1.player_id, p2.player_id)
+    
+1586789636 - SELECT * FROM towers WHERE game_id = 139
+1586789640 - SELECT * FROM towers WHERE tower_id = 2405
+1586789640 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789640 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789640 - SELECT * FROM towers WHERE game_id = 139
+1586789640 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789640 - UPDATE towers SET position_x = 5, position_y = 3 WHERE tower_id = 2405
+1586789640 - SELECT color FROM tiles WHERE position_x = 5 AND position_y = 3
+1586789640 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 139
+1586789640 - SELECT tower_id, tower_color FROM towers WHERE game_id = 139 AND tower_color = 'indigo' AND player_id = 9
+1586789640 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 139
+1586789640 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 139
+1586789640 - UPDATE games SET tower_id_to_move = 2414 WHERE game_id = 139
+1586789640 - UPDATE games SET turn_tower_color = 'indigo' WHERE game_id = 139
+1586789640 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789640 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789640 - SELECT * FROM towers WHERE game_id = 139
+1586789640 - SELECT * FROM towers WHERE tower_id = 2414
+1586789640 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789640 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789640 - SELECT * FROM towers WHERE game_id = 139
+1586789640 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789640 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586789645 - SELECT * FROM towers WHERE tower_id = 2414
+1586789645 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789645 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789645 - SELECT * FROM towers WHERE game_id = 139
+1586789645 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789645 - UPDATE towers SET position_x = 7, position_y = 2 WHERE tower_id = 2414
+1586789645 - SELECT color FROM tiles WHERE position_x = 7 AND position_y = 2
+1586789645 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 139
+1586789645 - SELECT tower_id, tower_color FROM towers WHERE game_id = 139 AND tower_color = 'brown' AND player_id = 10
+1586789645 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 139
+1586789645 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 139
+1586789645 - UPDATE games SET tower_id_to_move = 2408 WHERE game_id = 139
+1586789645 - UPDATE games SET turn_tower_color = 'brown' WHERE game_id = 139
+1586789645 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789645 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789645 - SELECT * FROM towers WHERE game_id = 139
+1586789645 - SELECT * FROM towers WHERE tower_id = 2408
+1586789645 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789645 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789645 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 9 THEN p2.player_name
+      WHEN p2.player_id = 9 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_1_score
+      WHEN p2.player_id = 9 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_2_score
+      WHEN p2.player_id = 9 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 9 IN (p1.player_id, p2.player_id)
+    
+1586789645 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789645 - SELECT * FROM towers WHERE game_id = 139
+1586789653 - SELECT * FROM towers WHERE tower_id = 2408
+1586789653 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789653 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789653 - SELECT * FROM towers WHERE game_id = 139
+1586789653 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789653 - UPDATE towers SET position_x = 8, position_y = 3 WHERE tower_id = 2408
+1586789653 - SELECT color FROM tiles WHERE position_x = 8 AND position_y = 3
+1586789653 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 139
+1586789653 - SELECT tower_id, tower_color FROM towers WHERE game_id = 139 AND tower_color = 'blue' AND player_id = 9
+1586789653 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 139
+1586789653 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 139
+1586789653 - UPDATE games SET tower_id_to_move = 2415 WHERE game_id = 139
+1586789653 - UPDATE games SET turn_tower_color = 'blue' WHERE game_id = 139
+1586789653 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789653 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789653 - SELECT * FROM towers WHERE game_id = 139
+1586789653 - SELECT * FROM towers WHERE tower_id = 2415
+1586789653 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789653 - SELECT * FROM players WHERE google_id = 'test_0004'
+_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789653 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586789653 - SELECT * FROM towers WHERE game_id = 139
+1586789667 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789667 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789667 - SELECT * FROM towers WHERE game_id = 139
+1586789677 - SELECT * FROM towers WHERE tower_id = 2415
+1586789677 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789677 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789677 - SELECT * FROM towers WHERE game_id = 139
+1586789677 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789677 - UPDATE towers SET position_x = 6, position_y = 5 WHERE tower_id = 2415
+1586789677 - SELECT color FROM tiles WHERE position_x = 6 AND position_y = 5
+1586789677 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 139
+1586789677 - SELECT tower_id, tower_color FROM towers WHERE game_id = 139 AND tower_color = 'blue' AND player_id = 10
+1586789677 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 139
+1586789677 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 139
+1586789677 - UPDATE games SET tower_id_to_move = 2402 WHERE game_id = 139
+1586789677 - UPDATE games SET turn_tower_color = 'blue' WHERE game_id = 139
+1586789677 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789677 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789677 - SELECT * FROM towers WHERE game_id = 139
+1586789677 - SELECT * FROM towers WHERE tower_id = 2402
+1586789677 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789677 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789677 - SELECT * FROM towers WHERE game_id = 139
+1586789677 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789677 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 9 THEN p2.player_name
+      WHEN p2.player_id = 9 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_1_score
+      WHEN p2.player_id = 9 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_2_score
+      WHEN p2.player_id = 9 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 9 IN (p1.player_id, p2.player_id)
+    
+1586789684 - SELECT * FROM towers WHERE tower_id = 2402
+1586789684 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789684 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789684 - SELECT * FROM towers WHERE game_id = 139
+1586789684 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789684 - UPDATE towers SET position_x = 2, position_y = 4 WHERE tower_id = 2402
+1586789684 - SELECT color FROM tiles WHERE position_x = 2 AND position_y = 4
+1586789684 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 139
+1586789684 - SELECT tower_id, tower_color FROM towers WHERE game_id = 139 AND tower_color = 'indigo' AND player_id = 9
+1586789684 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 139
+1586789684 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 139
+1586789684 - UPDATE games SET tower_id_to_move = 2414 WHERE game_id = 139
+1586789684 - UPDATE games SET turn_tower_color = 'indigo' WHERE game_id = 139
+1586789684 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789684 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789684 - SELECT * FROM towers WHERE game_id = 139
+1586789684 - SELECT * FROM towers WHERE tower_id = 2414
+1586789684 - SELECT * FROM players WHERE google_id = 'test_0004'
+1586789684 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789684 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 10 THEN p2.player_name
+      WHEN p2.player_id = 10 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_1_score
+      WHEN p2.player_id = 10 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 10 THEN games.player_2_score
+      WHEN p2.player_id = 10 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 10 IN (p1.player_id, p2.player_id)
+    
+1586789684 - SELECT * FROM towers WHERE game_id = 139
+1586789688 - SELECT * FROM towers WHERE tower_id = 2414
+1586789688 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789688 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789688 - SELECT * FROM towers WHERE game_id = 139
+1586789688 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789688 - UPDATE towers SET position_x = 6, position_y = 1 WHERE tower_id = 2414
+1586789688 - UPDATE games
+    SET
+    player_2_score = (player_2_score + 7)
+    WHERE game_id = 139
+1586789688 - SELECT
+    CASE WHEN player_1_score >= points_to_win OR player_2_score >= points_to_win THEN 1
+    ELSE 0
+    END AS is_game_won
+    FROM games
+    WHERE game_id = 139
+1586789688 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789688 - SELECT
+      game_id,
+      p1.player_name player_1_name,
+      p2.player_name player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 139
+1586789688 - SELECT * FROM towers WHERE game_id = 139
+1586789688 - SELECT * FROM players WHERE google_id = 'test_0003'
+1586789688 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 9 THEN p2.player_name
+      WHEN p2.player_id = 9 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_1_score
+      WHEN p2.player_id = 9 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 9 THEN games.player_2_score
+      WHEN p2.player_id = 9 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 9 IN (p1.player_id, p2.player_id)
+    
