@@ -1,12 +1,13 @@
 <template>
   <div id="app">
     <app-nav @onlogin="onlogin" @onlogout="onlogout"></app-nav>
-    <template v-if="loggedIn">
+    <router-view />
+    <!-- <template v-if="loggedIn">
       <router-view />
     </template>
     <template v-else>
       <p>Please login.</p>
-    </template>
+    </template>-->
     <notifications-panel></notifications-panel>
   </div>
 </template>

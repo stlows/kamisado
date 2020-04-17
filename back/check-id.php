@@ -10,3 +10,13 @@ function checkId($id){
     exit;
   }
 }
+
+function checkInt($int){
+  if(is_int($int)){
+    return;
+  }else{
+    global $UNEXPECTED_VALUE;
+    echo(json_encode($UNEXPECTED_VALUE));
+    exit;
+  }
+}

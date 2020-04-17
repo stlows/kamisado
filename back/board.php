@@ -20,8 +20,8 @@ class Board
   }
 
   function move($fromX, $fromY, $toX, $toY){
-    $this->$tiles[$toX][$toY] = $this->tiles[$fromX][$fromY];
-    $this->tiles[$fromX][$fromY] = []
+    $this->tiles[$toX][$toY] = $this->tiles[$fromX][$fromY];
+    $this->tiles[$fromX][$fromY] = [];
   }
 
   function towers(){

@@ -83,7 +83,7 @@ export default {
         })
         .finally(() => {
           this.fetchGame();
-          this.$refs.myGames.refreshGames();
+          //this.$refs.myGames.refreshGames();
         });
     },
     forfeitGame() {

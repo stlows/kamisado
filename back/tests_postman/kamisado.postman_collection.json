@@ -1,0 +1,4350 @@
+{
+	"info": {
+		"_postman_id": "93709464-82d6-42bd-8fb9-9a177eb22ad6",
+		"name": "kamisado",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Game setup",
+			"item": [
+				{
+					"name": "new-lobby",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7a811b95-3f9a-4ed6-879d-f5556ff08b6f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Body is a number\", function () {",
+									"    pm.expect(parseInt(responseBody)).to.be.a(\"number\");",
+									"});",
+									"pm.environment.set(\"lobby_id\", responseBody);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Charset",
+								"type": "text",
+								"value": "utf-8"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_1}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"pointsToWin\": 15\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/new-lobby",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"new-lobby"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "lobby P1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e1fd5116-a5d3-4de9-8435-81f2bdccba73",
+								"exec": [
+									"pm.test(\"Le bon Lobby a été créé\", function(){",
+									"    var list = JSON.parse(responseBody);",
+									"    pm.expect(list.some(l => l.lobby_id == pm.variables.get(\"lobby_id\") && l.player_name == pm.variables.get(\"player_1\") && l.points_to_win == 15)).to.be.true;",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{player_1}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "kamisado.localhost/api/lobby",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"lobby"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "lobby P3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e1fd5116-a5d3-4de9-8435-81f2bdccba73",
+								"exec": [
+									"pm.test(\"Le bon Lobby a été créé\", function(){",
+									"    var list = JSON.parse(responseBody);",
+									"    pm.expect(list.some(l => l.lobby_id == pm.variables.get(\"lobby_id\") && l.player_name == pm.variables.get(\"player_1\") && l.points_to_win == 15)).to.be.true;",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_3}}"
+							}
+						],
+						"url": {
+							"raw": "kamisado.localhost/api/lobby",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"lobby"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "new-game",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "487efa6d-8248-4a03-bc80-e5eea62b78a7",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Body is a number\", function () {",
+									"    pm.expect(parseInt(responseBody)).to.be.a(\"number\");",
+									"});",
+									"pm.environment.set(\"game_id\", responseBody);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Charset",
+								"value": "utf-8",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{player_2}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"lobbyId\": {{lobby_id}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/new-game",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"new-game"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-lobby",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fe3908b7-3128-43a5-adf9-65abf9d088dd",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Body is DELETED\", function () {",
+									"    pm.expect(responseBody).to.be.equal(\"DELETED\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Charset",
+								"type": "text",
+								"value": "utf-8"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "test_0003"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"lobbyId\": {{lobby_id}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/delete-lobby",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"delete-lobby"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "lobby",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e1fd5116-a5d3-4de9-8435-81f2bdccba73",
+								"exec": [
+									"pm.test(\"Le Lobby a été supprimé\", function(){",
+									"    var list = JSON.parse(responseBody);",
+									"    pm.expect(list.some(l => l.lobby_id == pm.variables.get(\"lobby_id\") && l.player_name == \"test_0004\" && l.points_to_win == 15)).to.be.false;",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_2}}"
+							}
+						],
+						"url": {
+							"raw": "kamisado.localhost/api/lobby",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"lobby"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "my-games P1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b8d16a76-987a-4b2d-96cb-5164ea1f0a05",
+								"exec": [
+									"pm.test(\"La game est dans mes games\", function(){",
+									"    var list = JSON.parse(responseBody);",
+									"    pm.expect(list.some(g => g.game_id == pm.variables.get(\"game_id\") && ",
+									"    g.points_to_win == 15 &&",
+									"    g.rival_name == pm.variables.get(\"player_2\") &&",
+									"    g.your_score == 0 &&",
+									"    g.rival_score == 0)).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{player_1}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/my-games",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"my-games"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "my-games P2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0dc6a7c8-7c01-48b8-86cb-f56265484f8f",
+								"exec": [
+									"pm.test(\"La game est dans mes games\", function(){",
+									"    var list = JSON.parse(responseBody);",
+									"    pm.expect(list.some(g => g.game_id == pm.variables.get(\"game_id\") && ",
+									"    g.points_to_win == 15 &&",
+									"    g.rival_name == pm.variables.get(\"player_1\") &&",
+									"    g.your_score == 0 &&",
+									"    g.rival_score == 0)).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_2}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/my-games",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"my-games"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "game",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a3bb6f6e-c47f-43e9-8a51-ee1514083393",
+								"exec": [
+									"var resp = pm.response.json()",
+									"var game = resp.game;",
+									"var towers = resp.towers;",
+									"",
+									"pm.test(\"La game a le bon id\", function(){",
+									"    pm.expect(game.game_id).to.be.eql(pm.variables.get(\"game_id\"));",
+									"})",
+									"pm.test(\"Le player 1 est le bon\", function(){",
+									"    pm.expect(game.player_1_name).to.be.eql(pm.variables.get(\"player_1\"));",
+									"})",
+									"pm.test(\"Le player 2 est le bon\", function(){",
+									"    pm.expect(game.player_2_name).to.be.eql(pm.variables.get(\"player_2\"));",
+									"})",
+									"pm.test(\"player_1_score est à 0\", function(){",
+									"    pm.expect(parseInt(game.player_1_score)).to.be.eql(0);",
+									"})",
+									"pm.test(\"player_2_score est à 0\", function(){",
+									"    pm.expect(parseInt(game.player_2_score)).to.be.eql(0);",
+									"})",
+									"pm.test(\"points_to_win est à 15\", function(){",
+									"    pm.expect(parseInt(game.points_to_win)).to.be.eql(15);",
+									"})",
+									"pm.test(\"tower_id_to_move est à null\", function(){",
+									"    pm.expect(game.tower_id_to_move).to.be.eql(null);",
+									"})",
+									"pm.test(\"is_first_move est à 1\", function(){",
+									"    pm.expect(parseInt(game.is_first_move)).to.be.eql(1);",
+									"})",
+									"pm.test(\"turn_color est à white\", function(){",
+									"    pm.expect(game.turn_color).to.be.eql(\"white\");",
+									"})",
+									"pm.test(\"turn_player_id est à 10\", function(){",
+									"    pm.expect(parseInt(game.turn_player_id)).to.be.eql(10);",
+									"})",
+									"pm.test(\"turn_tower_color est à null\", function(){",
+									"    pm.expect(game.turn_tower_color).to.be.eql(null);",
+									"})",
+									"",
+									"pm.test(\"Il y a 16 towers\", function(){",
+									"    pm.expect(towers.length).to.be.eql(16)",
+									"})",
+									"",
+									"pm.test(\"Tower white orange\", function(){",
+									"    var tower = towers.find(t => t.tower_color == \"orange\" && t.player_color == \"white\");",
+									"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"    pm.expect(parseInt(tower.position_x)).to.be.eql(1)",
+									"    pm.expect(parseInt(tower.position_y)).to.be.eql(1)",
+									"    pm.environment.set(\"white_orange_id\", tower.tower_id);",
+									"})",
+									"",
+									"pm.test(\"Tower white blue\", function(){",
+									"    var tower = towers.find(t => t.tower_color == \"blue\" && t.player_color == \"white\");",
+									"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"    pm.expect(parseInt(tower.position_x)).to.be.eql(2)",
+									"    pm.expect(parseInt(tower.position_y)).to.be.eql(1)",
+									"    pm.environment.set(\"white_blue_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower white indigo\", function(){",
+									"    var tower = towers.find(t => t.tower_color == \"indigo\" && t.player_color == \"white\");",
+									"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"    pm.expect(parseInt(tower.position_x)).to.be.eql(3)",
+									"    pm.expect(parseInt(tower.position_y)).to.be.eql(1)",
+									"    pm.environment.set(\"white_indigo_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower white pink\", function(){",
+									"    var tower = towers.find(t => t.tower_color == \"pink\" && t.player_color == \"white\");",
+									"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"    pm.expect(parseInt(tower.position_x)).to.be.eql(4)",
+									"    pm.expect(parseInt(tower.position_y)).to.be.eql(1)",
+									"    pm.environment.set(\"white_pink_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower white yellow\", function(){",
+									"    var tower = towers.find(t => t.tower_color == \"yellow\" && t.player_color == \"white\");",
+									"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"    pm.expect(parseInt(tower.position_x)).to.be.eql(5)",
+									"    pm.expect(parseInt(tower.position_y)).to.be.eql(1)",
+									"    pm.environment.set(\"white_yellow_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower white red\", function(){",
+									"    var tower = towers.find(t => t.tower_color == \"red\" && t.player_color == \"white\");",
+									"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"    pm.expect(parseInt(tower.position_x)).to.be.eql(6)",
+									"    pm.expect(parseInt(tower.position_y)).to.be.eql(1)",
+									"    pm.environment.set(\"white_red_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower white green\", function(){",
+									"    var tower = towers.find(t => t.tower_color == \"green\" && t.player_color == \"white\");",
+									"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"    pm.expect(parseInt(tower.position_x)).to.be.eql(7)",
+									"    pm.expect(parseInt(tower.position_y)).to.be.eql(1)",
+									"    pm.environment.set(\"white_green_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower white brown\", function(){",
+									"    var tower = towers.find(t => t.tower_color == \"brown\" && t.player_color == \"white\");",
+									"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"    pm.expect(parseInt(tower.position_x)).to.be.eql(8)",
+									"    pm.expect(parseInt(tower.position_y)).to.be.eql(1)",
+									"    pm.environment.set(\"white_brown_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower black orange\", function(){",
+									"  var tower = towers.find(t => t.tower_color == \"orange\" && t.player_color == \"black\");",
+									"  pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"  pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"  pm.expect(parseInt(tower.position_x)).to.be.eql(8)",
+									"  pm.expect(parseInt(tower.position_y)).to.be.eql(8)",
+									"  pm.environment.set(\"black_orange_id\", tower.tower_id);",
+									"})",
+									"",
+									"pm.test(\"Tower black blue\", function(){",
+									"  var tower = towers.find(t => t.tower_color == \"blue\" && t.player_color == \"black\");",
+									"  pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"  pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"  pm.expect(parseInt(tower.position_x)).to.be.eql(7)",
+									"  pm.expect(parseInt(tower.position_y)).to.be.eql(8)",
+									"  pm.environment.set(\"black_blue_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower black indigo\", function(){",
+									"  var tower = towers.find(t => t.tower_color == \"indigo\" && t.player_color == \"black\");",
+									"  pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"  pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"  pm.expect(parseInt(tower.position_x)).to.be.eql(6)",
+									"  pm.expect(parseInt(tower.position_y)).to.be.eql(8)",
+									"  pm.environment.set(\"black_indigo_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower black pink\", function(){",
+									"  var tower = towers.find(t => t.tower_color == \"pink\" && t.player_color == \"black\");",
+									"  pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"  pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"  pm.expect(parseInt(tower.position_x)).to.be.eql(5)",
+									"  pm.expect(parseInt(tower.position_y)).to.be.eql(8)",
+									"  pm.environment.set(\"black_pink_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower black yellow\", function(){",
+									"  var tower = towers.find(t => t.tower_color == \"yellow\" && t.player_color == \"black\");",
+									"  pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"  pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"  pm.expect(parseInt(tower.position_x)).to.be.eql(4)",
+									"  pm.expect(parseInt(tower.position_y)).to.be.eql(8)",
+									"  pm.environment.set(\"black_yellow_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower black red\", function(){",
+									"  var tower = towers.find(t => t.tower_color == \"red\" && t.player_color == \"black\");",
+									"  pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"  pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"  pm.expect(parseInt(tower.position_x)).to.be.eql(3)",
+									"  pm.expect(parseInt(tower.position_y)).to.be.eql(8)",
+									"  pm.environment.set(\"black_red_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower black green\", function(){",
+									"  var tower = towers.find(t => t.tower_color == \"green\" && t.player_color == \"black\");",
+									"  pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"  pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"  pm.expect(parseInt(tower.position_x)).to.be.eql(2)",
+									"  pm.expect(parseInt(tower.position_y)).to.be.eql(8)",
+									"  pm.environment.set(\"black_green_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower black brown\", function(){",
+									"  var tower = towers.find(t => t.tower_color == \"brown\" && t.player_color == \"black\");",
+									"  pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"  pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"  pm.expect(parseInt(tower.position_x)).to.be.eql(1)",
+									"  pm.expect(parseInt(tower.position_y)).to.be.eql(8)",
+									"  pm.environment.set(\"black_brown_id\", tower.tower_id);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{player_1}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/game?gameId={{game_id}}",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"game"
+							],
+							"query": [
+								{
+									"key": "gameId",
+									"value": "{{game_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Game moves",
+			"item": [
+				{
+					"name": "Not your turn P2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Not valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.false;",
+									"});",
+									"",
+									"pm.test(\"Message\", function () {",
+									"    pm.expect(moveResponse.message).to.be.eql(\"It's not your turn.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{player_2}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{white_orange_id}},\n\t\"target\":{\n\t\t\"x\": 3,\n\t\t\"y\": 2\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Not your turn P3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Not valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.false;",
+									"});",
+									"",
+									"pm.test(\"Message\", function () {",
+									"    pm.expect(moveResponse.message).to.be.eql(\"It's not your turn.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_3}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{white_orange_id}},\n\t\"target\":{\n\t\t\"x\": 3,\n\t\t\"y\": 2\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Not your tower P1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Not valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.false;",
+									"});",
+									"",
+									"pm.test(\"Message\", function () {",
+									"    pm.expect(moveResponse.message).to.be.eql(\"That is not your tower sir.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_1}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{black_orange_id}},\n\t\"target\":{\n\t\t\"x\": 7,\n\t\t\"y\": 7\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Not in bound X-",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Not valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.false;",
+									"});",
+									"",
+									"pm.test(\"Message\", function () {",
+									"    pm.expect(moveResponse.message).to.be.eql(\"Stay in bound buddy.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_1}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{white_orange_id}},\n\t\"target\":{\n\t\t\"x\": -1,\n\t\t\"y\": 3\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Not in bound X+",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Not valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.false;",
+									"});",
+									"",
+									"pm.test(\"Message\", function () {",
+									"    pm.expect(moveResponse.message).to.be.eql(\"Stay in bound buddy.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_1}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{white_orange_id}},\n\t\"target\":{\n\t\t\"x\": 9,\n\t\t\"y\": 5\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Not in bound Y-",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Not valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.false;",
+									"});",
+									"",
+									"pm.test(\"Message\", function () {",
+									"    pm.expect(moveResponse.message).to.be.eql(\"Stay in bound buddy.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_1}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{white_orange_id}},\n\t\"target\":{\n\t\t\"x\": 5,\n\t\t\"y\": -8\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Not in bound Y+",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Not valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.false;",
+									"});",
+									"",
+									"pm.test(\"Message\", function () {",
+									"    pm.expect(moveResponse.message).to.be.eql(\"Stay in bound buddy.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_1}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{white_orange_id}},\n\t\"target\":{\n\t\t\"x\": 5,\n\t\t\"y\": 158\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Valid P1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Is valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.true;",
+									"});",
+									"",
+									"pm.test(\"tower_id_to_move\", function () {",
+									"    pm.expect(moveResponse.tower_id_to_move).to.be.eql(pm.variables.get(\"black_orange_id\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_1}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{white_indigo_id}},\n\t\"target\":{\n\t\t\"x\": 3,\n\t\t\"y\": 3\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "game",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a3bb6f6e-c47f-43e9-8a51-ee1514083393",
+								"exec": [
+									"var resp = pm.response.json()",
+									"var game = resp.game;",
+									"var towers = resp.towers;",
+									"",
+									"pm.test(\"La game a le bon id\", function(){",
+									"    pm.expect(game.game_id).to.be.eql(pm.variables.get(\"game_id\"));",
+									"})",
+									"pm.test(\"Le player 1 est le bon\", function(){",
+									"    pm.expect(game.player_1_name).to.be.eql(pm.variables.get(\"player_1\"));",
+									"})",
+									"pm.test(\"Le player 2 est le bon\", function(){",
+									"    pm.expect(game.player_2_name).to.be.eql(pm.variables.get(\"player_2\"));",
+									"})",
+									"pm.test(\"player_1_score est à 0\", function(){",
+									"    pm.expect(parseInt(game.player_1_score)).to.be.eql(0);",
+									"})",
+									"pm.test(\"player_2_score est à 0\", function(){",
+									"    pm.expect(parseInt(game.player_2_score)).to.be.eql(0);",
+									"})",
+									"pm.test(\"points_to_win est à 15\", function(){",
+									"    pm.expect(parseInt(game.points_to_win)).to.be.eql(15);",
+									"})",
+									"pm.test(\"tower_id_to_move est à black_orange\", function(){",
+									"    pm.expect(game.tower_id_to_move).to.be.eql(pm.variables.get(\"black_orange_id\"));",
+									"})",
+									"pm.test(\"is_first_move est à 0\", function(){",
+									"    pm.expect(parseInt(game.is_first_move)).to.be.eql(0);",
+									"})",
+									"pm.test(\"turn_color est à black\", function(){",
+									"    pm.expect(game.turn_color).to.be.eql(\"black\");",
+									"})",
+									"pm.test(\"turn_player_id est à 9\", function(){",
+									"    pm.expect(parseInt(game.turn_player_id)).to.be.eql(9);",
+									"})",
+									"pm.test(\"turn_tower_color est à orange\", function(){",
+									"    pm.expect(game.turn_tower_color).to.be.eql(\"orange\");",
+									"})",
+									"",
+									"pm.test(\"Il y a 16 towers\", function(){",
+									"    pm.expect(towers.length).to.be.eql(16)",
+									"})",
+									"",
+									"",
+									"pm.test(\"Tower white indigo\", function(){",
+									"    var tower = towers.find(t => t.tower_color == \"indigo\" && t.player_color == \"white\");",
+									"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"    pm.expect(parseInt(tower.position_x)).to.be.eql(3)",
+									"    pm.expect(parseInt(tower.position_y)).to.be.eql(3)",
+									"    pm.environment.set(\"white_indigo_id\", tower.tower_id);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_1}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/game?gameId={{game_id}}",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"game"
+							],
+							"query": [
+								{
+									"key": "gameId",
+									"value": "{{game_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Not your turn P1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Not valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.false;",
+									"});",
+									"",
+									"pm.test(\"Message\", function () {",
+									"    pm.expect(moveResponse.message).to.be.eql(\"It's not your turn.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{player_1}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{white_blue_id}},\n\t\"target\":{\n\t\t\"x\": 2,\n\t\t\"y\": 2\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Can't move that tower P2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Not valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.false;",
+									"});",
+									"",
+									"pm.test(\"Message\", function () {",
+									"    pm.expect(moveResponse.message).to.be.eql(\"Can't move that tower right now.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_2}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{black_blue_id}},\n\t\"target\":{\n\t\t\"x\": 7,\n\t\t\"y\": 7\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Must go diagonal",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Not valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.false;",
+									"});",
+									"",
+									"pm.test(\"Message\", function () {",
+									"    pm.expect(moveResponse.message).to.be.eql(\"You must go diagonnally or straight ahead.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_2}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{black_orange_id}},\n\t\"target\":{\n\t\t\"x\": 5,\n\t\t\"y\": 7\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tower in the way",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Not valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.false;",
+									"});",
+									"",
+									"pm.test(\"Message\", function () {",
+									"    pm.expect(moveResponse.message).to.be.eql(\"Can't pass through or land on a tower.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_2}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{black_orange_id}},\n\t\"target\":{\n\t\t\"x\": 2,\n\t\t\"y\": 2\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tower in the way",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Not valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.false;",
+									"});",
+									"",
+									"pm.test(\"Message\", function () {",
+									"    pm.expect(moveResponse.message).to.be.eql(\"Can't pass through or land on a tower.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_2}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{black_orange_id}},\n\t\"target\":{\n\t\t\"x\": 3,\n\t\t\"y\": 3\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Valid P2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Is valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.true;",
+									"});",
+									"",
+									"pm.test(\"tower_id_to_move\", function () {",
+									"    pm.expect(moveResponse.tower_id_to_move).to.be.eql(pm.variables.get(\"white_indigo_id\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_2}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{black_orange_id}},\n\t\"target\":{\n\t\t\"x\": 8,\n\t\t\"y\": 2\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "game",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a3bb6f6e-c47f-43e9-8a51-ee1514083393",
+								"exec": [
+									"var resp = pm.response.json()",
+									"var game = resp.game;",
+									"var towers = resp.towers;",
+									"",
+									"pm.test(\"La game a le bon id\", function(){",
+									"    pm.expect(game.game_id).to.be.eql(pm.variables.get(\"game_id\"));",
+									"})",
+									"pm.test(\"Le player 1 est le bon\", function(){",
+									"    pm.expect(game.player_1_name).to.be.eql(pm.variables.get(\"player_1\"));",
+									"})",
+									"pm.test(\"Le player 2 est le bon\", function(){",
+									"    pm.expect(game.player_2_name).to.be.eql(pm.variables.get(\"player_2\"));",
+									"})",
+									"pm.test(\"player_1_score est à 0\", function(){",
+									"    pm.expect(parseInt(game.player_1_score)).to.be.eql(0);",
+									"})",
+									"pm.test(\"player_2_score est à 0\", function(){",
+									"    pm.expect(parseInt(game.player_2_score)).to.be.eql(0);",
+									"})",
+									"pm.test(\"points_to_win est à 15\", function(){",
+									"    pm.expect(parseInt(game.points_to_win)).to.be.eql(15);",
+									"})",
+									"pm.test(\"tower_id_to_move est à white_indigo\", function(){",
+									"    pm.expect(game.tower_id_to_move).to.be.eql(pm.variables.get(\"white_indigo_id\"));",
+									"})",
+									"pm.test(\"is_first_move est à 0\", function(){",
+									"    pm.expect(parseInt(game.is_first_move)).to.be.eql(0);",
+									"})",
+									"pm.test(\"turn_color est à white\", function(){",
+									"    pm.expect(game.turn_color).to.be.eql(\"white\");",
+									"})",
+									"pm.test(\"turn_player_id est à 10\", function(){",
+									"    pm.expect(parseInt(game.turn_player_id)).to.be.eql(10);",
+									"})",
+									"pm.test(\"turn_tower_color est à indigo\", function(){",
+									"    pm.expect(game.turn_tower_color).to.be.eql(\"indigo\");",
+									"})",
+									"",
+									"pm.test(\"Il y a 16 towers\", function(){",
+									"    pm.expect(towers.length).to.be.eql(16)",
+									"})",
+									"",
+									"",
+									"pm.test(\"Tower black orange\", function(){",
+									"    var tower = towers.find(t => t.tower_color == \"orange\" && t.player_color == \"black\");",
+									"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"    pm.expect(parseInt(tower.position_x)).to.be.eql(8)",
+									"    pm.expect(parseInt(tower.position_y)).to.be.eql(2)",
+									"    pm.environment.set(\"black_orange_id\", tower.tower_id);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_1}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/game?gameId={{game_id}}",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"game"
+							],
+							"query": [
+								{
+									"key": "gameId",
+									"value": "{{game_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Can't go backward P1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Not valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.false;",
+									"});",
+									"",
+									"pm.test(\"Message\", function () {",
+									"    pm.expect(moveResponse.message).to.be.eql(\"You can't go back nor sideways.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_1}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{white_indigo_id}},\n\t\"target\":{\n\t\t\"x\": 3,\n\t\t\"y\": 1\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Can't go sideways P1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Not valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.false;",
+									"});",
+									"",
+									"pm.test(\"Message\", function () {",
+									"    pm.expect(moveResponse.message).to.be.eql(\"You can't go back nor sideways.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_1}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{white_indigo_id}},\n\t\"target\":{\n\t\t\"x\": 6,\n\t\t\"y\": 3\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tower in the way",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Not valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.false;",
+									"});",
+									"",
+									"pm.test(\"Message\", function () {",
+									"    pm.expect(moveResponse.message).to.be.eql(\"Can't pass through or land on a tower.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_1}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{white_indigo_id}},\n\t\"target\":{\n\t\t\"x\": 3,\n\t\t\"y\": 8\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Valid P1 (Block)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Is valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.true;",
+									"});",
+									"",
+									"pm.test(\"Blocked\", function () {",
+									"    pm.expect(moveResponse.blocked).to.be.true;",
+									"});",
+									"",
+									"pm.test(\"tower_id_to_move\", function () {",
+									"    pm.expect(moveResponse.tower_id_to_move).to.be.eql(pm.variables.get(\"white_indigo_id\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_1}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{white_indigo_id}},\n\t\"target\":{\n\t\t\"x\": 4,\n\t\t\"y\": 4\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "game",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a3bb6f6e-c47f-43e9-8a51-ee1514083393",
+								"exec": [
+									"var resp = pm.response.json()",
+									"var game = resp.game;",
+									"var towers = resp.towers;",
+									"",
+									"pm.test(\"La game a le bon id\", function(){",
+									"    pm.expect(game.game_id).to.be.eql(pm.variables.get(\"game_id\"));",
+									"})",
+									"pm.test(\"Le player 1 est le bon\", function(){",
+									"    pm.expect(game.player_1_name).to.be.eql(pm.variables.get(\"player_1\"));",
+									"})",
+									"pm.test(\"Le player 2 est le bon\", function(){",
+									"    pm.expect(game.player_2_name).to.be.eql(pm.variables.get(\"player_2\"));",
+									"})",
+									"pm.test(\"player_1_score est à 0\", function(){",
+									"    pm.expect(parseInt(game.player_1_score)).to.be.eql(0);",
+									"})",
+									"pm.test(\"player_2_score est à 0\", function(){",
+									"    pm.expect(parseInt(game.player_2_score)).to.be.eql(0);",
+									"})",
+									"pm.test(\"points_to_win est à 15\", function(){",
+									"    pm.expect(parseInt(game.points_to_win)).to.be.eql(15);",
+									"})",
+									"pm.test(\"tower_id_to_move est à white_indigo\", function(){",
+									"    pm.expect(game.tower_id_to_move).to.be.eql(pm.variables.get(\"white_indigo_id\"));",
+									"})",
+									"pm.test(\"is_first_move est à 0\", function(){",
+									"    pm.expect(parseInt(game.is_first_move)).to.be.eql(0);",
+									"})",
+									"pm.test(\"turn_color est à white\", function(){",
+									"    pm.expect(game.turn_color).to.be.eql(\"white\");",
+									"})",
+									"pm.test(\"turn_player_id est à 10\", function(){",
+									"    pm.expect(parseInt(game.turn_player_id)).to.be.eql(10);",
+									"})",
+									"pm.test(\"turn_tower_color est à indigo\", function(){",
+									"    pm.expect(game.turn_tower_color).to.be.eql(\"indigo\");",
+									"})",
+									"",
+									"pm.test(\"Il y a 16 towers\", function(){",
+									"    pm.expect(towers.length).to.be.eql(16)",
+									"})",
+									"",
+									"",
+									"pm.test(\"Tower white indigo\", function(){",
+									"    var tower = towers.find(t => t.tower_color == \"indigo\" && t.player_color == \"white\");",
+									"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"    pm.expect(parseInt(tower.position_x)).to.be.eql(4)",
+									"    pm.expect(parseInt(tower.position_y)).to.be.eql(4)",
+									"    pm.environment.set(\"white_indigo_id\", tower.tower_id);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_1}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/game?gameId={{game_id}}",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"game"
+							],
+							"query": [
+								{
+									"key": "gameId",
+									"value": "{{game_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Valid P1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Is valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.true;",
+									"});",
+									"",
+									"",
+									"pm.test(\"tower_id_to_move\", function () {",
+									"    pm.expect(moveResponse.tower_id_to_move).to.be.eql(pm.variables.get(\"black_blue_id\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_1}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{white_indigo_id}},\n\t\"target\":{\n\t\t\"x\": 4,\n\t\t\"y\": 7\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Valid P2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Is valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.true;",
+									"});",
+									"",
+									"",
+									"pm.test(\"tower_id_to_move\", function () {",
+									"    pm.expect(moveResponse.tower_id_to_move).to.be.eql(pm.variables.get(\"white_blue_id\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_2}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{black_blue_id}},\n\t\"target\":{\n\t\t\"x\": 3,\n\t\t\"y\": 4\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Valid P1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Is valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.true;",
+									"});",
+									"",
+									"",
+									"pm.test(\"tower_id_to_move\", function () {",
+									"    pm.expect(moveResponse.tower_id_to_move).to.be.eql(pm.variables.get(\"black_red_id\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_1}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{white_blue_id}},\n\t\"target\":{\n\t\t\"x\": 8,\n\t\t\"y\": 7\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tower in the way",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Not valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.false;",
+									"});",
+									"",
+									"pm.test(\"Message\", function () {",
+									"    pm.expect(moveResponse.message).to.be.eql(\"Can't pass through or land on a tower.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_2}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{black_red_id}},\n\t\"target\":{\n\t\t\"x\": 3,\n\t\t\"y\": 1\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tower in the way",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Not valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.false;",
+									"});",
+									"",
+									"pm.test(\"Message\", function () {",
+									"    pm.expect(moveResponse.message).to.be.eql(\"Can't pass through or land on a tower.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_2}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{black_red_id}},\n\t\"target\":{\n\t\t\"x\": 6,\n\t\t\"y\": 5\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Valid P2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Is valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.true;",
+									"});",
+									"",
+									"",
+									"pm.test(\"tower_id_to_move\", function () {",
+									"    pm.expect(moveResponse.tower_id_to_move).to.be.eql(pm.variables.get(\"white_blue_id\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_2}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{black_red_id}},\n\t\"target\":{\n\t\t\"x\": 1,\n\t\t\"y\": 6\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Valid P1 (win round)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Is valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.true;",
+									"});",
+									"",
+									"",
+									"pm.test(\"round_won_by\", function () {",
+									"    pm.expect(moveResponse.round_won_by).to.be.eql(\"white\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_1}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{white_blue_id}},\n\t\"target\":{\n\t\t\"x\": 8,\n\t\t\"y\": 8\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "game",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a3bb6f6e-c47f-43e9-8a51-ee1514083393",
+								"exec": [
+									"var resp = pm.response.json()",
+									"var game = resp.game;",
+									"var towers = resp.towers;",
+									"",
+									"pm.test(\"La game a le bon id\", function(){",
+									"    pm.expect(game.game_id).to.be.eql(pm.variables.get(\"game_id\"));",
+									"})",
+									"pm.test(\"Le player 1 est le bon\", function(){",
+									"    pm.expect(game.player_1_name).to.be.eql(pm.variables.get(\"player_1\"));",
+									"})",
+									"pm.test(\"Le player 2 est le bon\", function(){",
+									"    pm.expect(game.player_2_name).to.be.eql(pm.variables.get(\"player_2\"));",
+									"})",
+									"pm.test(\"player_1_score est à 1\", function(){",
+									"    pm.expect(parseInt(game.player_1_score)).to.be.eql(1);",
+									"})",
+									"pm.test(\"player_2_score est à 0\", function(){",
+									"    pm.expect(parseInt(game.player_2_score)).to.be.eql(0);",
+									"})",
+									"pm.test(\"points_to_win est à 15\", function(){",
+									"    pm.expect(parseInt(game.points_to_win)).to.be.eql(15);",
+									"})",
+									"pm.test(\"tower_id_to_move est à null\", function(){",
+									"    pm.expect(game.tower_id_to_move).to.be.eql(null);",
+									"})",
+									"pm.test(\"is_first_move est à 1\", function(){",
+									"    pm.expect(parseInt(game.is_first_move)).to.be.eql(1);",
+									"})",
+									"pm.test(\"turn_color est à black\", function(){",
+									"    pm.expect(game.turn_color).to.be.eql(\"black\");",
+									"})",
+									"pm.test(\"turn_player_id est à 9\", function(){",
+									"    pm.expect(parseInt(game.turn_player_id)).to.be.eql(9);",
+									"})",
+									"pm.test(\"turn_tower_color est à null\", function(){",
+									"    pm.expect(game.turn_tower_color).to.be.eql(null);",
+									"})",
+									"",
+									"pm.test(\"Il y a 16 towers\", function(){",
+									"    pm.expect(towers.length).to.be.eql(16)",
+									"})",
+									"",
+									"pm.test(\"Tower white orange\", function(){",
+									"    var tower = towers.find(t => t.tower_color == \"orange\" && t.player_color == \"white\");",
+									"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"    pm.expect(parseInt(tower.position_x)).to.be.eql(1)",
+									"    pm.expect(parseInt(tower.position_y)).to.be.eql(1)",
+									"    pm.environment.set(\"white_orange_id\", tower.tower_id);",
+									"})",
+									"",
+									"pm.test(\"Tower white blue\", function(){",
+									"    var tower = towers.find(t => t.tower_color == \"blue\" && t.player_color == \"white\");",
+									"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"    pm.expect(parseInt(tower.sumo)).to.be.eql(1)",
+									"    pm.expect(parseInt(tower.position_x)).to.be.eql(3)",
+									"    pm.expect(parseInt(tower.position_y)).to.be.eql(1)",
+									"    pm.environment.set(\"white_blue_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower white indigo\", function(){",
+									"    var tower = towers.find(t => t.tower_color == \"indigo\" && t.player_color == \"white\");",
+									"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"    pm.expect(parseInt(tower.position_x)).to.be.eql(2)",
+									"    pm.expect(parseInt(tower.position_y)).to.be.eql(1)",
+									"    pm.environment.set(\"white_indigo_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower white pink\", function(){",
+									"    var tower = towers.find(t => t.tower_color == \"pink\" && t.player_color == \"white\");",
+									"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"    pm.expect(parseInt(tower.position_x)).to.be.eql(4)",
+									"    pm.expect(parseInt(tower.position_y)).to.be.eql(1)",
+									"    pm.environment.set(\"white_pink_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower white yellow\", function(){",
+									"    var tower = towers.find(t => t.tower_color == \"yellow\" && t.player_color == \"white\");",
+									"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"    pm.expect(parseInt(tower.position_x)).to.be.eql(5)",
+									"    pm.expect(parseInt(tower.position_y)).to.be.eql(1)",
+									"    pm.environment.set(\"white_yellow_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower white red\", function(){",
+									"    var tower = towers.find(t => t.tower_color == \"red\" && t.player_color == \"white\");",
+									"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"    pm.expect(parseInt(tower.position_x)).to.be.eql(6)",
+									"    pm.expect(parseInt(tower.position_y)).to.be.eql(1)",
+									"    pm.environment.set(\"white_red_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower white green\", function(){",
+									"    var tower = towers.find(t => t.tower_color == \"green\" && t.player_color == \"white\");",
+									"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"    pm.expect(parseInt(tower.position_x)).to.be.eql(7)",
+									"    pm.expect(parseInt(tower.position_y)).to.be.eql(1)",
+									"    pm.environment.set(\"white_green_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower white brown\", function(){",
+									"    var tower = towers.find(t => t.tower_color == \"brown\" && t.player_color == \"white\");",
+									"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"    pm.expect(parseInt(tower.position_x)).to.be.eql(8)",
+									"    pm.expect(parseInt(tower.position_y)).to.be.eql(1)",
+									"    pm.environment.set(\"white_brown_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower black orange\", function(){",
+									"  var tower = towers.find(t => t.tower_color == \"orange\" && t.player_color == \"black\");",
+									"  pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"  pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"  pm.expect(parseInt(tower.position_x)).to.be.eql(3)",
+									"  pm.expect(parseInt(tower.position_y)).to.be.eql(8)",
+									"  pm.environment.set(\"black_orange_id\", tower.tower_id);",
+									"})",
+									"",
+									"pm.test(\"Tower black blue\", function(){",
+									"  var tower = towers.find(t => t.tower_color == \"blue\" && t.player_color == \"black\");",
+									"  pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"  pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"  pm.expect(parseInt(tower.position_x)).to.be.eql(7)",
+									"  pm.expect(parseInt(tower.position_y)).to.be.eql(8)",
+									"  pm.environment.set(\"black_blue_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower black indigo\", function(){",
+									"  var tower = towers.find(t => t.tower_color == \"indigo\" && t.player_color == \"black\");",
+									"  pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"  pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"  pm.expect(parseInt(tower.position_x)).to.be.eql(6)",
+									"  pm.expect(parseInt(tower.position_y)).to.be.eql(8)",
+									"  pm.environment.set(\"black_indigo_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower black pink\", function(){",
+									"  var tower = towers.find(t => t.tower_color == \"pink\" && t.player_color == \"black\");",
+									"  pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"  pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"  pm.expect(parseInt(tower.position_x)).to.be.eql(5)",
+									"  pm.expect(parseInt(tower.position_y)).to.be.eql(8)",
+									"  pm.environment.set(\"black_pink_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower black yellow\", function(){",
+									"  var tower = towers.find(t => t.tower_color == \"yellow\" && t.player_color == \"black\");",
+									"  pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"  pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"  pm.expect(parseInt(tower.position_x)).to.be.eql(4)",
+									"  pm.expect(parseInt(tower.position_y)).to.be.eql(8)",
+									"  pm.environment.set(\"black_yellow_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower black red\", function(){",
+									"  var tower = towers.find(t => t.tower_color == \"red\" && t.player_color == \"black\");",
+									"  pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"  pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"  pm.expect(parseInt(tower.position_x)).to.be.eql(8)",
+									"  pm.expect(parseInt(tower.position_y)).to.be.eql(8)",
+									"  pm.environment.set(\"black_red_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower black green\", function(){",
+									"  var tower = towers.find(t => t.tower_color == \"green\" && t.player_color == \"black\");",
+									"  pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"  pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"  pm.expect(parseInt(tower.position_x)).to.be.eql(2)",
+									"  pm.expect(parseInt(tower.position_y)).to.be.eql(8)",
+									"  pm.environment.set(\"black_green_id\", tower.tower_id);",
+									"})",
+									"pm.test(\"Tower black brown\", function(){",
+									"  var tower = towers.find(t => t.tower_color == \"brown\" && t.player_color == \"black\");",
+									"  pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+									"  pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+									"  pm.expect(parseInt(tower.position_x)).to.be.eql(1)",
+									"  pm.expect(parseInt(tower.position_y)).to.be.eql(8)",
+									"  pm.environment.set(\"black_brown_id\", tower.tower_id);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_1}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/game?gameId={{game_id}}",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"game"
+							],
+							"query": [
+								{
+									"key": "gameId",
+									"value": "{{game_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Valid P2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Is valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.true;",
+									"});",
+									"",
+									"",
+									"pm.test(\"tower_id_to_move\", function () {",
+									"    pm.expect(moveResponse.tower_id_to_move).to.be.eql(pm.variables.get(\"white_blue_id\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_2}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{black_red_id}},\n\t\"target\":{\n\t\t\"x\": 8,\n\t\t\"y\": 3\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sumo max range",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Not valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.false;",
+									"});",
+									"",
+									"",
+									"pm.test(\"Message\", function () {",
+									"    pm.expect(moveResponse.message).to.be.eql(\"Sumo can only advance 5 tiles.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_1}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{white_blue_id}},\n\t\"target\":{\n\t\t\"x\": 3,\n\t\t\"y\": 7\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Valid P1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Is valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.true;",
+									"});",
+									"",
+									"",
+									"pm.test(\"tower_id_to_move\", function () {",
+									"    pm.expect(moveResponse.tower_id_to_move).to.be.eql(pm.variables.get(\"black_orange_id\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_1}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{white_blue_id}},\n\t\"target\":{\n\t\t\"x\": 3,\n\t\t\"y\": 3\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Valid P2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+								"exec": [
+									"var moveResponse = pm.response.json();",
+									"",
+									"pm.test(\"Is valid\", function () {",
+									"    pm.expect(moveResponse.valid).to.be.true;",
+									"});",
+									"",
+									"",
+									"pm.test(\"tower_id_to_move\", function () {",
+									"    pm.expect(moveResponse.tower_id_to_move).to.be.eql(pm.variables.get(\"white_blue_id\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{player_2}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"towerId\": {{black_orange_id}},\n\t\"target\":{\n\t\t\"x\": 3,\n\t\t\"y\": 4\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/move",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"move"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Tiles",
+			"item": [
+				{
+					"name": "tiles",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "44e6aafb-8279-467b-bfcc-9b2677be4b44",
+								"exec": [
+									"var expected = [",
+									"    {",
+									"        \"tile_id\": \"1\",",
+									"        \"position_x\": \"1\",",
+									"        \"position_y\": \"1\",",
+									"        \"color\": \"orange\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"2\",",
+									"        \"position_x\": \"2\",",
+									"        \"position_y\": \"1\",",
+									"        \"color\": \"blue\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"3\",",
+									"        \"position_x\": \"3\",",
+									"        \"position_y\": \"1\",",
+									"        \"color\": \"indigo\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"4\",",
+									"        \"position_x\": \"4\",",
+									"        \"position_y\": \"1\",",
+									"        \"color\": \"pink\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"5\",",
+									"        \"position_x\": \"5\",",
+									"        \"position_y\": \"1\",",
+									"        \"color\": \"yellow\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"6\",",
+									"        \"position_x\": \"6\",",
+									"        \"position_y\": \"1\",",
+									"        \"color\": \"red\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"7\",",
+									"        \"position_x\": \"7\",",
+									"        \"position_y\": \"1\",",
+									"        \"color\": \"green\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"8\",",
+									"        \"position_x\": \"8\",",
+									"        \"position_y\": \"1\",",
+									"        \"color\": \"brown\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"9\",",
+									"        \"position_x\": \"1\",",
+									"        \"position_y\": \"2\",",
+									"        \"color\": \"red\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"10\",",
+									"        \"position_x\": \"2\",",
+									"        \"position_y\": \"2\",",
+									"        \"color\": \"orange\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"11\",",
+									"        \"position_x\": \"3\",",
+									"        \"position_y\": \"2\",",
+									"        \"color\": \"pink\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"12\",",
+									"        \"position_x\": \"4\",",
+									"        \"position_y\": \"2\",",
+									"        \"color\": \"green\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"13\",",
+									"        \"position_x\": \"5\",",
+									"        \"position_y\": \"2\",",
+									"        \"color\": \"blue\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"14\",",
+									"        \"position_x\": \"6\",",
+									"        \"position_y\": \"2\",",
+									"        \"color\": \"yellow\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"15\",",
+									"        \"position_x\": \"7\",",
+									"        \"position_y\": \"2\",",
+									"        \"color\": \"brown\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"16\",",
+									"        \"position_x\": \"8\",",
+									"        \"position_y\": \"2\",",
+									"        \"color\": \"indigo\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"17\",",
+									"        \"position_x\": \"1\",",
+									"        \"position_y\": \"3\",",
+									"        \"color\": \"green\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"18\",",
+									"        \"position_x\": \"2\",",
+									"        \"position_y\": \"3\",",
+									"        \"color\": \"pink\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"19\",",
+									"        \"position_x\": \"3\",",
+									"        \"position_y\": \"3\",",
+									"        \"color\": \"orange\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"20\",",
+									"        \"position_x\": \"4\",",
+									"        \"position_y\": \"3\",",
+									"        \"color\": \"red\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"21\",",
+									"        \"position_x\": \"5\",",
+									"        \"position_y\": \"3\",",
+									"        \"color\": \"indigo\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"22\",",
+									"        \"position_x\": \"6\",",
+									"        \"position_y\": \"3\",",
+									"        \"color\": \"brown\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"23\",",
+									"        \"position_x\": \"7\",",
+									"        \"position_y\": \"3\",",
+									"        \"color\": \"yellow\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"24\",",
+									"        \"position_x\": \"8\",",
+									"        \"position_y\": \"3\",",
+									"        \"color\": \"blue\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"25\",",
+									"        \"position_x\": \"1\",",
+									"        \"position_y\": \"4\",",
+									"        \"color\": \"pink\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"26\",",
+									"        \"position_x\": \"2\",",
+									"        \"position_y\": \"4\",",
+									"        \"color\": \"indigo\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"27\",",
+									"        \"position_x\": \"3\",",
+									"        \"position_y\": \"4\",",
+									"        \"color\": \"blue\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"28\",",
+									"        \"position_x\": \"4\",",
+									"        \"position_y\": \"4\",",
+									"        \"color\": \"orange\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"29\",",
+									"        \"position_x\": \"5\",",
+									"        \"position_y\": \"4\",",
+									"        \"color\": \"brown\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"30\",",
+									"        \"position_x\": \"6\",",
+									"        \"position_y\": \"4\",",
+									"        \"color\": \"green\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"31\",",
+									"        \"position_x\": \"7\",",
+									"        \"position_y\": \"4\",",
+									"        \"color\": \"red\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"32\",",
+									"        \"position_x\": \"8\",",
+									"        \"position_y\": \"4\",",
+									"        \"color\": \"yellow\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"33\",",
+									"        \"position_x\": \"1\",",
+									"        \"position_y\": \"5\",",
+									"        \"color\": \"yellow\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"34\",",
+									"        \"position_x\": \"2\",",
+									"        \"position_y\": \"5\",",
+									"        \"color\": \"red\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"35\",",
+									"        \"position_x\": \"3\",",
+									"        \"position_y\": \"5\",",
+									"        \"color\": \"green\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"36\",",
+									"        \"position_x\": \"4\",",
+									"        \"position_y\": \"5\",",
+									"        \"color\": \"brown\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"37\",",
+									"        \"position_x\": \"5\",",
+									"        \"position_y\": \"5\",",
+									"        \"color\": \"orange\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"38\",",
+									"        \"position_x\": \"6\",",
+									"        \"position_y\": \"5\",",
+									"        \"color\": \"blue\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"39\",",
+									"        \"position_x\": \"7\",",
+									"        \"position_y\": \"5\",",
+									"        \"color\": \"indigo\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"40\",",
+									"        \"position_x\": \"8\",",
+									"        \"position_y\": \"5\",",
+									"        \"color\": \"pink\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"41\",",
+									"        \"position_x\": \"1\",",
+									"        \"position_y\": \"6\",",
+									"        \"color\": \"blue\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"42\",",
+									"        \"position_x\": \"2\",",
+									"        \"position_y\": \"6\",",
+									"        \"color\": \"yellow\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"43\",",
+									"        \"position_x\": \"3\",",
+									"        \"position_y\": \"6\",",
+									"        \"color\": \"brown\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"44\",",
+									"        \"position_x\": \"4\",",
+									"        \"position_y\": \"6\",",
+									"        \"color\": \"indigo\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"45\",",
+									"        \"position_x\": \"5\",",
+									"        \"position_y\": \"6\",",
+									"        \"color\": \"red\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"46\",",
+									"        \"position_x\": \"6\",",
+									"        \"position_y\": \"6\",",
+									"        \"color\": \"orange\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"47\",",
+									"        \"position_x\": \"7\",",
+									"        \"position_y\": \"6\",",
+									"        \"color\": \"pink\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"48\",",
+									"        \"position_x\": \"8\",",
+									"        \"position_y\": \"6\",",
+									"        \"color\": \"green\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"49\",",
+									"        \"position_x\": \"1\",",
+									"        \"position_y\": \"7\",",
+									"        \"color\": \"indigo\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"50\",",
+									"        \"position_x\": \"2\",",
+									"        \"position_y\": \"7\",",
+									"        \"color\": \"brown\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"51\",",
+									"        \"position_x\": \"3\",",
+									"        \"position_y\": \"7\",",
+									"        \"color\": \"yellow\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"52\",",
+									"        \"position_x\": \"4\",",
+									"        \"position_y\": \"7\",",
+									"        \"color\": \"blue\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"53\",",
+									"        \"position_x\": \"5\",",
+									"        \"position_y\": \"7\",",
+									"        \"color\": \"green\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"54\",",
+									"        \"position_x\": \"6\",",
+									"        \"position_y\": \"7\",",
+									"        \"color\": \"pink\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"55\",",
+									"        \"position_x\": \"7\",",
+									"        \"position_y\": \"7\",",
+									"        \"color\": \"orange\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"56\",",
+									"        \"position_x\": \"8\",",
+									"        \"position_y\": \"7\",",
+									"        \"color\": \"red\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"57\",",
+									"        \"position_x\": \"1\",",
+									"        \"position_y\": \"8\",",
+									"        \"color\": \"brown\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"58\",",
+									"        \"position_x\": \"2\",",
+									"        \"position_y\": \"8\",",
+									"        \"color\": \"green\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"59\",",
+									"        \"position_x\": \"3\",",
+									"        \"position_y\": \"8\",",
+									"        \"color\": \"red\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"60\",",
+									"        \"position_x\": \"4\",",
+									"        \"position_y\": \"8\",",
+									"        \"color\": \"yellow\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"61\",",
+									"        \"position_x\": \"5\",",
+									"        \"position_y\": \"8\",",
+									"        \"color\": \"pink\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"62\",",
+									"        \"position_x\": \"6\",",
+									"        \"position_y\": \"8\",",
+									"        \"color\": \"indigo\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"63\",",
+									"        \"position_x\": \"7\",",
+									"        \"position_y\": \"8\",",
+									"        \"color\": \"blue\"",
+									"    },",
+									"    {",
+									"        \"tile_id\": \"64\",",
+									"        \"position_x\": \"8\",",
+									"        \"position_y\": \"8\",",
+									"        \"color\": \"orange\"",
+									"    }",
+									"]",
+									"var tiles = pm.response.json();",
+									"pm.test(\"Il y a 64 tuiles\", function () {",
+									"    pm.expect(tiles.length).to.eql(64);",
+									"});",
+									"",
+									"pm.test(\"Tuile en (1, 1) est orange\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 1 && parseInt(t.position_y) == 1);",
+									"    pm.expect(tile.color).to.eql(\"orange\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (2, 1) est blue\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 2 && parseInt(t.position_y) == 1);",
+									"    pm.expect(tile.color).to.eql(\"blue\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (3, 1) est indigo\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 3 && parseInt(t.position_y) == 1);",
+									"    pm.expect(tile.color).to.eql(\"indigo\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (4, 1) est pink\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 4 && parseInt(t.position_y) == 1);",
+									"    pm.expect(tile.color).to.eql(\"pink\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (5, 1) est yellow\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 5 && parseInt(t.position_y) == 1);",
+									"    pm.expect(tile.color).to.eql(\"yellow\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (6, 1) est red\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 6 && parseInt(t.position_y) == 1);",
+									"    pm.expect(tile.color).to.eql(\"red\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (7, 1) est green\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 7 && parseInt(t.position_y) == 1);",
+									"    pm.expect(tile.color).to.eql(\"green\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (8, 1) est brown\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 8 && parseInt(t.position_y) == 1);",
+									"    pm.expect(tile.color).to.eql(\"brown\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (1, 2) est red\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 1 && parseInt(t.position_y) == 2);",
+									"    pm.expect(tile.color).to.eql(\"red\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (2, 2) est orange\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 2 && parseInt(t.position_y) == 2);",
+									"    pm.expect(tile.color).to.eql(\"orange\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (3, 2) est pink\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 3 && parseInt(t.position_y) == 2);",
+									"    pm.expect(tile.color).to.eql(\"pink\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (4, 2) est green\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 4 && parseInt(t.position_y) == 2);",
+									"    pm.expect(tile.color).to.eql(\"green\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (5, 2) est blue\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 5 && parseInt(t.position_y) == 2);",
+									"    pm.expect(tile.color).to.eql(\"blue\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (6, 2) est yellow\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 6 && parseInt(t.position_y) == 2);",
+									"    pm.expect(tile.color).to.eql(\"yellow\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (7, 2) est brown\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 7 && parseInt(t.position_y) == 2);",
+									"    pm.expect(tile.color).to.eql(\"brown\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (8, 2) est indigo\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 8 && parseInt(t.position_y) == 2);",
+									"    pm.expect(tile.color).to.eql(\"indigo\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (1, 3) est green\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 1 && parseInt(t.position_y) == 3);",
+									"    pm.expect(tile.color).to.eql(\"green\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (2, 3) est pink\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 2 && parseInt(t.position_y) == 3);",
+									"    pm.expect(tile.color).to.eql(\"pink\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (3, 3) est orange\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 3 && parseInt(t.position_y) == 3);",
+									"    pm.expect(tile.color).to.eql(\"orange\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (4, 3) est red\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 4 && parseInt(t.position_y) == 3);",
+									"    pm.expect(tile.color).to.eql(\"red\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (5, 3) est indigo\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 5 && parseInt(t.position_y) == 3);",
+									"    pm.expect(tile.color).to.eql(\"indigo\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (6, 3) est brown\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 6 && parseInt(t.position_y) == 3);",
+									"    pm.expect(tile.color).to.eql(\"brown\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (7, 3) est yellow\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 7 && parseInt(t.position_y) == 3);",
+									"    pm.expect(tile.color).to.eql(\"yellow\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (8, 3) est blue\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 8 && parseInt(t.position_y) == 3);",
+									"    pm.expect(tile.color).to.eql(\"blue\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (1, 4) est pink\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 1 && parseInt(t.position_y) == 4);",
+									"    pm.expect(tile.color).to.eql(\"pink\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (2, 4) est indigo\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 2 && parseInt(t.position_y) == 4);",
+									"    pm.expect(tile.color).to.eql(\"indigo\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (3, 4) est blue\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 3 && parseInt(t.position_y) == 4);",
+									"    pm.expect(tile.color).to.eql(\"blue\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (4, 4) est orange\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 4 && parseInt(t.position_y) == 4);",
+									"    pm.expect(tile.color).to.eql(\"orange\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (5, 4) est brown\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 5 && parseInt(t.position_y) == 4);",
+									"    pm.expect(tile.color).to.eql(\"brown\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (6, 4) est green\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 6 && parseInt(t.position_y) == 4);",
+									"    pm.expect(tile.color).to.eql(\"green\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (7, 4) est red\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 7 && parseInt(t.position_y) == 4);",
+									"    pm.expect(tile.color).to.eql(\"red\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (8, 4) est yellow\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 8 && parseInt(t.position_y) == 4);",
+									"    pm.expect(tile.color).to.eql(\"yellow\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (1, 5) est yellow\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 1 && parseInt(t.position_y) == 5);",
+									"    pm.expect(tile.color).to.eql(\"yellow\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (2, 5) est red\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 2 && parseInt(t.position_y) == 5);",
+									"    pm.expect(tile.color).to.eql(\"red\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (3, 5) est green\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 3 && parseInt(t.position_y) == 5);",
+									"    pm.expect(tile.color).to.eql(\"green\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (4, 5) est brown\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 4 && parseInt(t.position_y) == 5);",
+									"    pm.expect(tile.color).to.eql(\"brown\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (5, 5) est orange\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 5 && parseInt(t.position_y) == 5);",
+									"    pm.expect(tile.color).to.eql(\"orange\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (6, 5) est blue\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 6 && parseInt(t.position_y) == 5);",
+									"    pm.expect(tile.color).to.eql(\"blue\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (7, 5) est indigo\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 7 && parseInt(t.position_y) == 5);",
+									"    pm.expect(tile.color).to.eql(\"indigo\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (8, 5) est pink\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 8 && parseInt(t.position_y) == 5);",
+									"    pm.expect(tile.color).to.eql(\"pink\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (1, 6) est blue\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 1 && parseInt(t.position_y) == 6);",
+									"    pm.expect(tile.color).to.eql(\"blue\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (2, 6) est yellow\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 2 && parseInt(t.position_y) == 6);",
+									"    pm.expect(tile.color).to.eql(\"yellow\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (3, 6) est brown\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 3 && parseInt(t.position_y) == 6);",
+									"    pm.expect(tile.color).to.eql(\"brown\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (4, 6) est indigo\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 4 && parseInt(t.position_y) == 6);",
+									"    pm.expect(tile.color).to.eql(\"indigo\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (5, 6) est red\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 5 && parseInt(t.position_y) == 6);",
+									"    pm.expect(tile.color).to.eql(\"red\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (6, 6) est orange\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 6 && parseInt(t.position_y) == 6);",
+									"    pm.expect(tile.color).to.eql(\"orange\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (7, 6) est pink\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 7 && parseInt(t.position_y) == 6);",
+									"    pm.expect(tile.color).to.eql(\"pink\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (8, 6) est green\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 8 && parseInt(t.position_y) == 6);",
+									"    pm.expect(tile.color).to.eql(\"green\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (1, 7) est indigo\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 1 && parseInt(t.position_y) == 7);",
+									"    pm.expect(tile.color).to.eql(\"indigo\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (2, 7) est brown\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 2 && parseInt(t.position_y) == 7);",
+									"    pm.expect(tile.color).to.eql(\"brown\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (3, 7) est yellow\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 3 && parseInt(t.position_y) == 7);",
+									"    pm.expect(tile.color).to.eql(\"yellow\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (4, 7) est blue\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 4 && parseInt(t.position_y) == 7);",
+									"    pm.expect(tile.color).to.eql(\"blue\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (5, 7) est green\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 5 && parseInt(t.position_y) == 7);",
+									"    pm.expect(tile.color).to.eql(\"green\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (6, 7) est pink\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 6 && parseInt(t.position_y) == 7);",
+									"    pm.expect(tile.color).to.eql(\"pink\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (7, 7) est orange\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 7 && parseInt(t.position_y) == 7);",
+									"    pm.expect(tile.color).to.eql(\"orange\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (8, 7) est red\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 8 && parseInt(t.position_y) == 7);",
+									"    pm.expect(tile.color).to.eql(\"red\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (1, 8) est brown\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 1 && parseInt(t.position_y) == 8);",
+									"    pm.expect(tile.color).to.eql(\"brown\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (2, 8) est green\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 2 && parseInt(t.position_y) == 8);",
+									"    pm.expect(tile.color).to.eql(\"green\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (3, 8) est red\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 3 && parseInt(t.position_y) == 8);",
+									"    pm.expect(tile.color).to.eql(\"red\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (4, 8) est yellow\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 4 && parseInt(t.position_y) == 8);",
+									"    pm.expect(tile.color).to.eql(\"yellow\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (5, 8) est pink\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 5 && parseInt(t.position_y) == 8);",
+									"    pm.expect(tile.color).to.eql(\"pink\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (6, 8) est indigo\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 6 && parseInt(t.position_y) == 8);",
+									"    pm.expect(tile.color).to.eql(\"indigo\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (7, 8) est blue\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 7 && parseInt(t.position_y) == 8);",
+									"    pm.expect(tile.color).to.eql(\"blue\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Tuile en (8, 8) est orange\", function () {",
+									"    var tile = tiles.find(t => parseInt(t.position_x) === 8 && parseInt(t.position_y) == 8);",
+									"    pm.expect(tile.color).to.eql(\"orange\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/tiles",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tiles"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Game Stubs",
+			"item": [
+				{
+					"name": "Impasse",
+					"item": [
+						{
+							"name": "create-game",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "7a811b95-3f9a-4ed6-879d-f5556ff08b6f",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Body is a number\", function () {",
+											"    pm.expect(parseInt(responseBody)).to.be.a(\"number\");",
+											"});",
+											"pm.environment.set(\"game_id\", responseBody);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Charset",
+										"type": "text",
+										"value": "utf-8"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{player_1}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"game\": {\r\n        \"player_1_id\": 10,\r\n        \"player_2_id\": 9,\r\n        \"player_1_score\": \"0\",\r\n        \"player_2_score\": \"0\",\r\n        \"points_to_win\": 15,\r\n        \"is_first_move\": \"1\",\r\n        \"turn_color\": \"white\",\r\n        \"turn_player_id\": 10,\r\n        \"turn_tower_color\": \"indigo\"\r\n    },\r\n    \"towers\": [\r\n        {\r\n            \"tower_color\": \"orange\",\r\n            \"player_color\": \"white\",\r\n            \"sumo\": \"0\",\r\n            \"position_x\": \"6\",\r\n            \"position_y\": \"1\",\r\n            \"player_id\": \"10\"\r\n        },\r\n        {\r\n            \"tower_color\": \"blue\",\r\n            \"player_color\": \"white\",\r\n            \"sumo\": \"0\",\r\n            \"position_x\": \"7\",\r\n            \"position_y\": \"1\",\r\n            \"player_id\": \"10\"\r\n        },\r\n        {\r\n            \"tower_color\": \"indigo\",\r\n            \"player_color\": \"white\",\r\n            \"sumo\": \"0\",\r\n            \"position_x\": \"2\",\r\n            \"position_y\": \"1\",\r\n            \"player_id\": \"10\"\r\n        },\r\n        {\r\n            \"tower_color\": \"pink\",\r\n            \"player_color\": \"white\",\r\n            \"sumo\": \"0\",\r\n            \"position_x\": \"4\",\r\n            \"position_y\": \"1\",\r\n            \"player_id\": \"10\"\r\n        },\r\n        {\r\n            \"tower_color\": \"yellow\",\r\n            \"player_color\": \"white\",\r\n            \"sumo\": \"0\",\r\n            \"position_x\": \"5\",\r\n            \"position_y\": \"1\",\r\n            \"player_id\": \"10\"\r\n        },\r\n        {\r\n            \"tower_color\": \"red\",\r\n            \"player_color\": \"white\",\r\n            \"sumo\": \"0\",\r\n            \"position_x\": \"6\",\r\n            \"position_y\": \"4\",\r\n            \"player_id\": \"10\"\r\n        },\r\n        {\r\n            \"tower_color\": \"green\",\r\n            \"player_color\": \"white\",\r\n            \"sumo\": \"0\",\r\n            \"position_x\": \"7\",\r\n            \"position_y\": \"4\",\r\n            \"player_id\": \"10\"\r\n        },\r\n        {\r\n            \"tower_color\": \"brown\",\r\n            \"player_color\": \"white\",\r\n            \"sumo\": \"0\",\r\n            \"position_x\": \"8\",\r\n            \"position_y\": \"4\",\r\n            \"player_id\": \"10\"\r\n        },\r\n        {\r\n            \"tower_color\": \"brown\",\r\n            \"player_color\": \"black\",\r\n            \"sumo\": \"0\",\r\n            \"position_x\": \"3\",\r\n            \"position_y\": \"3\",\r\n            \"player_id\": \"9\"\r\n        },\r\n        {\r\n            \"tower_color\": \"green\",\r\n            \"player_color\": \"black\",\r\n            \"sumo\": \"0\",\r\n            \"position_x\": \"1\",\r\n            \"position_y\": \"3\",\r\n            \"player_id\": \"9\"\r\n        },\r\n        {\r\n            \"tower_color\": \"red\",\r\n            \"player_color\": \"black\",\r\n            \"sumo\": \"0\",\r\n            \"position_x\": \"2\",\r\n            \"position_y\": \"3\",\r\n            \"player_id\": \"9\"\r\n        },\r\n        {\r\n            \"tower_color\": \"yellow\",\r\n            \"player_color\": \"black\",\r\n            \"sumo\": \"0\",\r\n            \"position_x\": \"4\",\r\n            \"position_y\": \"8\",\r\n            \"player_id\": \"9\"\r\n        },\r\n        {\r\n            \"tower_color\": \"pink\",\r\n            \"player_color\": \"black\",\r\n            \"sumo\": \"0\",\r\n            \"position_x\": \"5\",\r\n            \"position_y\": \"8\",\r\n            \"player_id\": \"9\"\r\n        },\r\n        {\r\n            \"tower_color\": \"indigo\",\r\n            \"player_color\": \"black\",\r\n            \"sumo\": \"0\",\r\n            \"position_x\": \"6\",\r\n            \"position_y\": \"8\",\r\n            \"player_id\": \"9\"\r\n        },\r\n        {\r\n            \"tower_color\": \"blue\",\r\n            \"player_color\": \"black\",\r\n            \"sumo\": \"0\",\r\n            \"position_x\": \"7\",\r\n            \"position_y\": \"8\",\r\n            \"player_id\": \"9\"\r\n        },\r\n        {\r\n            \"tower_color\": \"orange\",\r\n            \"player_color\": \"black\",\r\n            \"sumo\": \"0\",\r\n            \"position_x\": \"7\",\r\n            \"position_y\": \"5\",\r\n            \"player_id\": \"9\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "kamisado.localhost/api/create-game",
+									"host": [
+										"kamisado",
+										"localhost"
+									],
+									"path": [
+										"api",
+										"create-game"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "game",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a3bb6f6e-c47f-43e9-8a51-ee1514083393",
+										"exec": [
+											"var resp = pm.response.json()",
+											"var game = resp.game;",
+											"var towers = resp.towers;",
+											"",
+											"pm.test(\"La game a le bon id\", function(){",
+											"    pm.expect(game.game_id).to.be.eql(pm.variables.get(\"game_id\"));",
+											"})",
+											"pm.test(\"Le player 1 est le bon\", function(){",
+											"    pm.expect(game.player_1_name).to.be.eql(pm.variables.get(\"player_1\"));",
+											"})",
+											"pm.test(\"Le player 2 est le bon\", function(){",
+											"    pm.expect(game.player_2_name).to.be.eql(pm.variables.get(\"player_2\"));",
+											"})",
+											"pm.test(\"player_1_score est à 0\", function(){",
+											"    pm.expect(parseInt(game.player_1_score)).to.be.eql(0);",
+											"})",
+											"pm.test(\"player_2_score est à 0\", function(){",
+											"    pm.expect(parseInt(game.player_2_score)).to.be.eql(0);",
+											"})",
+											"pm.test(\"points_to_win est à 15\", function(){",
+											"    pm.expect(parseInt(game.points_to_win)).to.be.eql(15);",
+											"})",
+											"pm.test(\"tower_id_to_move est à null\", function(){",
+											"    pm.expect(game.tower_id_to_move).to.be.eql(null);",
+											"})",
+											"pm.test(\"is_first_move est à 1\", function(){",
+											"    pm.expect(parseInt(game.is_first_move)).to.be.eql(1);",
+											"})",
+											"pm.test(\"turn_color est à white\", function(){",
+											"    pm.expect(game.turn_color).to.be.eql(\"white\");",
+											"})",
+											"pm.test(\"turn_player_id est à 10\", function(){",
+											"    pm.expect(parseInt(game.turn_player_id)).to.be.eql(10);",
+											"})",
+											"",
+											"pm.test(\"Il y a 16 towers\", function(){",
+											"    pm.expect(towers.length).to.be.eql(16)",
+											"})",
+											"",
+											"pm.test(\"Tower white indigo\", function(){",
+											"    var tower = towers.find(t => t.tower_color == \"indigo\" && t.player_color == \"white\");",
+											"    pm.environment.set(\"white_indigo_id\", tower.tower_id);",
+											"})",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{player_1}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "kamisado.localhost/api/game?gameId={{game_id}}",
+									"host": [
+										"kamisado",
+										"localhost"
+									],
+									"path": [
+										"api",
+										"game"
+									],
+									"query": [
+										{
+											"key": "gameId",
+											"value": "{{game_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "impasse",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3a8fb25a-026f-41b7-8799-4a634073b2a0",
+										"exec": [
+											"var moveResponse = pm.response.json();",
+											"",
+											"pm.test(\"Impasse\", function () {",
+											"    pm.expect(moveResponse.impasse).to.be.true;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{player_1}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"towerId\": {{white_indigo_id}},\n\t\"target\":{\n\t\t\"x\": 2,\n\t\t\"y\": 2\n\t}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "kamisado.localhost/api/move",
+									"host": [
+										"kamisado",
+										"localhost"
+									],
+									"path": [
+										"api",
+										"move"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "game",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a3bb6f6e-c47f-43e9-8a51-ee1514083393",
+										"exec": [
+											"var resp = pm.response.json()",
+											"var game = resp.game;",
+											"var towers = resp.towers;",
+											"",
+											"pm.test(\"La game a le bon id\", function(){",
+											"    pm.expect(game.game_id).to.be.eql(pm.variables.get(\"game_id\"));",
+											"})",
+											"pm.test(\"Le player 1 est le bon\", function(){",
+											"    pm.expect(game.player_1_name).to.be.eql(pm.variables.get(\"player_1\"));",
+											"})",
+											"pm.test(\"Le player 2 est le bon\", function(){",
+											"    pm.expect(game.player_2_name).to.be.eql(pm.variables.get(\"player_2\"));",
+											"})",
+											"pm.test(\"player_1_score est à 0\", function(){",
+											"    pm.expect(parseInt(game.player_1_score)).to.be.eql(0);",
+											"})",
+											"pm.test(\"player_2_score est à 1\", function(){",
+											"    pm.expect(parseInt(game.player_2_score)).to.be.eql(1);",
+											"})",
+											"pm.test(\"points_to_win est à 15\", function(){",
+											"    pm.expect(parseInt(game.points_to_win)).to.be.eql(15);",
+											"})",
+											"pm.test(\"tower_id_to_move est à null\", function(){",
+											"    pm.expect(game.tower_id_to_move).to.be.eql(null);",
+											"})",
+											"pm.test(\"is_first_move est à 1\", function(){",
+											"    pm.expect(parseInt(game.is_first_move)).to.be.eql(1);",
+											"})",
+											"pm.test(\"turn_color est à white\", function(){",
+											"    pm.expect(game.turn_color).to.be.eql(\"white\");",
+											"})",
+											"pm.test(\"turn_player_id est à 10\", function(){",
+											"    pm.expect(parseInt(game.turn_player_id)).to.be.eql(10);",
+											"})",
+											"pm.test(\"turn_tower_color est à null\", function(){",
+											"    pm.expect(game.turn_tower_color).to.be.eql(null);",
+											"})",
+											"",
+											"pm.test(\"Il y a 16 towers\", function(){",
+											"    pm.expect(towers.length).to.be.eql(16)",
+											"})",
+											"",
+											"pm.test(\"Tower white orange\", function(){",
+											"    var tower = towers.find(t => t.tower_color == \"orange\" && t.player_color == \"white\");",
+											"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+											"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+											"    pm.expect(parseInt(tower.position_x)).to.be.eql(6)",
+											"    pm.expect(parseInt(tower.position_y)).to.be.eql(1)",
+											"    pm.environment.set(\"white_orange_id\", tower.tower_id);",
+											"})",
+											"",
+											"pm.test(\"Tower white blue\", function(){",
+											"    var tower = towers.find(t => t.tower_color == \"blue\" && t.player_color == \"white\");",
+											"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+											"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+											"    pm.expect(parseInt(tower.position_x)).to.be.eql(7)",
+											"    pm.expect(parseInt(tower.position_y)).to.be.eql(1)",
+											"    pm.environment.set(\"white_blue_id\", tower.tower_id);",
+											"})",
+											"pm.test(\"Tower white indigo\", function(){",
+											"    var tower = towers.find(t => t.tower_color == \"indigo\" && t.player_color == \"white\");",
+											"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+											"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+											"    pm.expect(parseInt(tower.position_x)).to.be.eql(1)",
+											"    pm.expect(parseInt(tower.position_y)).to.be.eql(1)",
+											"    pm.environment.set(\"white_indigo_id\", tower.tower_id);",
+											"})",
+											"pm.test(\"Tower white pink\", function(){",
+											"    var tower = towers.find(t => t.tower_color == \"pink\" && t.player_color == \"white\");",
+											"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+											"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+											"    pm.expect(parseInt(tower.position_x)).to.be.eql(4)",
+											"    pm.expect(parseInt(tower.position_y)).to.be.eql(1)",
+											"    pm.environment.set(\"white_pink_id\", tower.tower_id);",
+											"})",
+											"pm.test(\"Tower white yellow\", function(){",
+											"    var tower = towers.find(t => t.tower_color == \"yellow\" && t.player_color == \"white\");",
+											"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+											"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+											"    pm.expect(parseInt(tower.position_x)).to.be.eql(5)",
+											"    pm.expect(parseInt(tower.position_y)).to.be.eql(1)",
+											"    pm.environment.set(\"white_yellow_id\", tower.tower_id);",
+											"})",
+											"pm.test(\"Tower white red\", function(){",
+											"    var tower = towers.find(t => t.tower_color == \"red\" && t.player_color == \"white\");",
+											"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+											"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+											"    pm.expect(parseInt(tower.position_x)).to.be.eql(2)",
+											"    pm.expect(parseInt(tower.position_y)).to.be.eql(1)",
+											"    pm.environment.set(\"white_red_id\", tower.tower_id);",
+											"})",
+											"pm.test(\"Tower white green\", function(){",
+											"    var tower = towers.find(t => t.tower_color == \"green\" && t.player_color == \"white\");",
+											"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+											"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+											"    pm.expect(parseInt(tower.position_x)).to.be.eql(3)",
+											"    pm.expect(parseInt(tower.position_y)).to.be.eql(1)",
+											"    pm.environment.set(\"white_green_id\", tower.tower_id);",
+											"})",
+											"pm.test(\"Tower white brown\", function(){",
+											"    var tower = towers.find(t => t.tower_color == \"brown\" && t.player_color == \"white\");",
+											"    pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+											"    pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+											"    pm.expect(parseInt(tower.position_x)).to.be.eql(8)",
+											"    pm.expect(parseInt(tower.position_y)).to.be.eql(1)",
+											"    pm.environment.set(\"white_brown_id\", tower.tower_id);",
+											"})",
+											"pm.test(\"Tower black orange\", function(){",
+											"  var tower = towers.find(t => t.tower_color == \"orange\" && t.player_color == \"black\");",
+											"  pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+											"  pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+											"  pm.expect(parseInt(tower.position_x)).to.be.eql(8)",
+											"  pm.expect(parseInt(tower.position_y)).to.be.eql(8)",
+											"  pm.environment.set(\"black_orange_id\", tower.tower_id);",
+											"})",
+											"",
+											"pm.test(\"Tower black blue\", function(){",
+											"  var tower = towers.find(t => t.tower_color == \"blue\" && t.player_color == \"black\");",
+											"  pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+											"  pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+											"  pm.expect(parseInt(tower.position_x)).to.be.eql(7)",
+											"  pm.expect(parseInt(tower.position_y)).to.be.eql(8)",
+											"  pm.environment.set(\"black_blue_id\", tower.tower_id);",
+											"})",
+											"pm.test(\"Tower black indigo\", function(){",
+											"  var tower = towers.find(t => t.tower_color == \"indigo\" && t.player_color == \"black\");",
+											"  pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+											"  pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+											"  pm.expect(parseInt(tower.position_x)).to.be.eql(6)",
+											"  pm.expect(parseInt(tower.position_y)).to.be.eql(8)",
+											"  pm.environment.set(\"black_indigo_id\", tower.tower_id);",
+											"})",
+											"pm.test(\"Tower black pink\", function(){",
+											"  var tower = towers.find(t => t.tower_color == \"pink\" && t.player_color == \"black\");",
+											"  pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+											"  pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+											"  pm.expect(parseInt(tower.position_x)).to.be.eql(5)",
+											"  pm.expect(parseInt(tower.position_y)).to.be.eql(8)",
+											"  pm.environment.set(\"black_pink_id\", tower.tower_id);",
+											"})",
+											"pm.test(\"Tower black yellow\", function(){",
+											"  var tower = towers.find(t => t.tower_color == \"yellow\" && t.player_color == \"black\");",
+											"  pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+											"  pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+											"  pm.expect(parseInt(tower.position_x)).to.be.eql(4)",
+											"  pm.expect(parseInt(tower.position_y)).to.be.eql(8)",
+											"  pm.environment.set(\"black_yellow_id\", tower.tower_id);",
+											"})",
+											"pm.test(\"Tower black red\", function(){",
+											"  var tower = towers.find(t => t.tower_color == \"red\" && t.player_color == \"black\");",
+											"  pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+											"  pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+											"  pm.expect(parseInt(tower.position_x)).to.be.eql(2)",
+											"  pm.expect(parseInt(tower.position_y)).to.be.eql(8)",
+											"  pm.environment.set(\"black_red_id\", tower.tower_id);",
+											"})",
+											"pm.test(\"Tower black green\", function(){",
+											"  var tower = towers.find(t => t.tower_color == \"green\" && t.player_color == \"black\");",
+											"  pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+											"  pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+											"  pm.expect(parseInt(tower.position_x)).to.be.eql(1)",
+											"  pm.expect(parseInt(tower.position_y)).to.be.eql(8)",
+											"  pm.environment.set(\"black_green_id\", tower.tower_id);",
+											"})",
+											"pm.test(\"Tower black brown\", function(){",
+											"  var tower = towers.find(t => t.tower_color == \"brown\" && t.player_color == \"black\");",
+											"  pm.expect(tower.game_id).to.be.eql(pm.variables.get(\"game_id\"))",
+											"  pm.expect(parseInt(tower.sumo)).to.be.eql(0)",
+											"  pm.expect(parseInt(tower.position_x)).to.be.eql(3)",
+											"  pm.expect(parseInt(tower.position_y)).to.be.eql(8)",
+											"  pm.environment.set(\"black_brown_id\", tower.tower_id);",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{player_1}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "kamisado.localhost/api/game?gameId={{game_id}}",
+									"host": [
+										"kamisado",
+										"localhost"
+									],
+									"path": [
+										"api",
+										"game"
+									],
+									"query": [
+										{
+											"key": "gameId",
+											"value": "{{game_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "test",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "test_0004",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "kamisado.localhost/api/test",
+					"host": [
+						"kamisado",
+						"localhost"
+					],
+					"path": [
+						"api",
+						"test"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

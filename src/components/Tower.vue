@@ -1,5 +1,5 @@
 <template>
-  <g>
+  <g style>
     <g v-for="(line, index) in playgroundHistory" :key="index">
       <line class="arrow" :x1="line.x1" :y1="line.y1" :x2="line.x2" :y2="line.y2">
         <title>Playground line</title>
@@ -21,7 +21,7 @@
     <g
       class="tower"
       :class="[tower.player_color, tower.tower_color, {dragging}]"
-      @mousedown="mouseDown($event, tower)"
+      @mousedown="mouseDown($event)"
       @mouseup="mouseUp($event)"
       :style="'transform: translate(' + x + 'px,' + y + 'px)' "
     >
@@ -88,7 +88,7 @@ export default {
     };
   },
   methods: {
-    mouseDown(ev, tower) {
+    mouseDown(ev) {
       this.dragging = true;
       this.arrowStartX = this.x;
       this.arrowStartY = this.y;
@@ -99,7 +99,10 @@ export default {
       this.x = Math.max(0, ev.offsetX - this.borderSize);
       this.y = Math.max(0, ev.offsetY - this.borderSize);
     },
-    mouseUp(ev, towerId) {
+    mouseUp(ev) {
+      if (!this.dragging) {
+        return;
+      }
       this.dragging = false;
       this.setCoordFromFull();
       this.setFullFromTower();

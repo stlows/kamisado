@@ -16,8 +16,8 @@ $targetX = $move["target"]["x"];
 $targetY = $move["target"]["y"];
 
 checkId($towerId);
-checkId($targetX);
-checkId($targetY);
+checkInt($targetX);
+checkInt($targetY);
 
 $sql = new Sql();
 
@@ -50,7 +50,7 @@ if (!$game["is_first_move"] && $game["tower_id_to_move"] != $towerId) {
 };
 
 // Is it in bound
-if ($targetX < 1 || $targetX > 8 || $targetY < 1 || $targetY > 8) {
+if (!is_in_bound($targetX) || !is_in_bound($targetY)) {
   echo (json_encode($OUT_OF_BOUND));
   exit;
 };
@@ -80,12 +80,76 @@ if(abs($targetY - $tower["position_y"]) > $SUMO_MOVEMENTS[$tower["sumo"]]){
 }
 
 // Gérer les pushs
-if($tower["player_color"] == "white"){
-  if($tower["sumo"] == 1 && $tower["position_x"] == $targetX && $tower["position_y"] + 1 == $targetY){
+// Conditions globales pour push: Être un sumo, Même X, 1 Y en avant
+$sumo = $tower["sumo"];
+$yDirection = $tower["player_color"] == "white" ? 1 : -1;
+$above1Y = $tower["position_y"] + $yDirection;
+$playerColor = $tower["player_color"];
+$otherPlayerColor = $playerColor == "white" ? "black" : "white";
+$pushed = false;
+$pushed_y = 0;
+
+if($sumo >= 1 && $targetX == $tower["position_x"] && $targetY == $above1Y){
+  // On vérifie qu'il y a une tour a pousser
+  if(is_in_bound($above1Y)){
+    $above1Tower = $board->tiles[$targetX][$above1Y];
+    if($above1Tower != []){
+      if($above1Tower["player_color"] == $otherPlayerColor && $above1Tower["sumo"] < $sumo){
+        $above2Y = $tower["position_y"] + $yDirection * 2;
+        if(is_in_bound($above2Y)){
+          $above2Tower = $board->tiles[$targetX][$above2Y];
+          if($above2Tower != []){
+            if($above2Tower["player_color"] == $otherPlayerColor && $above2Tower["sumo"] < $sumo){
+              $above3Y = $tower["position_y"] + $yDirection * 3;
+              if(is_in_bound($above3Y)){
+                $above3Tower = $board->tiles[$targetX][$above3Y];
+                if($above3Tower != []){
+                  if($above3Tower["player_color"] == $otherPlayerColor && $above3Tower["sumo"] < $sumo){
+                    $above4Y = $tower["position_y"] + $yDirection * 4;
+                    if(is_in_bound($above4Y)){
+                      $above4Tower = $board->tiles[$targetX][$above4Y];
+                      if($above4Tower == []){
+                        $sql->moveTower($above3Tower["tower_id"], $targetX, $above4Y);
+                        $sql->moveTower($above2Tower["tower_id"], $targetX, $above3Y);
+                        $pushed = true;
+                        $pushed_y = $above4Y;
+                      }
+                    }
+                  }
+                }else{
+                  $sql->moveTower($above2Tower["tower_id"], $targetX, $above3Y);
+                  $pushed = true;
+                  $pushed_y = $above3Y;
+                }
+              }
+            }
+          }else{
+            $pushed = true;
+            $pushed_y = $above2Y;
+          }
+        }
+      }
+    }
   }
 }
-else{
 
+// Executer les pushs
+if($pushed){
+  $sql->moveTower($above1Tower["tower_id"], $targetX, $above2Y);
+  $sql->moveTower($tower["tower_id"], $targetX, $targetY);
+
+  $tile_color = $sql->getTileColor($targetX, $pushed_y);
+  $tower_id_to_move = $sql->getTowerByColorGameAndPlayerId($gameId, $tile_color, $tower["player_id"]);
+  
+  $sql->setFirstMove($gameId, 0);
+  $sql->setTowerIdToMove($gameId, $tower_id_to_move);
+  $sql->setTurnTowerColor($gameId, $tile_color);
+  echo (json_encode([
+    "valid" => true,
+    "sumo_push" => true,
+    "tower_id_to_move" => $tower_id_to_move
+  ]));
+  exit;
 }
 
 // Check les overlaps
@@ -135,12 +199,12 @@ try {
   if($moved_tower_successful){
     
     check_win();
-    $tower_id_to_move = swap_turn($tower_id);
+    $tower_id_to_move = swap_turn($tower["tower_id"]);
     $towerBlocked = check_block($tower_id_to_move);
 
     if($towerBlocked){
 
-      $tower_id_to_move = swap_turn($tower_id_to_move)
+      $tower_id_to_move = swap_turn($tower_id_to_move);
       $towerBlocked = check_block($tower_id_to_move);
       
       if($towerBlocked){
@@ -173,14 +237,28 @@ try {
 }
 
 function impasse(){
-  reset_round("left");
+  global $sql, $gameId, $otherPlayerColor, $board;
+
+  $sql->addOnePointToPlayer($gameId, $otherPlayerColor);
+  $game_won = $sql->checkIfGameIsWon($gameId);
+  if($game_won){
+    game_won();
+  }
+  replace_towers("left");
+  $sql->setFirstMove($gameId, 1);
+  $sql->setTowerIdToMove($gameId, null);
+  $sql->setTurnTowerColor($gameId, null);
+  $sql->updateTowers($board->towers());
+  $sql->switchTurn($gameId);
+
   echo(json_encode([
-    "impasse" => true
+    "impasse" => true,
   ]));
   exit;
 }
 
 function replace_towers($dir){
+  global $tower, $board;
 
   if($tower["player_color"] == "black"){
     $board->replaceBlacks($dir);
@@ -214,7 +292,7 @@ function round_won(){
     game_won();
   }
 
-  $sql->promoteSumo($towerId);
+  $sql->promoteSumo($tower["tower_id"]);
   reset_round("left");
   echo(json_encode([
     "valid" => true,
@@ -313,22 +391,13 @@ function isTowerBlocked($tower, $game){
 }
 
 function tileOccupied($x, $y){
-  if($board[$x][$y] != []){
-    return $board[$x][$y];
+  global $board;
+  if($board->tiles[$x][$y] != []){
+    return $board->tiles[$x][$y];
   }
   return false;
 }
 
-function resetTowers($towers, $winner, $dir){
-  $board = new Board($towers);
-
-  if($winner == "black"){
-    $board->replaceBlacks($dir);
-    $board->replaceWhites($dir);
-  }else if($winner == "white"){
-    $board->replaceWhites($dir);
-    $board->replaceBlacks($dir);
-  }
-
-  return $board->towers();
+function is_in_bound($value){
+  return $value >= 1 && $value <= 8;
 }

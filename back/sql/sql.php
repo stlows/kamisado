@@ -50,6 +50,50 @@ class Sql {
     }
   }
 
+  function createStubGame($gameObject){
+    $game = $gameObject["game"];
+    $towers = $gameObject["towers"];
+
+    $player_1_id = $game["player_1_id"];
+    $player_2_id = $game["player_2_id"];
+    $player_1_score = $game["player_1_score"];
+    $player_2_score = $game["player_2_score"];
+    $points_to_win = $game["points_to_win"];
+    $is_first_move = $game["is_first_move"];
+    $turn_player_id = $game["turn_player_id"];
+    $turn_color = $game["turn_color"];
+    $turn_tower_color = $game["turn_tower_color"];
+
+    $gameQuery = "INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    ($player_1_id, $player_2_id, $player_1_score, $player_2_score, $points_to_win, $is_first_move, null, $turn_player_id, '$turn_color', '$turn_tower_color')";
+
+    $this->query($gameQuery);
+
+    $game_id = $this->conn->insert_id;
+
+    foreach($towers as $tower){
+
+      $tower_color = $tower["tower_color"];
+      $player_color = $tower["player_color"];
+      $position_x = $tower["position_x"];
+      $position_y = $tower["position_y"];
+      $sumo = $tower["sumo"];
+      $player_id = $tower["player_id"];
+      global $SYMBOLS;
+      $symbol = $SYMBOLS[$tower_color];
+      
+      $tower_query = "INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      ($game_id,'$tower_color','$player_color',$position_x,$position_y,$sumo,'$symbol',$player_id)";
+      $this->query($tower_query);
+    }
+    
+    return $game_id;
+  }
+
   function newGame($lobby_id){
 
     $lobby = $this->getLobby($lobby_id);
@@ -71,25 +115,27 @@ class Sql {
 
     $game_id = $this->conn->insert_id;
 
+    global $ORANGE_SYMBOL, $BLUE_SYMBOL, $INDIGO_SYMBOL, $PINK_SYMBOL, $YELLOW_SYMBOL, $RED_SYMBOL, $GREEN_SYMBOL, $BROWN_SYMBOL;
+
     $towersQuery = "INSERT INTO towers
     (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
     VALUES
-    ($game_id,'orange','white',1,1,0,'주',$player_1_id),
-    ($game_id,'blue','white',2,1,0,'푸',$player_1_id),
-    ($game_id,'indigo','white',3,1,0,'남',$player_1_id),
-    ($game_id,'pink','white',4,1,0,'담',$player_1_id),
-    ($game_id,'yellow','white',5,1,0,'노',$player_1_id),
-    ($game_id,'red','white',6,1,0,'빨',$player_1_id),
-    ($game_id,'green','white',7,1,0,'녹',$player_1_id),
-    ($game_id,'brown','white',8,1,0,'갈',$player_1_id),
-    ($game_id,'brown','black',1,8,0,'갈',$player_2_id),
-    ($game_id,'green','black',2,8,0,'녹',$player_2_id),
-    ($game_id,'red','black',3,8,0,'빨',$player_2_id),
-    ($game_id,'yellow','black',4,8,0,'노',$player_2_id),
-    ($game_id,'pink','black',5,8,0,'담',$player_2_id),
-    ($game_id,'indigo','black',6,8,0,'남',$player_2_id),
-    ($game_id,'blue','black',7,8,0,'푸',$player_2_id),
-    ($game_id,'orange','black',8,8,0,'주',$player_2_id)
+    ($game_id,'orange','white',1,1,0,'$ORANGE_SYMBOL',$player_1_id),
+    ($game_id,'blue','white',2,1,0,'$BLUE_SYMBOL',$player_1_id),
+    ($game_id,'indigo','white',3,1,0,'$INDIGO_SYMBOL',$player_1_id),
+    ($game_id,'pink','white',4,1,0,'$PINK_SYMBOL',$player_1_id),
+    ($game_id,'yellow','white',5,1,0,'$YELLOW_SYMBOL',$player_1_id),
+    ($game_id,'red','white',6,1,0,'$RED_SYMBOL',$player_1_id),
+    ($game_id,'green','white',7,1,0,'$GREEN_SYMBOL',$player_1_id),
+    ($game_id,'brown','white',8,1,0,'$BROWN_SYMBOL',$player_1_id),
+    ($game_id,'brown','black',1,8,0,'$BROWN_SYMBOL',$player_2_id),
+    ($game_id,'green','black',2,8,0,'$GREEN_SYMBOL',$player_2_id),
+    ($game_id,'red','black',3,8,0,'$RED_SYMBOL',$player_2_id),
+    ($game_id,'yellow','black',4,8,0,'$YELLOW_SYMBOL',$player_2_id),
+    ($game_id,'pink','black',5,8,0,'$PINK_SYMBOL',$player_2_id),
+    ($game_id,'indigo','black',6,8,0,'$INDIGO_SYMBOL',$player_2_id),
+    ($game_id,'blue','black',7,8,0,'$BLUE_SYMBOL',$player_2_id),
+    ($game_id,'orange','black',8,8,0,'$ORANGE_SYMBOL',$player_2_id)
     ";
     $this->query($towersQuery);
     return $game_id;
@@ -233,6 +279,18 @@ class Sql {
     $player_1_or_2 = $tower["player_color"] == 'white' ? '1' : '2';
     global $SUMO_POINTS;
     $to_add = $SUMO_POINTS[$tower["sumo"]];
+
+    $query = "UPDATE games
+    SET
+    player_" . $player_1_or_2 . "_score = (player_" . $player_1_or_2 . "_score + $to_add)
+    WHERE game_id = $game_id";
+    $this->query($query);
+  }
+
+  function addOnePointToPlayer($game_id, $player_color){
+
+    $player_1_or_2 = $player_color == 'white' ? '1' : '2';
+    $to_add = 1;
 
     $query = "UPDATE games
     SET
