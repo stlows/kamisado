@@ -31,7 +31,6 @@
 
 
 <script>
-import { Component, Vue } from "vue-property-decorator";
 import { mapGetters, mapActions } from "vuex";
 
 export default {

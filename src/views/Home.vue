@@ -1,18 +1,21 @@
 <template>
-  <div>
-    <b-jumbotron>
-      <template v-slot:header>가미 사도 &mdash; Kamisado</template>
-      <template v-slot:lead>
-        Welcome to the world of Kamisado!
-        Enjoy your stay.
-      </template>
-      <p>Made with ❤️ by Vincent Beaulieu</p>
-    </b-jumbotron>
+  <div class="mt-12 text-center">
+    <h1>Welcome to Kamisado</h1>
+    <div class="my-12">
+      <LoginRegister />
+    </div>
+    <v-img src="@/assets/game.png" max-width="500" class="mx-auto"></v-img>
   </div>
 </template>
 
 <script>
-export default {};
+import LoginRegister from "../components/LoginRegister";
+
+export default {
+  components: {
+    LoginRegister
+  }
+};
 </script>
 
 <style>

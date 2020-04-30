@@ -448,6 +448,119 @@ class Sql {
     return $this->multi_query($query);
   }
 
+  function register($credentials){
+    $email = $this->conn->real_escape_string($credentials["email"]);
+    $username =$this->conn->real_escape_string($credentials["username"]);
+    $password = $this->conn->real_escape_string($credentials["password"]);
+
+    // Check if user exists
+    $checkUserByEmailQuery = "SELECT * FROM players WHERE email = '$email'";
+    $checkUserByUsernameQuery = "SELECT * FROM players WHERE username = '$username'";
+
+    $checkUserByEmailResult = $this->query($checkUserByEmailQuery);
+    if($checkUserByEmailResult->num_rows > 0){
+      global $EMAIL_ALREADY_USED;
+      echo(json_encode($EMAIL_ALREADY_USED));
+      exit;
+    }
+
+    $checkUserByUsernameResult = $this->query($checkUserByUsernameQuery);
+    if($checkUserByUsernameResult->num_rows > 0){
+      global $USERNAME_TAKEN;
+      echo(json_encode($USERNAME_TAKEN));
+      exit;
+    }
+
+    // Create the user
+    $salt = bin2hex(random_bytes(5));
+    $password_hash = hash("sha256", $salt . $password);
+    $createUserQuery = "INSERT INTO players (username, email, password_hash, salt) VALUES ('$username', '$email', '$password_hash', '$salt')";
+    $createUserResult = $this->query($createUserQuery);
+
+    return $username;
+
+  }
+
+  function generate_verified_code($username){
+    $code = rand(115000, 950000);
+    $now = time();
+    $delay = 86400;
+    $expiration = $now + $delay;
+    $updateUserQuery = "UPDATE players SET code = '$code', code_expiration = $expiration  WHERE username = '$username'";
+    $updateUserResult = $this->query($updateUserQuery);
+
+  }
+
+  function verify_user($credentials){
+    $code = $credentials["code"];
+    $username = $credentials["username"];
+    $codeInDatabaseQuery = "SELECT code, code_expiration FROM players WHERE username = '$username'";
+    $result = $this->query($codeInDatabaseQuery);
+    if($result->num_rows == 1){
+
+      $assoc = $result->fetch_assoc();
+      $code_expiration = $assoc["code_expiration"];
+      if(time() > $code_expiration){
+        global $CODE_EXPIRED;
+        echo(json_encode($CODE_EXPIRED));
+        exit;
+      }
+
+      $codeInDatabase = $assoc["code"];
+      if($code == $codeInDatabase){
+        $updateUserQuery = "UPDATE players SET verified_email = 1, code = '', code_expiration = '' WHERE username = '$username'";
+        $updateUserResult = $this->query($updateUserQuery);
+        echo("VERIFIED");
+        exit;
+      }else{
+        global $WRONG_CODE;
+        echo(json_encode($WRONG_CODE));
+        exit;
+      }
+    }
+  }
+
+    function login($credentials){
+      $username = $this->conn->real_escape_string($credentials["email"]);
+      $password = $this->conn->real_escape_string($credentials["password"]);
+
+      $userInDb = "SELECT * FROM players WHERE username = '$username' || email = '$username'";
+
+      $result = $this->query($userInDb);
+
+      if($result->num_rows == 1){
+  
+        $assoc = $result->fetch_assoc();
+        $is_verified = $assoc["verified_email"];
+        if(!$is_verified){
+          global $EMAIL_NOT_VERIFIED;
+          echo(json_encode($EMAIL_NOT_VERIFIED));
+          exit;
+        }
+
+        $salt = $assoc["salt"];
+        $passwordEntered = hash("sha256", $salt . $password);
+
+        $passwordInDb = $assoc["password_hash"];
+
+        if($passwordEntered != $passwordInDb){
+          global $WRONG_CREDENTIALS;
+          echo(json_encode($WRONG_CREDENTIALS));
+          exit;
+        }
+        else{
+          $token = $this->generate_token($username);
+          return $token;
+        }
+      }
+    }
+
+    function generate_token($username){
+      $token = bin2hex(random_bytes(100));
+      $updateUserQuery = "UPDATE players SET token = '$token' WHERE username = '$username'";
+      $updateUserResult = $this->query($updateUserQuery);
+      return $token;
+    }
 }
 
 

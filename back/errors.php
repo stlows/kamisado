@@ -60,3 +60,33 @@ $UNEXPECTED_VALUE_POINTS_TO_WIN = [
   "message" => "Unexpected pointsToWin value. Accepted values are 1, 3, 7 and 15"
 ];
 
+$EMAIL_ALREADY_USED = [
+  "error" => 5012,
+  "message" => "Already a user registered using that email"
+];
+
+$USERNAME_TAKEN = [
+  "error" => 5013,
+  "message" => "Username already taken"
+];
+
+$WRONG_CODE = [
+  "error" => 5014,
+  "message" => "Wrong code"
+];
+
+$CODE_EXPIRED = [
+  "error" => 5015,
+  "message" => "Code expired"
+];
+
+$EMAIL_NOT_VERIFED = [
+  "error" => 5016,
+  "message" => "Email is not verified"
+];
+
+$WRONG_CREDENTIALS = [
+  "error" => 5017,
+  "message" => "Wrong credentials"
+];
+

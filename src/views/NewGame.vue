@@ -42,10 +42,6 @@
 <script>
 import InitialTiles from "../assets/InitialTiles.json";
 import { getTilesCopy, getUsersCopy } from "../copier.js";
-import Settings from "../models/Settings";
-import Game from "../models/Game";
-import Utils from "../models/Utils";
-import Notification from "../models/Notification";
 import { mapActions } from "vuex";
 
 export default {

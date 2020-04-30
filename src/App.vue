@@ -1,50 +1,26 @@
 <template>
-  <div id="app">
-    <app-nav @onlogin="onlogin" @onlogout="onlogout"></app-nav>
-    <router-view />
-    <!-- <template v-if="loggedIn">
+  <v-app>
+    <app-bar dark></app-bar>
+
+    <v-content>
       <router-view />
-    </template>
-    <template v-else>
-      <p>Please login.</p>
-    </template>-->
+    </v-content>
     <notifications-panel></notifications-panel>
-  </div>
+  </v-app>
 </template>
+
 <script>
-import Nav from "./components/Nav";
+import AppBar from "./components/AppBar";
 import NotificationsPanel from "./components/NotificationsPanel";
+import Vue from "vue";
+
 export default {
-  data() {
-    return {
-      loggedIn: false
-    };
-  },
   components: {
-    "app-nav": Nav,
+    "app-bar": AppBar,
     "notifications-panel": NotificationsPanel
   },
-  methods: {
-    onlogin() {
-      this.loggedIn = true;
-    },
-    onlogout() {
-      this.loggedIn = false;
-    }
-  }
+  data: () => ({
+    //
+  })
 };
 </script>
-
-<style lang="scss">
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  padding-bottom: 30px;
-}
-h1.header {
-  margin: 30px 0;
-  text-align: center;
-}
-</style>

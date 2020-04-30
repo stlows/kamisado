@@ -1,7 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import Notification from "./models/Notification";
-import Game from "./models/Game";
 import { api } from "./plugins/api"
 
 Vue.use(Vuex);
@@ -9,14 +7,10 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     notifications: [],
-    token: "test_0004",
     localGames: [],
+    isSignedIn: false
   },
   mutations: {
-
-    setToken(state, token) {
-      state.token = token;
-    },
     addLocalGame(state, game) {
       state.localGames.push(game);
     }
@@ -28,14 +22,14 @@ export const store = new Vuex.Store({
     newGame({ commit, state }, lobbyId) {
       return api.post("new-game.php", { lobbyId }, {
         headers: {
-          'Authorization': state.token
+          'Authorization': localStorage.get('token')
         }
       })
     },
     getGame({ commit, state }, gameId) {
       return api.get("game.php", {
         headers: {
-          'Authorization': state.token
+          'Authorization': localStorage.get('token')
         },
         params: {
           gameId: gameId
@@ -45,7 +39,7 @@ export const store = new Vuex.Store({
     getTower({ commit, state }, towerId) {
       return api.get("tower.php", {
         headers: {
-          'Authorization': state.token
+          'Authorization': localStorage.get('token')
         },
         params: {
           towerId: towerId
@@ -55,59 +49,68 @@ export const store = new Vuex.Store({
     getMyGames({ commit, state }, ) {
       return api.get("my-games.php", {
         headers: {
-          'Authorization': state.token
+          'Authorization': localStorage.get('token')
         }
       })
     },
     getTiles({ commit, state }, ) {
       return api.get("tiles.php", {
         headers: {
-          'Authorization': state.token
+          'Authorization': localStorage.get('token')
         }
       })
     },
     getLobby({ commit, state }, ) {
       return api.get("lobby.php", {
         headers: {
-          'Authorization': state.token
+          'Authorization': localStorage.get('token')
         }
       })
     },
     newLobby({ commit, state }, pointsToWin) {
       return api.post("new-lobby.php", { pointsToWin }, {
         headers: {
-          'Authorization': state.token
+          'Authorization': localStorage.get('token')
         }
       })
     },
     deleteLobby({ commit, state }, lobbyId) {
       return api.post("delete-lobby.php", { lobbyId }, {
         headers: {
-          'Authorization': state.token
+          'Authorization': localStorage.get('token')
         }
       })
     },
     move({ commit, state }, move) {
       return api.post("move.php", move, {
         headers: {
-          'Authorization': state.token
+          'Authorization': localStorage.get('token')
         }
       })
     },
     forfeit({ commit, state }, gameId) {
       return api.post("forfeit.php", { gameId: parseInt(gameId) }, {
         headers: {
-          'Authorization': state.token
+          'Authorization': localStorage.get('token')
         }
       })
+    },
+    register({ commit, state }, credentials) {
+      return api.post("register.php", credentials)
+    },
+    verify({ commit, state }, credentials) {
+      return api.post("verify.php", credentials)
+    },
+    login({ commit, state }, credentials) {
+      return api.post("login.php", credentials)
+    },
+    checkIsSignedIn({ state }) {
+      state.isSignedIn = localStorage.getItem("token") !== null
     }
   },
   getters: {
-    gameById: (state) => (id) => {
-      return state.localGames.find((g) => g.id === id);
-    },
-    getToken(state) {
-      return state.token
+    isSignedIn(state) {
+      return state.isSignedIn
     }
   }
 });
