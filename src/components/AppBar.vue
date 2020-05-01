@@ -2,9 +2,7 @@
   <v-app-bar app>
     <v-toolbar-title>가미 사도 &mdash; Kamisado</v-toolbar-title>
     <div class="ml-6">
-      <v-toolbar-item>
-        <v-btn text @click="$router.push('/')">Home</v-btn>
-      </v-toolbar-item>
+      <v-btn text @click="$router.push('/')">Home</v-btn>
     </div>
 
     <v-spacer></v-spacer>

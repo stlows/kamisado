@@ -44,6 +44,12 @@ export default new Router({
       props: true
     },
     {
+      path: "/online/game",
+      name: "online/game",
+      component: () => import("./views/OnlineGame.vue"),
+      props: true
+    },
+    {
       path: "/register",
       name: "register",
       component: () => import("./views/Register.vue")

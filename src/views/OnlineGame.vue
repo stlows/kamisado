@@ -1,25 +1,33 @@
 <template>
-  <div class="main">
-    <div class="left">
-      <OnlineLobby ref="onlineLobbyRef" @lobbyJoined="lobbyJoined" />
+  <div class="d-flex pa-12">
+    <div>
+      <OnlineLobby ref="onlineLobbyRef" @lobbyJoined="lobbyJoined" class="mb-12" />
       <NewGame @refreshLobby="$refs.onlineLobbyRef.refreshLobby()" />
     </div>
-    <div class="center">
-      <div class="text-center mb-2">
-        <a href="#" @click.prevent="forfeitGame">Forfeit</a> |
-        <a href="#" @click.prevent="fetchGame" id="refreshLink">Refresh</a> |
-        <a href="#" @click.prevent="rotate = !rotate" id="refreshLink">Rotate</a>
+    <div class="mx-auto">
+      <div class="d-flex">
+        <div class="d-flex flex-column mr-6">
+          <Board
+            :towers="game.towers"
+            @towerMoved="towerMoved"
+            :playgroundMode="playgroundMode"
+            :rotate="rotate"
+          ></Board>
+          <v-form class="text-center mx-auto" style="max-width: 250px">
+            <v-checkbox label="Playground Mode" v-model="playgroundMode"></v-checkbox>
+          </v-form>
+        </div>
+        <div class="d-flex flex-column align-center mt-8">
+          <v-btn text color="info" @click.prevent="fetchGame" class="mb-3">Refresh</v-btn>
+          <v-btn text color="warning" @click.prevent="forfeitGame" class="mb-3">Forfeit</v-btn>
+          <v-btn icon text color="info" @click.prevent="rotate = !rotate" title="Rotate Board">
+            <v-icon>mdi-rotate-3d-variant</v-icon>
+          </v-btn>
+        </div>
       </div>
-      <b-form-checkbox id="playgroundModeCheckbox" v-model="playgroundMode">Playground Mode</b-form-checkbox>
-      <Board
-        :towers="game.towers"
-        @towerMoved="towerMoved"
-        :playgroundMode="playgroundMode"
-        :rotate="rotate"
-      ></Board>
     </div>
     <div class="right">
-      <ActiveGameInfo :game="game.game"></ActiveGameInfo>
+      <ActiveGameInfo :game="game.game" class="mb-12"></ActiveGameInfo>
       <MyGames ref="myGames" @refreshGame="fetchGame" />
     </div>
   </div>
@@ -116,19 +124,7 @@ export default {
 
 <style lang="scss">
 @import "../assets/colors.scss";
-.main {
-  padding: 30px;
-  display: flex;
-}
-.left {
-  width: 500px;
-}
-.center {
-  margin: 0 50px;
-}
-.right {
-  width: 900px;
-}
+
 .tower-description {
   display: inline-block;
   border-radius: 50%;

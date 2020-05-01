@@ -1,27 +1,26 @@
 <template>
-  <div class="my-games">
-    <div class="card games-container">
-      <div class="card-header">
-        <h3>My games</h3>
-        <a href="#" @click="refreshGames">Refresh</a>
-      </div>
-      <div class="card-body">
-        <template v-if="loading"></template>
-        <template v-else>
-          <template v-if="games.length > 0">
-            <b-table :items="games" :fields="fields">
-              <template v-slot:cell(game_id)="data">
-                <a href="#" @click.prevent="goToGame(data)">Go to game</a>
-              </template>
-            </b-table>
-          </template>
-          <template v-else>
-            <p>Join a game in the lobby!</p>
-          </template>
-        </template>
-      </div>
+  <v-card class="pa-6">
+    <div class="d-flex justify-space-between">
+      <h2>My games</h2>
+      <v-spacer></v-spacer>
+      <v-btn @click.prevent="refreshGames" color="info" text>Refresh</v-btn>
     </div>
-  </div>
+    <div class="card-body">
+      <template v-if="loading"></template>
+      <template v-else>
+        <template v-if="games.length > 0">
+          <v-data-table :items="games" :headers="fields">
+            <template v-slot:cell(game_id)="data">
+              <a href="#" @click.prevent="goToGame(data)">Go to game</a>
+            </template>
+          </v-data-table>
+        </template>
+        <template v-else>
+          <p>Join a game in the lobby!</p>
+        </template>
+      </template>
+    </div>
+  </v-card>
 </template>
 
 

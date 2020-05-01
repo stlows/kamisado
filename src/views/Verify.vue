@@ -2,6 +2,7 @@
   <div class="d-flex align-center justify-center" style="height: 100%">
     <v-card min-width="500" class="py-6 px-12">
       <h1 class="mb-6">Verify your account</h1>
+
       <v-form @submit="submit">
         <v-text-field
           label="Enter the code"
@@ -10,6 +11,8 @@
           @keyup.enter="submit"
           :disabled="disabled"
         ></v-text-field>
+        <p>We sent you a validation code by email. If you didn't receive it, check your spam folder.</p>
+        <p>Still not? Click here to send a new one.</p>
       </v-form>
 
       <div class="text-center">

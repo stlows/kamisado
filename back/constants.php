@@ -21,3 +21,5 @@ $SYMBOLS = [
   "green" => $GREEN_SYMBOL,
   "brown" => $BROWN_SYMBOL
 ];
+
+$VERIFY_EMAIL_BODY = "Thank you for creating an account with Kamisado Game\r\nTo verify your email, please enter this 6-digits code into the verify page.\r\n\r\nGood Luck and have fun,\r\nKamisado Online Team";

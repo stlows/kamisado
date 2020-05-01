@@ -1,9 +1,10 @@
 <template>
   <div class="lobby">
-    <div class="card lobby-container">
-      <div class="card-header">
-        <h3>Lobby</h3>
-        <a href="#" @click.prevent="refreshLobby">Refresh</a>
+    <v-card class="px-6 py-3">
+      <div class="d-flex justify-space-between">
+        <h2>Lobby</h2>
+        <v-spacer></v-spacer>
+        <v-btn href="#" @click.prevent="refreshLobby" color="info" text>Refresh</v-btn>
       </div>
       <div class="card-body">
         <template v-if="loading">
@@ -22,10 +23,7 @@
           </template>
         </template>
       </div>
-      <!-- <div class="card-footer">
-        <button class="btn btn-large btn-primary" @click="newLobby">New Game</button>
-      </div>-->
-    </div>
+    </v-card>
   </div>
 </template>
 

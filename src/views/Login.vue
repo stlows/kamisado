@@ -65,10 +65,15 @@ export default {
 
       this.login(this.form)
         .then(res => {
-          if (res.data.error) {
-            this.errorMessage = res.data.message;
+          if (res.data.error || !res.data) {
+            if (res.data.message) {
+              this.errorMessage = res.data.message;
+            } else {
+              this.errorMessage = "Wrong credentials";
+            }
           } else {
-            localStorage.setItem("token", res.data);
+            var token = btoa(this.form.email + ":" + this.form.password);
+            localStorage.setItem("token", token);
             this.checkIsSignedIn();
             this.$router.push("/");
           }

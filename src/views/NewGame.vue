@@ -1,41 +1,21 @@
 <template>
   <div id="newGame">
-    <div class="card new-game">
-      <div class="card-header">
-        <h3>New game</h3>
-      </div>
-      <div class="card-body">
-        <b-form @submit="onSubmit">
-          <!-- <b-form-group label="Local or online">
-            <b-form-radio
-              v-model="settings.localOrOnline"
-              name="localOrOnlineRadio"
-              value="local"
-            >Local</b-form-radio>
-            <b-form-radio
-              v-model="settings.localOrOnline"
-              name="localOrOnlineRadio"
-              value="online"
-            >Online</b-form-radio>
-          </b-form-group>-->
-          <!-- <b-form-group label="Vs Human or computer?" v-if="settings.localOrOnline === 'local'">
-            <b-form-radio v-model="settings.aiOrHuman" name="aiOrHumanRadio" value="human">Human</b-form-radio>
-            <b-form-radio
-              v-model="settings.aiOrHuman"
-              name="aiOrHumanRadio"
-              value="ai"
-              disabled
-              title="Not yet implemented..."
-            >Computer</b-form-radio>
-          </b-form-group>
-          <hr />-->
-          <b-form-group label="Points to win:">
-            <b-form-select v-model="settings.pointsToWin" :options="pointsToWinOptions"></b-form-select>
-          </b-form-group>
-          <b-button type="submit" id="newLobbyButton" variant="primary">Create game !</b-button>
-        </b-form>
-      </div>
-    </div>
+    <v-card class="pa-6">
+      <h2 class="mb-6">New game</h2>
+      <v-form>
+        <v-select
+          label="Points to win"
+          :items="pointsToWinOptions"
+          v-model="settings.pointsToWin"
+          max-width="250"
+          outlined
+        ></v-select>
+      </v-form>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn @click="onSubmit" color="success" text>Create game !</v-btn>
+      </v-card-actions>
+    </v-card>
   </div>
 </template>
 

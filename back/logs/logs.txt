@@ -88,3 +88,158 @@
 1588281065 - UPDATE players SET token = '43a47cf622019d461d4a8a6dd6ab8a86035cfe24c7e95f1f5563e65904b7d7daa2053c9db181d1721ab1a3d33bec317a83187ff08fe54e3fb9bd813aa1b24023ee631a5c7c46a0370c85f19fea1555e10bc3a50fac1974ab9f3084d07c747b714286d828' WHERE username = 'stlows'
 1588281177 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
 1588281177 - UPDATE players SET token = '8af7bd8200c8221278a485951032559062241560c528f0a31c76c7b95b52066b934c4bb9d9b79b6cb24a2e35bf71393b55bd5328fc85176d3a48f2cec8b92e47549c3cbd34d0009ae6648c572cb7adaa96463dd05390463e9e1b99eccf6b58190cd78920' WHERE username = 'stlows'
+1588341197 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588341235 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588341235 - SELECT * FROM players WHERE username = 'stlows'
+1588341235 - INSERT INTO players (username, email, password_hash, salt) VALUES ('stlows', 'vincent_beaulieu@live.ca', 'a2e3ed2a3724773b6311fff2cffd5ffd72e776e51dd227fcd9c1331fd6c32fb4', '2b0e3a0366')
+1588341235 - UPDATE players SET code = '595383', code_expiration = 1588427635  WHERE username = 'stlows'
+1588341425 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588341436 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588341436 - SELECT * FROM players WHERE username = 'stlows'
+1588341436 - INSERT INTO players (username, email, password_hash, salt) VALUES ('stlows', 'vincent_beaulieu@live.ca', '4b18ff9555cbf8bbe9674af3a2f47b730fad76dccdcc456c99fd66638ce81f7b', '913bed1439')
+1588341436 - UPDATE players SET code = '886725', code_expiration = 1588427836  WHERE username = 'stlows'
+1588342140 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588342140 - SELECT * FROM players WHERE username = 'stlows'
+1588342140 - INSERT INTO players (username, email, password_hash, salt) VALUES ('stlows', 'vincent_beaulieu@live.ca', '5b1bc8948726b92841e858f1ee9d851948ce5f246000956e5a631313e7edae93', '5640446e12')
+1588342140 - UPDATE players SET code = '403670', code_expiration = 1588428540  WHERE username = 'stlows'
+1588342573 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588342573 - SELECT * FROM players WHERE username = 'stlows'
+1588342573 - INSERT INTO players (username, email, password_hash, salt) VALUES ('stlows', 'vincent_beaulieu@live.ca', 'ebafaa969ee1d6b7a0c5ef60fab8d6c5ef7d1e2493fab60ddeccfe07da3495d2', '0ce5f7bb04')
+1588342573 - UPDATE players SET code = '888758', code_expiration = 1588428973  WHERE username = 'stlows'
+1588342669 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588342669 - SELECT * FROM players WHERE username = 'stlows'
+1588342669 - INSERT INTO players (username, email, password_hash, salt) VALUES ('stlows', 'vincent_beaulieu@live.ca', '9984858bdbad0b6f44d409adcd88b48ab9c44e50c20791b0787976a717af96b8', 'e2ab612fc5')
+1588342669 - UPDATE players SET code = '812585', code_expiration = 1588429069  WHERE username = 'stlows'
+1588342820 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588342820 - SELECT * FROM players WHERE username = 'stlows'
+1588342820 - INSERT INTO players (username, email, password_hash, salt) VALUES ('stlows', 'vincent_beaulieu@live.ca', '4773014d5c40931c1cb8163c4dfc0bf7d6033a73aa37d84640f77d05be60403d', 'a69208eb32')
+1588342820 - UPDATE players SET code = '612917', code_expiration = 1588429220  WHERE username = 'stlows'
+1588342865 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588342865 - SELECT * FROM players WHERE username = 'stlows'
+1588342865 - INSERT INTO players (username, email, password_hash, salt) VALUES ('stlows', 'vincent_beaulieu@live.ca', 'db1b6f59e8926a10d1302105e8897db39333b47cdc183245a8da0fb75d96d76a', '1ab975e979')
+1588342865 - UPDATE players SET code = '130684', code_expiration = 1588429265  WHERE username = 'stlows'
+1588342955 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588342955 - SELECT * FROM players WHERE username = 'stlows'
+1588342955 - INSERT INTO players (username, email, password_hash, salt) VALUES ('stlows', 'vincent_beaulieu@live.ca', '8d24db1a14c4d1c89543a381da272d3a8ead383218b853551393760b904ea6e8', '36790767cf')
+1588342955 - UPDATE players SET code = '372602', code_expiration = 1588429355  WHERE username = 'stlows'
+1588343006 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588343006 - SELECT * FROM players WHERE username = 'stlows'
+1588343006 - INSERT INTO players (username, email, password_hash, salt) VALUES ('stlows', 'vincent_beaulieu@live.ca', '0da2d08d311d21d7c20ef7da7b73d5058313242827108e860c03ddd849d932fe', '4e3cb9aafd')
+1588343006 - UPDATE players SET code = '625714', code_expiration = 1588429406  WHERE username = 'stlows'
+1588343029 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588343029 - SELECT * FROM players WHERE username = 'stlows'
+1588343029 - INSERT INTO players (username, email, password_hash, salt) VALUES ('stlows', 'vincent_beaulieu@live.ca', '81aa211b8df713e59001c9cc79e6f52e281a7a34c942dc60fe3846920d333a75', 'b48791a69f')
+1588343029 - UPDATE players SET code = '762091', code_expiration = 1588429429  WHERE username = 'stlows'
+1588343227 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588343227 - SELECT * FROM players WHERE username = 'stlows'
+1588343227 - INSERT INTO players (username, email, password_hash, salt) VALUES ('stlows', 'vincent_beaulieu@live.ca', '2fe6e0f213309ba405668e32cb2d41f93be63e4a9c522c91e7a1da893b4091e7', '80d94c5cc7')
+1588343227 - UPDATE players SET code = '754028', code_expiration = 1588429627  WHERE username = 'stlows'
+1588343330 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588343330 - SELECT * FROM players WHERE username = 'stlows'
+1588343330 - INSERT INTO players (username, email, password_hash, salt) VALUES ('stlows', 'vincent_beaulieu@live.ca', '4412e0dd434e51ad780d8a7f5b8ccf62f8bdc60006403ddb9951be576cc3bf01', 'fb9bfb7419')
+1588343330 - UPDATE players SET code = '697357', code_expiration = 1588429730  WHERE username = 'stlows'
+1588343412 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588343412 - SELECT * FROM players WHERE username = 'stlows'
+1588343412 - INSERT INTO players (username, email, password_hash, salt) VALUES ('stlows', 'vincent_beaulieu@live.ca', '26d7adbbe29c2f60332634c27160c4441afe8d3bfd03024a3417ab3fb054520c', '1582bdcfeb')
+1588343412 - UPDATE players SET code = '279092', code_expiration = 1588429812  WHERE username = 'stlows'
+1588344053 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588344053 - SELECT * FROM players WHERE username = 'stlows'
+1588344053 - INSERT INTO players (username, email, password_hash, salt) VALUES ('stlows', 'vincent_beaulieu@live.ca', '4e316bc6c3f9d5f64f7ce68477bf7230f86df5221f83d8d0183160ccc6d5d5b6', 'f22f1ba45b')
+1588344053 - UPDATE players SET code = '501230', code_expiration = 1588430453  WHERE username = 'stlows'
+1588344115 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588344115 - SELECT * FROM players WHERE username = 'stlows'
+1588344115 - INSERT INTO players (username, email, password_hash, salt) VALUES ('stlows', 'vincent_beaulieu@live.ca', 'e6d22f1f92a70b3be5a99a35dd2467ad9f66fa06ff261187356047d62bed92a1', 'a5e9094314')
+1588344115 - UPDATE players SET code = '227549', code_expiration = 1588430515  WHERE username = 'stlows'
+1588344362 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588344362 - SELECT * FROM players WHERE username = 'stlows'
+1588344362 - INSERT INTO players (username, email, password_hash, salt) VALUES ('stlows', 'vincent_beaulieu@live.ca', '30fff2b022f735203aad8ff3645fde1175e60fdeabcb5a8ca6a21f87b3218e72', '67411da1e3')
+1588344362 - UPDATE players SET code = '263184', code_expiration = 1588430762  WHERE username = 'stlows'
+1588344602 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588344602 - SELECT * FROM players WHERE username = 'stlows'
+1588344602 - INSERT INTO players (username, email, password_hash, salt) VALUES ('stlows', 'vincent_beaulieu@live.ca', 'f15918ed7c6abab6fbf7840b56858b957ed8a4448e6cf45397a7ba5c08f9ee8c', 'e39ecdbc37')
+1588344602 - UPDATE players SET code = '825863', code_expiration = 1588431002  WHERE username = 'stlows'
+1588345182 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588345182 - SELECT * FROM players WHERE username = 'stlows'
+1588345182 - INSERT INTO players (username, email, password_hash, salt) VALUES ('stlows', 'vincent_beaulieu@live.ca', '10601ce026e16e981ad76b592c3b870ad294ccd9fa76356b964e5996249ca5c4', 'd4b4e73582')
+1588345182 - UPDATE players SET code = '198171', code_expiration = 1588431582  WHERE username = 'stlows'
+1588345549 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588345549 - SELECT * FROM players WHERE username = 'stlows'
+1588345549 - INSERT INTO players (username, email, password_hash, salt) VALUES ('stlows', 'vincent_beaulieu@live.ca', '65b3e2ec0412b75bc225c638c65447ede813b636dc07d92835a426a029e3254f', '510450856f')
+1588345549 - UPDATE players SET code = '333146', code_expiration = 1588431949  WHERE username = 'stlows'
+1588345675 - SELECT code, code_expiration FROM players WHERE username = 'stlows'
+1588345675 - UPDATE players SET verified_email = 1, code = '', code_expiration = '' WHERE username = 'stlows'
+1588345727 - SELECT * FROM players WHERE username = '' || email = ''
+1588345733 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588345733 - UPDATE players SET token = '32fde93197eb3c9cf33e020f5fc8f8134e2ed5f9841db47078fed870df3085a7332a9c04d3862622b3443af541e0a3d32730ebc6769916b039858ffcb73beb902555e85364d87b1c6e483a2c9e05232c3fc34fec74c527c099ba096894d2aa3fc9ecdb87' WHERE username = 'stlows'
+1588345776 - SELECT * FROM players WHERE username = 'vincent_beaulieu@live.ca' || email = 'vincent_beaulieu@live.ca'
+1588345776 - UPDATE players SET token = '91bb4549c79e5799c31b7367b670917714ff9c109b1cb7a0e471aab17515281661374ef31694dac9b968e2b05969406055ebfdd9dcc4bb8f7235954037e721abfd997aa49a180dc92b49263b04c6bda3d8c9e087870ffb9d79b24e49b376373864b78869' WHERE username = 'vincent_beaulieu@live.ca'
+1588345787 - SELECT * FROM players WHERE username = 'vincent_beaulieu@live.ca' || email = 'vincent_beaulieu@live.ca'
+1588345787 - UPDATE players SET token = '2f108692d24f5002e17c1c10820957636787d3312c8e9852bb4154b15deac9498546c5b0a001138eb1d23d08674c84e284247f5269116e8b85871b9c1fb6112134e50cc82a8e1ae36413f5070b797901a926b38b25bd63a4515a37cfbd0d5d7a993cdbc3' WHERE username = 'vincent_beaulieu@live.ca'
+1588345788 - SELECT * FROM players WHERE username = 'vincent_beaulieu@live.ca' || email = 'vincent_beaulieu@live.ca'
+1588345788 - UPDATE players SET token = '3a33ca3618ab40a5fbbb7482c4bca2efcfd58f76b569bd1e6afb17ff3a45040ccdb83fdc3a33c96376da04c174b761b255ae64eda6d7aba0aca6720886213949aa99bae160231392dd8574b64dd42fcfc94cd9107b50212f81412c66cd1f5dce52238dae' WHERE username = 'vincent_beaulieu@live.ca'
+1588345789 - SELECT * FROM players WHERE username = 'vincent_beaulieu@live.ca' || email = 'vincent_beaulieu@live.ca'
+1588345789 - UPDATE players SET token = '0ce55d38ddf77bbdda28deed9e524669090f197f0307b585b8f1e8eefef2cbeb417c68f4846c4028658e15bb264dff5cb622fc7c413442bd63607579522ac911b870e0e93cf813186fd9be34dfda28a542ddd7b29a529e50ef2a6ad049b1927bb773263f' WHERE username = 'vincent_beaulieu@live.ca'
+1588345789 - SELECT * FROM players WHERE username = 'vincent_beaulieu@live.ca' || email = 'vincent_beaulieu@live.ca'
+1588345789 - UPDATE players SET token = '39cca3820954b819b30d85e627c844765f5e38d7d7e3d617f9c178a207476fddc9853fb4fb1b53cad7a005fb1dc0d8bb00519f6b4baafa58ca9e9be9fd8f2a2d0c8baca487894650e833d5a6d28425e7ba666b8d94945775e25b7af38e0ce4d21a389165' WHERE username = 'vincent_beaulieu@live.ca'
+1588345790 - SELECT * FROM players WHERE username = 'vincent_beaulieu@live.ca' || email = 'vincent_beaulieu@live.ca'
+1588345790 - UPDATE players SET token = '15b7a33e0be6c5c645d425eb557e71ee2678477260dc8ea772653e508f14a08c360d49280a0ba8cf7e19e75f1b51905b08bf6a1501c874c579dbc3c6f50bac8ed9b678f42dc5b62ba3d72a206fc274d414f596b917a13d31adefb215ad73ec980f96a0c5' WHERE username = 'vincent_beaulieu@live.ca'
+1588345873 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588345873 - SELECT * FROM players WHERE username = 'stlows'
+1588345873 - INSERT INTO players (username, email, password_hash, salt) VALUES ('stlows', 'vincent_beaulieu@live.ca', '6acc2356eb6fce189c60f899d695b585460445eb6f6661f52378c177a13b07dc', '04a81471ac')
+1588345873 - UPDATE players SET code = '550938', code_expiration = 1588432273  WHERE username = 'stlows'
+1588346187 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588346187 - SELECT * FROM players WHERE username = 'stlows'
+1588346187 - INSERT INTO players (username, email, password_hash, salt) VALUES ('stlows', 'vincent_beaulieu@live.ca', 'ddb928a21ce4a2e20fe8c5181c71ee7d98c51948d8ca204117949ad0c34e6177', '4f2f6f61ee')
+1588346187 - UPDATE players SET code = '505951', code_expiration = 1588432587  WHERE username = 'stlows'
+1588346301 - SELECT code, code_expiration FROM players WHERE username = 'stlows'
+1588346301 - UPDATE players SET verified_email = 1, code = '', code_expiration = '' WHERE username = 'stlows'
+1588346315 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588346315 - UPDATE players SET token = '53ac6a5af0703b6a7d535b67dfbc2c5f26442284409637f87c68a6a30e96a7552baf85894017b127869453573e5d93939385088e366e67d2242f562435f5c089fad55bf71cf7a26a0083c9d39b73b4155645ef26763508ec5882283a9eb22a580e4a9761' WHERE username = 'stlows'
+1588346626 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588346626 - UPDATE players SET token = 'd39da60fedeef85612a645330aab20166fc6009fcd2d41ee4d0461fb64fa06f97b0d376a5596a1ec14edc35328d9d54bd3f59d778930696505b9931f3a6c04a8a783fa716bf2d1edc18a19a4ab1f75f07627710434772657d7d81f8b356ac537415525fa' WHERE username = 'stlows'
+1588346912 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588346915 - SELECT * FROM players WHERE username = 'vincent_beaulieu@live.ca' || email = 'vincent_beaulieu@live.ca'
+1588346943 - SELECT * FROM players WHERE username = 'toto@toto.com' || email = 'toto@toto.com'
+1588346980 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588346986 - SELECT * FROM players WHERE username = 'vincent_beaulieu@live.ca' || email = 'vincent_beaulieu@live.ca'
+1588347159 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588348037 - SELECT * FROM tiles
+1588348052 - SELECT * FROM tiles
+1588348370 - SELECT * FROM tiles
+1588348780 - SELECT * FROM tiles
+1588348852 - SELECT * FROM tiles
+1588348885 - SELECT * FROM tiles
+1588348905 - SELECT * FROM tiles
+1588348945 - SELECT * FROM tiles
+1588349015 - SELECT * FROM tiles
+1588349067 - SELECT * FROM tiles
+1588349094 - SELECT * FROM tiles
+1588349150 - SELECT * FROM tiles
+1588349204 - SELECT * FROM tiles
+1588349300 - SELECT * FROM tiles
+1588349434 - SELECT * FROM tiles
+1588349580 - SELECT * FROM tiles
+1588349810 - SELECT * FROM tiles
+1588350069 - SELECT * FROM tiles
+1588353786 - SELECT * FROM players WHERE google_id = ''
+1588353786 - SELECT player_name, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id
+1588354503 - SELECT * FROM players WHERE google_id = ''
+1588354503 - SELECT player_name, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id
+1588354533 - SELECT * FROM players WHERE google_id = ''
+1588354533 - SELECT player_name, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id
+1588354550 - SELECT * FROM players WHERE google_id = ''
+1588354550 - SELECT player_name, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id
+1588354630 - SELECT * FROM players WHERE google_id = ''
+1588354630 - SELECT player_name, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id
+1588354801 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588354801 - SELECT * FROM players WHERE google_id = ''
+1588354801 - SELECT player_name, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id
+1588355022 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588355022 - SELECT * FROM players WHERE google_id = ''
+1588355022 - SELECT player_name, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id
+1588355039 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588355039 - SELECT * FROM players WHERE google_id = 'stlows'
+1588355039 - INSERT INTO players (player_name, google_id) VALUES ('', 'stlows')
+1588355039 - SELECT player_name, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id
+1588355254 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588355254 - SELECT player_name, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id

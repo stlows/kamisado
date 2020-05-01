@@ -90,3 +90,9 @@ $WRONG_CREDENTIALS = [
   "message" => "Wrong credentials"
 ];
 
+$PLEASE_LOGIN_FIRST = [
+  "error" => 5018,
+  "message" => "Please login first"
+];
+
+

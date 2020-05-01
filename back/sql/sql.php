@@ -35,19 +35,13 @@ class Sql {
   }
 
   function getLoginPlayerId(){
-
-    $google_id = $_SESSION["google_id"];
-    $query = "SELECT * FROM players WHERE google_id = '$google_id'";
-    $result = $this->query($query);
-    if ($result->num_rows == 1) {
-      return $result->fetch_assoc()["player_id"];
-    } else if ($result->num_rows == 0) {
-      $name = $_SESSION["google_name"];
-      $query = "INSERT INTO players (player_name, google_id) VALUES ('$name', '$google_id')";
-      $result = $this->query($query);
-      return  $this->conn->insert_id;
-    } else {
+    global $PLEASE_LOGIN_FIRST;
+    if(!isset($_SESSION) || !isset($_SESSION["user_id"])){
+      echo(json_encode($PLEASE_LOGIN_FIRST));
+      exit;
     }
+    return $_SESSION["user_id"];
+    
   }
 
   function createStubGame($gameObject){
@@ -488,7 +482,7 @@ class Sql {
     $expiration = $now + $delay;
     $updateUserQuery = "UPDATE players SET code = '$code', code_expiration = $expiration  WHERE username = '$username'";
     $updateUserResult = $this->query($updateUserQuery);
-
+    return $code;
   }
 
   function verify_user($credentials){
@@ -521,6 +515,8 @@ class Sql {
   }
 
     function login($credentials){
+      global $WRONG_CREDENTIALS;
+
       $username = $this->conn->real_escape_string($credentials["email"]);
       $password = $this->conn->real_escape_string($credentials["password"]);
 
@@ -543,23 +539,13 @@ class Sql {
 
         $passwordInDb = $assoc["password_hash"];
 
-        if($passwordEntered != $passwordInDb){
-          global $WRONG_CREDENTIALS;
-          echo(json_encode($WRONG_CREDENTIALS));
-          exit;
-        }
-        else{
-          $token = $this->generate_token($username);
-          return $token;
+        if($passwordEntered == $passwordInDb){
+          $_SESSION["user_id"] = $assoc["player_id"];
+          return true;
         }
       }
-    }
-
-    function generate_token($username){
-      $token = bin2hex(random_bytes(100));
-      $updateUserQuery = "UPDATE players SET token = '$token' WHERE username = '$username'";
-      $updateUserResult = $this->query($updateUserQuery);
-      return $token;
+      echo(json_encode($WRONG_CREDENTIALS));
+      exit;
     }
 }
 
