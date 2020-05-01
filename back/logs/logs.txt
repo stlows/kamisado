@@ -243,3 +243,384 @@
 1588355039 - SELECT player_name, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id
 1588355254 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
 1588355254 - SELECT player_name, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id
+1588356525 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588356525 - 
+    INSERT INTO lobby
+    (points_to_win, player_id)
+    VALUES
+    (15, 41)
+1588356529 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588356529 - SELECT player_name, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id
+1588356817 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588356817 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id
+1588356847 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588356847 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id
+1588357676 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588357676 - 
+    INSERT INTO lobby
+    (points_to_win, player_id)
+    VALUES
+    (15, 41)
+1588357692 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588357692 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id
+1588357706 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588357706 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id
+1588358405 - SELECT * FROM players WHERE email = 'toto@toto.ca'
+1588358405 - SELECT * FROM players WHERE username = 'steph'
+1588358405 - INSERT INTO players (username, email, password_hash, salt) VALUES ('steph', 'toto@toto.ca', 'ef08fc69a87ed2de894c4f203c5ab3a89b841bc7939d43758ef61b6b5fdd3720', '0d28e2a168')
+1588358405 - UPDATE players SET code = '300100', code_expiration = 1588444805  WHERE username = 'steph'
+1588358434 - SELECT code, code_expiration FROM players WHERE username = 'steph'
+1588358434 - UPDATE players SET verified_email = 1, code = '', code_expiration = '' WHERE username = 'steph'
+1588358442 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588358454 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588358721 - SELECT * FROM players WHERE email = 'toto@toto.ca'
+1588358721 - SELECT * FROM players WHERE username = 'toto'
+1588358721 - INSERT INTO players (username, email, password_hash, salt) VALUES ('toto', 'toto@toto.ca', '3302bf4d7eae55766a1c36508d68110d22d0f6288452a0768fbe364d868b1fde', '84dbada0ec')
+1588358721 - UPDATE players SET code = '164846', code_expiration = 1588445121  WHERE username = 'toto'
+1588358744 - SELECT code, code_expiration FROM players WHERE username = 'toto'
+1588358744 - UPDATE players SET verified_email = 1, code = '', code_expiration = '' WHERE username = 'toto'
+1588359599 - SELECT * FROM players WHERE email = 'steph@exemple.ca'
+1588359599 - SELECT * FROM players WHERE username = 'steph'
+1588359599 - INSERT INTO players (username, email, password_hash, salt) VALUES ('steph', 'steph@exemple.ca', '587f21e2a5afecb1b9302f3ef0352e17868f6f39414caf569baf9be56a783161', 'c9345df1e8')
+1588359599 - UPDATE players SET code = '269348', code_expiration = 1588445999  WHERE username = 'steph'
+1588359669 - SELECT * FROM players WHERE username = 'toto' || email = 'toto'
+1588359669 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id
+1588359753 - SELECT * FROM lobby WHERE lobby_id = 158
+1588359753 - INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    (41, 44, 0, 0, 15, true, null, 41, 'white', null)
+1588359753 - INSERT INTO towers
+    (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+    VALUES
+    (197,'orange','white',1,1,0,'주',41),
+    (197,'blue','white',2,1,0,'푸',41),
+    (197,'indigo','white',3,1,0,'남',41),
+    (197,'pink','white',4,1,0,'담',41),
+    (197,'yellow','white',5,1,0,'노',41),
+    (197,'red','white',6,1,0,'빨',41),
+    (197,'green','white',7,1,0,'녹',41),
+    (197,'brown','white',8,1,0,'갈',41),
+    (197,'brown','black',1,8,0,'갈',44),
+    (197,'green','black',2,8,0,'녹',44),
+    (197,'red','black',3,8,0,'빨',44),
+    (197,'yellow','black',4,8,0,'노',44),
+    (197,'pink','black',5,8,0,'담',44),
+    (197,'indigo','black',6,8,0,'남',44),
+    (197,'blue','black',7,8,0,'푸',44),
+    (197,'orange','black',8,8,0,'주',44)
+    
+1588359785 - SELECT code, code_expiration FROM players WHERE username = 'steph'
+1588359785 - UPDATE players SET verified_email = 1, code = '', code_expiration = '' WHERE username = 'steph'
+1588360015 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588360015 - 
+    INSERT INTO lobby
+    (points_to_win, player_id)
+    VALUES
+    (15, 41)
+1588360018 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588360018 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id
+1588360031 - SELECT * FROM players WHERE username = 'toto' || email = 'toto'
+1588360031 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id
+1588360040 - SELECT * FROM lobby WHERE lobby_id = 159
+1588360040 - INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    (41, 44, 0, 0, 15, true, null, 41, 'white', null)
+1588360040 - INSERT INTO towers
+    (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+    VALUES
+    (198,'orange','white',1,1,0,'주',41),
+    (198,'blue','white',2,1,0,'푸',41),
+    (198,'indigo','white',3,1,0,'남',41),
+    (198,'pink','white',4,1,0,'담',41),
+    (198,'yellow','white',5,1,0,'노',41),
+    (198,'red','white',6,1,0,'빨',41),
+    (198,'green','white',7,1,0,'녹',41),
+    (198,'brown','white',8,1,0,'갈',41),
+    (198,'brown','black',1,8,0,'갈',44),
+    (198,'green','black',2,8,0,'녹',44),
+    (198,'red','black',3,8,0,'빨',44),
+    (198,'yellow','black',4,8,0,'노',44),
+    (198,'pink','black',5,8,0,'담',44),
+    (198,'indigo','black',6,8,0,'남',44),
+    (198,'blue','black',7,8,0,'푸',44),
+    (198,'orange','black',8,8,0,'주',44)
+    
+1588360198 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588360224 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588360237 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588360264 - SELECT * FROM players WHERE username = 'toto' || email = 'toto'
+1588360481 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id
+1588360585 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588360585 - 
+    INSERT INTO lobby
+    (points_to_win, player_id)
+    VALUES
+    (15, 41)
+1588360611 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588360611 - SELECT * FROM lobby WHERE lobby_id = 160
+1588360611 - INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    (41, 45, 0, 0, 15, true, null, 41, 'white', null)
+1588360611 - INSERT INTO towers
+    (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+    VALUES
+    (199,'orange','white',1,1,0,'주',41),
+    (199,'blue','white',2,1,0,'푸',41),
+    (199,'indigo','white',3,1,0,'남',41),
+    (199,'pink','white',4,1,0,'담',41),
+    (199,'yellow','white',5,1,0,'노',41),
+    (199,'red','white',6,1,0,'빨',41),
+    (199,'green','white',7,1,0,'녹',41),
+    (199,'brown','white',8,1,0,'갈',41),
+    (199,'brown','black',1,8,0,'갈',45),
+    (199,'green','black',2,8,0,'녹',45),
+    (199,'red','black',3,8,0,'빨',45),
+    (199,'yellow','black',4,8,0,'노',45),
+    (199,'pink','black',5,8,0,'담',45),
+    (199,'indigo','black',6,8,0,'남',45),
+    (199,'blue','black',7,8,0,'푸',45),
+    (199,'orange','black',8,8,0,'주',45)
+    
+1588360868 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588360872 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588360872 - 
+    INSERT INTO lobby
+    (points_to_win, player_id)
+    VALUES
+    (15, 41)
+1588360874 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588360983 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588360983 - SELECT * FROM lobby WHERE lobby_id = 161
+1588360988 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588360988 - SELECT * FROM lobby WHERE lobby_id = 161
+1588360988 - INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    (41, 45, 0, 0, 15, true, null, 41, 'white', null)
+1588360988 - INSERT INTO towers
+    (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+    VALUES
+    (200,'orange','white',1,1,0,'주',41),
+    (200,'blue','white',2,1,0,'푸',41),
+    (200,'indigo','white',3,1,0,'남',41),
+    (200,'pink','white',4,1,0,'담',41),
+    (200,'yellow','white',5,1,0,'노',41),
+    (200,'red','white',6,1,0,'빨',41),
+    (200,'green','white',7,1,0,'녹',41),
+    (200,'brown','white',8,1,0,'갈',41),
+    (200,'brown','black',1,8,0,'갈',45),
+    (200,'green','black',2,8,0,'녹',45),
+    (200,'red','black',3,8,0,'빨',45),
+    (200,'yellow','black',4,8,0,'노',45),
+    (200,'pink','black',5,8,0,'담',45),
+    (200,'indigo','black',6,8,0,'남',45),
+    (200,'blue','black',7,8,0,'푸',45),
+    (200,'orange','black',8,8,0,'주',45)
+    
+1588360989 - 161
+1588360992 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588361015 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588361015 - SELECT * FROM lobby WHERE lobby_id = 161
+1588361015 - INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    (41, 45, 0, 0, 15, true, null, 41, 'white', null)
+1588361015 - INSERT INTO towers
+    (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+    VALUES
+    (201,'orange','white',1,1,0,'주',41),
+    (201,'blue','white',2,1,0,'푸',41),
+    (201,'indigo','white',3,1,0,'남',41),
+    (201,'pink','white',4,1,0,'담',41),
+    (201,'yellow','white',5,1,0,'노',41),
+    (201,'red','white',6,1,0,'빨',41),
+    (201,'green','white',7,1,0,'녹',41),
+    (201,'brown','white',8,1,0,'갈',41),
+    (201,'brown','black',1,8,0,'갈',45),
+    (201,'green','black',2,8,0,'녹',45),
+    (201,'red','black',3,8,0,'빨',45),
+    (201,'yellow','black',4,8,0,'노',45),
+    (201,'pink','black',5,8,0,'담',45),
+    (201,'indigo','black',6,8,0,'남',45),
+    (201,'blue','black',7,8,0,'푸',45),
+    (201,'orange','black',8,8,0,'주',45)
+    
+1588361015 - 161
+1588361017 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588361017 - SELECT * FROM lobby WHERE lobby_id = 161
+1588361017 - INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    (41, 45, 0, 0, 15, true, null, 41, 'white', null)
+1588361017 - INSERT INTO towers
+    (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+    VALUES
+    (202,'orange','white',1,1,0,'주',41),
+    (202,'blue','white',2,1,0,'푸',41),
+    (202,'indigo','white',3,1,0,'남',41),
+    (202,'pink','white',4,1,0,'담',41),
+    (202,'yellow','white',5,1,0,'노',41),
+    (202,'red','white',6,1,0,'빨',41),
+    (202,'green','white',7,1,0,'녹',41),
+    (202,'brown','white',8,1,0,'갈',41),
+    (202,'brown','black',1,8,0,'갈',45),
+    (202,'green','black',2,8,0,'녹',45),
+    (202,'red','black',3,8,0,'빨',45),
+    (202,'yellow','black',4,8,0,'노',45),
+    (202,'pink','black',5,8,0,'담',45),
+    (202,'indigo','black',6,8,0,'남',45),
+    (202,'blue','black',7,8,0,'푸',45),
+    (202,'orange','black',8,8,0,'주',45)
+    
+1588361017 - 161
+1588361018 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588361018 - SELECT * FROM lobby WHERE lobby_id = 161
+1588361018 - INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    (41, 45, 0, 0, 15, true, null, 41, 'white', null)
+1588361018 - INSERT INTO towers
+    (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+    VALUES
+    (203,'orange','white',1,1,0,'주',41),
+    (203,'blue','white',2,1,0,'푸',41),
+    (203,'indigo','white',3,1,0,'남',41),
+    (203,'pink','white',4,1,0,'담',41),
+    (203,'yellow','white',5,1,0,'노',41),
+    (203,'red','white',6,1,0,'빨',41),
+    (203,'green','white',7,1,0,'녹',41),
+    (203,'brown','white',8,1,0,'갈',41),
+    (203,'brown','black',1,8,0,'갈',45),
+    (203,'green','black',2,8,0,'녹',45),
+    (203,'red','black',3,8,0,'빨',45),
+    (203,'yellow','black',4,8,0,'노',45),
+    (203,'pink','black',5,8,0,'담',45),
+    (203,'indigo','black',6,8,0,'남',45),
+    (203,'blue','black',7,8,0,'푸',45),
+    (203,'orange','black',8,8,0,'주',45)
+    
+1588361018 - 161
+1588361018 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588361018 - SELECT * FROM lobby WHERE lobby_id = 161
+1588361018 - INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    (41, 45, 0, 0, 15, true, null, 41, 'white', null)
+1588361018 - INSERT INTO towers
+    (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+    VALUES
+    (204,'orange','white',1,1,0,'주',41),
+    (204,'blue','white',2,1,0,'푸',41),
+    (204,'indigo','white',3,1,0,'남',41),
+    (204,'pink','white',4,1,0,'담',41),
+    (204,'yellow','white',5,1,0,'노',41),
+    (204,'red','white',6,1,0,'빨',41),
+    (204,'green','white',7,1,0,'녹',41),
+    (204,'brown','white',8,1,0,'갈',41),
+    (204,'brown','black',1,8,0,'갈',45),
+    (204,'green','black',2,8,0,'녹',45),
+    (204,'red','black',3,8,0,'빨',45),
+    (204,'yellow','black',4,8,0,'노',45),
+    (204,'pink','black',5,8,0,'담',45),
+    (204,'indigo','black',6,8,0,'남',45),
+    (204,'blue','black',7,8,0,'푸',45),
+    (204,'orange','black',8,8,0,'주',45)
+    
+1588361018 - 161
+1588361090 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588361090 - SELECT * FROM lobby WHERE lobby_id = 161
+1588361090 - INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    (41, 45, 0, 0, 15, true, null, 41, 'white', null)
+1588361090 - INSERT INTO towers
+    (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+    VALUES
+    (205,'orange','white',1,1,0,'주',41),
+    (205,'blue','white',2,1,0,'푸',41),
+    (205,'indigo','white',3,1,0,'남',41),
+    (205,'pink','white',4,1,0,'담',41),
+    (205,'yellow','white',5,1,0,'노',41),
+    (205,'red','white',6,1,0,'빨',41),
+    (205,'green','white',7,1,0,'녹',41),
+    (205,'brown','white',8,1,0,'갈',41),
+    (205,'brown','black',1,8,0,'갈',45),
+    (205,'green','black',2,8,0,'녹',45),
+    (205,'red','black',3,8,0,'빨',45),
+    (205,'yellow','black',4,8,0,'노',45),
+    (205,'pink','black',5,8,0,'담',45),
+    (205,'indigo','black',6,8,0,'남',45),
+    (205,'blue','black',7,8,0,'푸',45),
+    (205,'orange','black',8,8,0,'주',45)
+    
+1588361090 - UPDATE lobby set game_id = 205 WHERE lobby_id = 161
+1588361093 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588361111 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588361111 - SELECT * FROM lobby WHERE lobby_id = 161
+1588361111 - INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    (41, 45, 0, 0, 15, true, null, 41, 'white', null)
+1588361111 - INSERT INTO towers
+    (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+    VALUES
+    (206,'orange','white',1,1,0,'주',41),
+    (206,'blue','white',2,1,0,'푸',41),
+    (206,'indigo','white',3,1,0,'남',41),
+    (206,'pink','white',4,1,0,'담',41),
+    (206,'yellow','white',5,1,0,'노',41),
+    (206,'red','white',6,1,0,'빨',41),
+    (206,'green','white',7,1,0,'녹',41),
+    (206,'brown','white',8,1,0,'갈',41),
+    (206,'brown','black',1,8,0,'갈',45),
+    (206,'green','black',2,8,0,'녹',45),
+    (206,'red','black',3,8,0,'빨',45),
+    (206,'yellow','black',4,8,0,'노',45),
+    (206,'pink','black',5,8,0,'담',45),
+    (206,'indigo','black',6,8,0,'남',45),
+    (206,'blue','black',7,8,0,'푸',45),
+    (206,'orange','black',8,8,0,'주',45)
+    
+1588361111 - UPDATE lobby set game_id = 206 WHERE lobby_id = 161
+1588361201 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588361201 - SELECT * FROM lobby WHERE lobby_id = 161
+1588361234 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588361234 - 
+    INSERT INTO lobby
+    (points_to_win, player_id)
+    VALUES
+    (15, 41)
+1588361237 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588361240 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588361240 - SELECT * FROM lobby WHERE lobby_id = 162
+1588361240 - INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    (41, 45, 0, 0, 15, true, null, 41, 'white', null)
+1588361240 - INSERT INTO towers
+    (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+    VALUES
+    (207,'orange','white',1,1,0,'주',41),
+    (207,'blue','white',2,1,0,'푸',41),
+    (207,'indigo','white',3,1,0,'남',41),
+    (207,'pink','white',4,1,0,'담',41),
+    (207,'yellow','white',5,1,0,'노',41),
+    (207,'red','white',6,1,0,'빨',41),
+    (207,'green','white',7,1,0,'녹',41),
+    (207,'brown','white',8,1,0,'갈',41),
+    (207,'brown','black',1,8,0,'갈',45),
+    (207,'green','black',2,8,0,'녹',45),
+    (207,'red','black',3,8,0,'빨',45),
+    (207,'yellow','black',4,8,0,'노',45),
+    (207,'pink','black',5,8,0,'담',45),
+    (207,'indigo','black',6,8,0,'남',45),
+    (207,'blue','black',7,8,0,'푸',45),
+    (207,'orange','black',8,8,0,'주',45)
+    
+1588361240 - UPDATE lobby set game_id = 207 WHERE lobby_id = 162
+1588361269 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588361286 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588361286 - SELECT * FROM lobby WHERE lobby_id = 162

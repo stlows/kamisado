@@ -91,6 +91,12 @@ class Sql {
   function newGame($lobby_id){
 
     $lobby = $this->getLobby($lobby_id);
+    
+    if($lobby["game_id"] !== null){
+      global $CANT_JOIN_THAT_LOBBY;
+      echo(json_encode($CANT_JOIN_THAT_LOBBY));
+      exit;
+    }
 
     $player_2_id = $this->getLoginPlayerId();
     $player_1_id = $lobby["player_id"];
@@ -132,6 +138,10 @@ class Sql {
     ($game_id,'orange','black',8,8,0,'$ORANGE_SYMBOL',$player_2_id)
     ";
     $this->query($towersQuery);
+
+    $lobbyQuery = "UPDATE lobby set game_id = $game_id WHERE lobby_id = $lobby_id";
+    $this->query($lobbyQuery);
+
     return $game_id;
   }
 
@@ -399,9 +409,7 @@ class Sql {
 
   function getAllLobby(){
 
-    $player_id = $this->getLoginPlayerId();
-
-    $query = "SELECT player_name, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id";
+    $query = "SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null";
 
     $result = $this->query($query);
 

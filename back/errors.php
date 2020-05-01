@@ -95,4 +95,8 @@ $PLEASE_LOGIN_FIRST = [
   "message" => "Please login first"
 ];
 
+$CANT_JOIN_THAT_LOBBY = [
+  "error" => 5019,
+  "message" => "Can't join that lobby, alreay a game in progress"
+];
 
