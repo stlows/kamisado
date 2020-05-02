@@ -1,30 +1,38 @@
 <template>
-  <v-card class="pa-6">
-    <h2 v-if="game">Active game: {{game.game_id}}</h2>
+  <v-card class="pa-6" min-width="500">
+    <h2 class="mb-3" v-if="game">Active game: {{game.game_id}}</h2>
     <h2 v-else>No game selected</h2>
-    <v-card-text v-if="game">
-      <v-list-item class="d-flex justify-content-between align-items-center">
+    <template v-if="game">
+      <v-list-item>
         <span
           :class="{'font-weight-bold': game.turn_color === 'white'}"
         >{{game.player_1_name}} [white] ({{game.player_1_score}})</span>
+        <v-spacer></v-spacer>
         <span class="vs">vs.</span>
+        <v-spacer></v-spacer>
         <span
           :class="{'font-weight-bold': game.turn_color === 'black'}"
         >{{game.player_2_name}} [black] ({{game.player_2_score}})</span>
       </v-list-item>
-      <v-list-item class="d-flex justify-content-between align-items-center">
+      <v-divider></v-divider>
+      <v-list-item>
         <span>Points to win</span>
+        <v-spacer></v-spacer>
         <span>{{game.points_to_win}}</span>
       </v-list-item>
-      <v-list-item class="d-flex justify-content-between align-items-center">
+      <v-divider></v-divider>
+      <v-list-item>
         <span>Turn</span>
+        <v-spacer></v-spacer>
         <span>{{game.turn_color}} ({{ game.turn_color === 'white' ? game.player_1_name : game.player_2_name }})</span>
       </v-list-item>
-      <v-list-item class="d-flex justify-content-between align-items-center">
+      <v-divider></v-divider>
+      <v-list-item>
         <span>Tower to move</span>
-        <span class="tower-color" :class="[towerToMove]">{{towerToMove}}</span>
+        <v-spacer></v-spacer>
+        <span>{{towerToMove}}</span>
       </v-list-item>
-    </v-card-text>
+    </template>
   </v-card>
 </template>
 

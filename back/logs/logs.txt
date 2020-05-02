@@ -624,3 +624,4402 @@
 1588361269 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
 1588361286 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
 1588361286 - SELECT * FROM lobby WHERE lobby_id = 162
+1588361513 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588369267 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369267 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 41 THEN p2.player_name
+      WHEN p2.player_id = 41 THEN p1.player_name
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_1_score
+      WHEN p2.player_id = 41 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_2_score
+      WHEN p2.player_id = 41 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 41 IN (p1.player_id, p2.player_id)
+    
+1588369375 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369375 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 41 THEN p2.username
+      WHEN p2.player_id = 41 THEN p1.username
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_1_score
+      WHEN p2.player_id = 41 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_2_score
+      WHEN p2.player_id = 41 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 41 IN (p1.player_id, p2.player_id)
+    
+1588369383 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588369383 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 45 THEN p2.username
+      WHEN p2.player_id = 45 THEN p1.username
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 45 THEN games.player_1_score
+      WHEN p2.player_id = 45 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 45 THEN games.player_2_score
+      WHEN p2.player_id = 45 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 45 IN (p1.player_id, p2.player_id)
+    
+1588369397 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588369402 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369402 - 
+    INSERT INTO lobby
+    (points_to_win, player_id)
+    VALUES
+    (15, 41)
+1588369404 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588369443 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369443 - 
+    INSERT INTO lobby
+    (points_to_win, player_id)
+    VALUES
+    (15, 41)
+1588369445 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588369449 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588369449 - SELECT * FROM lobby WHERE lobby_id = 164
+1588369449 - INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    (41, 45, 0, 0, 15, true, null, 41, 'white', null)
+1588369449 - INSERT INTO towers
+    (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+    VALUES
+    (208,'orange','white',1,1,0,'주',41),
+    (208,'blue','white',2,1,0,'푸',41),
+    (208,'indigo','white',3,1,0,'남',41),
+    (208,'pink','white',4,1,0,'담',41),
+    (208,'yellow','white',5,1,0,'노',41),
+    (208,'red','white',6,1,0,'빨',41),
+    (208,'green','white',7,1,0,'녹',41),
+    (208,'brown','white',8,1,0,'갈',41),
+    (208,'brown','black',1,8,0,'갈',45),
+    (208,'green','black',2,8,0,'녹',45),
+    (208,'red','black',3,8,0,'빨',45),
+    (208,'yellow','black',4,8,0,'노',45),
+    (208,'pink','black',5,8,0,'담',45),
+    (208,'indigo','black',6,8,0,'남',45),
+    (208,'blue','black',7,8,0,'푸',45),
+    (208,'orange','black',8,8,0,'주',45)
+    
+1588369449 - UPDATE lobby set game_id = 208 WHERE lobby_id = 164
+1588369452 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588369455 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369455 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 41 THEN p2.username
+      WHEN p2.player_id = 41 THEN p1.username
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_1_score
+      WHEN p2.player_id = 41 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_2_score
+      WHEN p2.player_id = 41 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 41 IN (p1.player_id, p2.player_id)
+    
+1588369458 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588369458 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 45 THEN p2.username
+      WHEN p2.player_id = 45 THEN p1.username
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 45 THEN games.player_1_score
+      WHEN p2.player_id = 45 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 45 THEN games.player_2_score
+      WHEN p2.player_id = 45 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 45 IN (p1.player_id, p2.player_id)
+    
+1588369461 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 208
+1588369461 - SELECT * FROM towers WHERE game_id = 208
+1588369516 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588369516 - SELECT * FROM towers WHERE tower_id = 3489
+1588369516 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 208
+1588369516 - SELECT * FROM towers WHERE game_id = 208
+1588369705 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369705 - 
+    INSERT INTO lobby
+    (points_to_win, player_id)
+    VALUES
+    (15, 41)
+1588369705 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588369705 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588369705 - SELECT * FROM lobby WHERE lobby_id = 165
+1588369705 - INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    (41, 45, 0, 0, 15, true, null, 41, 'white', null)
+1588369705 - INSERT INTO towers
+    (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+    VALUES
+    (209,'orange','white',1,1,0,'주',41),
+    (209,'blue','white',2,1,0,'푸',41),
+    (209,'indigo','white',3,1,0,'남',41),
+    (209,'pink','white',4,1,0,'담',41),
+    (209,'yellow','white',5,1,0,'노',41),
+    (209,'red','white',6,1,0,'빨',41),
+    (209,'green','white',7,1,0,'녹',41),
+    (209,'brown','white',8,1,0,'갈',41),
+    (209,'brown','black',1,8,0,'갈',45),
+    (209,'green','black',2,8,0,'녹',45),
+    (209,'red','black',3,8,0,'빨',45),
+    (209,'yellow','black',4,8,0,'노',45),
+    (209,'pink','black',5,8,0,'담',45),
+    (209,'indigo','black',6,8,0,'남',45),
+    (209,'blue','black',7,8,0,'푸',45),
+    (209,'orange','black',8,8,0,'주',45)
+    
+1588369705 - UPDATE lobby set game_id = 209 WHERE lobby_id = 165
+1588369705 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588369705 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369705 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 41 THEN p2.username
+      WHEN p2.player_id = 41 THEN p1.username
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_1_score
+      WHEN p2.player_id = 41 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_2_score
+      WHEN p2.player_id = 41 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 41 IN (p1.player_id, p2.player_id)
+    
+1588369705 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588369705 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 45 THEN p2.username
+      WHEN p2.player_id = 45 THEN p1.username
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 45 THEN games.player_1_score
+      WHEN p2.player_id = 45 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 45 THEN games.player_2_score
+      WHEN p2.player_id = 45 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 45 IN (p1.player_id, p2.player_id)
+    
+1588369705 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369705 - SELECT * FROM towers WHERE game_id = 209
+1588369705 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588369705 - SELECT * FROM towers WHERE tower_id = 3505
+1588369705 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369705 - SELECT * FROM towers WHERE game_id = 209
+1588369705 - SELECT * FROM players WHERE username = 'toto' || email = 'toto'
+1588369705 - SELECT * FROM towers WHERE tower_id = 3505
+1588369705 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369705 - SELECT * FROM towers WHERE game_id = 209
+1588369705 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369705 - SELECT * FROM towers WHERE tower_id = 3520
+1588369705 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369705 - SELECT * FROM towers WHERE game_id = 209
+1588369705 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369705 - SELECT * FROM towers WHERE tower_id = 3505
+1588369705 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369705 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369706 - SELECT * FROM towers WHERE tower_id = 3505
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369706 - SELECT * FROM towers WHERE tower_id = 3505
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369706 - SELECT * FROM towers WHERE tower_id = 3505
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369706 - SELECT * FROM towers WHERE tower_id = 3507
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - UPDATE towers SET position_x = 3, position_y = 3 WHERE tower_id = 3507
+1588369706 - SELECT * FROM towers WHERE tower_id = 3507
+1588369706 - SELECT color FROM tiles WHERE position_x = 3 AND position_y = 3
+1588369706 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 209
+1588369706 - SELECT tower_id, tower_color FROM towers WHERE game_id = 209 AND tower_color = 'orange' AND player_id = 45
+1588369706 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 209
+1588369706 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 209
+1588369706 - UPDATE games SET tower_id_to_move = 3520 WHERE game_id = 209
+1588369706 - UPDATE games SET turn_tower_color = 'orange' WHERE game_id = 209
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - SELECT * FROM towers WHERE tower_id = 3520
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369706 - SELECT * FROM towers WHERE tower_id = 3506
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588369706 - SELECT * FROM towers WHERE tower_id = 3519
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588369706 - SELECT * FROM towers WHERE tower_id = 3520
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588369706 - SELECT * FROM towers WHERE tower_id = 3520
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588369706 - SELECT * FROM towers WHERE tower_id = 3520
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588369706 - SELECT * FROM towers WHERE tower_id = 3520
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - UPDATE towers SET position_x = 8, position_y = 2 WHERE tower_id = 3520
+1588369706 - SELECT * FROM towers WHERE tower_id = 3520
+1588369706 - SELECT color FROM tiles WHERE position_x = 8 AND position_y = 2
+1588369706 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 209
+1588369706 - SELECT tower_id, tower_color FROM towers WHERE game_id = 209 AND tower_color = 'indigo' AND player_id = 41
+1588369706 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 209
+1588369706 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 209
+1588369706 - UPDATE games SET tower_id_to_move = 3507 WHERE game_id = 209
+1588369706 - UPDATE games SET turn_tower_color = 'indigo' WHERE game_id = 209
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - SELECT * FROM towers WHERE tower_id = 3507
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369706 - SELECT * FROM towers WHERE tower_id = 3507
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369706 - SELECT * FROM towers WHERE tower_id = 3507
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369706 - SELECT * FROM towers WHERE tower_id = 3507
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369706 - SELECT * FROM towers WHERE tower_id = 3507
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - UPDATE towers SET position_x = 4, position_y = 4 WHERE tower_id = 3507
+1588369706 - SELECT * FROM towers WHERE tower_id = 3507
+1588369706 - SELECT color FROM tiles WHERE position_x = 4 AND position_y = 4
+1588369706 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 209
+1588369706 - SELECT tower_id, tower_color FROM towers WHERE game_id = 209 AND tower_color = 'orange' AND player_id = 45
+1588369706 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 209
+1588369706 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 209
+1588369706 - UPDATE games SET tower_id_to_move = 3520 WHERE game_id = 209
+1588369706 - UPDATE games SET turn_tower_color = 'orange' WHERE game_id = 209
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - SELECT * FROM towers WHERE tower_id = 3520
+1588369706 - SELECT * FROM towers WHERE tower_id = 3520
+1588369706 - SELECT color FROM tiles WHERE position_x = 8 AND position_y = 2
+1588369706 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 209
+1588369706 - SELECT tower_id, tower_color FROM towers WHERE game_id = 209 AND tower_color = 'indigo' AND player_id = 41
+1588369706 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 209
+1588369706 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 209
+1588369706 - UPDATE games SET tower_id_to_move = 3507 WHERE game_id = 209
+1588369706 - UPDATE games SET turn_tower_color = 'indigo' WHERE game_id = 209
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - SELECT * FROM towers WHERE tower_id = 3507
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369706 - SELECT * FROM towers WHERE tower_id = 3507
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - UPDATE towers SET position_x = 4, position_y = 7 WHERE tower_id = 3507
+1588369706 - SELECT * FROM towers WHERE tower_id = 3507
+1588369706 - SELECT color FROM tiles WHERE position_x = 4 AND position_y = 7
+1588369706 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 209
+1588369706 - SELECT tower_id, tower_color FROM towers WHERE game_id = 209 AND tower_color = 'blue' AND player_id = 45
+1588369706 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 209
+1588369706 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 209
+1588369706 - UPDATE games SET tower_id_to_move = 3519 WHERE game_id = 209
+1588369706 - UPDATE games SET turn_tower_color = 'blue' WHERE game_id = 209
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - SELECT * FROM towers WHERE tower_id = 3519
+1588369706 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588369706 - SELECT * FROM towers WHERE tower_id = 3519
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - UPDATE towers SET position_x = 3, position_y = 4 WHERE tower_id = 3519
+1588369706 - SELECT * FROM towers WHERE tower_id = 3519
+1588369706 - SELECT color FROM tiles WHERE position_x = 3 AND position_y = 4
+1588369706 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 209
+1588369706 - SELECT tower_id, tower_color FROM towers WHERE game_id = 209 AND tower_color = 'blue' AND player_id = 41
+1588369706 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 209
+1588369706 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 209
+1588369706 - UPDATE games SET tower_id_to_move = 3506 WHERE game_id = 209
+1588369706 - UPDATE games SET turn_tower_color = 'blue' WHERE game_id = 209
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - SELECT * FROM towers WHERE tower_id = 3506
+1588369706 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369706 - SELECT * FROM towers WHERE tower_id = 3506
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - UPDATE towers SET position_x = 8, position_y = 7 WHERE tower_id = 3506
+1588369706 - SELECT * FROM towers WHERE tower_id = 3506
+1588369706 - SELECT color FROM tiles WHERE position_x = 8 AND position_y = 7
+1588369706 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 209
+1588369706 - SELECT tower_id, tower_color FROM towers WHERE game_id = 209 AND tower_color = 'red' AND player_id = 45
+1588369706 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 209
+1588369706 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 209
+1588369706 - UPDATE games SET tower_id_to_move = 3515 WHERE game_id = 209
+1588369706 - UPDATE games SET turn_tower_color = 'red' WHERE game_id = 209
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369706 - SELECT * FROM towers WHERE tower_id = 3515
+1588369706 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588369706 - SELECT * FROM towers WHERE tower_id = 3515
+1588369706 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369706 - SELECT * FROM towers WHERE game_id = 209
+1588369707 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588369707 - SELECT * FROM towers WHERE tower_id = 3515
+1588369707 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369707 - SELECT * FROM towers WHERE game_id = 209
+1588369707 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588369707 - SELECT * FROM towers WHERE tower_id = 3515
+1588369707 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369707 - SELECT * FROM towers WHERE game_id = 209
+1588369707 - UPDATE towers SET position_x = 1, position_y = 6 WHERE tower_id = 3515
+1588369707 - SELECT * FROM towers WHERE tower_id = 3515
+1588369707 - SELECT color FROM tiles WHERE position_x = 1 AND position_y = 6
+1588369707 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 209
+1588369707 - SELECT tower_id, tower_color FROM towers WHERE game_id = 209 AND tower_color = 'blue' AND player_id = 41
+1588369707 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 209
+1588369707 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 209
+1588369707 - UPDATE games SET tower_id_to_move = 3506 WHERE game_id = 209
+1588369707 - UPDATE games SET turn_tower_color = 'blue' WHERE game_id = 209
+1588369707 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369707 - SELECT * FROM towers WHERE game_id = 209
+1588369707 - SELECT * FROM towers WHERE tower_id = 3506
+1588369707 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369707 - SELECT * FROM towers WHERE tower_id = 3506
+1588369707 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369707 - SELECT * FROM towers WHERE game_id = 209
+1588369707 - UPDATE towers SET position_x = 8, position_y = 8 WHERE tower_id = 3506
+1588369707 - UPDATE games
+    SET
+    player_1_score = (player_1_score + 1)
+    WHERE game_id = 209
+1588369707 - SELECT
+    CASE WHEN player_1_score >= points_to_win OR player_2_score >= points_to_win THEN 1
+    ELSE 0
+    END AS is_game_won
+    FROM games
+    WHERE game_id = 209
+1588369707 - UPDATE towers SET sumo = (sumo + 1) WHERE tower_id = 3506
+1588369707 - UPDATE games
+    SET
+    is_first_move = 1
+    WHERE game_id = 209
+1588369707 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 209
+1588369707 - UPDATE games SET tower_id_to_move = NULL WHERE game_id = 209
+1588369707 - UPDATE games SET turn_tower_color = NULL WHERE game_id = 209
+1588369707 - UPDATE towers SET position_x = 1, position_y = 1 WHERE tower_id = 3505;UPDATE towers SET position_x = 2, position_y = 1 WHERE tower_id = 3507;UPDATE towers SET position_x = 3, position_y = 1 WHERE tower_id = 3506;UPDATE towers SET position_x = 4, position_y = 1 WHERE tower_id = 3508;UPDATE towers SET position_x = 5, position_y = 1 WHERE tower_id = 3509;UPDATE towers SET position_x = 6, position_y = 1 WHERE tower_id = 3510;UPDATE towers SET position_x = 7, position_y = 1 WHERE tower_id = 3511;UPDATE towers SET position_x = 8, position_y = 1 WHERE tower_id = 3512;UPDATE towers SET position_x = 1, position_y = 8 WHERE tower_id = 3513;UPDATE towers SET position_x = 2, position_y = 8 WHERE tower_id = 3514;UPDATE towers SET position_x = 3, position_y = 8 WHERE tower_id = 3520;UPDATE towers SET position_x = 4, position_y = 8 WHERE tower_id = 3516;UPDATE towers SET position_x = 5, position_y = 8 WHERE tower_id = 3517;UPDATE towers SET position_x = 6, position_y = 8 WHERE tower_id = 3518;UPDATE towers SET position_x = 7, position_y = 8 WHERE tower_id = 3519;UPDATE towers SET position_x = 8, position_y = 8 WHERE tower_id = 3515;
+1588369707 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369707 - SELECT * FROM towers WHERE game_id = 209
+1588369707 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588369707 - SELECT * FROM towers WHERE tower_id = 3515
+1588369707 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369707 - SELECT * FROM towers WHERE game_id = 209
+1588369707 - UPDATE towers SET position_x = 8, position_y = 3 WHERE tower_id = 3515
+1588369707 - SELECT * FROM towers WHERE tower_id = 3515
+1588369707 - SELECT color FROM tiles WHERE position_x = 8 AND position_y = 3
+1588369707 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 209
+1588369707 - SELECT tower_id, tower_color FROM towers WHERE game_id = 209 AND tower_color = 'blue' AND player_id = 41
+1588369707 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 209
+1588369707 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 209
+1588369707 - UPDATE games SET tower_id_to_move = 3506 WHERE game_id = 209
+1588369707 - UPDATE games SET turn_tower_color = 'blue' WHERE game_id = 209
+1588369707 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369707 - SELECT * FROM towers WHERE game_id = 209
+1588369707 - SELECT * FROM towers WHERE tower_id = 3506
+1588369707 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369707 - SELECT * FROM towers WHERE tower_id = 3506
+1588369707 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369707 - SELECT * FROM towers WHERE game_id = 209
+1588369707 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369707 - SELECT * FROM towers WHERE tower_id = 3506
+1588369707 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369707 - SELECT * FROM towers WHERE game_id = 209
+1588369707 - UPDATE towers SET position_x = 3, position_y = 3 WHERE tower_id = 3506
+1588369707 - SELECT * FROM towers WHERE tower_id = 3506
+1588369707 - SELECT color FROM tiles WHERE position_x = 3 AND position_y = 3
+1588369707 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 209
+1588369707 - SELECT tower_id, tower_color FROM towers WHERE game_id = 209 AND tower_color = 'orange' AND player_id = 45
+1588369707 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 209
+1588369707 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 209
+1588369707 - UPDATE games SET tower_id_to_move = 3520 WHERE game_id = 209
+1588369707 - UPDATE games SET turn_tower_color = 'orange' WHERE game_id = 209
+1588369707 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369707 - SELECT * FROM towers WHERE game_id = 209
+1588369707 - SELECT * FROM towers WHERE tower_id = 3520
+1588369707 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588369707 - SELECT * FROM towers WHERE tower_id = 3520
+1588369707 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369707 - SELECT * FROM towers WHERE game_id = 209
+1588369707 - UPDATE towers SET position_x = 3, position_y = 4 WHERE tower_id = 3520
+1588369707 - SELECT * FROM towers WHERE tower_id = 3520
+1588369707 - SELECT color FROM tiles WHERE position_x = 3 AND position_y = 4
+1588369707 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 209
+1588369707 - SELECT tower_id, tower_color FROM towers WHERE game_id = 209 AND tower_color = 'blue' AND player_id = 41
+1588369707 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 209
+1588369707 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 209
+1588369707 - UPDATE games SET tower_id_to_move = 3506 WHERE game_id = 209
+1588369707 - UPDATE games SET turn_tower_color = 'blue' WHERE game_id = 209
+1588369707 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369707 - SELECT * FROM towers WHERE game_id = 209
+1588369707 - SELECT * FROM towers WHERE tower_id = 3506
+1588369707 - SELECT * FROM tiles
+1588369707 - INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    (10, 9, 0, 0, 15, 1, null, 10, 'white', 'indigo')
+1588369707 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'orange','white',6,1,0,'주',10)
+1588369707 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'blue','white',7,1,0,'푸',10)
+1588369707 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'indigo','white',2,1,0,'남',10)
+1588369707 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'pink','white',4,1,0,'담',10)
+1588369707 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'yellow','white',5,1,0,'노',10)
+1588369707 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'red','white',6,4,0,'빨',10)
+1588369707 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'green','white',7,4,0,'녹',10)
+1588369707 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'brown','white',8,4,0,'갈',10)
+1588369707 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'brown','black',3,3,0,'갈',9)
+1588369707 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'green','black',1,3,0,'녹',9)
+1588369707 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'red','black',2,3,0,'빨',9)
+1588369707 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'yellow','black',4,8,0,'노',9)
+1588369707 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'pink','black',5,8,0,'담',9)
+1588369707 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'indigo','black',6,8,0,'남',9)
+1588369707 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'blue','black',7,8,0,'푸',9)
+1588369707 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'orange','black',7,5,0,'주',9)
+1588369707 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369707 - SELECT * FROM towers WHERE tower_id = 3507
+1588369707 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588369707 - SELECT * FROM towers WHERE game_id = 209
+1588369707 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588369707 - SELECT code, code_expiration FROM players WHERE username = 'stlows'
+1588369707 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369707 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588369707 - SELECT * FROM players WHERE username = 'toto' || email = 'toto'
+1588369707 - SELECT * FROM players WHERE username = 'vincent_beaulieu@live.ca' || email = 'vincent_beaulieu@live.ca'
+1588369707 - SELECT * FROM players WHERE username = 'toto@toto.com' || email = 'toto@toto.com'
+1588369708 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369708 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 75
+1588369733 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369733 - 
+    INSERT INTO lobby
+    (points_to_win, player_id)
+    VALUES
+    (15, 41)
+1588369736 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588369739 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588369739 - SELECT * FROM lobby WHERE lobby_id = 166
+1588369739 - INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    (41, 45, 0, 0, 15, true, null, 41, 'white', null)
+1588369739 - INSERT INTO towers
+    (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+    VALUES
+    (211,'orange','white',1,1,0,'주',41),
+    (211,'blue','white',2,1,0,'푸',41),
+    (211,'indigo','white',3,1,0,'남',41),
+    (211,'pink','white',4,1,0,'담',41),
+    (211,'yellow','white',5,1,0,'노',41),
+    (211,'red','white',6,1,0,'빨',41),
+    (211,'green','white',7,1,0,'녹',41),
+    (211,'brown','white',8,1,0,'갈',41),
+    (211,'brown','black',1,8,0,'갈',45),
+    (211,'green','black',2,8,0,'녹',45),
+    (211,'red','black',3,8,0,'빨',45),
+    (211,'yellow','black',4,8,0,'노',45),
+    (211,'pink','black',5,8,0,'담',45),
+    (211,'indigo','black',6,8,0,'남',45),
+    (211,'blue','black',7,8,0,'푸',45),
+    (211,'orange','black',8,8,0,'주',45)
+    
+1588369739 - UPDATE lobby set game_id = 211 WHERE lobby_id = 166
+1588369746 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588369764 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369764 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 41 THEN p2.username
+      WHEN p2.player_id = 41 THEN p1.username
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_1_score
+      WHEN p2.player_id = 41 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_2_score
+      WHEN p2.player_id = 41 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 41 IN (p1.player_id, p2.player_id)
+    
+1588369784 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369784 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 41 THEN p2.username
+      WHEN p2.player_id = 41 THEN p1.username
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_1_score
+      WHEN p2.player_id = 41 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_2_score
+      WHEN p2.player_id = 41 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 41 IN (p1.player_id, p2.player_id)
+    
+1588369841 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588369841 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 45 THEN p2.username
+      WHEN p2.player_id = 45 THEN p1.username
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 45 THEN games.player_1_score
+      WHEN p2.player_id = 45 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 45 THEN games.player_2_score
+      WHEN p2.player_id = 45 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 45 IN (p1.player_id, p2.player_id)
+    
+1588369845 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 211
+1588369845 - SELECT * FROM towers WHERE game_id = 211
+1588369861 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 211
+1588369861 - SELECT * FROM towers WHERE game_id = 211
+1588369894 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369894 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 41 THEN p2.username
+      WHEN p2.player_id = 41 THEN p1.username
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_1_score
+      WHEN p2.player_id = 41 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_2_score
+      WHEN p2.player_id = 41 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 41 IN (p1.player_id, p2.player_id)
+    
+1588369899 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 211
+1588369899 - SELECT * FROM towers WHERE game_id = 211
+1588369904 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588369904 - SELECT * FROM towers WHERE tower_id = 3537
+1588369904 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 211
+1588369904 - SELECT * FROM towers WHERE game_id = 211
+1588369907 - SELECT * FROM players WHERE username = 'toto' || email = 'toto'
+1588369907 - SELECT * FROM towers WHERE tower_id = 3537
+1588369907 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 211
+1588369907 - SELECT * FROM towers WHERE game_id = 211
+1588369910 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369910 - SELECT * FROM towers WHERE tower_id = 3552
+1588369910 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 211
+1588369910 - SELECT * FROM towers WHERE game_id = 211
+1588369914 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369914 - SELECT * FROM towers WHERE tower_id = 3537
+1588369914 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 211
+1588369914 - SELECT * FROM towers WHERE game_id = 211
+1588369961 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588369961 - SELECT * FROM towers WHERE tower_id = 3539
+1588369961 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 211
+1588369961 - SELECT * FROM towers WHERE game_id = 211
+1588369961 - UPDATE towers SET position_x = 3, position_y = 3 WHERE tower_id = 3539
+1588369961 - SELECT * FROM towers WHERE tower_id = 3539
+1588369961 - SELECT color FROM tiles WHERE position_x = 3 AND position_y = 3
+1588369961 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 211
+1588369961 - SELECT tower_id, tower_color FROM towers WHERE game_id = 211 AND tower_color = 'orange' AND player_id = 45
+1588369961 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 211
+1588369961 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 211
+1588369961 - UPDATE games SET tower_id_to_move = 3552 WHERE game_id = 211
+1588369961 - UPDATE games SET turn_tower_color = 'orange' WHERE game_id = 211
+1588369961 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 211
+1588369961 - SELECT * FROM towers WHERE game_id = 211
+1588369961 - SELECT * FROM towers WHERE tower_id = 3552
+1588369965 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 211
+1588369965 - SELECT * FROM towers WHERE game_id = 211
+1588370157 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370157 - 
+    INSERT INTO lobby
+    (points_to_win, player_id)
+    VALUES
+    (15, 41)
+1588370157 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588370157 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588370157 - SELECT * FROM lobby WHERE lobby_id = 167
+1588370157 - INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    (41, 45, 0, 0, 15, true, null, 41, 'white', null)
+1588370157 - INSERT INTO towers
+    (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+    VALUES
+    (212,'orange','white',1,1,0,'주',41),
+    (212,'blue','white',2,1,0,'푸',41),
+    (212,'indigo','white',3,1,0,'남',41),
+    (212,'pink','white',4,1,0,'담',41),
+    (212,'yellow','white',5,1,0,'노',41),
+    (212,'red','white',6,1,0,'빨',41),
+    (212,'green','white',7,1,0,'녹',41),
+    (212,'brown','white',8,1,0,'갈',41),
+    (212,'brown','black',1,8,0,'갈',45),
+    (212,'green','black',2,8,0,'녹',45),
+    (212,'red','black',3,8,0,'빨',45),
+    (212,'yellow','black',4,8,0,'노',45),
+    (212,'pink','black',5,8,0,'담',45),
+    (212,'indigo','black',6,8,0,'남',45),
+    (212,'blue','black',7,8,0,'푸',45),
+    (212,'orange','black',8,8,0,'주',45)
+    
+1588370157 - UPDATE lobby set game_id = 212 WHERE lobby_id = 167
+1588370157 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588370157 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370157 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 41 THEN p2.username
+      WHEN p2.player_id = 41 THEN p1.username
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_1_score
+      WHEN p2.player_id = 41 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_2_score
+      WHEN p2.player_id = 41 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 41 IN (p1.player_id, p2.player_id)
+    
+1588370157 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588370157 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 45 THEN p2.username
+      WHEN p2.player_id = 45 THEN p1.username
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 45 THEN games.player_1_score
+      WHEN p2.player_id = 45 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 45 THEN games.player_2_score
+      WHEN p2.player_id = 45 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 45 IN (p1.player_id, p2.player_id)
+    
+1588370157 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370157 - SELECT * FROM towers WHERE game_id = 212
+1588370157 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588370157 - SELECT * FROM towers WHERE tower_id = 3553
+1588370157 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370157 - SELECT * FROM towers WHERE game_id = 212
+1588370157 - SELECT * FROM players WHERE username = 'toto' || email = 'toto'
+1588370157 - SELECT * FROM towers WHERE tower_id = 3553
+1588370157 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370157 - SELECT * FROM towers WHERE game_id = 212
+1588370157 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370157 - SELECT * FROM towers WHERE tower_id = 3568
+1588370157 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370157 - SELECT * FROM towers WHERE game_id = 212
+1588370157 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370157 - SELECT * FROM towers WHERE tower_id = 3553
+1588370157 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370157 - SELECT * FROM towers WHERE game_id = 212
+1588370157 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370157 - SELECT * FROM towers WHERE tower_id = 3553
+1588370157 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370157 - SELECT * FROM towers WHERE game_id = 212
+1588370157 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370157 - SELECT * FROM towers WHERE tower_id = 3553
+1588370157 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370157 - SELECT * FROM towers WHERE game_id = 212
+1588370157 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370157 - SELECT * FROM towers WHERE tower_id = 3553
+1588370157 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370157 - SELECT * FROM towers WHERE game_id = 212
+1588370157 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370157 - SELECT * FROM towers WHERE tower_id = 3555
+1588370157 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370157 - SELECT * FROM towers WHERE game_id = 212
+1588370157 - UPDATE towers SET position_x = 3, position_y = 3 WHERE tower_id = 3555
+1588370157 - SELECT * FROM towers WHERE tower_id = 3555
+1588370157 - SELECT color FROM tiles WHERE position_x = 3 AND position_y = 3
+1588370157 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 212
+1588370157 - SELECT tower_id, tower_color FROM towers WHERE game_id = 212 AND tower_color = 'orange' AND player_id = 45
+1588370157 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 212
+1588370157 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 212
+1588370157 - UPDATE games SET tower_id_to_move = 3568 WHERE game_id = 212
+1588370157 - UPDATE games SET turn_tower_color = 'orange' WHERE game_id = 212
+1588370157 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370157 - SELECT * FROM towers WHERE game_id = 212
+1588370157 - SELECT * FROM towers WHERE tower_id = 3568
+1588370157 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370157 - SELECT * FROM towers WHERE game_id = 212
+1588370157 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370157 - SELECT * FROM towers WHERE tower_id = 3554
+1588370157 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370157 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588370158 - SELECT * FROM towers WHERE tower_id = 3567
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588370158 - SELECT * FROM towers WHERE tower_id = 3568
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588370158 - SELECT * FROM towers WHERE tower_id = 3568
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588370158 - SELECT * FROM towers WHERE tower_id = 3568
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588370158 - SELECT * FROM towers WHERE tower_id = 3568
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - UPDATE towers SET position_x = 8, position_y = 2 WHERE tower_id = 3568
+1588370158 - SELECT * FROM towers WHERE tower_id = 3568
+1588370158 - SELECT color FROM tiles WHERE position_x = 8 AND position_y = 2
+1588370158 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 212
+1588370158 - SELECT tower_id, tower_color FROM towers WHERE game_id = 212 AND tower_color = 'indigo' AND player_id = 41
+1588370158 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 212
+1588370158 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 212
+1588370158 - UPDATE games SET tower_id_to_move = 3555 WHERE game_id = 212
+1588370158 - UPDATE games SET turn_tower_color = 'indigo' WHERE game_id = 212
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - SELECT * FROM towers WHERE tower_id = 3555
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370158 - SELECT * FROM towers WHERE tower_id = 3555
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370158 - SELECT * FROM towers WHERE tower_id = 3555
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370158 - SELECT * FROM towers WHERE tower_id = 3555
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370158 - SELECT * FROM towers WHERE tower_id = 3555
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - UPDATE towers SET position_x = 4, position_y = 4 WHERE tower_id = 3555
+1588370158 - SELECT * FROM towers WHERE tower_id = 3555
+1588370158 - SELECT color FROM tiles WHERE position_x = 4 AND position_y = 4
+1588370158 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 212
+1588370158 - SELECT tower_id, tower_color FROM towers WHERE game_id = 212 AND tower_color = 'orange' AND player_id = 45
+1588370158 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 212
+1588370158 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 212
+1588370158 - UPDATE games SET tower_id_to_move = 3568 WHERE game_id = 212
+1588370158 - UPDATE games SET turn_tower_color = 'orange' WHERE game_id = 212
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - SELECT * FROM towers WHERE tower_id = 3568
+1588370158 - SELECT * FROM towers WHERE tower_id = 3568
+1588370158 - SELECT color FROM tiles WHERE position_x = 8 AND position_y = 2
+1588370158 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 212
+1588370158 - SELECT tower_id, tower_color FROM towers WHERE game_id = 212 AND tower_color = 'indigo' AND player_id = 41
+1588370158 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 212
+1588370158 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 212
+1588370158 - UPDATE games SET tower_id_to_move = 3555 WHERE game_id = 212
+1588370158 - UPDATE games SET turn_tower_color = 'indigo' WHERE game_id = 212
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - SELECT * FROM towers WHERE tower_id = 3555
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370158 - SELECT * FROM towers WHERE tower_id = 3555
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - UPDATE towers SET position_x = 4, position_y = 7 WHERE tower_id = 3555
+1588370158 - SELECT * FROM towers WHERE tower_id = 3555
+1588370158 - SELECT color FROM tiles WHERE position_x = 4 AND position_y = 7
+1588370158 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 212
+1588370158 - SELECT tower_id, tower_color FROM towers WHERE game_id = 212 AND tower_color = 'blue' AND player_id = 45
+1588370158 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 212
+1588370158 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 212
+1588370158 - UPDATE games SET tower_id_to_move = 3567 WHERE game_id = 212
+1588370158 - UPDATE games SET turn_tower_color = 'blue' WHERE game_id = 212
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - SELECT * FROM towers WHERE tower_id = 3567
+1588370158 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588370158 - SELECT * FROM towers WHERE tower_id = 3567
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - UPDATE towers SET position_x = 3, position_y = 4 WHERE tower_id = 3567
+1588370158 - SELECT * FROM towers WHERE tower_id = 3567
+1588370158 - SELECT color FROM tiles WHERE position_x = 3 AND position_y = 4
+1588370158 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 212
+1588370158 - SELECT tower_id, tower_color FROM towers WHERE game_id = 212 AND tower_color = 'blue' AND player_id = 41
+1588370158 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 212
+1588370158 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 212
+1588370158 - UPDATE games SET tower_id_to_move = 3554 WHERE game_id = 212
+1588370158 - UPDATE games SET turn_tower_color = 'blue' WHERE game_id = 212
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - SELECT * FROM towers WHERE tower_id = 3554
+1588370158 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370158 - SELECT * FROM towers WHERE tower_id = 3554
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - UPDATE towers SET position_x = 8, position_y = 7 WHERE tower_id = 3554
+1588370158 - SELECT * FROM towers WHERE tower_id = 3554
+1588370158 - SELECT color FROM tiles WHERE position_x = 8 AND position_y = 7
+1588370158 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 212
+1588370158 - SELECT tower_id, tower_color FROM towers WHERE game_id = 212 AND tower_color = 'red' AND player_id = 45
+1588370158 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 212
+1588370158 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 212
+1588370158 - UPDATE games SET tower_id_to_move = 3563 WHERE game_id = 212
+1588370158 - UPDATE games SET turn_tower_color = 'red' WHERE game_id = 212
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - SELECT * FROM towers WHERE tower_id = 3563
+1588370158 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588370158 - SELECT * FROM towers WHERE tower_id = 3563
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588370158 - SELECT * FROM towers WHERE tower_id = 3563
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588370158 - SELECT * FROM towers WHERE tower_id = 3563
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - UPDATE towers SET position_x = 1, position_y = 6 WHERE tower_id = 3563
+1588370158 - SELECT * FROM towers WHERE tower_id = 3563
+1588370158 - SELECT color FROM tiles WHERE position_x = 1 AND position_y = 6
+1588370158 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 212
+1588370158 - SELECT tower_id, tower_color FROM towers WHERE game_id = 212 AND tower_color = 'blue' AND player_id = 41
+1588370158 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 212
+1588370158 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 212
+1588370158 - UPDATE games SET tower_id_to_move = 3554 WHERE game_id = 212
+1588370158 - UPDATE games SET turn_tower_color = 'blue' WHERE game_id = 212
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - SELECT * FROM towers WHERE tower_id = 3554
+1588370158 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370158 - SELECT * FROM towers WHERE tower_id = 3554
+1588370158 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370158 - SELECT * FROM towers WHERE game_id = 212
+1588370158 - UPDATE towers SET position_x = 8, position_y = 8 WHERE tower_id = 3554
+1588370159 - UPDATE games
+    SET
+    player_1_score = (player_1_score + 1)
+    WHERE game_id = 212
+1588370159 - SELECT
+    CASE WHEN player_1_score >= points_to_win OR player_2_score >= points_to_win THEN 1
+    ELSE 0
+    END AS is_game_won
+    FROM games
+    WHERE game_id = 212
+1588370159 - UPDATE towers SET sumo = (sumo + 1) WHERE tower_id = 3554
+1588370159 - UPDATE games
+    SET
+    is_first_move = 1
+    WHERE game_id = 212
+1588370159 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 212
+1588370159 - UPDATE games SET tower_id_to_move = NULL WHERE game_id = 212
+1588370159 - UPDATE games SET turn_tower_color = NULL WHERE game_id = 212
+1588370159 - UPDATE towers SET position_x = 1, position_y = 1 WHERE tower_id = 3553;UPDATE towers SET position_x = 2, position_y = 1 WHERE tower_id = 3555;UPDATE towers SET position_x = 3, position_y = 1 WHERE tower_id = 3554;UPDATE towers SET position_x = 4, position_y = 1 WHERE tower_id = 3556;UPDATE towers SET position_x = 5, position_y = 1 WHERE tower_id = 3557;UPDATE towers SET position_x = 6, position_y = 1 WHERE tower_id = 3558;UPDATE towers SET position_x = 7, position_y = 1 WHERE tower_id = 3559;UPDATE towers SET position_x = 8, position_y = 1 WHERE tower_id = 3560;UPDATE towers SET position_x = 1, position_y = 8 WHERE tower_id = 3561;UPDATE towers SET position_x = 2, position_y = 8 WHERE tower_id = 3562;UPDATE towers SET position_x = 3, position_y = 8 WHERE tower_id = 3568;UPDATE towers SET position_x = 4, position_y = 8 WHERE tower_id = 3564;UPDATE towers SET position_x = 5, position_y = 8 WHERE tower_id = 3565;UPDATE towers SET position_x = 6, position_y = 8 WHERE tower_id = 3566;UPDATE towers SET position_x = 7, position_y = 8 WHERE tower_id = 3567;UPDATE towers SET position_x = 8, position_y = 8 WHERE tower_id = 3563;
+1588370159 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370159 - SELECT * FROM towers WHERE game_id = 212
+1588370159 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588370159 - SELECT * FROM towers WHERE tower_id = 3563
+1588370159 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370159 - SELECT * FROM towers WHERE game_id = 212
+1588370159 - UPDATE towers SET position_x = 8, position_y = 3 WHERE tower_id = 3563
+1588370159 - SELECT * FROM towers WHERE tower_id = 3563
+1588370159 - SELECT color FROM tiles WHERE position_x = 8 AND position_y = 3
+1588370159 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 212
+1588370159 - SELECT tower_id, tower_color FROM towers WHERE game_id = 212 AND tower_color = 'blue' AND player_id = 41
+1588370159 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 212
+1588370159 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 212
+1588370159 - UPDATE games SET tower_id_to_move = 3554 WHERE game_id = 212
+1588370159 - UPDATE games SET turn_tower_color = 'blue' WHERE game_id = 212
+1588370159 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370159 - SELECT * FROM towers WHERE game_id = 212
+1588370159 - SELECT * FROM towers WHERE tower_id = 3554
+1588370159 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370159 - SELECT * FROM towers WHERE tower_id = 3554
+1588370159 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370159 - SELECT * FROM towers WHERE game_id = 212
+1588370159 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370159 - SELECT * FROM towers WHERE tower_id = 3554
+1588370159 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370159 - SELECT * FROM towers WHERE game_id = 212
+1588370159 - UPDATE towers SET position_x = 3, position_y = 3 WHERE tower_id = 3554
+1588370159 - SELECT * FROM towers WHERE tower_id = 3554
+1588370159 - SELECT color FROM tiles WHERE position_x = 3 AND position_y = 3
+1588370159 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 212
+1588370159 - SELECT tower_id, tower_color FROM towers WHERE game_id = 212 AND tower_color = 'orange' AND player_id = 45
+1588370159 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 212
+1588370159 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 212
+1588370159 - UPDATE games SET tower_id_to_move = 3568 WHERE game_id = 212
+1588370159 - UPDATE games SET turn_tower_color = 'orange' WHERE game_id = 212
+1588370159 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370159 - SELECT * FROM towers WHERE game_id = 212
+1588370159 - SELECT * FROM towers WHERE tower_id = 3568
+1588370159 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588370159 - SELECT * FROM towers WHERE tower_id = 3568
+1588370159 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370159 - SELECT * FROM towers WHERE game_id = 212
+1588370159 - UPDATE towers SET position_x = 3, position_y = 4 WHERE tower_id = 3568
+1588370159 - SELECT * FROM towers WHERE tower_id = 3568
+1588370159 - SELECT color FROM tiles WHERE position_x = 3 AND position_y = 4
+1588370159 - SELECT CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END AS other_player_id
+              FROM games WHERE game_id = 212
+1588370159 - SELECT tower_id, tower_color FROM towers WHERE game_id = 212 AND tower_color = 'blue' AND player_id = 41
+1588370159 - UPDATE games
+    SET
+    is_first_move = 0
+    WHERE game_id = 212
+1588370159 - UPDATE games
+    SET
+    turn_player_id = CASE WHEN player_1_id = turn_player_id THEN player_2_id
+                          WHEN player_2_id = turn_player_id THEN player_1_id
+                          END,
+    turn_color = CASE WHEN turn_color = 'white' THEN 'black'
+                      WHEN turn_color = 'black' THEN 'white'
+                      END
+    WHERE game_id = 212
+1588370159 - UPDATE games SET tower_id_to_move = 3554 WHERE game_id = 212
+1588370159 - UPDATE games SET turn_tower_color = 'blue' WHERE game_id = 212
+1588370159 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370159 - SELECT * FROM towers WHERE game_id = 212
+1588370159 - SELECT * FROM towers WHERE tower_id = 3554
+1588370159 - SELECT * FROM tiles
+1588370159 - INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    (10, 9, 0, 0, 15, 1, null, 10, 'white', 'indigo')
+1588370159 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'orange','white',6,1,0,'주',10)
+1588370159 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'blue','white',7,1,0,'푸',10)
+1588370159 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'indigo','white',2,1,0,'남',10)
+1588370159 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'pink','white',4,1,0,'담',10)
+1588370159 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'yellow','white',5,1,0,'노',10)
+1588370159 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'red','white',6,4,0,'빨',10)
+1588370159 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'green','white',7,4,0,'녹',10)
+1588370159 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'brown','white',8,4,0,'갈',10)
+1588370159 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'brown','black',3,3,0,'갈',9)
+1588370159 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'green','black',1,3,0,'녹',9)
+1588370159 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'red','black',2,3,0,'빨',9)
+1588370159 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'yellow','black',4,8,0,'노',9)
+1588370159 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'pink','black',5,8,0,'담',9)
+1588370159 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'indigo','black',6,8,0,'남',9)
+1588370159 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'blue','black',7,8,0,'푸',9)
+1588370159 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'orange','black',7,5,0,'주',9)
+1588370159 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370159 - SELECT * FROM towers WHERE tower_id = 3555
+1588370159 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588370159 - SELECT * FROM towers WHERE game_id = 212
+1588370159 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588370159 - SELECT code, code_expiration FROM players WHERE username = 'stlows'
+1588370159 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370159 - SELECT * FROM players WHERE username = 'steph' || email = 'steph'
+1588370159 - SELECT * FROM players WHERE username = 'toto' || email = 'toto'
+1588370159 - SELECT * FROM players WHERE username = 'vincent_beaulieu@live.ca' || email = 'vincent_beaulieu@live.ca'
+1588370159 - SELECT * FROM players WHERE username = 'toto@toto.com' || email = 'toto@toto.com'
+1588370159 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370159 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 75
+1588370181 - INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    (10, 9, 0, 0, 15, 1, null, 10, 'white', 'indigo')
+1588370181 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'orange','white',6,1,0,'주',10)
+1588370181 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'blue','white',7,1,0,'푸',10)
+1588370181 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'indigo','white',2,1,0,'남',10)
+1588370181 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'pink','white',4,1,0,'담',10)
+1588370181 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'yellow','white',5,1,0,'노',10)
+1588370181 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'red','white',6,4,0,'빨',10)
+1588370181 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'green','white',7,4,0,'녹',10)
+1588370181 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'brown','white',8,4,0,'갈',10)
+1588370181 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'brown','black',3,3,0,'갈',9)
+1588370181 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'green','black',1,3,0,'녹',9)
+1588370181 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'red','black',2,3,0,'빨',9)
+1588370181 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'yellow','black',4,8,0,'노',9)
+1588370181 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'pink','black',5,8,0,'담',9)
+1588370181 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'indigo','black',6,8,0,'남',9)
+1588370181 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'blue','black',7,8,0,'푸',9)
+1588370181 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'orange','black',7,5,0,'주',9)
+1588370261 - INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    (10, 9, 0, 0, 15, 1, null, 10, 'white', 'indigo')
+1588370261 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'orange','white',6,1,0,'주',10)
+1588370261 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'blue','white',7,1,0,'푸',10)
+1588370261 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'indigo','white',2,1,0,'남',10)
+1588370261 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'pink','white',4,1,0,'담',10)
+1588370261 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'yellow','white',5,1,0,'노',10)
+1588370261 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'red','white',6,4,0,'빨',10)
+1588370261 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'green','white',7,4,0,'녹',10)
+1588370261 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'brown','white',8,4,0,'갈',10)
+1588370261 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'brown','black',3,3,0,'갈',9)
+1588370261 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'green','black',1,3,0,'녹',9)
+1588370261 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'red','black',2,3,0,'빨',9)
+1588370261 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'yellow','black',4,8,0,'노',9)
+1588370261 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'pink','black',5,8,0,'담',9)
+1588370261 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'indigo','black',6,8,0,'남',9)
+1588370261 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'blue','black',7,8,0,'푸',9)
+1588370261 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'orange','black',7,5,0,'주',9)
+1588370298 - INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    (10, 9, 0, 0, 15, 1, null, 10, 'white', 'indigo')
+1588370298 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'orange','white',6,1,0,'주',10)
+1588370299 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'blue','white',7,1,0,'푸',10)
+1588370299 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'indigo','white',2,1,0,'남',10)
+1588370299 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'pink','white',4,1,0,'담',10)
+1588370299 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'yellow','white',5,1,0,'노',10)
+1588370299 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'red','white',6,4,0,'빨',10)
+1588370299 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'green','white',7,4,0,'녹',10)
+1588370299 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'brown','white',8,4,0,'갈',10)
+1588370299 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'brown','black',3,3,0,'갈',9)
+1588370299 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'green','black',1,3,0,'녹',9)
+1588370299 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'red','black',2,3,0,'빨',9)
+1588370299 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'yellow','black',4,8,0,'노',9)
+1588370299 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'pink','black',5,8,0,'담',9)
+1588370299 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'indigo','black',6,8,0,'남',9)
+1588370299 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'blue','black',7,8,0,'푸',9)
+1588370299 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (0,'orange','black',7,5,0,'주',9)
+1588370385 - INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    (45, 41, 0, 0, 15, 1, null, 45, 'white', 'indigo')
+1588370385 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (217,'orange','white',6,1,0,'주',45)
+1588370385 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (217,'blue','white',7,1,0,'푸',45)
+1588370385 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (217,'indigo','white',2,1,0,'남',45)
+1588370385 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (217,'pink','white',4,1,0,'담',45)
+1588370385 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (217,'yellow','white',5,1,0,'노',45)
+1588370385 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (217,'red','white',6,4,0,'빨',45)
+1588370385 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (217,'green','white',7,4,0,'녹',45)
+1588370385 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (217,'brown','white',8,4,0,'갈',45)
+1588370385 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (217,'brown','black',3,3,0,'갈',41)
+1588370385 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (217,'green','black',1,3,0,'녹',41)
+1588370385 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (217,'red','black',2,3,0,'빨',41)
+1588370385 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (217,'yellow','black',4,8,0,'노',41)
+1588370385 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (217,'pink','black',5,8,0,'담',41)
+1588370385 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (217,'indigo','black',6,8,0,'남',41)
+1588370385 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (217,'blue','black',7,8,0,'푸',41)
+1588370385 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (217,'orange','black',7,5,0,'주',41)
+1588370392 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 217
+1588370392 - SELECT * FROM towers WHERE game_id = 217
+1588370544 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370544 - INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    (45, 41, 0, 0, 15, 1, null, 45, 'white', 'indigo')
+1588370544 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (218,'orange','white',6,1,0,'주',45)
+1588370544 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (218,'blue','white',7,1,0,'푸',45)
+1588370544 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (218,'indigo','white',2,1,0,'남',45)
+1588370544 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (218,'pink','white',4,1,0,'담',45)
+1588370544 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (218,'yellow','white',5,1,0,'노',45)
+1588370544 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (218,'red','white',6,4,0,'빨',45)
+1588370544 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (218,'green','white',7,4,0,'녹',45)
+1588370544 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (218,'brown','white',8,4,0,'갈',45)
+1588370544 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (218,'brown','black',3,3,0,'갈',41)
+1588370544 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (218,'green','black',1,3,0,'녹',41)
+1588370544 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (218,'red','black',2,3,0,'빨',41)
+1588370544 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (218,'yellow','black',4,8,0,'노',41)
+1588370544 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (218,'pink','black',5,8,0,'담',41)
+1588370544 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (218,'indigo','black',6,8,0,'남',41)
+1588370544 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (218,'blue','black',7,8,0,'푸',41)
+1588370544 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (218,'orange','black',7,5,0,'주',41)
+1588370571 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370571 - INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    (45, 41, 0, 0, 15, 1, null, 45, 'white', 'indigo')
+1588370571 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (219,'orange','white',6,1,0,'주',45)
+1588370571 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (219,'blue','white',7,1,0,'푸',45)
+1588370571 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (219,'indigo','white',2,1,0,'남',45)
+1588370571 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (219,'pink','white',4,1,0,'담',45)
+1588370571 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (219,'yellow','white',5,1,0,'노',45)
+1588370571 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (219,'red','white',6,4,0,'빨',45)
+1588370571 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (219,'green','white',7,4,0,'녹',45)
+1588370571 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (219,'brown','white',8,4,0,'갈',45)
+1588370571 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (219,'brown','black',3,3,0,'갈',41)
+1588370571 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (219,'green','black',1,3,0,'녹',41)
+1588370571 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (219,'red','black',2,3,0,'빨',41)
+1588370571 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (219,'yellow','black',4,8,0,'노',41)
+1588370571 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (219,'pink','black',5,8,0,'담',41)
+1588370571 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (219,'indigo','black',6,8,0,'남',41)
+1588370571 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (219,'blue','black',7,8,0,'푸',41)
+1588370571 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (219,'orange','black',7,5,0,'주',41)
+1588370580 - SELECT * FROM players WHERE email = 'vincent_beaulieu@live.ca'
+1588370891 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370891 - INSERT INTO games
+    (player_1_id, player_2_id, player_1_score, player_2_score, points_to_win, is_first_move, tower_id_to_move, turn_player_id, turn_color, turn_tower_color)
+    VALUES
+    (41, 41, 0, 0, 15, 1, null, 41, 'white', 'indigo')
+1588370891 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (220,'orange','white',6,1,0,'주',41)
+1588370891 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (220,'blue','white',7,1,0,'푸',41)
+1588370891 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (220,'indigo','white',2,1,0,'남',41)
+1588370891 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (220,'pink','white',4,1,0,'담',41)
+1588370891 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (220,'yellow','white',5,1,0,'노',41)
+1588370891 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (220,'red','white',6,4,0,'빨',41)
+1588370891 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (220,'green','white',7,4,0,'녹',41)
+1588370891 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (220,'brown','white',8,4,0,'갈',41)
+1588370891 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (220,'brown','black',3,3,0,'갈',41)
+1588370891 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (220,'green','black',1,3,0,'녹',41)
+1588370891 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (220,'red','black',2,3,0,'빨',41)
+1588370891 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (220,'yellow','black',4,8,0,'노',41)
+1588370891 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (220,'pink','black',5,8,0,'담',41)
+1588370891 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (220,'indigo','black',6,8,0,'남',41)
+1588370891 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (220,'blue','black',7,8,0,'푸',41)
+1588370891 - INSERT INTO towers
+      (game_id,tower_color,player_color,position_x,position_y,sumo,symbol,player_id)
+      VALUES
+      (220,'orange','black',7,5,0,'주',41)
+1588370903 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588370903 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 220
+1588370903 - SELECT * FROM tiles
+1588370903 - SELECT * FROM towers WHERE game_id = 220
+1588370903 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370903 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 41 THEN p2.username
+      WHEN p2.player_id = 41 THEN p1.username
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_1_score
+      WHEN p2.player_id = 41 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_2_score
+      WHEN p2.player_id = 41 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 41 IN (p1.player_id, p2.player_id)
+    
+1588370919 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588370919 - 
+    INSERT INTO lobby
+    (points_to_win, player_id)
+    VALUES
+    (3, 41)
+1588370919 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371072 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371149 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371183 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371193 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371197 - SELECT * FROM tiles
+1588371197 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371197 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 220
+1588371197 - SELECT * FROM towers WHERE game_id = 220
+1588371260 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371341 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371341 - SELECT * FROM tiles
+1588371341 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 220
+1588371341 - SELECT * FROM towers WHERE game_id = 220
+1588371363 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371442 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371451 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371482 - SELECT * FROM tiles
+1588371482 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 220
+1588371482 - SELECT * FROM towers WHERE game_id = 220
+1588371482 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371564 - SELECT * FROM tiles
+1588371564 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371564 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 220
+1588371564 - SELECT * FROM towers WHERE game_id = 220
+1588371572 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371575 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371576 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371577 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371605 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371615 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371641 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371652 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371670 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371672 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371673 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371735 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371786 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371786 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 220
+1588371786 - SELECT * FROM towers WHERE game_id = 220
+1588371866 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371889 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371899 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371909 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371922 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371954 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588371986 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 220
+1588371986 - SELECT * FROM towers WHERE game_id = 220
+1588372364 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588372371 - SELECT * FROM tiles
+,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 220
+1588372371 - SELECT * FROM towers WHERE game_id = 220
+1588372371 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588372608 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588372608 - SELECT * FROM tiles
+1588372608 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588372608 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 220
+1588372608 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 41 THEN p2.username
+      WHEN p2.player_id = 41 THEN p1.username
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_1_score
+      WHEN p2.player_id = 41 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_2_score
+      WHEN p2.player_id = 41 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 41 IN (p1.player_id, p2.player_id)
+    
+1588372608 - SELECT * FROM towers WHERE game_id = 220
+1588372625 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588372625 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 41 THEN p2.username
+      WHEN p2.player_id = 41 THEN p1.username
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_1_score
+      WHEN p2.player_id = 41 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_2_score
+      WHEN p2.player_id = 41 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 41 IN (p1.player_id, p2.player_id)
+    
+1588372818 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588372818 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 41 THEN p2.username
+      WHEN p2.player_id = 41 THEN p1.username
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_1_score
+      WHEN p2.player_id = 41 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_2_score
+      WHEN p2.player_id = 41 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 41 IN (p1.player_id, p2.player_id)
+    
+1588372820 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 208
+1588372820 - SELECT * FROM towers WHERE game_id = 208
+1588372822 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 211
+1588372822 - SELECT * FROM towers WHERE game_id = 211
+1588372825 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 218
+1588372825 - SELECT * FROM towers WHERE game_id = 218
+1588372826 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 211
+1588372826 - SELECT * FROM towers WHERE game_id = 211
+1588372982 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588372982 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 211
+1588372982 - SELECT * FROM towers WHERE game_id = 211
+1588372982 - SELECT * FROM tiles
+1588372982 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588372982 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 41 THEN p2.username
+      WHEN p2.player_id = 41 THEN p1.username
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_1_score
+      WHEN p2.player_id = 41 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_2_score
+      WHEN p2.player_id = 41 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 41 IN (p1.player_id, p2.player_id)
+    
+1588373012 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 208
+1588373012 - SELECT * FROM towers WHERE game_id = 208
+1588373013 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 207
+1588373013 - SELECT * FROM towers WHERE game_id = 207
+1588373015 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 209
+1588373015 - SELECT * FROM towers WHERE game_id = 209
+1588373019 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 211
+1588373019 - SELECT * FROM towers WHERE game_id = 211
+1588373020 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588373020 - SELECT * FROM towers WHERE game_id = 212
+1588373021 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 217
+1588373021 - SELECT * FROM towers WHERE game_id = 217
+1588373022 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 218
+1588373022 - SELECT * FROM towers WHERE game_id = 218
+1588373064 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 208
+1588373064 - SELECT * FROM towers WHERE game_id = 208
+1588373065 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 207
+1588373065 - SELECT * FROM towers WHERE game_id = 207
+1588373067 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 211
+1588373067 - SELECT * FROM towers WHERE game_id = 211
+1588373074 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588373074 - SELECT * FROM towers WHERE game_id = 212
+1588373075 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 217
+1588373075 - SELECT * FROM towers WHERE game_id = 217
+1588373077 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588373077 - SELECT * FROM towers WHERE game_id = 212
+1588373096 - SELECT * FROM tiles
+1588373096 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588373096 - SELECT * FROM towers WHERE game_id = 212
+1588373096 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588373111 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588373115 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588373116 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588373213 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588381602 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588381602 - SELECT * FROM towers WHERE game_id = 212
+1588381607 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588381615 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588381616 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588381617 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588381688 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588381701 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588381706 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588381712 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588381787 - SELECT * FROM tiles
+1588381787 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588381787 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588381787 - SELECT * FROM towers WHERE game_id = 212
+1588381788 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588381792 - SELECT * FROM tiles
+ts_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588381792 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588381792 - SELECT * FROM towers WHERE game_id = 212
+1588381793 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588381794 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588381795 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588381799 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588381807 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588381809 - SELECT * FROM tiles
+1588381809 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588381809 - SELECT * FROM towers WHERE game_id = 212
+1588381809 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588381811 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588381815 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588381909 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588381916 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588381930 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382071 - SELECT * FROM tiles
+1588382071 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382071 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588382071 - SELECT * FROM towers WHERE game_id = 212
+1588382108 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588382108 - SELECT * FROM towers WHERE game_id = 212
+1588382108 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382108 - SELECT * FROM tiles
+1588382148 - SELECT * FROM tiles
+1588382148 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382148 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588382148 - SELECT * FROM towers WHERE game_id = 212
+1588382155 - SELECT * FROM tiles
+1588382155 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588382155 - SELECT * FROM towers WHERE game_id = 212
+1588382155 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382163 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382223 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588382223 - SELECT * FROM towers WHERE game_id = 212
+1588382223 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382223 - SELECT * FROM tiles
+1588382224 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382319 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382322 - SELECT * FROM tiles
+1588382322 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588382322 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382322 - SELECT * FROM towers WHERE game_id = 212
+1588382324 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382330 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382383 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382392 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382491 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382531 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382541 - SELECT * FROM tiles
+1588382541 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 212
+1588382541 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382541 - SELECT * FROM towers WHERE game_id = 212
+1588382551 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382572 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382585 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382602 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382643 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382656 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588382665 - SELECT * FROM tiles
+1588382665 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382688 - SELECT * FROM tiles
+1588382688 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382688 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588382688 - SELECT
+    game_id,
+    points_to_win,
+    CASE
+      WHEN p1.player_id = 41 THEN p2.username
+      WHEN p2.player_id = 41 THEN p1.username
+    END AS rival_name,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_1_score
+      WHEN p2.player_id = 41 THEN games.player_2_score
+    END AS your_score,
+    CASE
+      WHEN p1.player_id = 41 THEN games.player_2_score
+      WHEN p2.player_id = 41 THEN games.player_1_score
+    END AS rival_score
+    FROM games
+    LEFT JOIN players p1 ON games.player_1_id = p1.player_id
+    LEFT JOIN players p2 ON games.player_2_id = p2.player_id
+    WHERE 41 IN (p1.player_id, p2.player_id)
+    
+1588382705 - SELECT
+      game_id,
+      p1.username player_1_name,
+      p2.username player_2_name,
+      player_1_score, player_2_score, 
+      points_to_win, 
+      tower_id_to_move, 
+      is_first_move, 
+      turn_color, 
+      turn_player_id,
+      turn_tower_color
+      From games
+      LEFT JOIN players p1 ON p1.player_id = player_1_id
+      LEFT JOIN players p2 ON p2.player_id = player_2_id
+      Where game_id = 208
+1588382705 - SELECT * FROM towers WHERE game_id = 208
+1588382709 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588382709 - 
+    INSERT INTO lobby
+    (points_to_win, player_id)
+    VALUES
+    (3, 41)
+1588382709 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382728 - SELECT * FROM players WHERE username = 'stlows' || email = 'stlows'
+1588382728 - 
+    INSERT INTO lobby
+    (points_to_win, player_id)
+    VALUES
+    (3, 41)
+1588382728 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null
+1588382793 - SELECT username, points_to_win, lobby_id FROM lobby LEFT JOIN players ON players.player_id = lobby.player_id WHERE game_id is null

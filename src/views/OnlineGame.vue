@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex pa-12">
-    <div>
+    <div class="mr-6">
       <OnlineLobby ref="onlineLobbyRef" @lobbyJoined="lobbyJoined" class="mb-12" />
       <NewGame @refreshLobby="$refs.onlineLobbyRef.refreshLobby()" />
     </div>
@@ -26,7 +26,7 @@
         </div>
       </div>
     </div>
-    <div class="right">
+    <div class="ml-6">
       <ActiveGameInfo :game="game.game" class="mb-12"></ActiveGameInfo>
       <MyGames ref="myGames" @refreshGame="fetchGame" />
     </div>
@@ -63,8 +63,7 @@ export default {
       this.getGame(this.gameId).then(res => {
         if (res.data.error) {
           this.notify({
-            id: new Date().valueOf(),
-            variant: "danger",
+            variant: "error",
             message: res.data.message
           });
         } else {
@@ -83,8 +82,7 @@ export default {
         .then(res => {
           if (!res.data.valid) {
             this.notify({
-              id: new Date().valueOf(),
-              variant: "danger",
+              variant: "error",
               message: res.data.message
             });
           }

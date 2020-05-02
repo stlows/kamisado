@@ -1,6 +1,6 @@
 <template>
   <div id="newGame">
-    <v-card class="pa-6">
+    <v-card class="pa-6 mx-auto" max-width="300">
       <h2 class="mb-6">New game</h2>
       <v-form>
         <v-select
@@ -40,12 +40,18 @@ export default {
     onSubmit(evt) {
       evt.preventDefault();
       this.newLobby(this.settings.pointsToWin).then(res => {
+        if (res.data.error) {
+          this.notify({
+            variant: "error",
+            message: res.data.message
+          });
+        } else {
+          this.notify({
+            variant: "success",
+            message: "Lobby created"
+          });
+        }
         this.$emit("refreshLobby");
-        this.notify({
-          id: new Date().valueOf(),
-          variant: "success",
-          message: "Lobby created"
-        });
       });
     }
   }

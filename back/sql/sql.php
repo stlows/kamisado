@@ -45,16 +45,18 @@ class Sql {
   }
 
   function createStubGame($gameObject){
+
+    $login_id = $this->getLoginPlayerId();
     $game = $gameObject["game"];
     $towers = $gameObject["towers"];
 
-    $player_1_id = $game["player_1_id"];
-    $player_2_id = $game["player_2_id"];
+    $player_1_id = $login_id;
+    $player_2_id = $login_id;
     $player_1_score = $game["player_1_score"];
     $player_2_score = $game["player_2_score"];
     $points_to_win = $game["points_to_win"];
     $is_first_move = $game["is_first_move"];
-    $turn_player_id = $game["turn_player_id"];
+    $turn_player_id = $login_id;
     $turn_color = $game["turn_color"];
     $turn_tower_color = $game["turn_tower_color"];
 
@@ -74,7 +76,7 @@ class Sql {
       $position_x = $tower["position_x"];
       $position_y = $tower["position_y"];
       $sumo = $tower["sumo"];
-      $player_id = $tower["player_id"];
+      $player_id = $login_id;
       global $SYMBOLS;
       $symbol = $SYMBOLS[$tower_color];
       
@@ -91,7 +93,7 @@ class Sql {
   function newGame($lobby_id){
 
     $lobby = $this->getLobby($lobby_id);
-    
+
     if($lobby["game_id"] !== null){
       global $CANT_JOIN_THAT_LOBBY;
       echo(json_encode($CANT_JOIN_THAT_LOBBY));
@@ -166,12 +168,10 @@ class Sql {
 
   function getGame($game_id){
 
-    $player_id = $this->getLoginPlayerId();
-
     $gameQuery = "SELECT
       game_id,
-      p1.player_name player_1_name,
-      p2.player_name player_2_name,
+      p1.username player_1_name,
+      p2.username player_2_name,
       player_1_score, player_2_score, 
       points_to_win, 
       tower_id_to_move, 
@@ -218,8 +218,8 @@ class Sql {
     game_id,
     points_to_win,
     CASE
-      WHEN p1.player_id = $player_id THEN p2.player_name
-      WHEN p2.player_id = $player_id THEN p1.player_name
+      WHEN p1.player_id = $player_id THEN p2.username
+      WHEN p2.player_id = $player_id THEN p1.username
     END AS rival_name,
     CASE
       WHEN p1.player_id = $player_id THEN games.player_1_score

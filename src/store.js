@@ -17,6 +17,8 @@ export const store = new Vuex.Store({
   },
   actions: {
     notify({ commit, state }, notification) {
+      notification.value = true
+      notification.id = new Date().valueOf()
       state.notifications.push(notification);
     },
     newGame({ commit, state, getters }, lobbyId) {
@@ -77,6 +79,7 @@ export const store = new Vuex.Store({
       return state.isSignedIn
     },
     getHeaders(state) {
+      console.log(localStorage)
       return {
         headers: {
           'Authorization': 'Basic ' + localStorage.getItem('token')

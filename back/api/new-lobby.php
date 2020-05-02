@@ -13,6 +13,7 @@ checkId($pointsToWin);
 
 $accepted = [1, 3, 7, 15];
 if(in_array($pointsToWin, $accepted)){
+  
   $credentials = getCredentialsFromHeader();
   $sql = new Sql();
   if($sql->login($credentials)){

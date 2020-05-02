@@ -7,7 +7,9 @@ include_once("../sql/sql.php");
 
 $game = json_decode(file_get_contents('php://input'), true);
 
+$credentials = getCredentialsFromHeader();
 $sql = new Sql();
-$game_id = $sql->createStubGame($game);
-
-echo $game_id;
+if($sql->login($credentials)){
+  $game_id = $sql->createStubGame($game);
+  echo $game_id;
+}

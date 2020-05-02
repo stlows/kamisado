@@ -1,28 +1,16 @@
 <template>
   <div class="lobby">
     <v-card class="px-6 py-3">
-      <div class="d-flex justify-space-between">
+      <div class="d-flex justify-space-between mb-3">
         <h2>Lobby</h2>
         <v-spacer></v-spacer>
         <v-btn href="#" @click.prevent="refreshLobby" color="info" text>Refresh</v-btn>
       </div>
-      <div class="card-body">
-        <template v-if="loading">
-          <p>Loading...</p>
+      <v-data-table :loading="loading" :items="lobbies" :headers="headers" disable-sort>
+        <template v-slot:item.lobby_id="{ item }">
+          <v-btn text color="success" @click="joinGame(item.lobby_id)">Join</v-btn>
         </template>
-        <template v-else>
-          <template v-if="games.length > 0">
-            <b-table :items="games" :fields="fields">
-              <template v-slot:cell(lobby_id)="data">
-                <a href="#" class="joinGameLink" @click.prevent="joinGame(data)">Join</a>
-              </template>
-            </b-table>
-          </template>
-          <template v-else>
-            <p>No lobby</p>
-          </template>
-        </template>
-      </div>
+      </v-data-table>
     </v-card>
   </div>
 </template>
@@ -34,13 +22,13 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
-      fields: [
-        "player_name",
-        "points_to_win",
-        { key: "lobby_id", label: "Link" }
+      headers: [
+        { text: "Player", value: "username" },
+        { text: "Points", value: "points_to_win", align: "center", width: 50 },
+        { text: "Join", value: "lobby_id", align: "center", width: 50 }
       ],
-      games: [],
-      loading: true
+      lobbies: [],
+      loading: false
     };
   },
   methods: {
@@ -48,7 +36,7 @@ export default {
     refreshLobby() {
       this.loading = true;
       this.getLobby().then(res => {
-        this.games = res.data;
+        this.lobbies = res.data;
         this.loading = false;
       });
     },
@@ -59,8 +47,7 @@ export default {
       this.newGame(parseInt(data.value)).then(res => {
         if (res.data.error) {
           this.notify({
-            id: new Date().valueOf(),
-            variant: "danger",
+            variant: "error",
             message: res.data.message
           });
         } else {

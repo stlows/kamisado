@@ -4,7 +4,9 @@ include_once("../check-get.php");
 include_once("../authorization-header.php");
 include_once("../sql/sql.php");
 
+$credentials = getCredentialsFromHeader();
 $sql = new Sql();
-$games = $sql->getMyGames();
-
-echo json_encode($games);
+if($sql->login($credentials)){
+  $games = $sql->getMyGames();
+  echo json_encode($games);
+}

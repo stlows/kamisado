@@ -45,7 +45,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "{{player_1}}"
+								"value": "Basic {{player_1_token}}"
 							}
 						],
 						"body": {
@@ -72,7 +72,7 @@
 					"response": []
 				},
 				{
-					"name": "lobby P1",
+					"name": "lobby",
 					"event": [
 						{
 							"listen": "test",
@@ -81,7 +81,7 @@
 								"exec": [
 									"pm.test(\"Le bon Lobby a été créé\", function(){",
 									"    var list = JSON.parse(responseBody);",
-									"    pm.expect(list.some(l => l.lobby_id == pm.variables.get(\"lobby_id\") && l.player_name == pm.variables.get(\"player_1\") && l.points_to_win == 15)).to.be.true;",
+									"    pm.expect(list.some(l => l.lobby_id == pm.variables.get(\"lobby_id\") && l.username == pm.variables.get(\"player_1_username\") && l.points_to_win == 15)).to.be.true;",
 									"});",
 									""
 								],
@@ -91,54 +91,7 @@
 					],
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{player_1}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "kamisado.localhost/api/lobby",
-							"host": [
-								"kamisado",
-								"localhost"
-							],
-							"path": [
-								"api",
-								"lobby"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "lobby P3",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "e1fd5116-a5d3-4de9-8435-81f2bdccba73",
-								"exec": [
-									"pm.test(\"Le bon Lobby a été créé\", function(){",
-									"    var list = JSON.parse(responseBody);",
-									"    pm.expect(list.some(l => l.lobby_id == pm.variables.get(\"lobby_id\") && l.player_name == pm.variables.get(\"player_1\") && l.points_to_win == 15)).to.be.true;",
-									"});",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"type": "text",
-								"value": "{{player_3}}"
-							}
-						],
+						"header": [],
 						"url": {
 							"raw": "kamisado.localhost/api/lobby",
 							"host": [
@@ -189,7 +142,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "{{player_2}}",
+								"value": "Basic {{player_2_token}}",
 								"type": "text"
 							}
 						],
@@ -211,68 +164,6 @@
 							"path": [
 								"api",
 								"new-game"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete-lobby",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "fe3908b7-3128-43a5-adf9-65abf9d088dd",
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"pm.test(\"Body is DELETED\", function () {",
-									"    pm.expect(responseBody).to.be.equal(\"DELETED\");",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept-Charset",
-								"type": "text",
-								"value": "utf-8"
-							},
-							{
-								"key": "Authorization",
-								"type": "text",
-								"value": "test_0003"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"lobbyId\": {{lobby_id}}\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "kamisado.localhost/api/delete-lobby",
-							"host": [
-								"kamisado",
-								"localhost"
-							],
-							"path": [
-								"api",
-								"delete-lobby"
 							]
 						}
 					},
@@ -354,7 +245,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "{{player_1}}",
+								"value": "Basic {{player_1_token}}",
 								"type": "text"
 							}
 						],
@@ -417,7 +308,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "{{player_2}}"
+								"value": "Basic {{player_2_token}}"
 							}
 						],
 						"body": {
@@ -639,11 +530,6 @@
 								"name": "Content-Type",
 								"type": "text",
 								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "{{player_1}}",
-								"type": "text"
 							}
 						],
 						"body": {
@@ -714,7 +600,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "{{player_2}}",
+								"value": "Basic {{player_2_token}}",
 								"type": "text"
 							}
 						],
@@ -4299,6 +4185,236 @@
 					],
 					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"vincent_beaulieu@live.ca\",\n\t\"username\": \"stlows\",\n\t\"password\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/register",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\":\"stlows\",\n\t\"code\":\"333146\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/verify",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login with username",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"stlows\",\n\t\"password\":\"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/login",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login with username P2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"steph\",\n\t\"password\":\"bateau\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/login",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login with username P3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"toto\",\n\t\"password\":\"abc\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/login",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login with email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"vincent_beaulieu@live.ca\",\n\t\"password\":\"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/login",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login with not existing email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"toto@toto.com\",\n\t\"password\":\"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/login",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login with wrong password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"stlows\",\n\t\"password\":\"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "kamisado.localhost/api/login",
+							"host": [
+								"kamisado",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}

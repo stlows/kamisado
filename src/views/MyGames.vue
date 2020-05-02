@@ -1,25 +1,20 @@
 <template>
   <v-card class="pa-6">
-    <div class="d-flex justify-space-between">
+    <div class="d-flex justify-space-between mb-3">
       <h2>My games</h2>
       <v-spacer></v-spacer>
       <v-btn @click.prevent="refreshGames" color="info" text>Refresh</v-btn>
     </div>
-    <div class="card-body">
-      <template v-if="loading"></template>
-      <template v-else>
-        <template v-if="games.length > 0">
-          <v-data-table :items="games" :headers="fields">
-            <template v-slot:cell(game_id)="data">
-              <a href="#" @click.prevent="goToGame(data)">Go to game</a>
-            </template>
-          </v-data-table>
+    <template v-if="games.length > 0">
+      <v-data-table :items="games" :headers="headers" disable-sort>
+        <template v-slot:item.game_id="{ item }">
+          <v-btn text color="success" @click="goToGame(item.game_id)">Go</v-btn>
         </template>
-        <template v-else>
-          <p>Join a game in the lobby!</p>
-        </template>
-      </template>
-    </div>
+      </v-data-table>
+    </template>
+    <template v-else>
+      <p>Join a game in the lobby!</p>
+    </template>
   </v-card>
 </template>
 
@@ -30,12 +25,12 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      fields: [
-        { key: "rival_name", label: "Vs." },
-        { key: "points_to_win", label: "To win" },
-        "your_score",
-        "rival_score",
-        { key: "game_id", label: "Link" }
+      headers: [
+        { value: "rival_name", text: "Vs." },
+        { value: "points_to_win", text: "To win" },
+        { value: "your_score", text: "Your score" },
+        { value: "rival_score", text: "Rival score" },
+        { value: "game_id", text: "Go" }
       ],
       games: [],
       loading: true
@@ -50,8 +45,8 @@ export default {
         this.loading = false;
       });
     },
-    goToGame(data) {
-      this.$router.push({ path: "/online/game/" + parseInt(data.value) });
+    goToGame(game_id) {
+      this.$router.push({ path: "/online/game/" + parseInt(game_id) });
       this.$emit("refreshGame");
     }
   },

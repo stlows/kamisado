@@ -8,6 +8,9 @@ include_once("../validations.php");
 include_once("../errors.php");
 include_once("../board.php");
 include_once("../constants.php");
+$credentials = getCredentialsFromHeader();
+$sql = new Sql();
+$sql->login($credentials);
 
 $move = json_decode(file_get_contents('php://input'), true);
 
@@ -19,7 +22,7 @@ checkId($towerId);
 checkInt($targetX);
 checkInt($targetY);
 
-$sql = new Sql();
+
 
 $tower = $sql->getTower($towerId);
 
