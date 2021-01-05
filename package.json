@@ -9,7 +9,7 @@
     "work": "vue-cli-service serve --port 8090 --mode work"
   },
   "dependencies": {
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "core-js": "^2.6.11",
     "cypress": "^4.1.0",
     "vue": "^2.6.11",
